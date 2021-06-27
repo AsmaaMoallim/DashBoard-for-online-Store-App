@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Banner
- * 
+ *
  * @property string $ban_id
  * @property string $ban_name
  * @property string $medl_id
  * @property bool $state
  * @property int|null $fakeID
- * 
+ *
  * @property MediaIbrary $media_ibrary
  *
  * @package App\Models
@@ -34,6 +34,7 @@ class Banner extends Model
 	];
 
 	protected $fillable = [
+	    'ban_id',
 		'ban_name',
 		'medl_id',
 		'state',

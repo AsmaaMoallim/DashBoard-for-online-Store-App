@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EmailBox
- * 
+ *
  * @property string $sys_email
  * @property string $email_cla_name
  * @property string $email_cla_email
  * @property string $email_cla_phone
  * @property string $email_type
  * @property int|null $fakeID
- * 
+ *
  * @property SysInfoEmail $sys_info_email
  *
  * @package App\Models
@@ -34,6 +34,7 @@ class EmailBox extends Model
 	];
 
 	protected $fillable = [
+	    'sys_email',
 		'email_cla_name',
 		'email_cla_email',
 		'email_cla_phone',

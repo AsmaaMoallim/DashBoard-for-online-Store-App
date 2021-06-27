@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 
-class h extends Controller
+class justtotakereadyfunctions extends Controller
 {
     /**
      * Display a listing of the resource.

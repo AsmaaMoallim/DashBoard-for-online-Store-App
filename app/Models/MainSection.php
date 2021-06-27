@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MainSection
- * 
+ *
  * @property string $main_name
  * @property string $medl_id
  * @property bool $state
  * @property int|null $fakeID
- * 
+ *
  * @property MediaIbrary $media_ibrary
  * @property Collection|SubSection[] $sub_sections
  *
@@ -35,6 +35,7 @@ class MainSection extends Model
 	];
 
 	protected $fillable = [
+	    'main_name',
 		'medl_id',
 		'state',
 		'fakeID'

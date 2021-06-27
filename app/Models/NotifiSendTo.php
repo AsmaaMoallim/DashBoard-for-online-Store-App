@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class NotifiSendTo
- * 
+ *
  * @property string $notifi_id
  * @property string $cla_id
  * @property int|null $fakeID
- * 
+ *
  * @property Notification $notification
  * @property Client $client
  *

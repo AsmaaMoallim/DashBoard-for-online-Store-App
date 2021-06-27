@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProdAvilIn
- * 
+ *
  * @property string $prod_id
  * @property string $mesu_value
  * @property int|null $fakeID
- * 
+ *
  * @property Product $product
  * @property Measure $measure
  *

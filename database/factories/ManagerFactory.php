@@ -26,19 +26,19 @@ class ManagerFactory extends Factory
     public function definition()
     {
         DB::table('manager')->delete();
-        static $x = 0;
-        static $y = 0;
+        static $man_id= 0;
+        static $fakeID = 0;
         return [
 
-            'man_id' => ++$x,
-            'man_frist_name' => $this->faker->name(),
+            'man_id' => ++$man_id,
+            'man_frist_name' => $this->faker->firstName(),
             'man_last_name' => $this->faker->name(),
             'man_phone_num' => $this->faker->phoneNumber,
             'man_email' => $this->faker->unique()->safeEmail(),
             'man_password' => $this->faker->randomDigit(),
             'pos_name' => $this->faker->randomElement(Position::pluck('pos_name')->toArray()),
             'state' => $this->faker->boolean(50),
-            'fakeID'=> ++$y
+            'fakeID' => ++$fakeID,
 
         ];
     }

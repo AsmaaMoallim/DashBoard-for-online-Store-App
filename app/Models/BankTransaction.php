@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BankTransaction
- * 
+ *
  * @property string $ord_number
  * @property string $cla_id
  * @property string $sys_bank_account_num
  * @property float $banktran_amount
  * @property boolean $banktran_img
  * @property int|null $fakeID
- * 
+ *
  * @property SysBankAccount $sys_bank_account
  * @property Client $client
  * @property Order $order

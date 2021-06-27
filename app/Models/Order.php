@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Order
- * 
+ *
  * @property string $cla_id
  * @property string $ord_number
  * @property Carbon $ord_date
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $stage_name
  * @property bool $state
  * @property int|null $fakeID
- * 
+ *
  * @property Client $client
  * @property PaymentMethod $payment_method
  * @property Stage $stage
@@ -47,6 +47,7 @@ class Order extends Model
 	];
 
 	protected $fillable = [
+	    'ord_number',
 		'cla_id',
 		'ord_date',
 		'pay_method_name',

@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Notification
- * 
+ *
  * @property string $notifi_id
  * @property string $notifi_title
  * @property string $notifi_content
  * @property string $man_id
  * @property int|null $fakeID
- * 
+ *
  * @property Manager $manager
  * @property Collection|NotifiSendTo[] $notifi_send_tos
  *
@@ -35,6 +35,7 @@ class Notification extends Model
 	];
 
 	protected $fillable = [
+	    'notifi_id',
 		'notifi_title',
 		'notifi_content',
 		'man_id',

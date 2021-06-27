@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductProdAvilColor
- * 
+ *
  * @property string $prod_avil_color
  * @property string $prod_id
  * @property int|null $fakeID
- * 
+ *
  * @property Product $product
  *
  * @package App\Models

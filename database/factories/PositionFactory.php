@@ -26,11 +26,11 @@ class PositionFactory extends Factory
         DB::table('manager')->delete();
         DB::table('permission')->delete();
         DB::table('position')->delete();
-        static $pos = 0;
+        static $fakeID = 0;
         return [
             "pos_name" => $this->faker->unique()->name,
             'state' => $this->faker->boolean(50),
-            'fakeID'=> ++$pos,
+            'fakeID'=> ++$fakeID,
         ];
     }
 }

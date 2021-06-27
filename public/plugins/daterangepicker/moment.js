@@ -145,7 +145,7 @@
 
         // tokens to ordinalize and pad
         ordinalizeTokens = 'DDD w W M D d'.split(' '),
-        paddedTokens = 'M D H h m s w W'.split(' '),
+        paddedTokens = 'M D H justtotakereadyfunctions m s w W'.split(' '),
 
         formatTokenFunctions = {
             M    : function () {
@@ -953,8 +953,8 @@
         },
 
         _longDateFormat : {
-            LTS : 'h:mm:ss A',
-            LT : 'h:mm A',
+            LTS : 'justtotakereadyfunctions:mm:ss A',
+            LT : 'justtotakereadyfunctions:mm A',
             L : 'MM/DD/YYYY',
             LL : 'MMMM D, YYYY',
             LLL : 'MMMM D, YYYY LT',

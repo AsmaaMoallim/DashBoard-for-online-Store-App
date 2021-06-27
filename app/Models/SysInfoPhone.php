@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysInfoPhone
- * 
+ *
  * @property string $sys_phone_num
  * @property bool $state
  * @property int|null $fakeID
@@ -30,6 +30,7 @@ class SysInfoPhone extends Model
 	];
 
 	protected $fillable = [
+	    'sys_phone_num',
 		'state',
 		'fakeID'
 	];

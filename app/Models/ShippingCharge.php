@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ShippingCharge
- * 
+ *
  * @property string $ord_number
  * @property int $ship_price
  * @property int|null $fakeID
- * 
+ *
  * @property Order $order
  *
  * @package App\Models
@@ -32,6 +32,7 @@ class ShippingCharge extends Model
 	];
 
 	protected $fillable = [
+	    'ord_number',
 		'ship_price',
 		'fakeID'
 	];

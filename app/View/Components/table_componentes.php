@@ -4,10 +4,11 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use App\Http\Controllers\PositionController;
-class table1 extends Component
+class tableComponentes extends Component
 {
     public $rows;
     public $columns;
+    public $tables;
 
 
     /**
@@ -15,10 +16,11 @@ class table1 extends Component
      *
      * @return void
      */
-    public function __construct($rows,$columns)
+    public function __construct($rows,$columns,$tables)
     {
         $this->rows = $rows;
         $this->columns =$columns;
+        $this->tables =$tables;
     }
 
     /**
@@ -28,7 +30,7 @@ class table1 extends Component
      */
     public function render()
     {
-        return view('components.table1');
+        return view('components.tableComponentes');
 ;
     }
 }

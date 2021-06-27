@@ -11,16 +11,17 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Measure
- * 
+ *
  * @property string $mesu_value
  * @property int|null $fakeID
- * 
+ *
  * @property Collection|ProdAvilIn[] $prod_avil_ins
  *
  * @package App\Models
  */
 class Measure extends Model
 {
+
 	protected $table = 'measure';
 	protected $primaryKey = 'mesu_value';
 	public $incrementing = false;
@@ -31,6 +32,7 @@ class Measure extends Model
 	];
 
 	protected $fillable = [
+	    'mesu_value',
 		'fakeID'
 	];
 

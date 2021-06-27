@@ -22,11 +22,11 @@ class PermissionFactory extends Factory
      */
     public function definition()
     {
-        static $per = 0;
+        static $fakeID = 0;
         return [
             'per_name'=> $this->faker->name,
             'state' => $this->faker->boolean(50),
-            'fakeID'=> ++$per,
+            'fakeID'=> ++$fakeID,
 
         ];
     }

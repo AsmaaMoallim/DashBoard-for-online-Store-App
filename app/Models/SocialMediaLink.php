@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SocialMediaLink
- * 
+ *
  * @property string $social_id
  * @property string $social_site_name
  * @property boolean|null $social_img
@@ -34,6 +34,7 @@ class SocialMediaLink extends Model
 	];
 
 	protected $fillable = [
+	    'social_id',
 		'social_site_name',
 		'social_img',
 		'social_url',

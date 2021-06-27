@@ -55,17 +55,15 @@
 
                                         @endfor
 
-                                        {{--                                    <td> {{ $h->$val }}</td>--}}
-                                        {{--                                <td>{{ $h->$val}}</td>--}}
                                         <td class="project-actions text-right">
                                             @if($rows->state)
-                                                <a class="btn btn-primary btn-sm" href="{{ url('/maneger/' . $rows->fakeID . '/update') }}">
+                                                <a class="btn btn-success btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/update') }}">
                                                     <i class="fa ">
                                                     </i>
                                                     تعطيل
                                                 </a>
                                             @elseif(!$rows->state)
-                                                <a class="btn btn-success btn-sm" href="{{ url('/maneger/' . $rows->fakeID . '/update') }}">
+                                                <a class="btn btn-primary btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/update') }}">
                                                     <i class="fa ">
                                                     </i>
                                                     تفعيل
@@ -77,9 +75,7 @@
                                                 </i>
                                                 تعديل
                                             </a>
-                                            <a class="btn btn-danger btn-sm deletee" href="{{ url('/maneger/' . $rows->fakeID . '/delete') }}">
-
-{{--                                            <a class="btn btn-danger btn-sm deletee" href="{{ route('row.destroy') }}">--}}
+                                            <a class="btn btn-danger btn-sm deletee" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/delete') }}">
                                                 <i class="fa fa-trash">
                                                 </i>
                                                 حذف
@@ -90,7 +86,6 @@
 
                             </tr>
                             @endfor
-                            {{--                            @dd( $arrays[$x++])--}}
 
                             @endforeach
 
@@ -106,29 +101,3 @@
     </div>
 @endsection
 
-{{--<script>--}}
-
-{{--    let keys = document.querySelector('.table');--}}
-{{--    keys.addEventListener('click', (e)=> {--}}
-{{--        let target = e.target;--}}
-
-{{--        function hand() {--}}
-{{--            console.log(arguments[0].target().id)--}}
-{{--        }--}}
-{{--    },--}}
-{{--    $(document).ready(function () {--}}
-{{--        hand();--}}
-{{--    });--}}
-
-{{--</script>--}}
-{{--<script>--}}
-{{--    let keys = document.querySelector('.table');--}}
-{{--    keys.addEventListener('click', (e)=>{--}}
-{{--        let target = e.target;--}}
-{{--        if(target.classList.contains('deletee')){--}}
-
-{{--            console.log(target.id);--}}
-{{--        }--}}
-
-{{--    })--}}
-{{--</script>--}}

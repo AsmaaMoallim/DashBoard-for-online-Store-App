@@ -536,7 +536,7 @@
 
             this.updateCalendars();
         },
-        
+
         keydown: function (e) {
             //hide on tab or enter
         	if ((e.keyCode === 9) || (e.keyCode === 13)) {
@@ -560,7 +560,7 @@
                 };
                 parentRightEdge = this.parentEl[0].clientWidth + this.parentEl.offset().left;
             }
-            
+
             if (this.drops == 'up')
             	containerTop = this.element.offset().top - this.container.outerHeight() - parentOffset.top;
             else
@@ -1206,13 +1206,13 @@
                 var min_minute = 0;
                 var max_minute = 59;
 
-                if (minDate && (side == 'left' || this.singleDatePicker) && selected.format('YYYY-MM-DD h A') == minDate.format('YYYY-MM-DD h A')) {
+                if (minDate && (side == 'left' || this.singleDatePicker) && selected.format('YYYY-MM-DD justtotakereadyfunctions A') == minDate.format('YYYY-MM-DD justtotakereadyfunctions A')) {
                     min_minute = minDate.minute();
                     if (selected.minute() < min_minute)
                         selected.minute(min_minute);
                 }
 
-                if (maxDate && (side == 'right' || this.singleDatePicker) && selected.format('YYYY-MM-DD h A') == maxDate.format('YYYY-MM-DD h A')) {
+                if (maxDate && (side == 'right' || this.singleDatePicker) && selected.format('YYYY-MM-DD justtotakereadyfunctions A') == maxDate.format('YYYY-MM-DD justtotakereadyfunctions A')) {
                     max_minute = maxDate.minute();
                     if (selected.minute() > max_minute)
                         selected.minute(max_minute);

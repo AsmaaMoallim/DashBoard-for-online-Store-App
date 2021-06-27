@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Stage
- * 
+ *
  * @property string $stage_name
  * @property int|null $fakeID
- * 
+ *
  * @property Collection|Order[] $orders
  *
  * @package App\Models
@@ -31,6 +31,7 @@ class Stage extends Model
 	];
 
 	protected $fillable = [
+	    'stage_name',
 		'fakeID'
 	];
 

@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PosInclude
- * 
+ *
  * @property string $pos_name
  * @property string $per_name
  * @property int|null $fakeID
- * 
+ *
  * @property Position $position
  * @property Permission $permission
  *

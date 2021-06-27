@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrdHasItemOf
- * 
+ *
  * @property string $prod_id
  * @property int $prod_ord_amount
  * @property string $ord_number
  * @property int|null $fakeID
- * 
+ *
  * @property Order $order
  * @property Product $product
  *

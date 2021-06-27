@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Client
- * 
+ *
  * @property string $cla_id
  * @property string $cla_frist_name
  * @property string $cla_last_name
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $cla_phone_num
  * @property string $cla_email
  * @property int|null $fakeID
- * 
+ *
  * @property Collection|BankTransaction[] $bank_transactions
  * @property Collection|Comment[] $comments
  * @property Collection|NotifiSendTo[] $notifi_send_tos
@@ -41,6 +41,7 @@ class Client extends Model
 	];
 
 	protected $fillable = [
+	    'cla_id',
 		'cla_frist_name',
 		'cla_last_name',
 		'cla_img',

@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Report
- * 
+ *
  * @property string $report_id
  * @property string $cla_id
  * @property string $prod_id
  * @property string $com_id
  * @property int|null $fakeID
- * 
+ *
  * @property Client $client
  * @property Comment $comment
  * @property IgnoredReport $ignored_report

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Position
+ * Class Posi tion
  *
  * @property string $pos_name
  * @property bool $state

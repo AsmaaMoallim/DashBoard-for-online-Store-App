@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Product
- * 
+ *
  * @property string $prod_id
  * @property string $prod_name
  * @property string $sub_name
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $medl_id
  * @property bool $state
  * @property int|null $fakeID
- * 
+ *
  * @property MediaIbrary $media_ibrary
  * @property SubSection $sub_section
  * @property Collection|Comment[] $comments
@@ -47,14 +47,16 @@ class Product extends Model
 	];
 
 	protected $fillable = [
-		'prod_name',
-		'sub_name',
-		'prod_price',
-		'prod_avil_amount',
-		'prod_desc_img',
-		'medl_id',
-		'state',
-		'fakeID'
+        'prod_id',
+        'prod_name',
+        'sub_name',
+        'prod_price',
+        'prod_avil_amount',
+        'prod_desc_img',
+        'medl_id',
+        'state',
+        'fakeID'
+
 	];
 
 	public function media_ibrary()

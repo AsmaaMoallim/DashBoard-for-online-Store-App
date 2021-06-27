@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MediaIbrary
- * 
+ *
  * @property string $medl_id
  * @property string $medl_name
  * @property string $medl_description
  * @property boolean $medl_img_ved
  * @property bool $state
  * @property int|null $fakeID
- * 
+ *
  * @property Collection|Banner[] $banners
  * @property Collection|MainSection[] $main_sections
  * @property Collection|Product[] $products
@@ -40,6 +40,7 @@ class MediaIbrary extends Model
 	];
 
 	protected $fillable = [
+	    'medl_id',
 		'medl_name',
 		'medl_description',
 		'medl_img_ved',

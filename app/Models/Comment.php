@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Comment
- * 
+ *
  * @property string $com_id
  * @property string $cla_id
  * @property string $prod_id
  * @property string $com_content
  * @property int $com_rateing
  * @property int|null $fakeID
- * 
+ *
  * @property Client $client
  * @property Product $product
  * @property Collection|Report[] $reports

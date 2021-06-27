@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PaymentMethod
- * 
+ *
  * @property string $pay_method_name
  * @property int|null $fakeID
- * 
+ *
  * @property Collection|Order[] $orders
  *
  * @package App\Models
@@ -31,6 +31,7 @@ class PaymentMethod extends Model
 	];
 
 	protected $fillable = [
+	    'pay_method_name',
 		'fakeID'
 	];
 
