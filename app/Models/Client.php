@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,7 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean|null $cla_img
  * @property string $cla_phone_num
  * @property string $cla_email
- * @property int|null $fakeID
+ * @property bool $state
+ * @property int $fakeId
  *
  * @property Collection|BankTransaction[] $bank_transactions
  * @property Collection|Comment[] $comments
@@ -30,24 +32,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Client extends Model
 {
-	protected $table = 'clients';
+    use HasFactory;
+
+    protected $table = 'clients';
 	protected $primaryKey = 'cla_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'cla_img' => 'boolean',
-		'fakeID' => 'int'
+		'state' => 'bool',
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'cla_id',
 		'cla_frist_name',
 		'cla_last_name',
 		'cla_img',
 		'cla_phone_num',
 		'cla_email',
-		'fakeID'
+		'state',
+		'fakeId'
 	];
 
 	public function bank_transactions()

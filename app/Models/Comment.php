@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $prod_id
  * @property string $com_content
  * @property int $com_rateing
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Client $client
  * @property Product $product
@@ -27,20 +28,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comment extends Model
 {
-	protected $table = 'comments';
+    use HasFactory;
+
+    protected $table = 'comments';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'com_rateing' => 'int',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'cla_id',
 		'com_content',
 		'com_rateing',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function client()

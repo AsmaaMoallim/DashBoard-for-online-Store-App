@@ -22,7 +22,9 @@ class StageFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
+        static $stage_id = 0;
         return [
+            'stage_id' => ++$stage_id,
             'stage_name' => $this->faker->randomElement(['submitted', 'shipped', 'processing']),
             'fakeID'=> ++$fakeID,
         ];

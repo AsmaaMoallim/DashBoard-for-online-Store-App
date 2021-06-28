@@ -25,14 +25,16 @@ class OrderFactory extends Factory
     public function definition()
     {
         static $ord_number = 0;
+        static $ord_id = 0;
         static $fakeID = 0;
 
         return [
+            'ord_id' => ++$ord_id,
             'ord_number' => ++$ord_number,
             'cla_id' =>  $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
             'ord_date'=> $this->faker->date(),
-            'pay_method_name'=>  $this->faker->randomElement(PaymentMethod::pluck('pay_method_name')->toArray()),
-            'stage_name' =>  $this->faker->randomElement(Stage::pluck('stage_name')->toArray()),
+            'payment_method_id'=>  $this->faker->randomElement(PaymentMethod::pluck('payment_method_id')->toArray()),
+            'stage_id' =>  $this->faker->randomElement(Stage::pluck('stage_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];

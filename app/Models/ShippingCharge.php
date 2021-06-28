@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ShippingCharge
- *
- * @property string $ord_number
+ * 
+ * @property string $ship_id
+ * @property string $ord_id
  * @property int $ship_price
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property Order $order
  *
  * @package App\Models
@@ -22,23 +23,23 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingCharge extends Model
 {
 	protected $table = 'shipping_charge';
-	protected $primaryKey = 'ord_number';
+	protected $primaryKey = 'ship_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'ship_price' => 'int',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'ord_number',
+		'ord_id',
 		'ship_price',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function order()
 	{
-		return $this->belongsTo(Order::class, 'ord_number');
+		return $this->belongsTo(Order::class, 'ord_id');
 	}
 }

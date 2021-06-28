@@ -7,17 +7,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class MediaIbrary
+ * Class MediaLibrary
  *
  * @property string $medl_id
  * @property string $medl_name
  * @property string $medl_description
  * @property boolean $medl_img_ved
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Collection|Banner[] $banners
  * @property Collection|MainSection[] $main_sections
@@ -26,9 +27,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class MediaIbrary extends Model
+class MediaLibrary extends Model
 {
-	protected $table = 'media_ibrary';
+    use HasFactory;
+
+    protected $table = 'media_library';
 	protected $primaryKey = 'medl_id';
 	public $incrementing = false;
 	public $timestamps = false;
@@ -36,16 +39,15 @@ class MediaIbrary extends Model
 	protected $casts = [
 		'medl_img_ved' => 'boolean',
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'medl_id',
 		'medl_name',
 		'medl_description',
 		'medl_img_ved',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function banners()

@@ -19,12 +19,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $man_phone_num
  * @property string $man_email
  * @property string $man_password
- * @property string $pos_name
+ * @property string $pos_id
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Position $position
- * @property ManagerOperationsRecord $manager_operations_record
+ * @property Collection|ManagerOperationsRecord[] $manager_operations_records
  * @property Collection|Notification[] $notifications
  *
  * @package App\Models
@@ -32,14 +32,15 @@ use Illuminate\Database\Eloquent\Model;
 class Manager extends Model
 {
     use HasFactory;
-	protected $table = 'manager';
+
+    protected $table = 'manager';
 	protected $primaryKey = 'man_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $hidden = [
@@ -52,19 +53,19 @@ class Manager extends Model
 		'man_phone_num',
 		'man_email',
 		'man_password',
-		'pos_name',
+		'pos_id',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function position()
 	{
-		return $this->belongsTo(Position::class, 'pos_name');
+		return $this->belongsTo(Position::class, 'pos_id');
 	}
 
-	public function manager_operations_record()
+	public function manager_operations_records()
 	{
-		return $this->hasOne(ManagerOperationsRecord::class, 'man_id');
+		return $this->hasMany(ManagerOperationsRecord::class, 'man_id');
 	}
 
 	public function notifications()

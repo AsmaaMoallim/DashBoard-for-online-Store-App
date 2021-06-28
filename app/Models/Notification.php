@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $notifi_title
  * @property string $notifi_content
  * @property string $man_id
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Manager $manager
  * @property Collection|NotifiSendTo[] $notifi_send_tos
@@ -25,21 +26,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notification extends Model
 {
-	protected $table = 'notifications';
+    use HasFactory;
+
+    protected $table = 'notifications';
 	protected $primaryKey = 'notifi_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'notifi_id',
 		'notifi_title',
 		'notifi_content',
 		'man_id',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function manager()

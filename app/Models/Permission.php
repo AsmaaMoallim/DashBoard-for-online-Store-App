@@ -13,34 +13,37 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Permission
  *
+ * @property string $per_id
  * @property string $per_name
+ * @property int $fakeId
  * @property bool $state
- * @property int|null $fakeID
  *
  * @property Collection|PosInclude[] $pos_includes
  *
  * @package App\Models
  */
 class Permission extends Model
-{    use HasFactory;
+{
+    use HasFactory;
 
     protected $table = 'permission';
-	protected $primaryKey = 'per_name';
+	protected $primaryKey = 'per_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int',
+		'state' => 'bool'
 	];
 
 	protected $fillable = [
-		'state',
-		'fakeID'
+		'per_name',
+		'fakeId',
+		'state'
 	];
 
 	public function pos_includes()
 	{
-		return $this->hasMany(PosInclude::class, 'per_name');
+		return $this->hasMany(PosInclude::class, 'per_id');
 	}
 }

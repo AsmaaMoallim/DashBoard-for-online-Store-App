@@ -27,7 +27,10 @@ class PositionFactory extends Factory
         DB::table('permission')->delete();
         DB::table('position')->delete();
         static $fakeID = 0;
+        static $pos_id = 0;
+
         return [
+            'pos_id'=> ++$pos_id,
             "pos_name" => $this->faker->unique()->name,
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,

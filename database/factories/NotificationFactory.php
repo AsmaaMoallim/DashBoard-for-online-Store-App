@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Manager;
+use App\Models\MediaLibrary;
 use App\Models\Notification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,7 +30,7 @@ class NotificationFactory extends Factory
             'notifi_id' => ++$notifi_id,
             'notifi_title' => $this->faker->name,
             'notifi_content' => $this->faker->name,
-            'medl_id' => $this->faker->randomElement(MediaIbraryFactory::pluck('medl_id')->toArray()),
+            'man_id' => $this->faker->randomElement(Manager::pluck('man_id')->toArray()),
             'fakeID' => ++$fakeID,
         ];
     }

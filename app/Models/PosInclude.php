@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PosInclude
- *
- * @property string $pos_name
- * @property string $per_name
- * @property int|null $fakeID
- *
+ * 
+ * @property string $pos_id
+ * @property string $per_id
+ * @property int $fakeId
+ * 
  * @property Position $position
  * @property Permission $permission
  *
@@ -27,20 +27,20 @@ class PosInclude extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'fakeID'
+		'fakeId'
 	];
 
 	public function position()
 	{
-		return $this->belongsTo(Position::class, 'pos_name');
+		return $this->belongsTo(Position::class, 'pos_id');
 	}
 
 	public function permission()
 	{
-		return $this->belongsTo(Permission::class, 'per_name');
+		return $this->belongsTo(Permission::class, 'per_id');
 	}
 }

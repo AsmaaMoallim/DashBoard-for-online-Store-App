@@ -17,48 +17,30 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $tables = 'Manager';
+        $tables = 'manager';
         $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
         $rows = \DB::table('manager')->get();
         return view('master_tables_view')->with('rows',$rows)->with('columns', $columns)->with('tables',$tables);
     }
 
-    public function destroy($tables, $id)
+    public function destroy($id)
     {
-
        $data = Manager::find($id);
-//        dd($data);
-
         $data->delete();
-// or
-//
-//        Manager::where('id',$manager)->first();
-//        $data->delete();
-
-        return redirect()->route('manager.index')
-            ->with('success','deleted successfully!');
+        return redirect()->back();
     }
 
-    public function update( $tables, $id)
+    public function update($id)
     {
-
         $data = Manager::find($id);
-//        dd($tables);
-//        dd($id);
-//        dd($data);
-//            dd($data->state);
-
         if($data->state==false){
             $data->state=true;
             $data->save();
         }
         else{
-//            dd($data->state);
             $data->state= false;
             $data->save();
         }
-        return redirect()->route('manager.index');
-
-
+        return redirect()->back();
     }
 }

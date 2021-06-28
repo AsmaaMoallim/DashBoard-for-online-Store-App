@@ -11,13 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ManagerOperationsRecord
- *
+ * 
+ * @property string $man_oper_record_id
  * @property string $man_id
  * @property Carbon $man_oper_date
  * @property Carbon $man_oper_time
  * @property string $man_operation
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property Manager $manager
  *
  * @package App\Models
@@ -25,12 +26,12 @@ use Illuminate\Database\Eloquent\Model;
 class ManagerOperationsRecord extends Model
 {
 	protected $table = 'manager_operations_record';
-	protected $primaryKey = 'man_id';
+	protected $primaryKey = 'man_oper_record_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $dates = [
@@ -38,12 +39,12 @@ class ManagerOperationsRecord extends Model
 		'man_oper_time'
 	];
 
-
 	protected $fillable = [
+		'man_id',
 		'man_oper_date',
 		'man_oper_time',
 		'man_operation',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function manager()

@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductProdAvilColor
- *
+ * 
  * @property string $prod_avil_color
  * @property string $prod_id
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property Product $product
  *
  * @package App\Models
@@ -26,11 +26,11 @@ class ProductProdAvilColor extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'fakeID'
+		'fakeId'
 	];
 
 	public function product()

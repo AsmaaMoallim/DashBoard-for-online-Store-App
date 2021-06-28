@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Posi tion
+ * Class Position
  *
+ * @property string $pos_id
  * @property string $pos_name
+ * @property int $fakeId
  * @property bool $state
- * @property int|null $fakeID
  *
  * @property Collection|Manager[] $managers
  * @property Collection|PosInclude[] $pos_includes
@@ -23,30 +24,32 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  */
 class Position extends Model
-{    use HasFactory;
+{
+    use HasFactory;
 
     protected $table = 'position';
-	protected $primaryKey = 'pos_name';
+	protected $primaryKey = 'pos_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int',
+		'state' => 'bool'
 	];
 
 	protected $fillable = [
-		'state',
-		'fakeID'
+		'pos_name',
+		'fakeId',
+		'state'
 	];
 
 	public function managers()
 	{
-		return $this->hasMany(Manager::class, 'pos_name');
+		return $this->hasMany(Manager::class, 'pos_id');
 	}
 
 	public function pos_includes()
 	{
-		return $this->hasMany(PosInclude::class, 'pos_name');
+		return $this->hasMany(PosInclude::class, 'pos_id');
 	}
 }

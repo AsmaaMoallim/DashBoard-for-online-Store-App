@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrdHasItemOf
- *
+ * 
  * @property string $prod_id
  * @property int $prod_ord_amount
- * @property string $ord_number
- * @property int|null $fakeID
- *
+ * @property string $ord_id
+ * @property int $fakeId
+ * 
  * @property Order $order
  * @property Product $product
  *
@@ -29,17 +29,17 @@ class OrdHasItemOf extends Model
 
 	protected $casts = [
 		'prod_ord_amount' => 'int',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
 		'prod_ord_amount',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function order()
 	{
-		return $this->belongsTo(Order::class, 'ord_number');
+		return $this->belongsTo(Order::class, 'ord_id');
 	}
 
 	public function product()

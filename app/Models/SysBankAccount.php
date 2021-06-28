@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysBankAccount
- *
+ * 
+ * @property string $sys_bank_id
  * @property string $sys_bank_name
  * @property string $sys_bank_account_num
  * @property bool $state
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property Collection|BankTransaction[] $bank_transactions
  *
  * @package App\Models
@@ -24,24 +25,24 @@ use Illuminate\Database\Eloquent\Model;
 class SysBankAccount extends Model
 {
 	protected $table = 'sys_bank_account';
-	protected $primaryKey = 'sys_bank_account_num';
+	protected $primaryKey = 'sys_bank_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'sys_bank_account_num',
 		'sys_bank_name',
+		'sys_bank_account_num',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function bank_transactions()
 	{
-		return $this->hasMany(BankTransaction::class, 'sys_bank_account_num');
+		return $this->hasMany(BankTransaction::class, 'sys_bank_id');
 	}
 }

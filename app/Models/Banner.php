@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,14 +16,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ban_name
  * @property string $medl_id
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
- * @property MediaIbrary $media_ibrary
+ * @property MediaLibrary $media_library
  *
  * @package App\Models
  */
 class Banner extends Model
 {
+    use HasFactory;
 	protected $table = 'banner';
 	protected $primaryKey = 'ban_id';
 	public $incrementing = false;
@@ -30,19 +32,18 @@ class Banner extends Model
 
 	protected $casts = [
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'ban_id',
 		'ban_name',
 		'medl_id',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 
-	public function media_ibrary()
+	public function media_library()
 	{
-		return $this->belongsTo(MediaIbrary::class, 'medl_id');
+		return $this->belongsTo(MediaLibrary::class, 'medl_id');
 	}
 }

@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,15 +15,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $prod_id
  * @property string $prod_name
- * @property string $sub_name
+ * @property string $sub_id
  * @property float $prod_price
  * @property int $prod_avil_amount
  * @property boolean $prod_desc_img
  * @property string $medl_id
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
- * @property MediaIbrary $media_ibrary
+ * @property MediaLibrary $media_library
  * @property SubSection $sub_section
  * @property Collection|Comment[] $comments
  * @property Collection|OrdHasItemOf[] $ord_has_item_ofs
@@ -33,7 +34,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-	protected $table = 'product';
+    use HasFactory;
+
+    protected $table = 'product';
 	protected $primaryKey = 'prod_id';
 	public $incrementing = false;
 	public $timestamps = false;
@@ -43,30 +46,28 @@ class Product extends Model
 		'prod_avil_amount' => 'int',
 		'prod_desc_img' => 'boolean',
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-        'prod_id',
-        'prod_name',
-        'sub_name',
-        'prod_price',
-        'prod_avil_amount',
-        'prod_desc_img',
-        'medl_id',
-        'state',
-        'fakeID'
-
+		'prod_name',
+		'sub_id',
+		'prod_price',
+		'prod_avil_amount',
+		'prod_desc_img',
+		'medl_id',
+		'state',
+		'fakeId'
 	];
 
-	public function media_ibrary()
+	public function media_library()
 	{
-		return $this->belongsTo(MediaIbrary::class, 'medl_id');
+		return $this->belongsTo(MediaLibrary::class, 'medl_id');
 	}
 
 	public function sub_section()
 	{
-		return $this->belongsTo(SubSection::class, 'sub_name');
+		return $this->belongsTo(SubSection::class, 'sub_id');
 	}
 
 	public function comments()

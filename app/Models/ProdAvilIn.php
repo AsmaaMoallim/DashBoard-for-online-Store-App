@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProdAvilIn
- *
+ * 
  * @property string $prod_id
- * @property string $mesu_value
- * @property int|null $fakeID
- *
+ * @property string $mesu_id
+ * @property int $fakeId
+ * 
  * @property Product $product
  * @property Measure $measure
  *
@@ -27,11 +27,11 @@ class ProdAvilIn extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'fakeID'
+		'fakeId'
 	];
 
 	public function product()
@@ -41,6 +41,6 @@ class ProdAvilIn extends Model
 
 	public function measure()
 	{
-		return $this->belongsTo(Measure::class, 'mesu_value');
+		return $this->belongsTo(Measure::class, 'mesu_id');
 	}
 }

@@ -22,8 +22,10 @@ class MeasureFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
+        static $mesu_id = 0;
 
         return [
+            'mesu_id'=> ++$mesu_id,
             'mesu_value' => $this->faker->randomAscii,
             'fakeID'=> ++$fakeID,
         ];

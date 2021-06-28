@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Position;
-use http\Url;
+use App\Models\Measure;
 use Illuminate\Http\Request;
 
-class PositionController extends Controller
+class MeasureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,16 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $tables = 'position';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('position');
-        $rows = \DB::table('position')->get();
+        $tables = 'measure';
+        $columns= \DB::getSchemaBuilder()->getColumnListing('measure');
+        $rows = \DB::table('measure')->get();
         return view('master_tables_view')->with('rows',$rows)->with('columns', $columns)->with('tables',$tables);;
     }
 
 
     public function destroy($id)
     {
-        $data = Position::find($id);
+        $data = Measure::find($id);
         $data->delete();
 
         return redirect()->back();
@@ -33,7 +32,8 @@ class PositionController extends Controller
     public function update( $id)
     {
 
-        $data = Position::find($id);
+        $data = Measure::find($id);
+
 
         if($data->state==false){
             $data->state=true;
@@ -46,4 +46,5 @@ class PositionController extends Controller
         return redirect()->back();
 
     }
+
 }

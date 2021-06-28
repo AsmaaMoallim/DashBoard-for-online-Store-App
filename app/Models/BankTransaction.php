@@ -10,14 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BankTransaction
- *
- * @property string $ord_number
+ * 
+ * @property string $trans_id
+ * @property string $ord_id
  * @property string $cla_id
- * @property string $sys_bank_account_num
+ * @property string $sys_bank_id
  * @property float $banktran_amount
  * @property boolean $banktran_img
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property SysBankAccount $sys_bank_account
  * @property Client $client
  * @property Order $order
@@ -33,18 +34,18 @@ class BankTransaction extends Model
 	protected $casts = [
 		'banktran_amount' => 'float',
 		'banktran_img' => 'boolean',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
 		'banktran_amount',
 		'banktran_img',
-		'fakeID'
+		'fakeId'
 	];
 
 	public function sys_bank_account()
 	{
-		return $this->belongsTo(SysBankAccount::class, 'sys_bank_account_num');
+		return $this->belongsTo(SysBankAccount::class, 'sys_bank_id');
 	}
 
 	public function client()
@@ -54,6 +55,6 @@ class BankTransaction extends Model
 
 	public function order()
 	{
-		return $this->belongsTo(Order::class, 'ord_number');
+		return $this->belongsTo(Order::class, 'ord_id');
 	}
 }

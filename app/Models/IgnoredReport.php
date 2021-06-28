@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class IgnoredReport
- *
+ * 
  * @property string $report_id
  * @property string $cla_id
  * @property string $prod_id
  * @property string $com_id
- * @property int|null $fakeID
- *
+ * @property int $fakeId
+ * 
  * @property Report $report
  *
  * @package App\Models
@@ -28,11 +28,11 @@ class IgnoredReport extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'fakeID'
+		'fakeId'
 	];
 
 	public function report()

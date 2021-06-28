@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SocialMediaLink
- *
+ * 
  * @property string $social_id
  * @property string $social_site_name
  * @property boolean|null $social_img
  * @property string $social_url
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @package App\Models
  */
@@ -30,15 +30,14 @@ class SocialMediaLink extends Model
 	protected $casts = [
 		'social_img' => 'boolean',
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'social_id',
 		'social_site_name',
 		'social_img',
 		'social_url',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 }

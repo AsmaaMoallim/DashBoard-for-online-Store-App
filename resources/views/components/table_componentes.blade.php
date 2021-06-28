@@ -31,7 +31,7 @@
                             <tr>
                                 @for( $i = 0 ; $i<=10 ; $i++)
 
-                                    @if(isset($columns[$i]) && $columns[$i]!='fakeID')
+                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')
                                         <th>{{$columns[$i]}}</th> @endif
 
                                 @endfor
@@ -45,7 +45,7 @@
                                     @for( $i = 0 ; $i<=10; $i++)
 
                                         @for( $i = 0 ; $i<=10; $i++)
-                                            @if(isset($columns[$i]) && $columns[$i]!='fakeID')
+                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
 
                                                 <?php $val = (string)$columns[$i] ?>
                                                 @if($val)
@@ -56,26 +56,29 @@
                                         @endfor
 
                                         <td class="project-actions text-right">
+                                            @if(isset($rows->state))
                                             @if($rows->state)
-                                                <a class="btn btn-success btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/update') }}">
+                                                <a class="btn btn-success btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
                                                     <i class="fa ">
                                                     </i>
                                                     تعطيل
                                                 </a>
                                             @elseif(!$rows->state)
-                                                <a class="btn btn-primary btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/update') }}">
+                                                <a class="btn btn-primary btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
                                                     <i class="fa ">
                                                     </i>
                                                     تفعيل
                                                 </a>
                                             @endif
+                                            @endif
+
                                             <a class="btn btn-info btn-sm" href="#">
                                                 <i class="fa fa-pencil">
 
                                                 </i>
                                                 تعديل
                                             </a>
-                                            <a class="btn btn-danger btn-sm deletee" href="{{ url('/'.$tables .'/'. $rows->fakeID . '/delete') }}">
+                                            <a class="btn btn-danger btn-sm deletee" href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
                                                 <i class="fa fa-trash">
                                                 </i>
                                                 حذف

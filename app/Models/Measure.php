@@ -7,13 +7,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Measure
  *
+ * @property string $mesu_id
  * @property string $mesu_value
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Collection|ProdAvilIn[] $prod_avil_ins
  *
@@ -21,23 +23,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Measure extends Model
 {
+    use HasFactory;
 
-	protected $table = 'measure';
-	protected $primaryKey = 'mesu_value';
+    protected $table = 'measure';
+	protected $primaryKey = 'mesu_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'mesu_value',
-		'fakeID'
+		'mesu_value',
+		'fakeId'
 	];
 
 	public function prod_avil_ins()
 	{
-		return $this->hasMany(ProdAvilIn::class, 'mesu_value');
+		return $this->hasMany(ProdAvilIn::class, 'mesu_id');
 	}
 }

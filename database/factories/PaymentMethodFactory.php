@@ -22,8 +22,10 @@ class PaymentMethodFactory extends Factory
     public function definition()
     {
         static $fakeID=0;
+        static $payment_method_id=0;
         return [
-            'pay_method_name' => $this->faker->name,
+            'payment_method_id' => ++$payment_method_id,
+            'pay_method_name' => $this->faker->firstName,
             'fakeID'=> ++$fakeID,
         ];
     }

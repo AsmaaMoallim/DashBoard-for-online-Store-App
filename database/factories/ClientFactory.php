@@ -30,6 +30,7 @@ class ClientFactory extends Factory
             'cla_img'=>$this->faker->image(),
             'cla_phone_num' => $this->faker->phoneNumber,
             'cla_email'=> $this->faker->unique()->safeEmail(),
+            'state' => $this->faker->boolean(50),
             'fakeID' => ++$fakeID,
         ];
     }

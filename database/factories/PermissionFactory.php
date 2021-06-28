@@ -23,7 +23,9 @@ class PermissionFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
+        static $per_id = 0;
         return [
+            'per_id'=> ++$per_id,
             'per_name'=> $this->faker->name,
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\MainSection;
+use App\Models\MediaLibrary;
 use App\Models\SubSection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,10 +24,12 @@ class SubSectionFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
+        static $sub_id = 0;
         return [
+            'sub_id' => ++$sub_id,
             'sub_name'=>$this->faker->name,
-            'main_name'=>$this->faker->randomElement(MainSection::pluck('main_name')->toArray()),
-            'medl_id' => $this->faker->randomElement(MediaIbraryFactory::pluck('medl_id')->toArray()),
+            'main_id'=>$this->faker->randomElement(MainSection::pluck('main_id')->toArray()),
+            'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];

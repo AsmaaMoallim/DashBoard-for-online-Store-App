@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysInfoEmail
- *
+ * 
+ * @property string $sys_email_id
  * @property string $sys_email
  * @property bool $state
- *
+ * @property int $fakeId
+ * 
  * @property EmailBox $email_box
  *
  * @package App\Models
@@ -21,22 +23,23 @@ use Illuminate\Database\Eloquent\Model;
 class SysInfoEmail extends Model
 {
 	protected $table = 'sys_info_email';
-	protected $primaryKey = 'sys_email';
+	protected $primaryKey = 'sys_email_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'state' => 'bool'
+		'state' => 'bool',
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-        'sys_email',
+		'sys_email',
 		'state',
-        'fakeID'
+		'fakeId'
 	];
 
 	public function email_box()
 	{
-		return $this->hasOne(EmailBox::class, 'sys_email');
+		return $this->hasOne(EmailBox::class, 'sys_email_id');
 	}
 }

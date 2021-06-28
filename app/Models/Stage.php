@@ -7,13 +7,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Stage
  *
+ * @property string $stage_id
  * @property string $stage_name
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @property Collection|Order[] $orders
  *
@@ -21,22 +23,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Stage extends Model
 {
-	protected $table = 'stage';
-	protected $primaryKey = 'stage_name';
+    use HasFactory;
+
+    protected $table = 'stage';
+	protected $primaryKey = 'stage_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'stage_name',
-		'fakeID'
+		'stage_name',
+		'fakeId'
 	];
 
 	public function orders()
 	{
-		return $this->hasMany(Order::class, 'stage_name');
+		return $this->hasMany(Order::class);
 	}
 }

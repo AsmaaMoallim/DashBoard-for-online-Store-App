@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\MediaIbrary;
+use App\Models\MediaLibrary;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MediaIbraryFactory extends Factory
+class MediaLibraryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = MediaIbrary::class;
+    protected $model = MediaLibrary::class;
 
     /**
      * Define the model's default state.

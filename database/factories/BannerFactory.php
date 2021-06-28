@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Banner;
 use App\Models\MediaIbrary;
+use App\Models\MediaLibrary;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BannerFactory extends Factory
@@ -28,7 +29,7 @@ class BannerFactory extends Factory
         return [
             'ban_id'=>++$ban_id,
             'ban_name' =>$this->faker->name,
-            'medl_id' => $this->faker->randomElement(MediaIbrary::pluck('medl_id')->toArray()),
+            'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID' => ++$fakeID
         ];

@@ -10,28 +10,29 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysInfoPhone
- *
+ * 
+ * @property string $sys_phone_id
  * @property string $sys_phone_num
  * @property bool $state
- * @property int|null $fakeID
+ * @property int $fakeId
  *
  * @package App\Models
  */
 class SysInfoPhone extends Model
 {
 	protected $table = 'sys_info_phone';
-	protected $primaryKey = 'sys_phone_num';
+	protected $primaryKey = 'sys_phone_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'state' => 'bool',
-		'fakeID' => 'int'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-	    'sys_phone_num',
+		'sys_phone_num',
 		'state',
-		'fakeID'
+		'fakeId'
 	];
 }

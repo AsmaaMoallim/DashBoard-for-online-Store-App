@@ -36,7 +36,7 @@ class ManagerFactory extends Factory
             'man_phone_num' => $this->faker->phoneNumber,
             'man_email' => $this->faker->unique()->safeEmail(),
             'man_password' => $this->faker->randomDigit(),
-            'pos_name' => $this->faker->randomElement(Position::pluck('pos_name')->toArray()),
+            'pos_id' => $this->faker->randomElement(Position::pluck('pos_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID' => ++$fakeID,
 
