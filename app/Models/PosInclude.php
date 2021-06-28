@@ -6,15 +6,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PosInclude
- * 
+ *
  * @property string $pos_id
  * @property string $per_id
  * @property int $fakeId
- * 
+ *
  * @property Position $position
  * @property Permission $permission
  *
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PosInclude extends Model
 {
+    use HasFactory;
 	protected $table = 'pos_include';
 	public $incrementing = false;
 	public $timestamps = false;

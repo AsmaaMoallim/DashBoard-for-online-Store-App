@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,8 @@ class ProductProdAvilColorFactory extends Factory
     {
         static $fakeID = 0;
         return [
+            'prod_avil_color' => $this->faker->hexColor,
+            'prod_id' => $this->faker->randomElement(Product::pluck('prod_id')->toArray()),
             'fakeID' => ++$fakeID,
         ];
     }

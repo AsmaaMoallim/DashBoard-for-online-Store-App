@@ -7,24 +7,26 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ManagerOperationsRecord
- * 
+ *
  * @property string $man_oper_record_id
  * @property string $man_id
  * @property Carbon $man_oper_date
  * @property Carbon $man_oper_time
  * @property string $man_operation
  * @property int $fakeId
- * 
+ *
  * @property Manager $manager
  *
  * @package App\Models
  */
 class ManagerOperationsRecord extends Model
 {
+    use HasFactory;
 	protected $table = 'manager_operations_record';
 	protected $primaryKey = 'man_oper_record_id';
 	public $incrementing = false;

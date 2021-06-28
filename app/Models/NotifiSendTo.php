@@ -6,15 +6,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class NotifiSendTo
- * 
+ *
  * @property string $notifi_id
  * @property string $cla_id
  * @property int $fakeId
- * 
+ *
  * @property Notification $notification
  * @property Client $client
  *
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NotifiSendTo extends Model
 {
+    use HasFactory;
 	protected $table = 'notifi_send_to';
 	public $incrementing = false;
 	public $timestamps = false;

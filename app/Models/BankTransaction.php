@@ -6,11 +6,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BankTransaction
- * 
+ *
  * @property string $trans_id
  * @property string $ord_id
  * @property string $cla_id
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $banktran_amount
  * @property boolean $banktran_img
  * @property int $fakeId
- * 
+ *
  * @property SysBankAccount $sys_bank_account
  * @property Client $client
  * @property Order $order
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BankTransaction extends Model
 {
+    use HasFactory;
 	protected $table = 'bank_transaction';
 	public $incrementing = false;
 	public $timestamps = false;

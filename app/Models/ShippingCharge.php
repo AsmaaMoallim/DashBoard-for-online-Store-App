@@ -6,22 +6,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ShippingCharge
- * 
+ *
  * @property string $ship_id
  * @property string $ord_id
  * @property int $ship_price
  * @property int $fakeId
- * 
+ *
  * @property Order $order
  *
  * @package App\Models
  */
 class ShippingCharge extends Model
 {
+    use HasFactory;
 	protected $table = 'shipping_charge';
 	protected $primaryKey = 'ship_id';
 	public $incrementing = false;

@@ -6,24 +6,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EmailBox
- * 
+ *
  * @property string $sys_email_id
  * @property string $email_cla_name
  * @property string $email_cla_email
  * @property string $email_cla_phone
  * @property string $email_type
  * @property int $fakeId
- * 
+ *
  * @property SysInfoEmail $sys_info_email
  *
  * @package App\Models
  */
 class EmailBox extends Model
 {
+    use HasFactory;
 	protected $table = 'email_box';
 	protected $primaryKey = 'sys_email_id';
 	public $incrementing = false;

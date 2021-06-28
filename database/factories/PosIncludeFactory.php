@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Manager;
+use App\Models\Permission;
 use App\Models\PosInclude;
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PosIncludeFactory extends Factory
@@ -23,6 +26,8 @@ class PosIncludeFactory extends Factory
     {
         static $fakeID = 0;
         return [
+            'pos_id' => $this->faker->randomElement(Position::pluck('pos_id')->toArray()),
+            'per_id'=> $this->faker->randomElement(Permission::pluck('per_id')->toArray()),
             'fakeID' => ++$fakeID,
         ];
     }

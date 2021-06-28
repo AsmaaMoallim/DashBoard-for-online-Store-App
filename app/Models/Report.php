@@ -6,17 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Report
- * 
+ *
  * @property string $report_id
  * @property string $cla_id
  * @property string $prod_id
  * @property string $com_id
  * @property int $fakeId
- * 
+ *
  * @property Client $client
  * @property Comment $comment
  * @property IgnoredReport $ignored_report
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Report extends Model
 {
+    use HasFactory;
 	protected $table = 'report';
 	public $incrementing = false;
 	public $timestamps = false;

@@ -22,7 +22,9 @@ class SysInfoEmailFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
+        static $sys_email_id =0 ;
         return [
+            'sys_email_id'=> ++$sys_email_id,
             'sys_email' => $this->faker->unique()->safeEmail(),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,

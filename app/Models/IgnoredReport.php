@@ -6,23 +6,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class IgnoredReport
- * 
+ *
  * @property string $report_id
  * @property string $cla_id
  * @property string $prod_id
  * @property string $com_id
  * @property int $fakeId
- * 
+ *
  * @property Report $report
  *
  * @package App\Models
  */
 class IgnoredReport extends Model
 {
+    use HasFactory;
 	protected $table = 'ignored_reports';
 	public $incrementing = false;
 	public $timestamps = false;
