@@ -307,18 +307,18 @@
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">الادارة</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-left ">
-                            <li class=" ml-3">
-                                <button type="button" class="btn btn-primary float-right">
-                                    <i class="fa fa-plus"></i>  إضافة مدير </button>
-                            </li>
+{{--                    <div class="col-sm-6">--}}
+{{--                        <ol class="breadcrumb float-sm-left ">--}}
+{{--                            <li class=" ml-3">--}}
+{{--                                <button type="button" class="btn btn-primary float-right">--}}
+{{--                                    <i class="fa fa-plus"></i>  إضافة مدير </button>--}}
+{{--                            </li>--}}
 
-                            <li>
-                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>
-                            </li>
-                        </ol>
-                    </div> <!-- /.col -->
+{{--                            <li>--}}
+{{--                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>--}}
+{{--                            </li>--}}
+{{--                        </ol>--}}
+{{--                    </div> <!-- /.col -->--}}
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

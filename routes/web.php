@@ -63,10 +63,14 @@ Route::get('/email_box', [\App\Http\Controllers\MeasureController::class, 'index
 
 
 
+//  ازرار الاضافة وسجل عمليات المدراء والتعليقات المتجاهلة
+Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
+Route::get('manager/manager_operations_record/display', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
+
+
 
 
 //////////////////////////////////////////////////Ruba
-
 Route::get('/new-manager-form',[App\Http\Controllers\managerController::class,'showData']);
 Route::post('/addManager', [App\Http\Controllers\managerController::class, 'addManager']);
 //for testing edit
@@ -84,6 +88,14 @@ Route::view('/new-product-form','new-product-form');
 Route::view('/measures-form','measures-form');
 Route::view('/notifications-form','notifications-form');
 Route::view('/TestEdit','TestEditting');
+
+
+
+
+
+
+
+
 //Route::get('/test','test');
 //Route::get('/test', function() {
 // return view('test-form',['managers'=>manager::all()]); });
