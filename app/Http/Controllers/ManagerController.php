@@ -17,6 +17,8 @@ class ManagerController extends Controller
      */
     public function index()
     {
+
+
         $tables = 'manager';
         $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
         $rows = \DB::table('manager')->get();
