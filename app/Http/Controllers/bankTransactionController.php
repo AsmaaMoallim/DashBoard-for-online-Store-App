@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankTransaction;
 use Illuminate\Http\Request;
 
 class bankTransactionController extends Controller
@@ -19,4 +20,6 @@ class bankTransactionController extends Controller
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
+
+
 }

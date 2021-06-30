@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainSection;
+use App\Models\SubSection;
 use Illuminate\Http\Request;
 
 class subSectionController extends Controller
@@ -13,12 +14,26 @@ class subSectionController extends Controller
         $formPage = "new-subDepartment-form";
         $addNew = "إضافة قسم فرعي جديد";
         $showRecords = "0";
-        $tables = 'sub_section';
+        $tables = 'sub_sections';
         $columns= \DB::getSchemaBuilder()->getColumnListing('sub_section');
         $rows = \DB::table('sub_section')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+    }
+
+    public function enableordisable($id)
+    {
+        $data = SubSection::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
     }
 
     public function insertData(){

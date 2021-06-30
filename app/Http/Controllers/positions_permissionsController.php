@@ -2,28 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Permission;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
-class commentController extends Controller
+class positions_permissionsController extends Controller
 {
     public function index()
     {
-        $recordPage = "comment_reports";
-        $formPage = "0";
-        $addNew = "0";
-        $showRecords = "عرض إبلاغات التعليقات";
-        $tables = 'comments';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('comments');
-        $rows = \DB::table('comments')->get();
+        $recordPage = "0";
+        $formPage = "new-role-form";
+        $addNew = "إضافة منصب جديد";
+        $showRecords = "0";
+        $tables = 'positions_permissionsController';
+        $columns= \DB::getSchemaBuilder()->getColumnListing('position');
+        $rows = \DB::table('position')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function enableOrdisable($id)
+    public function enableordisable($id)
     {
-        $data = Comment::find($id);
+
+        $data = Position::find($id);
+
+
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -33,5 +37,6 @@ class commentController extends Controller
             $data->save();
         }
         return redirect()->back();
+
     }
 }

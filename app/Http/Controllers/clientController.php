@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class clientController extends Controller
@@ -20,6 +21,19 @@ class clientController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
+    public function enableordisable($id)
+    {
+        $data = Client::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
+    }
     public function contactinfo(){
         $recordPage = "0";
         $formPage = "0";
@@ -32,6 +46,8 @@ class clientController extends Controller
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
+
+
 
 
     public function insertData(){

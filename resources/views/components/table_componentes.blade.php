@@ -90,14 +90,14 @@
                                             @if(isset($rows->state))
                                                 @if($rows->state)
                                                     <a class="btn btn-success btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
                                                         <i class="fa ">
                                                         </i>
                                                         تعطيل
                                                     </a>
                                                 @elseif(!$rows->state)
                                                     <a class="btn btn-primary btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
                                                         <i class="fa ">
                                                         </i>
                                                         تفعيل

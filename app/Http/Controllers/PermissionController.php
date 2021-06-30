@@ -27,6 +27,7 @@ class PermissionController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
 
 
+
     //    function addNew(Request $request)
 //    {
 //        $manager = new Manager;
@@ -48,7 +49,7 @@ class PermissionController extends Controller
         return redirect()->back();
     }
 
-    public function update( $id)
+    public function enableordisable($id)
     {
 
         $data = Permission::find($id);

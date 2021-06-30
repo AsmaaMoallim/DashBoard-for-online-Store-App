@@ -34,7 +34,7 @@ class MeasureController extends Controller
         return redirect()->back();
     }
 
-    public function update( $id)
+    public function enableOrdisable( $id)
     {
 
         $data = Measure::find($id);

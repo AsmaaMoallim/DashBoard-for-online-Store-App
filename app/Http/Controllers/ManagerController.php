@@ -37,7 +37,7 @@ class ManagerController extends Controller
         return redirect()->back();
     }
 
-    public function update($id)
+    public function enableordisable($id)
     {
         $data = Manager::find($id);
         if($data->state==false){
