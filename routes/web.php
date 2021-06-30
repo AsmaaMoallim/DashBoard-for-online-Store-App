@@ -41,6 +41,7 @@ Route::get('/measure/{int}/update', [\App\Http\Controllers\MeasureController::cl
 Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
 Route::get('/positions_permissionsController', [App\Http\Controllers\PositionController::class, 'index'])->name('positions_permissionsController.index');
 Route::get('/positions_permissionsController', [App\Http\Controllers\PermissionController::class, 'index'])->name('positions_permissionsController.index');
+
 Route::get('/media_Library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
 Route::get('/banners', [App\Http\Controllers\bannerController::class, 'index'])->name('banners.index');
 Route::get('/main_Sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_Sections.index');

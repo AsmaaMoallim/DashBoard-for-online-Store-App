@@ -17,9 +17,9 @@ class PositionController extends Controller
     public function index()
     {
         $recordPage = "0";
+        $showRecords = "0";
         $formPage = "new-role-form";
         $addNew = "إضافة منصب جديد";
-        $showRecords = "0";
         $tables = 'position';
         $columns= \DB::getSchemaBuilder()->getColumnListing('position');
         $rows = \DB::table('position')->get();
@@ -33,18 +33,14 @@ class PositionController extends Controller
         return view('new-role-form', ['permissions' => $permission]);
     }
 
-
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+        function store(Request $request)
+    {
+        $position = new Position();
+        $position->pos_id = $request->pos_id;
+        $position->pos_name = $request->pos_name;
+        $position->save();
+        return redirect('/position');
+   }
 
 
     public function destroy($id)

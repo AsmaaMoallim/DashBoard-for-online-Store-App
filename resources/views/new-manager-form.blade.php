@@ -20,7 +20,8 @@
                     <x-form.input name="ManagerEmail" class="form-control" type="email"
                                   label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" />
 
-                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب', 'onchange'=>'GetSelectedItem(this.value)'])
+                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب',
+                       'onchange'=>'GetSelectedItem(this.value)', 'all'=>'managers','id'=>'man_id', 'name'=>'man_firs_name'])
 
                     <script>
                         function GetSelectedItem(value)

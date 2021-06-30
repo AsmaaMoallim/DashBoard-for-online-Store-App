@@ -51,7 +51,6 @@ class ManagerController extends Controller
         return redirect()->back();
     }
 
-
     public function insertData(){
         $manager = manager::all();
         return view('new-manager-form', ['managers' => $manager]);
