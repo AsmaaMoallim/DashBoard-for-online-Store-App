@@ -27,6 +27,20 @@ class MediaLibraryController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
+    public function enableordisable($id)
+    {
+        $data = MediaLibrary::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

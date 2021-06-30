@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainSection;
 use Illuminate\Http\Request;
 
 class mainSectionController extends Controller
@@ -18,6 +19,20 @@ class mainSectionController extends Controller
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+    }
+
+    public function enableordisable($id)
+    {
+        $data = MainSection::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
     }
 
     //    function addNew(Request $request)

@@ -13,7 +13,7 @@ class productController extends Controller
         $formPage = "new-product-form";
         $addNew = "إضافة منتج جديد";
         $showRecords = "عرض التفاصيل";
-        $tables = 'product';
+        $tables = 'products';
         $columns= \DB::getSchemaBuilder()->getColumnListing('product');
         $rows = \DB::table('product')->get();
         return view('master_tables_view')->with('rows',$rows)->with
@@ -32,6 +32,19 @@ class productController extends Controller
 //      $manager->save();
 //        return redirect('/home');
 //   }
+    public function enableordisable($id)
+    {
+        $data = Product::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
+    }
 
     public function insertData(){
         return view('new-product-form');

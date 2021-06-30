@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SysBankAccount;
 use Illuminate\Http\Request;
 
 class bankAccountController extends Controller
@@ -20,7 +21,25 @@ class bankAccountController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
+    public function enableOrdisable($id)
+    {
+        $data = SysBankAccount::find($id);
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
+
+
     public function insertData(){
         return view('new-bank-account-form');
     }
+
+
 }

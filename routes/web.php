@@ -19,29 +19,43 @@ Route::get('/', function () {
 
 
 Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
-Route::get('/manager/{id}/delete', [\App\Http\Controllers\ManagerController::class, 'destroy'])->name('manager.destroy');
-Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
+//Route::get('/manager/{id}/delete', [\App\Http\Controllers\ManagerController::class, 'destroy'])->name('manager.destroy');
+//Route::get('/manager/{int}/enable_or_disable', [\App\Http\Controllers\ManagerController::class, 'enableOrdisable'])->name('manager.enableOrdisable');
+//
+//Route::get('/position', [\App\Http\Controllers\PositionController::class, 'index'])->name('position.index');
+//Route::get('/position/{id}/delete', [\App\Http\Controllers\PositionController::class, 'destroy'])->name('position.destroy');
+//Route::get('/position/{int}/enable_or_disable', [\App\Http\Controllers\PositionController::class, 'enableOrdisable'])->name('position.enableOrdisable');
+//
+//
+//Route::get('/permission', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permission.index');
+//Route::get('/permission/{id}/delete', [\App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy');
+//Route::get('/permission/{int}/enableordisable', [\App\Http\Controllers\PermissionController::class, 'enableordisable'])->name('permission.enableordisable');
+//
+//Route::get('/measure', [\App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
+//Route::get('/measure/{id}/delete', [\App\Http\Controllers\MeasureController::class, 'destroy'])->name('measure.destroy');
+//Route::get('/measure/{int}/enable_or_disable', [\App\Http\Controllers\MeasureController::class, 'enableOrdisable'])->name('measure.enableOrdisable');
 
-Route::get('/position', [\App\Http\Controllers\PositionController::class, 'index'])->name('position.index');
-Route::get('/position/{id}/delete', [\App\Http\Controllers\PositionController::class, 'destroy'])->name('position.destroy');
-Route::get('/position/{int}/update', [\App\Http\Controllers\PositionController::class, 'update'])->name('position.update');
 
-
-Route::get('/permission', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permission.index');
-Route::get('/permission/{id}/delete', [\App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy');
-Route::get('/permission/{int}/update', [\App\Http\Controllers\PermissionController::class, 'update'])->name('permission.update');
-
-Route::get('/measure', [\App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
-Route::get('/measure/{id}/delete', [\App\Http\Controllers\MeasureController::class, 'destroy'])->name('measure.destroy');
-Route::get('/measure/{int}/update', [\App\Http\Controllers\MeasureController::class, 'update'])->name('measure.update');
+////////////////////////////////////////////////////enableordisable state
+Route::get('/manager/{int}/enableordisable', [\App\Http\Controllers\ManagerController::class, 'enableordisable'])->name('manager.enableordisable');
+Route::get('/positions_permissionsController/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
+Route::get('/media_library/{int}/enableordisable', [App\Http\Controllers\MediaLibraryController::class, 'enableordisable'])->name('media_Library.enableordisable');
+Route::get('/banners/{int}/enableordisable', [App\Http\Controllers\bannerController::class, 'enableordisable'])->name('banners.enableordisable');
+Route::get('/main_sections/{int}/enableordisable', [\App\Http\Controllers\mainSectionController::class, 'enableordisable'])->name('main_Sections.enableordisable');
+Route::get('/sub_sections/{int}/enableordisable', [\App\Http\Controllers\subSectionController::class, 'enableordisable'])->name('enableordisable.index');
+Route::get('/products/{int}/enableordisable', [\App\Http\Controllers\productController::class, 'enableordisable'])->name('products.enableordisable');
+Route::get('/clients/{int}/enableordisable', [\App\Http\Controllers\clientController::class, 'enableordisable'])->name('clients.enableordisable');
+Route::get('/orders/{int}/enableordisable', [\App\Http\Controllers\orderController::class, 'enableordisable'])->name('orders.enableordisable');
+Route::get('/social_media_link/{int}/enableordisable', [\App\Http\Controllers\socialMediaLinksController::class, 'enableordisable'])->name('social_media_link.enableordisable');
+Route::get('/sys_bank_account/{int}/enableordisable', [\App\Http\Controllers\bankAccountController::class, 'enableordisable'])->name('bank_accounts.enableordisable');
+Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentController::class, 'enableordisable'])->name('comments.enableordisable');
 
 
 /////// temporary end pages
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
-Route::get('/positions_permissionsController', [App\Http\Controllers\PositionController::class, 'index'])->name('positions_permissionsController.index');
-Route::get('/positions_permissionsController', [App\Http\Controllers\PermissionController::class, 'index'])->name('positions_permissionsController.index');
-
+Route::get('/positions_permissionsController', [App\Http\Controllers\positions_permissionsController::class, 'index'])->name('positions_permissionsController.index');
+//Route::get('/positions_permissionsController', [App\Http\Controllers\PermissionController::class, 'index'])->name('positions_permissionsController.index');
 Route::get('/media_Library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
 Route::get('/banners', [App\Http\Controllers\bannerController::class, 'index'])->name('banners.index');
 Route::get('/main_Sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_Sections.index');
