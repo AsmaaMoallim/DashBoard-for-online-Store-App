@@ -1,4 +1,4 @@
-@extends('layouts.admintemp')
+@extends('adminLayout')
 
 @section('content')
 
@@ -14,7 +14,7 @@
                     <x-form.input name="" class="form-control" type="name"
                                   label="اسم المنتج " placeholder="أدخل اسم المنتج الجديد " />
 
-                    @include('components.form.dynamic-dropdown-list', ['label'=>'القسم الفرعي'])
+{{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'القسم الفرعي'])--}}
 
                     <x-form.input name="" class="form-control" type="price"
                                   label="السعر " placeholder=" أدخل سعر المنتج الجديد" />

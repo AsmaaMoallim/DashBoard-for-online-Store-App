@@ -1,4 +1,4 @@
-@extends('layouts.admintemp')
+@extends('adminLayout')
 
 @section('content')
     <div class="col-lg-6 pr-xl-5">
@@ -15,8 +15,8 @@
 
                     <x-form.photo-input name="" label="صورة" />
 
-                    @include('components.form.dynamic-dropdown-list', ['label'=>' القسم الرئيسي التابع له',
-                                  'onchange'=>'GetSelectedItem(this.value)'])
+{{--                    @include('components.form.dynamic-dropdown-list', ['label'=>' القسم الرئيسي التابع له',--}}
+{{--                                  'onchange'=>'GetSelectedItem(this.value)'])--}}
 
                     <script>
                         function GetSelectedItem(value)

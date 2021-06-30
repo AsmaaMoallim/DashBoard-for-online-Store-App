@@ -15,7 +15,7 @@ class MeasureController extends Controller
     public function index()
     {
         $recordPage = "0";
-        $formPage = "measures-form";
+        $formPage = "update-measures-form";
         $addNew = "تعديل المقاسات";
         $showRecords = "0";
         $tables = 'measure';
@@ -24,6 +24,10 @@ class MeasureController extends Controller
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
+
+    public function insertData(){
+        return view('update-measures-form');
+    }
 
 
     public function destroy($id)

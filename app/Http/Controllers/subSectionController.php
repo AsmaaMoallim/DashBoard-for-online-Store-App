@@ -11,7 +11,7 @@ class subSectionController extends Controller
     public function index()
     {
         $recordPage = "0";
-        $formPage = "new-subDepartment-form";
+        $formPage = "new-subSection-form";
         $addNew = "إضافة قسم فرعي جديد";
         $showRecords = "0";
         $tables = 'sub_sections';
@@ -38,7 +38,14 @@ class subSectionController extends Controller
 
     public function insertData(){
         $mainSection = MainSection::all();
-        return view('new-subDepartment-form', ['$mainSections' => $mainSection]);
+        return view('new-subSection-form', ['$mainSections' => $mainSection]);
+    }
+
+    public function delete($id)
+    {
+        $data = SubSection::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
     //    function addNew(Request $request)

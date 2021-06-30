@@ -1,4 +1,4 @@
-@extends('layouts.admintemp')
+@extends('adminLayout')
 
 @section('content')
 
@@ -10,20 +10,17 @@
             <form>
                 <div class="card-body fc-direction-rtl">
 
+{{--                    <div class="form-group col-sm-10 ">--}}
+{{--                        <label></label>--}}
+{{--                        <select name=""  >--}}
+{{--                            @foreach($clients as $client)--}}
+{{--                                <option value="{{$client->id}}"> {{$client->Name}} </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
 
-
-                                        <!-- Dynamic dropDownList -->
-                    <div class="form-group col-sm-10 ">
-                        <label></label>
-                        <select name=""  >
-                            @foreach($clients as $client)
-                                <option value="{{$client->id}}"> {{$client->Name}} </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    @include('components.form.dynamic-dropdown-list', 'multiple' , ['label'=>'العميل',
-                               'onchange'=>'changeSelection(this.value)', 'id'=> 'option'])
+{{--                    @include('components.form.dynamic-dropdown-list', 'multiple' , ['label'=>'العميل',--}}
+{{--                               'onchange'=>'changeSelection(this.value)', 'id'=> 'option'])--}}
 
                     <script>
                         function changeSelection(value){
@@ -42,10 +39,10 @@
                     <x-form.input name="" class="form-control" type="text"
                                   label="عنوان الإشعار" placeholder="أدخل عنوان الإشعار" />
 
-                    <div class="form-group col-sm-10 ">
+                    <div>
                     <label>نص الإشعار</label>
                     <br>
-                    <textarea placeholder="أدخل نص الإشعار" > </textarea>
+                    <textarea class="form-group col-sm-10" placeholder="أدخل نص الإشعار" > </textarea>
                     </div>
 
                     <x-form.cancel-button/>

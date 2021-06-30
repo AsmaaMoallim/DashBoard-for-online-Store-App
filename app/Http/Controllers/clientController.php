@@ -47,12 +47,20 @@ class clientController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-
-
-
     public function insertData(){
         return view('new-client-form');
     }
+
+    public function delete($id)
+    {
+        $data = Client::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+
+
+
 
     //    function addNew(Request $request)
 //    {

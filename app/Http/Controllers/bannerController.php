@@ -22,6 +22,10 @@ class bannerController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
+    public function insertData(){
+        return view('new-banner-form');
+    }
+
 
     public function enableordisable($id)
     {
@@ -34,6 +38,13 @@ class bannerController extends Controller
             $data->state= false;
             $data->save();
         }
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $data = Banner::find($id);
+        $data->delete();
         return redirect()->back();
     }
 

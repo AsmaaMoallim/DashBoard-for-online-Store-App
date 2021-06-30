@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Position;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class positions_permissionsController extends Controller
@@ -12,15 +11,20 @@ class positions_permissionsController extends Controller
     public function index()
     {
         $recordPage = "0";
-        $formPage = "new-role-form";
+        $formPage = "new-position-form";
         $addNew = "إضافة منصب جديد";
         $showRecords = "0";
-        $tables = 'positions_permissionsController';
+        $tables = 'position';
         $columns= \DB::getSchemaBuilder()->getColumnListing('position');
         $rows = \DB::table('position')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+    }
+
+    public function insertData(){
+        $permission = Permission::all();
+        return view('new-position-form', ['$permissions' => $permission]);
     }
 
     public function enableordisable($id)
@@ -41,17 +45,11 @@ class positions_permissionsController extends Controller
 
     }
 
-    public function insertData(){
-        $permission = Permission::all();
-        return view('new-role-form', ['permissions' => $permission]);
+    public function delete($id)
+    {
+        $data = Position::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
-    function store(Request $request)
-    {
-        $position = new Position();
-        $position->pos_id = $request->pos_id;
-        $position->pos_name = $request->pos_name;
-        $position->save();
-        return redirect('/position');
-    }
 }

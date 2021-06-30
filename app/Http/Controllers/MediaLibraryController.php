@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MediaLibrary;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class MediaLibraryController extends Controller
@@ -15,7 +16,7 @@ class MediaLibraryController extends Controller
     public function index()
     {
         $recordPage = "0";
-        $formPage = "new-photolibrary-form";
+        $formPage = "new-mediaLibrary-form";
         $addNew = "إضافة صورة/فيديو جديد";
         $showRecords = "0";
         //these var does not in compo
@@ -25,6 +26,10 @@ class MediaLibraryController extends Controller
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+    }
+
+    public function insertData(){
+        return view('new-mediaLibrary-form');
     }
 
     public function enableordisable($id)

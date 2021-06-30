@@ -14,8 +14,8 @@ class orderController extends Controller
         $addNew = "0";
         $showRecords = "عرض";
         $tables = 'orders';
-        $columns= DB::getSchemaBuilder()->getColumnListing('orders');
-        $rows = DB::table('orders')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('orders');
+        $rows = \DB::table('orders')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
@@ -32,6 +32,14 @@ class orderController extends Controller
             $data->state= false;
             $data->save();
         }
+        return redirect()->back();
+    }
+
+
+    public function delete($id)
+    {
+        $data = Order::find($id);
+        $data->delete();
         return redirect()->back();
     }
 }

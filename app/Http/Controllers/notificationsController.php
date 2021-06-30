@@ -10,7 +10,7 @@ class notificationsController extends Controller
     public function index()
     {
         $recordPage = "";
-        $formPage = "notification-form";
+        $formPage = "new-notifications-form";
         $addNew = "إرسال إشعار جديد";
         $showRecords = "0";
         $tables = 'notifications';
@@ -23,6 +23,6 @@ class notificationsController extends Controller
 
     public function insertData(){
         $client = Client::all();
-        return view('notifications-form', ['client' => $client]);
+        return view('new-notifications-form', ['client' => $client]);
     }
 }

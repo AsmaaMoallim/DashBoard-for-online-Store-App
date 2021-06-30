@@ -31,7 +31,7 @@ class ManagerController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
        $data = Manager::find($id);
         $data->delete();
@@ -61,15 +61,21 @@ class ManagerController extends Controller
     function store(Request $request)
     {
         $manager = new Manager;
+        $manager->man_id= 100;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
-        $manager->pos_id = $request->pos_id;
+        $manager->pos_id = 55;
+//        $manager->pos_id = $request->pos_id;
         $manager->man_phone_num = $request->man_phone_num;
         $manager->man_email = $request->man_email;
         $manager->man_password = $request->man_password;
+        $manager->fakeId = 1;
+        $manager->state = 1;
         $manager->save();
         return redirect('/home');
     }
+
+
 //    public function update(Request $request, manager $manager,$id)
 //    {
 //        $data = manager::find($id);

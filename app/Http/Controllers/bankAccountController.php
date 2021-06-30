@@ -21,6 +21,10 @@ class bankAccountController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
+    public function insertData(){
+        return view('new-bank-account-form');
+    }
+
     public function enableOrdisable($id)
     {
         $data = SysBankAccount::find($id);
@@ -36,10 +40,15 @@ class bankAccountController extends Controller
     }
 
 
-
-    public function insertData(){
-        return view('new-bank-account-form');
+    public function delete($id)
+    {
+        $data = SysBankAccount::find($id);
+        $data->delete();
+        return redirect()->back();
     }
+
+
+
 
 
 }

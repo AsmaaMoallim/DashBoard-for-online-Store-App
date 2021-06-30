@@ -23,8 +23,21 @@
                     <x-form.input name="man_email" class="form-control" type="email"
                                   label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" />
 
-                    <x-form.dynamic-dropdown-list :data="$positions" id="pos_id" name="man_firs_name" label="المنصب"
-                                                  onchange= 'GetSelectedItem(this.id)'/>
+
+{{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب', 'onchange'=>'GetSelectedItem(this.value)', 'data'=>'positions','name'=>'pos_name'])--}}
+
+
+                    {{--                    <div class="form-group col-sm-10 ">--}}
+{{--                        <label>المنصب</label>--}}
+{{--                        <select  name="ManagerRole" onchange="GetSelectedItem">--}}
+{{--                            @foreach($positions as $position)--}}
+{{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+
+
+{{--                    <x-form.dynamic-dropdown-list :data="$positions" id="pos_id" name="man_firs_name" label=""></x-form.dynamic-dropdown-list>--}}
 
                     <script>
                         function GetSelectedItem(pos_id)

@@ -2,7 +2,7 @@
         <label>{{$label}}</label>
         <select  name="ManagerRole" onchange="{{$onchange}}">
             @foreach($data as $data)
-                <option value="{{$data->$id}}"> {{$data->$name}} </option>
+                <option value="{{$data->fakeId}}"> {{$data->$name}} </option>
             @endforeach
         </select>
     </div>

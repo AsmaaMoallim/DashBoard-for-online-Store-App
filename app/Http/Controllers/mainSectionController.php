@@ -10,7 +10,7 @@ class mainSectionController extends Controller
     public function index()
     {
         $recordPage = "0";
-        $formPage = "new-mainDepartment-form";
+        $formPage = "new-maninSection-form";
         $addNew = "إضافة قسم رئيسي جديد";
         $showRecords = "0";
         $tables = 'main_sections';
@@ -19,6 +19,10 @@ class mainSectionController extends Controller
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+    }
+
+    public function insertData(){
+        return view('new-maninSection-form');
     }
 
     public function enableordisable($id)
@@ -32,6 +36,14 @@ class mainSectionController extends Controller
             $data->state= false;
             $data->save();
         }
+        return redirect()->back();
+    }
+
+
+    public function delete($id)
+    {
+        $data = MainSection::find($id);
+        $data->delete();
         return redirect()->back();
     }
 

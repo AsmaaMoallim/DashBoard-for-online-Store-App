@@ -1,4 +1,4 @@
-@extends('layouts.admintemp')
+@extends('adminLayout')
 
 @section('content')
 <!-- form div -->
