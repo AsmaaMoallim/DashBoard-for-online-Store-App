@@ -16,8 +16,8 @@
                     <div class="form-group col-sm-10 ">
                         <label></label>
                         <select name=""  >
-                            @foreach($managers as $manager)
-                                <option value="{{$manager['id']}}"> {{$manager->ManagerName}} </option>
+                            @foreach($clients as $client)
+                                <option value="{{$client->id}}"> {{$client->Name}} </option>
                             @endforeach
                         </select>
                     </div>

@@ -14,11 +14,30 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $recordPage = "0";
+        $formPage = "new-role-form";
+        $addNew = "إضافة منصب جديد";
+        $showRecords = "0";
+        //these var does not in compo
         $tables = 'permission';
         $columns= \DB::getSchemaBuilder()->getColumnListing('permission');
         $rows = \DB::table('permission')->get();
-        return view('master_tables_view')->with('rows',$rows)->with('columns', $columns)->with('tables',$tables);;
-    }
+        return view('master_tables_view')->with('rows',$rows)->with
+        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
+
+
+    //    function addNew(Request $request)
+//    {
+//        $manager = new Manager;
+//        $manager->ManagerName = $request->ManagerName;
+//        $manager->ManagerEmail = $request->ManagerEmail;
+//        $manager->ManagerPhone = $request->ManagerPhone;
+//        $manager->ManagerRole = $request->ManagerRole;
+//        $manager->ManagerPassword = $request->ManagerPassword;
+//      $manager->save();
+//        return redirect('/home');
+//   }
 
 
     public function destroy($id)

@@ -185,7 +185,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('positions_permissions.index')}}" class="nav-link">
+                                    <a href="{{ route('positions_permissionsController.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الصلاحيات والمناصب</p>
                                     </a>
@@ -197,7 +197,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('bannares.index')}}" class="nav-link">
+                                    <a href="{{ route('banners.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>البانارات</p>
                                     </a>

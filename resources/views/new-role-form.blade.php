@@ -15,8 +15,8 @@
                     <div class="form-group col-sm-10 ">
                         <label>الصلاحيات</label>
                         <br>
-                        @foreach($managers as $manager)
-                            <input type="checkbox" value="{{$manager['id']}}"> {{$manager->ManagerName}} >
+                        @foreach($permissions as $permission)
+                            <input type="checkbox" value="{{$permission['id']}}"> {{$permission->Name}} >
                         @endforeach
                     </div>
 

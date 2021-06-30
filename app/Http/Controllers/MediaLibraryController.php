@@ -14,7 +14,17 @@ class MediaLibraryController extends Controller
      */
     public function index()
     {
-        //
+        $recordPage = "0";
+        $formPage = "new-photolibrary-form";
+        $addNew = "إضافة صورة/فيديو جديد";
+        $showRecords = "0";
+        //these var does not in compo
+        $tables = 'media_library';
+        $columns= DB::getSchemaBuilder()->getColumnListing('media_library');
+        $rows = DB::table('media_library')->get();
+        return view('master_tables_view')->with('rows',$rows)->with
+        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
     /**
@@ -33,11 +43,17 @@ class MediaLibraryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    //    function addNew(Request $request)
+//    {
+//        $manager = new Manager;
+//        $manager->ManagerName = $request->ManagerName;
+//        $manager->ManagerEmail = $request->ManagerEmail;
+//        $manager->ManagerPhone = $request->ManagerPhone;
+//        $manager->ManagerRole = $request->ManagerRole;
+//        $manager->ManagerPassword = $request->ManagerPassword;
+//      $manager->save();
+//        return redirect('/home');
+//   }
     /**
      * Display the specified resource.
      *

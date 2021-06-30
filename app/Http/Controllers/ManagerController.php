@@ -21,6 +21,7 @@ class ManagerController extends Controller
         $formPage = "new-manager-form";
         $addNew = "اضف مدير جديد";
         $showRecords = "سجل عمليات المديرين";
+        //these var does not in compo
         $tables = 'manager';
         $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
         $rows = \DB::table('manager')->get();
