@@ -37,6 +37,13 @@ class bannerController extends Controller
         return redirect()->back();
     }
 
+    public function delete($id)
+    {
+        $data = Banner::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
     //    function addNew(Request $request)
 //    {
 //        $manager = new Manager;

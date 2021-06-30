@@ -25,7 +25,8 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}" rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}"
+          rel="stylesheet">
     <!-- bootstrap rtl -->
     <link rel="stylesheet" href="{{ asset('dist/css/bootstrap-rtl.min.css') }}">
     <!-- template rtl version -->
@@ -90,7 +91,8 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle ml-3">
+                            <img src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar"
+                                 class="img-size-50 img-circle ml-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     پیمان احمدی
@@ -106,7 +108,8 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle ml-3">
+                            <img src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Avatar"
+                                 class="img-size-50 img-circle ml-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     سارا وکیلی
@@ -173,13 +176,14 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('manager.index')}}" class="nav-link active">
+                                    <a href="{{ route('manager.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الادارة</p>
                                     </a>
@@ -190,6 +194,7 @@
                                         <p>الصلاحيات والمناصب</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="{{ route('media_Library.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
@@ -231,7 +236,8 @@
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الطلبات</p>
                                     </a>
-                                </li>   <li class="nav-item">
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('measure.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>دليل المقاسات</p>
@@ -307,18 +313,18 @@
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">الادارة</h1>
                     </div><!-- /.col -->
-{{--                    <div class="col-sm-6">--}}
-{{--                        <ol class="breadcrumb float-sm-left ">--}}
-{{--                            <li class=" ml-3">--}}
-{{--                                <button type="button" class="btn btn-primary float-right">--}}
-{{--                                    <i class="fa fa-plus"></i>  إضافة مدير </button>--}}
-{{--                            </li>--}}
+                    {{--                    <div class="col-sm-6">--}}
+                    {{--                        <ol class="breadcrumb float-sm-left ">--}}
+                    {{--                            <li class=" ml-3">--}}
+                    {{--                                <button type="button" class="btn btn-primary float-right">--}}
+                    {{--                                    <i class="fa fa-plus"></i>  إضافة مدير </button>--}}
+                    {{--                            </li>--}}
 
-{{--                            <li>--}}
-{{--                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>--}}
-{{--                            </li>--}}
-{{--                        </ol>--}}
-{{--                    </div> <!-- /.col -->--}}
+                    {{--                            <li>--}}
+                    {{--                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>--}}
+                    {{--                            </li>--}}
+                    {{--                        </ol>--}}
+                    {{--                    </div> <!-- /.col -->--}}
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -368,5 +374,13 @@
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('dist/js/demo.js') }}"></script>
 
+
+        <script>
+            $(document).ready(
+                 $('nav li a').click(function() {
+                         $(this).addClass('active');
+                 }));
+        </script>
 </body>
+
 </html>

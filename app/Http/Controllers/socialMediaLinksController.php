@@ -36,6 +36,13 @@ class socialMediaLinksController extends Controller
     }
 
 
+    public function delete($id)
+    {
+        $data = SocialMediaLink::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
     public function insertData(){
         return view('new-social-media-form');
     }

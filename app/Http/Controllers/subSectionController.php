@@ -41,6 +41,13 @@ class subSectionController extends Controller
         return view('new-subDepartment-form', ['$mainSections' => $mainSection]);
     }
 
+    public function delete($id)
+    {
+        $data = SubSection::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
     //    function addNew(Request $request)
 //    {
 //        $manager = new Manager;

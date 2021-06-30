@@ -30,7 +30,7 @@ class ManagerController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
        $data = Manager::find($id);
         $data->delete();

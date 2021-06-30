@@ -35,6 +35,14 @@ class mainSectionController extends Controller
         return redirect()->back();
     }
 
+
+    public function delete($id)
+    {
+        $data = MainSection::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
     //    function addNew(Request $request)
 //    {
 //        $manager = new Manager;

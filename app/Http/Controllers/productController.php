@@ -49,4 +49,12 @@ class productController extends Controller
     public function insertData(){
         return view('new-product-form');
     }
+
+
+    public function delete($id)
+    {
+        $data = Product::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
 }

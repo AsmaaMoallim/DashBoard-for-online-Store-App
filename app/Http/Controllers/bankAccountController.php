@@ -36,6 +36,13 @@ class bankAccountController extends Controller
     }
 
 
+    public function delete($id)
+    {
+        $data = SysBankAccount::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
 
     public function insertData(){
         return view('new-bank-account-form');

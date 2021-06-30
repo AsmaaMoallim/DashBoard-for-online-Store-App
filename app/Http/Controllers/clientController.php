@@ -48,6 +48,13 @@ class clientController extends Controller
     }
 
 
+    public function delete($id)
+    {
+        $data = Client::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
 
 
     public function insertData(){

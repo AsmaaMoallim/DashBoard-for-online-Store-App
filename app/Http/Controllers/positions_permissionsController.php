@@ -39,4 +39,11 @@ class positions_permissionsController extends Controller
         return redirect()->back();
 
     }
+
+    public function delete($id)
+    {
+        $data = Position::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
 }

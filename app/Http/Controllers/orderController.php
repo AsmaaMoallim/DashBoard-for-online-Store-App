@@ -34,4 +34,12 @@ class orderController extends Controller
         }
         return redirect()->back();
     }
+
+
+    public function delete($id)
+    {
+        $data = Order::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
 }
