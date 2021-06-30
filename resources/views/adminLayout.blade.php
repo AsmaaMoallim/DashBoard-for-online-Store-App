@@ -232,7 +232,7 @@
                                         <p>الطلبات</p>
                                     </a>
                                 </li>   <li class="nav-item">
-                                    <a href="{{ route('measures.index')}}" class="nav-link">
+                                    <a href="{{ route('measure.index')}}" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>دليل المقاسات</p>
                                     </a>

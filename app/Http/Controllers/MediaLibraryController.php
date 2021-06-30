@@ -20,8 +20,8 @@ class MediaLibraryController extends Controller
         $showRecords = "0";
         //these var does not in compo
         $tables = 'media_library';
-        $columns= DB::getSchemaBuilder()->getColumnListing('media_library');
-        $rows = DB::table('media_library')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('media_library');
+        $rows = \DB::table('media_library')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

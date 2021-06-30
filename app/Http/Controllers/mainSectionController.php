@@ -13,8 +13,8 @@ class mainSectionController extends Controller
         $addNew = "إضافة قسم رئيسي جديد";
         $showRecords = "0";
         $tables = 'main_sections';
-        $columns= DB::getSchemaBuilder()->getColumnListing('main_sections');
-        $rows = DB::table('main_sections')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('main_sections');
+        $rows = \DB::table('main_sections')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

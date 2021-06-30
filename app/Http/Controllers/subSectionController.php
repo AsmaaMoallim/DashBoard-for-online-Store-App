@@ -14,8 +14,8 @@ class subSectionController extends Controller
         $addNew = "إضافة قسم فرعي جديد";
         $showRecords = "0";
         $tables = 'sub_section';
-        $columns= DB::getSchemaBuilder()->getColumnListing('sub_section');
-        $rows = DB::table('sub_section')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('sub_section');
+        $rows = \DB::table('sub_section')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

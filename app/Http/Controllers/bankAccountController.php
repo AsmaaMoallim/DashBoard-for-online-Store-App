@@ -13,8 +13,8 @@ class bankAccountController extends Controller
         $addNew = "إضافة حساب بنكي جديد";
         $showRecords = "0";
         $tables = 'sys_bank_account';
-        $columns= DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
-        $rows = DB::table('sys_bank_account')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
+        $rows = \DB::table('sys_bank_account')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

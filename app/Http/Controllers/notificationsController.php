@@ -14,8 +14,8 @@ class notificationsController extends Controller
         $addNew = "إرسال إشعار جديد";
         $showRecords = "0";
         $tables = 'notifications';
-        $columns= DB::getSchemaBuilder()->getColumnListing('notifications');
-        $rows = DB::table('notifications')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('notifications');
+        $rows = \DB::table('notifications')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

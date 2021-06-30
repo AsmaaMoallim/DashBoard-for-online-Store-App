@@ -14,8 +14,8 @@ class bannerController extends Controller
         $addNew = "إضافة بانر جديد";
         $showRecords = "0";
         $tables = 'banner';
-        $columns= DB::getSchemaBuilder()->getColumnListing('banner');
-        $rows = DB::table('banner')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('banner');
+        $rows = \DB::table('banner')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

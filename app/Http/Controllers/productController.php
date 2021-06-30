@@ -14,8 +14,8 @@ class productController extends Controller
         $addNew = "إضافة منتج جديد";
         $showRecords = "عرض التفاصيل";
         $tables = 'product';
-        $columns= DB::getSchemaBuilder()->getColumnListing('product');
-        $rows = DB::table('product')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('product');
+        $rows = \DB::table('product')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);

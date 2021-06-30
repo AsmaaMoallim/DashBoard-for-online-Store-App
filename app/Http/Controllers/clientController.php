@@ -13,8 +13,8 @@ class clientController extends Controller
         $addNew = "إضافة عميل جديد";
         $showRecords = "0";
         $tables = 'clients';
-        $columns= DB::getSchemaBuilder()->getColumnListing('clients');
-        $rows = DB::table('clients')->get();
+        $columns= \DB::getSchemaBuilder()->getColumnListing('clients');
+        $rows = \DB::table('clients')->get();
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
