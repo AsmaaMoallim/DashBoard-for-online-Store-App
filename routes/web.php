@@ -95,7 +95,7 @@ Route::get('comments/comment_reports/display', [App\Http\Controllers\reportContr
 
 
 //////////////////////////////////////////////////Ruba
-Route::get('/new-manager-form',[App\Http\Controllers\managerController::class,'showData']);
+Route::get('/new-manager-form',[App\Http\Controllers\managerController::class,'insertData']);
 Route::post('/addManager', [App\Http\Controllers\managerController::class, 'addManager']);
 //for testing edit
 Route::post('/update', [App\Http\Controllers\managerController::class, 'update']);
