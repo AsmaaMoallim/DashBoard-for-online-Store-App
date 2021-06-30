@@ -15,11 +15,10 @@
                     <div class="form-group col-sm-10 ">
                         <label>الصلاحيات</label>
                         <br>
-                        @foreach($permissions as $permission)
-                            <input type="checkbox" value="{{$permission['id']}}"> {{$permission->Name}} >
+                        @foreach( $permissions as $permission)
+                            <input type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}} >
                         @endforeach
                     </div>
-
 
 
                     <x-form.cancel-button/>

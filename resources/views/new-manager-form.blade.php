@@ -7,36 +7,38 @@
         <div class=" card card-dark " style="background-color: silver ">
         <x-form.header-card title="إضافة مدير جديد"/>
 
-            <form action="/addManager" method="Post">
+            <form action="/store-manager" method="Post">
                 <div class="card-body fc-direction-rtl">
                     @csrf
 
-                    <x-form.input name="ManagerName" class="form-control" type="name"
-                                  label="الاسم" placeholder="أدخل اسم المدير الجديد" />
+                    <x-form.input name="man_first_name" class="form-control" type="name"
+                                  label="الاسم الأول" placeholder="أدخل الأسم الأول للمدير الجديد" />
 
-                    <x-form.input name="ManagerPhone" class="form-control" type="tel"
+                    <x-form.input name="man_last_name" class="form-control" type="name"
+                                  label="الاسم الأخير" placeholder="أدخل اسم الأخير للمدير الجديد" />
+
+                    <x-form.input name="man_phone_num" class="form-control" type="tel"
                                   label="رقم الجوال" placeholder="أدخل رقم الجوال التابع للمدير الجديد" />
 
-                    <x-form.input name="ManagerEmail" class="form-control" type="email"
+                    <x-form.input name="man_email" class="form-control" type="email"
                                   label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" />
 
-                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب',
-                       'onchange'=>'GetSelectedItem(this.value)', 'all'=>'managers','id'=>'man_id', 'name'=>'man_firs_name'])
+                    <x-form.dynamic-dropdown-list :data="$positions" id="pos_id" name="man_firs_name" label="المنصب"
+                                                  onchange= 'GetSelectedItem(this.id)'/>
 
                     <script>
-                        function GetSelectedItem(value)
+                        function GetSelectedItem(pos_id)
                         {
-                            var option = document.getElementById(value);
+                            var option = document.getElementById(pos_id);
                             var selectedop = option.options[option.selectedIndex].text;
                         }
                     </script>
 
-                    <x-form.input name="ManagerPassword" class="form-control" type="password"
+                    <x-form.input name="man_password" class="form-control" type="password"
                                   label="كلمة المرور" placeholder="أدخل كلمة المرور التابعة للمدير الجديد" />
 
                     <x-form.cancel-button/>
                     <x-form.save-button/>
-
                     <button  class=" btn btn-primary ml-1" onclick="window.location='{{ url("TestEdit") }}'" type="button" value="تعديل" />
 
                 </div>

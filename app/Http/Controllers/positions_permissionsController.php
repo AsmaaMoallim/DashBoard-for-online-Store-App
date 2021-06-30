@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Position;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class positions_permissionsController extends Controller
@@ -38,5 +39,19 @@ class positions_permissionsController extends Controller
         }
         return redirect()->back();
 
+    }
+
+    public function insertData(){
+        $permission = Permission::all();
+        return view('new-role-form', ['permissions' => $permission]);
+    }
+
+    function store(Request $request)
+    {
+        $position = new Position();
+        $position->pos_id = $request->pos_id;
+        $position->pos_name = $request->pos_name;
+        $position->save();
+        return redirect('/position');
     }
 }

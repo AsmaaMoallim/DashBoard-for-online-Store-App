@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manager;
+use App\Models\Position;
 use http\Url;
 use Illuminate\Http\Request;
 use function Symfony\Component\Translation\t;
@@ -52,27 +53,23 @@ class ManagerController extends Controller
     }
 
     public function insertData(){
-        $manager = manager::all();
-        return view('new-manager-form', ['managers' => $manager]);
+        $position = Position::all();
+        return view('new-manager-form', ['$positions' => $position]);
     }
 
-    ////////////Ruba/////////////
-//    function showData()
-//    {
-//        $manager = manager::all();
-//        return view('new-manager-form', ['managers' => $manager]);
-//    }
-//    function addManager(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//        $manager->save();
-//        return redirect('/home');
-//    }
+
+    function store(Request $request)
+    {
+        $manager = new Manager;
+        $manager->man_frist_name = $request->man_frist_name;
+        $manager->man_last_name = $request->man_last_name;
+        $manager->pos_id = $request->pos_id;
+        $manager->man_phone_num = $request->man_phone_num;
+        $manager->man_email = $request->man_email;
+        $manager->man_password = $request->man_password;
+        $manager->save();
+        return redirect('/home');
+    }
 //    public function update(Request $request, manager $manager,$id)
 //    {
 //        $data = manager::find($id);

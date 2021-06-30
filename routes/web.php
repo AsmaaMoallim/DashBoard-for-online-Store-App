@@ -77,8 +77,9 @@ Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'inde
 
 
 
-// تابع ل ازرار الاضافة وسجل عمليات المدراء والتعليقات المتجاهلة
+// go to form btn
 Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
+Route::get('positions_permissionsController/new-role-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);
 Route::get('sub_section/new-subDepartment-form/insertData',[App\Http\Controllers\subSectionController::class,'insertData']);
 Route::get('client/new-client-form/insertData',[App\Http\Controllers\clientController::class,'insertData']);
 Route::get('position/new-role-form/insertData',[App\Http\Controllers\PositionController::class,'insertData']);
@@ -92,11 +93,11 @@ Route::get('product/product_details/display', [App\Http\Controllers\productContr
 Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
 
 
+// store data of save btn
+Route::post('/store-manager', [AppHttpControllersmanagerController::class, 'store']);
 
+Route::get('/new-manager-form',[App\Http\Controllers\managerController::class,'insertData']);
 
-//////////////////////////////////////////////////Ruba
-Route::get('/new-manager-form',[App\Http\Controllers\managerController::class,'showData']);
-Route::post('/addManager', [App\Http\Controllers\managerController::class, 'addManager']);
 //for testing edit
 Route::post('/update', [App\Http\Controllers\managerController::class, 'update']);
 Route::post('/TestEdit', [App\Http\Controllers\managerController::class, 'update']);

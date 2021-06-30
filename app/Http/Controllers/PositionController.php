@@ -28,19 +28,9 @@ class PositionController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function insertData(){
-        $permission = Permission::all();
-        return view('new-role-form', ['permissions' => $permission]);
-    }
 
-        function store(Request $request)
-    {
-        $position = new Position();
-        $position->pos_id = $request->pos_id;
-        $position->pos_name = $request->pos_name;
-        $position->save();
-        return redirect('/position');
-   }
+
+
 
 
     public function destroy($id)
