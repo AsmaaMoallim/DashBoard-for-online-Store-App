@@ -24,7 +24,7 @@
 {{--                    </div>--}}
 
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button  indexPage="positions_permissionsController" />
                     <x-form.save-button/>
 
             </div>

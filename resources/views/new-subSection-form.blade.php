@@ -27,7 +27,7 @@
                     </script>
 
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="sub_Sections"/>
                     <x-form.save-button/>
 
                 </div>

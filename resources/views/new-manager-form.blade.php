@@ -50,7 +50,7 @@
                     <x-form.input name="man_password" class="form-control" type="password"
                                   label="كلمة المرور" placeholder="أدخل كلمة المرور التابعة للمدير الجديد" />
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="manager"/>
                     <x-form.save-button/>
                     <button  class=" btn btn-primary ml-1" onclick="window.location='{{ url("TestEdit") }}'" type="button" value="تعديل" />
 

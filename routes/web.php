@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
+//Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 //Route::get('/manager/{id}/delete', [\App\Http\Controllers\ManagerController::class, 'destroy'])->name('manager.destroy');
 //Route::get('/manager/{int}/enable_or_disable', [\App\Http\Controllers\ManagerController::class, 'enableOrdisable'])->name('manager.enableOrdisable');
 //
@@ -35,7 +35,7 @@ Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index']
 //Route::get('/measure/{int}/enable_or_disable', [\App\Http\Controllers\MeasureController::class, 'enableOrdisable'])->name('measure.enableOrdisable');
 
 
-////////////////////////////////////////////////////enableordisable state
+////////////////////////////////////////////////////  enableordisable state
 Route::get('/manager/{int}/enableordisable', [\App\Http\Controllers\ManagerController::class, 'enableordisable'])->name('manager.enableordisable');
 Route::get('/positions_permissionsController/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
 Route::get('/media_library/{int}/enableordisable', [App\Http\Controllers\MediaLibraryController::class, 'enableordisable'])->name('media_Library.enableordisable');
@@ -50,7 +50,7 @@ Route::get('/sys_bank_account/{int}/enableordisable', [\App\Http\Controllers\ban
 Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentController::class, 'enableordisable'])->name('comments.enableordisable');
 
 
-////////////////////////////////////////////////////enableordisable state
+////////////////////////////////////////////////////   delete row
 Route::get('/manager/{int}/delete', [\App\Http\Controllers\ManagerController::class, 'delete'])->name('manager.delete');
 Route::get('/positions_permissionsController/{int}/delete', [App\Http\Controllers\positions_permissionsController::class, 'delete'])->name('positions_permissionsController.delete');
 Route::get('/media_library/{int}/delete', [App\Http\Controllers\MediaLibraryController::class, 'delete'])->name('media_Library.delete');
@@ -69,9 +69,10 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 //Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');
 
+//indexPage=""
 
-
-//tables
+////////////////////////////////////////////////////  tables   + cancel button
+Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
 Route::get('/positions_permissionsController', [App\Http\Controllers\positions_permissionsController::class, 'index'])->name('positions_permissionsController.index');
 Route::get('/media_Library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
@@ -94,7 +95,7 @@ Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'inde
 
 
 
-// go to forms
+////////////////////////////////////////////////////   go to forms
 Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
 Route::get('position/new-position-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);
 Route::get('media_library/new-mediaLibrary-form/insertData',[App\Http\Controllers\MediaLibraryController::class,'insertData']);
@@ -108,7 +109,7 @@ Route::get('sys_bank_account/new-bank-account-form/insertData',[App\Http\Control
 Route::get('notifications/new-notifications-form/insertData',[App\Http\Controllers\notificationsController::class,'insertData']);
 
 
-// display
+////////////////////////////////////////////////////   display
 Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
 Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'index'])->name('product_details.index');
 Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'index'])->name('order_details.index');
@@ -117,8 +118,14 @@ Route::get('comments/comment_reports/display', [App\Http\Controllers\reportContr
 Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'index'])->name('email_box');
 
 
-//save btn
+////////////////////////////////////////////////////   save btn
 Route::Post('/store-manager',[App\Http\Controllers\managerController::class,'store']);
+
+
+
+
+
+
 
 
 

@@ -15,7 +15,7 @@
 
                     <x-form.photo-input name=" " label="الصورة" />
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="main_Sections"/>
                     <x-form.save-button/>
 
                 </div>
