@@ -244,7 +244,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('contact_iformation.index')}}" class="nav-link {{"contact_iformation"==request()->path()?"active":""}}">
+                                    <a href="{{ route('contact_information.index')}}" class="nav-link {{"contact_information"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>بيانات التواصل</p>
                                     </a>

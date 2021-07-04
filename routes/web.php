@@ -83,7 +83,7 @@ Route::get('/products', [\App\Http\Controllers\productController::class, 'index'
 Route::get('/clients', [\App\Http\Controllers\clientController::class, 'index'])->name('clients.index');
 Route::get('/orders', [\App\Http\Controllers\orderController::class, 'index'])->name('orders.index');
 Route::get('/measure', [App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
-Route::get('/contact_information', [\App\Http\Controllers\sysContactInfoController::class, 'index'])->name('contact_iformation.index');
+Route::get('/contact_information', [\App\Http\Controllers\sysContactInfoController::class, 'index'])->name('contact_information.index');
 Route::get('/social_media_link', [\App\Http\Controllers\socialMediaLinksController::class, 'index'])->name('social_media_link.index');
 Route::get('/shipping_charge', [\App\Http\Controllers\shippingChargeController::class, 'index'])->name('shipping_charge.index');
 Route::get('/bank_accounts', [\App\Http\Controllers\bankAccountController::class, 'index'])->name('bank_accounts.index');
