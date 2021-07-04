@@ -70,6 +70,11 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 //Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');
 
 //indexPage=""
+////////////////////////////////////////////////////  update button
+Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
+
+
+
 
 ////////////////////////////////////////////////////  tables   + cancel button
 Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
