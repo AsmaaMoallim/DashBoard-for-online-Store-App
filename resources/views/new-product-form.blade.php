@@ -92,7 +92,7 @@
                         })
                     </script>
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="products" />
                     <x-form.save-button/>
 
                 </div>

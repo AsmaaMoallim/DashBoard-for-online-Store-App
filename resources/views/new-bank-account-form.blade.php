@@ -18,7 +18,7 @@
 " placeholder="أدخل اسم المدير الجديد" />
 
 
-                <x-form.cancel-button/>
+                <x-form.cancel-button  indexPage="bank_accounts" />
                 <x-form.save-button/>
 
             </div>

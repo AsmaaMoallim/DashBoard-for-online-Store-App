@@ -24,7 +24,7 @@
                 <x-form.input name="" class="form-control" type="password"
                               label="كلمة المرور" placeholder="أدخل كلمة المرور التابعة للعميل الجديد" />
 
-        <x-form.cancel-button/>
+        <x-form.cancel-button indexPage="clients"/>
         <x-form.save-button/>
 
                 </div>

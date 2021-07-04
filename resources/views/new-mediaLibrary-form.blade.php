@@ -19,7 +19,7 @@
                     <x-form.input name="" class="form-control" type="url"
                                   label="أو" placeholder="ادخل رابط الفيديو" />
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="media_Library"/>
                     <x-form.save-button/>
 
                 </div>

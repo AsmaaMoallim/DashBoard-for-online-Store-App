@@ -13,8 +13,8 @@
                     <x-form.photo-input name="" label="صورة القياسات الجديد" />
 
                     <x-form.save-button/>
-                    <x-form.cancel-button/>
-                    <button class=" btn ml-1 " type="submit" style='float: left; background-color: #23923d;' > تعديل </button>
+                    <x-form.cancel-button indexPage="measure" />
+                    <button class=" btn ml-1 btn-info" type="submit" style='float: left; background-color: #23923d;' > تعديل </button>
 
                 </div>
             </form>

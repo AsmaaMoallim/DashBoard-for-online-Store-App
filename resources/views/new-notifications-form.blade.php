@@ -45,7 +45,7 @@
                     <textarea class="form-group col-sm-10" placeholder="أدخل نص الإشعار" > </textarea>
                     </div>
 
-                    <x-form.cancel-button/>
+                    <x-form.cancel-button indexPage="notifications"/>
                     <x-form.save-button/>
 
                 </div>
