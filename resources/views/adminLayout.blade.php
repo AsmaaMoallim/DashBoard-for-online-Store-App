@@ -202,7 +202,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('banners.index')}}" class="nav-link {{"banners"?"active"==request()->path():""}}">
+                                    <a href="{{ route('banners.index')}}" class="nav-link {{"banners"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>البانارات</p>
                                     </a>
