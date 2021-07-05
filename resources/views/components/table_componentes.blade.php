@@ -105,7 +105,7 @@
                                                 @endif
                                             @endif
 
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
                                                 <i class="fa fa-pencil">
 
                                                 </i>

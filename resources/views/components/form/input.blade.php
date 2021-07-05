@@ -2,7 +2,7 @@
 
     <div class="form-group col-sm-10 ">
         <label>{{ $label }}</label>
-        <input class="{{$class}}" name="{{$name}}" type="{{$type}}" placeholder="{{$placeholder}}">
+        <input class="{{$class}}" name="{{$name}}" type="{{$type}}" placeholder="{{$placeholder}}" value="{{$value ?? ''}}">
     </div>
 
 {{--</div>--}}
