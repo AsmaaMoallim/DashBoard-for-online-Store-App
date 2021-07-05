@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('adminLayout');
 });
 
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
@@ -119,8 +119,13 @@ Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxCont
 
 
 ////////////////////////////////////////////////////   save btn
-Route::Post('/store-manager',[App\Http\Controllers\managerController::class,'store']);
-
+Route::Post('/store-manager',[App\Http\Controllers\managerController::class,'store'])->name("store_new_manager");
+Route::Post('/store-bank-account',[App\Http\Controllers\bankAccountController::class,'store'])->name("store_new_bank_account");
+Route::Post('/store-media-library',[App\Http\Controllers\MediaLibraryController::class,'store'])->name("store_media_library");
+Route::Post('/store-banner',[App\Http\Controllers\bannerController::class,'store'])->name("store_banner");
+Route::Post('/store-main-section',[App\Http\Controllers\mainSectionController::class,'store'])->name("store_main_section");
+Route::Post('/store-sub-section',[App\Http\Controllers\subSectionController::class,'store'])->name("store_sub_section");
+Route::Post('/store-client',[App\Http\Controllers\clientController::class,'store'])->name("store-client");
 
 
 

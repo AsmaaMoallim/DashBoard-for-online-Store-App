@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\SysBankAccount;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,7 @@ class bankAccountController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function insertData(){
-        return view('new-bank-account-form');
-    }
+
 
     public function enableOrdisable($id)
     {
@@ -47,6 +46,21 @@ class bankAccountController extends Controller
         return redirect()->back();
     }
 
+    public function insertData(){
+        return view('new-bank-account-form');
+    }
+
+    function store(Request $request)
+    {
+        $sys_bank_account = new SysBankAccount();
+        $sys_bank_account->sys_bank_id=90;
+        $sys_bank_account->sys_bank_name = $request->sys_bank_name;
+        $sys_bank_account->sys_bank_account_num = $request->sys_bank_account_num;
+        $sys_bank_account->state = 1;
+        $sys_bank_account->fakeId =1;
+        $sys_bank_account->save();
+        return redirect('/manager');
+    }
 
 
 

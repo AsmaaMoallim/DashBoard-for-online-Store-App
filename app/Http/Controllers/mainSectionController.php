@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainSection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class mainSectionController extends Controller
@@ -47,15 +48,15 @@ class mainSectionController extends Controller
         return redirect()->back();
     }
 
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+    function store(Request $request)
+    {
+        $mainSection = new MainSection();
+        $mainSection->main_id=11;
+        $mainSection->main_name = $request->main_name;
+        $mainSection->medl_id = $request->medl_id;
+        $mainSection->state = 0;
+        $mainSection->fakeId =1;
+        $mainSection->save();
+        return redirect('/manager');
+    }
 }

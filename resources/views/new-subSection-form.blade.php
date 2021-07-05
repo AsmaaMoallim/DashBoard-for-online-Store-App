@@ -6,17 +6,25 @@
 
             <x-form.header-card title=" إضافة قسم رئيسي جديد"/>
 
-            <form>
+            <form action="/store-sub-section" method="post">
                 <div class="card-body fc-direction-rtl">
+                    @csrf
 
-                    <x-form.input name="" class="form-control" type="name"
+                    <x-form.input name="sub_name" class="form-control" type="name"
                                   label="اسم القسم الفرعي"
                                   placeholder="ادخل اسم القسم الفرعي الجديد" />
 
-                    <x-form.photo-input name="" label="صورة" />
+                    <x-form.photo-input name="medl_id" label="صورة" />
 
-{{--                    @include('components.form.dynamic-dropdown-list', ['label'=>' القسم الرئيسي التابع له',--}}
-{{--                                  'onchange'=>'GetSelectedItem(this.value)'])--}}
+
+                    <div class="form-group col-sm-10 ">
+                        <label>القسم الرئيسي التابع له</label>
+                        <select  name="main_id" onchange="GetSelectedItem">
+                            @foreach($mainSections as $mainSection)
+                                <option value="{{$mainSection->main_id}}"> {{$mainSection->main_name}} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <script>
                         function GetSelectedItem(value)

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manager;
+use App\Models\Permission;
 use App\Models\Position;
 use http\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use function Sodium\increment;
 use function Symfony\Component\Translation\t;
 
 
@@ -52,27 +55,27 @@ class ManagerController extends Controller
         return redirect()->back();
     }
 
+
     public function insertData(){
-        $position = Position::all();
-        return view('new-manager-form', ['$positions' => $position]);
+        $positions = Position::all();
+        return view('new-manager-form', ['positions' => $positions]);
     }
 
 
     function store(Request $request)
     {
-        $manager = new Manager;
-        $manager->man_id= 100;
+        $manager = new Manager();
+        $manager->man_id=90;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
-        $manager->pos_id = 55;
-//        $manager->pos_id = $request->pos_id;
+        $manager->pos_id = $request->pos_id;
         $manager->man_phone_num = $request->man_phone_num;
         $manager->man_email = $request->man_email;
         $manager->man_password = $request->man_password;
         $manager->fakeId = 1;
         $manager->state = 1;
         $manager->save();
-        return redirect('/home');
+        return redirect('/manager');
     }
 
 

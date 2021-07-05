@@ -22,11 +22,6 @@ class bannerController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function insertData(){
-        return view('new-banner-form');
-    }
-
-
     public function enableordisable($id)
     {
         $data = Banner::find($id);
@@ -48,15 +43,20 @@ class bannerController extends Controller
         return redirect()->back();
     }
 
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+    public function insertData(){
+    return view('new-banner-form');
+}
+
+    function store(Request $request)
+    {
+        $banner = new Banner();
+        $banner->ban_id=11;
+        $banner->ban_name = $request->ban_name;
+        $banner->medl_id = $request->medl_id;
+        $banner->state = 0;
+        $banner->fakeId =1;
+        $banner->save();
+        return redirect('/manager');
+    }
+
 }

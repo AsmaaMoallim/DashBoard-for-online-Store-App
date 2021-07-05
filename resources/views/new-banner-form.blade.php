@@ -6,13 +6,14 @@
         <div class=" card card-dark " style="background-color: silver ">
             <x-form.header-card title="إضافة بانر جديد"/>
 
-            <form>
+            <form action="/store-banner" method="post">
                 <div class="card-body fc-direction-rtl">
+                    @csrf
 
-                    <x-form.input name="" class="form-control" type="name"
+                    <x-form.input name="ban_name" class="form-control" type="name"
                                   label="اسم البانر" placeholder="ادخل اسم البانر الجديد" />
 
-                    <x-form.photo-input name=" " label="الصورة" />
+                    <x-form.photo-input name="medl_id" label="الصورة" />
 
                         <x-form.cancel-button indexPage="banners"/>
                         <x-form.save-button/>

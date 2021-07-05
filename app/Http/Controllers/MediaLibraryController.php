@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MediaLibrary;
 use App\Models\Position;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class MediaLibraryController extends Controller
@@ -56,29 +57,20 @@ class MediaLibraryController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\MediaLibrary  $mediaLibrary
-     * @return \Illuminate\Http\Response
-     */
+
+    function store(Request $request)
+    {
+        $media_library = new MediaLibrary();
+        $media_library->medl_id=90;
+        $media_library->medl_name = $request->medl_name;
+        $media_library->medl_description = $request->medl_description;
+        $media_library->medl_img_ved = $request->medl_img_ved;
+        $media_library->state = 1;
+        $media_library->fakeId =1;
+        $media_library->save();
+        return redirect('/manager');
+    }
+
     public function show(MediaLibrary $mediaLibrary)
     {
         //

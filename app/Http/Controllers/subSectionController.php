@@ -38,7 +38,7 @@ class subSectionController extends Controller
 
     public function insertData(){
         $mainSection = MainSection::all();
-        return view('new-subSection-form', ['$mainSections' => $mainSection]);
+        return view('new-subSection-form', ['mainSections' => $mainSection]);
     }
 
     public function delete($id)
@@ -48,15 +48,18 @@ class subSectionController extends Controller
         return redirect()->back();
     }
 
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+
+    function store(Request $request)
+    {
+        $sub_section = new SubSection();
+        $sub_section->sub_id=11;
+        $sub_section->sub_name = $request->sub_name;
+        $sub_section->main_id = $request->main_id;
+        $sub_section->medl_id = $request->medl_id;
+        $sub_section->state = 1;
+        $sub_section->fakeId =1;
+        $sub_section->save();
+        return redirect('/manager');
+    }
+
 }

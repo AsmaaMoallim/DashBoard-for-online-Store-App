@@ -59,18 +59,18 @@ class clientController extends Controller
     }
 
 
-
-
-
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+    function store(Request $request)
+    {
+        $client= new Client();
+        $client->cla_id=11;
+        $client->cla_frist_name = $request->cla_frist_name;
+        $client->cla_last_name = $request->cla_last_name;
+        $client->cla_img = $request->cla_img;
+        $client->cla_phone_num = $request->cla_phone_num;
+        $client->cla_email = $request->cla_email;
+        $client->state = 0;
+        $client->fakeId =1;
+        $client->save();
+        return redirect('/');
+    }
 }

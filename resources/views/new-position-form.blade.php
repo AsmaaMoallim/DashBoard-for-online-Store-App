@@ -10,8 +10,8 @@
             <form>
                 @csrf
                 <div class="card-body fc-direction-rtl">
-                    <x-form.input name="positionName" class="form-control" type="ىشةث"
-                                  label="سم المنصب" placeholder="أدخل اسم المنصب الجديد" />
+                    <x-form.input name="pos_id" class="form-control" type="text"
+                                  label="اسم المنصب" placeholder="أدخل اسم المنصب الجديد" />
 
 
                     {{--                    <!-- Dynamic dropDownList -->--}}
