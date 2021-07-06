@@ -12,7 +12,7 @@
                     @csrf
 
 
-@if("manager/".$id."/update"==request()->path())
+                   @if("manager/".$id."/update"==request()->path())
                         <?php
                         $man_frist_name = $currentValues->man_frist_name;
                         $man_last_name = $currentValues->man_last_name;
@@ -64,7 +64,6 @@
 
                     <x-form.cancel-button indexPage="manager"/>
                     <x-form.save-button/>
-                    <button  class=" btn btn-primary ml-1" onclick="window.location='{{ url("TestEdit") }}'" type="button" value="تعديل" />
 
                 </div>
             </form>

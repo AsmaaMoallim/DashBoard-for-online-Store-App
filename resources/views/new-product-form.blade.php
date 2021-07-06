@@ -11,12 +11,12 @@
                 @csrf
                 <div class="card-body fc-direction-rtl">
 
-                    <x-form.input name="" class="form-control" type="name"
+                    <x-form.input name="prod_name" class="form-control" type="name"
                                   label="اسم المنتج " placeholder="أدخل اسم المنتج الجديد " />
 
 {{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'القسم الفرعي'])--}}
 
-                    <x-form.input name="" class="form-control" type="price"
+                    <x-form.input name="prod_price" class="form-control" type="price"
                                   label="السعر " placeholder=" أدخل سعر المنتج الجديد" />
 
                     <div>
@@ -26,7 +26,7 @@
                     </div>
                     <br>
 
-                    <x-form.input name="" class="form-control" type="number"
+                    <x-form.input name="prod_avil_amount" class="form-control" type="number"
                                   label="الكمية المتوفرة حالياً " placeholder=" أدخل الكمية المتوفرة حالياً للمنتج الجديد " />
 
 
@@ -36,11 +36,12 @@
                     <div class="form-group col-sm-10 ">
                         <label>الألوان المتاحة</label>
                         <input id="color" type="color" class="mr-1" >
-                        <input id="hex" class="form-control" name="" type="text" placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','" >
+                        <input id="hex" class="form-control" name="prod_avil_color" type="text" placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','" >
                     </div>
 
                     <script>
 
+                        // var inputValue = document.getElementById("hex").value();
                         let colorInput = document.querySelector('#color');
                         let hexInput = document.querySelector('#hex');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductProdAvilColor;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -21,17 +22,18 @@ class productController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    //    function addNew(Request $request)
-//    {
-//        $manager = new Manager;
-//        $manager->ManagerName = $request->ManagerName;
-//        $manager->ManagerEmail = $request->ManagerEmail;
-//        $manager->ManagerPhone = $request->ManagerPhone;
-//        $manager->ManagerRole = $request->ManagerRole;
-//        $manager->ManagerPassword = $request->ManagerPassword;
-//      $manager->save();
-//        return redirect('/home');
-//   }
+        function addNew(Request $request)
+    {
+        $product = new Product();
+        $co = new ProductProdAvilColor();
+        $manager->ManagerName = $request->ManagerName;
+        $manager->ManagerEmail = $request->ManagerEmail;
+        $manager->ManagerPhone = $request->ManagerPhone;
+        $manager->ManagerRole = $request->ManagerRole;
+        $manager->ManagerPassword = $request->ManagerPassword;
+      $manager->save();
+        return redirect('/home');
+   }
     public function enableordisable($id)
     {
         $data = Product::find($id);
