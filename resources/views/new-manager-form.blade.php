@@ -31,6 +31,16 @@
                     <x-form.input name="man_email" class="form-control" type="email" label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" value="{{$man_email ?? ''}}"></x-form.input>
 
 
+{{--                    <div class="form-group col-sm-10 ">--}}
+{{--                        <label>المنصب</label>--}}
+{{--                        <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">--}}
+{{--                            @foreach($positions as $position)--}}
+{{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+
+
                     {{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب', 'onchange'=>'GetSelectedItem(this.value)', 'data'=>'positions','name'=>'pos_name'])--}}
 
 
