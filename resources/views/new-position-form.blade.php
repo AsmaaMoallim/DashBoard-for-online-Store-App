@@ -7,7 +7,7 @@
 
             <x-form.header-card title="إضافة منصب جديد"/>
 
-            <form>
+            <form action="" method="post">
                 @csrf
                 <div class="card-body fc-direction-rtl">
                     <x-form.input name="pos_id" class="form-control" type="text"
@@ -19,7 +19,8 @@
                         <label>الصلاحيات</label>
                         <br>
                         @foreach( $permissions as $permission)
-                            <input type="checkbox" value="$permission['per_id']"> {{$permission->per_name}} >
+                            <input type="checkbox" value="{{$permission->per_id}}"> {{$permission->per_name}}>
+                            <br>
                         @endforeach
                     </div>
 

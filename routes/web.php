@@ -99,7 +99,6 @@ Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'inde
 
 
 
-
 ////////////////////////////////////////////////////   go to forms
 Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
 Route::get('position/new-position-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);

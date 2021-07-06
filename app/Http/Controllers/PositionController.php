@@ -31,8 +31,6 @@ class PositionController extends Controller
 
 
 
-
-
     public function destroy($id)
     {
         $data = Position::find($id);

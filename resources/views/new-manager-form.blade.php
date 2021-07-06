@@ -42,30 +42,15 @@
                                   value="{{$man_email ?? ''}}"></x-form.input>
 
 
-                    {{--                    <div class="form-group col-sm-10 ">--}}
-                    {{--                        <label>المنصب</label>--}}
-                    {{--                        <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">--}}
-                    {{--                            @foreach($positions as $position)--}}
-                    {{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
+                                        <div class="form-group col-sm-10 ">
+                                            <label>المنصب</label>
+                                            <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">
+                                                @foreach($positions as $position)
+                                                    <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-
-                    {{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب', 'onchange'=>'GetSelectedItem(this.value)', 'data'=>'positions','name'=>'pos_name'])--}}
-
-
-                    {{--                    <div class="form-group col-sm-10 ">--}}
-                    {{--                        <label>المنصب</label>--}}
-                    {{--                        <select  name="ManagerRole" onchange="GetSelectedItem">--}}
-                    {{--                            @foreach($positions as $position)--}}
-                    {{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
-
-
-                    {{--                    <x-form.dynamic-dropdown-list :data="$positions" id="pos_id" name="man_firs_name" label=""></x-form.dynamic-dropdown-list>--}}
 
                     <script>
                         function GetSelectedItem(pos_id) {

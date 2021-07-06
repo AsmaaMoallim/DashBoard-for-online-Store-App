@@ -24,8 +24,9 @@ class positions_permissionsController extends Controller
 
     public function insertData(){
         $permission = Permission::all();
-        return view('new-position-form', ['$permissions' => $permission]);
+        return view('new-position-form', ['permissions' => $permission]);
     }
+
 
     public function enableordisable($id)
     {
