@@ -14,14 +14,14 @@
                                   label="اسم المنصب" placeholder="أدخل اسم المنصب الجديد" />
 
 
-                    {{--                    <!-- Dynamic dropDownList -->--}}
-{{--                    <div class="form-group col-sm-10 ">--}}
-{{--                        <label>الصلاحيات</label>--}}
-{{--                        <br>--}}
-{{--                        @foreach( $permissions as $permission)--}}
-{{--                            <input type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}} >--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
+                                        <!-- Dynamic dropDownList -->
+                    <div class="form-group col-sm-10 ">
+                        <label>الصلاحيات</label>
+                        <br>
+                        @foreach( $permissions as $permission)
+                            <input type="checkbox" value="$permission['per_id']"> {{$permission->per_name}} >
+                        @endforeach
+                    </div>
 
 
                     <x-form.cancel-button  indexPage="positions_permissionsController" />

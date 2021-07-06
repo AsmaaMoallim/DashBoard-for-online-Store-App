@@ -25,15 +25,16 @@ class productController extends Controller
         function addNew(Request $request)
     {
         $product = new Product();
-        $co = new ProductProdAvilColor();
-        $manager->ManagerName = $request->ManagerName;
-        $manager->ManagerEmail = $request->ManagerEmail;
-        $manager->ManagerPhone = $request->ManagerPhone;
-        $manager->ManagerRole = $request->ManagerRole;
-        $manager->ManagerPassword = $request->ManagerPassword;
-      $manager->save();
+        $prod_avil_color = new ProductProdAvilColor();
+        $product->prod_name = $request->prod_name;
+        $product->prod_price = $request->prod_price;
+        $product->prod_avil_amount = $request->prod_avil_amount;
+        $product->prod_desc_img = $request->prod_desc_img;
+        $product->save();
+        $prod_avil_color->save();
         return redirect('/home');
    }
+
     public function enableordisable($id)
     {
         $data = Product::find($id);

@@ -41,9 +41,9 @@
 
                     <script>
 
-                        // var inputValue = document.getElementById("hex").value();
                         let colorInput = document.querySelector('#color');
                         let hexInput = document.querySelector('#hex');
+
 
                         colorInput.addEventListener('input',()=>{
                             let color = colorInput.value;
@@ -53,12 +53,9 @@
 
                     </script>
 
-                    <x-form.input name="" class="form-control" type="name"
-                                  label="معلومات المنتج " placeholder="أدخل معلومات المنتج" />
-
                     <div class="form-group col-sm-10" >
                         <label>معلومات المنتج</label>
-                        <textarea class="form-control" id="editor1" name="editor1" style="width:100%"> </textarea>
+                        <textarea class="form-control" id="editor1" name="prod_desc_img" style="width:100%"> </textarea>
                     </div>
 
                     <!-- jQuery -->
