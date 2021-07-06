@@ -5,16 +5,13 @@
     <!-- form div -->
     <div class="col-lg-6 pr-xl-5">
         <div class=" card card-dark " style="background-color: silver ">
-            <x-form.header-card title="إضافة مدير جديد"/>
             <x-form.header-card title="إضافة مدير جديد"></x-form.header-card>
 
             <form action="/store-manager" method="Post">
                 <div class="card-body fc-direction-rtl">
                     @csrf
 
-                    <x-form.input name="man_first_name" class="form-control" type="name"
-                                  label="الاسم الأول" placeholder="أدخل الأسم الأول للمدير الجديد" />
-                    @if("manager/".$id."/update"==request()->path())
+                               @if("manager/".$id."/update"==request()->path())
                         <?php
                         $man_frist_name = $currentValues->man_frist_name;
                         $man_last_name = $currentValues->man_last_name;
@@ -27,16 +24,10 @@
                     {{--                    {{  request()->path() == 'manager/'.$id.'/update' ? $currentValues->man_frist_name: "" }}--}}
                     <x-form.input name="man_first_name" class="form-control" type="name" label="الاسم الأول" placeholder="أدخل الأسم الأول للمدير الجديد" value="{{$man_frist_name ?? ''}}"></x-form.input>
 
-                    <x-form.input name="man_last_name" class="form-control" type="name"
-                                  label="الاسم الأخير" placeholder="أدخل اسم الأخير للمدير الجديد" />
-                    <x-form.input name="man_last_name" class="form-control" type="name" label="الاسم الأخير" placeholder="أدخل اسم الأخير للمدير الجديد" value="{{$man_last_name ?? ''}}"></x-form.input>
+                          <x-form.input name="man_last_name" class="form-control" type="name" label="الاسم الأخير" placeholder="أدخل اسم الأخير للمدير الجديد" value="{{$man_last_name ?? ''}}"></x-form.input>
 
-                    <x-form.input name="man_phone_num" class="form-control" type="tel"
-                                  label="رقم الجوال" placeholder="أدخل رقم الجوال التابع للمدير الجديد" />
-                    <x-form.input name="man_phone_num" class="form-control" type="tel" label="رقم الجوال" placeholder="أدخل رقم الجوال التابع للمدير الجديد" value="{{$man_phone_num ?? ''}}"></x-form.input>
+                        <x-form.input name="man_phone_num" class="form-control" type="tel" label="رقم الجوال" placeholder="أدخل رقم الجوال التابع للمدير الجديد" value="{{$man_phone_num ?? ''}}"></x-form.input>
 
-                    <x-form.input name="man_email" class="form-control" type="email"
-                                  label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" />
                     <x-form.input name="man_email" class="form-control" type="email" label="البريد الإلكتروني" placeholder="أدخل البريد الإلكتروني التابع للمدير الجديد" value="{{$man_email ?? ''}}"></x-form.input>
 
 
@@ -63,14 +54,8 @@
                         }
                     </script>
 
-                    <x-form.input name="man_password" class="form-control" type="password"
-                                  label="كلمة المرور" placeholder="أدخل كلمة المرور التابعة للمدير الجديد" />
                     <x-form.input name="man_password" class="form-control" type="password" label="كلمة المرور" placeholder="أدخل كلمة المرور التابعة للمدير الجديد" value="{{$man_password ?? ''}}"></x-form.input>
-
-                    <x-form.cancel-button indexPage="manager"/>
-                    <x-form.save-button/>
-                    <button  class=" btn btn-primary ml-1" onclick="window.location='{{ url("TestEdit") }}'" type="button" value="تعديل" />
-                    <x-form.cancel-button indexPage="manager"></x-form.cancel-button>
+    <x-form.cancel-button indexPage="manager"></x-form.cancel-button>
                     <x-form.save-button></x-form.save-button>
                     <button  class=" btn btn-primary ml-1" onclick="window.location='{{ url("TestEdit") }}'" type="button" value="تعديل" ></button>
 
