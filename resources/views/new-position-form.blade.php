@@ -7,8 +7,8 @@
 
             <x-form.header-card title="إضافة منصب جديد"></x-form.header-card>
 
-            <form>
-                @csrf
+            <form action="/store-product" method="post">
+            @csrf
 
                 @if(isset($id))
 

@@ -25,7 +25,7 @@ class positions_permissionsController extends Controller
 
     public function insertData(){
         $permission = Permission::all();
-        return view('new-position-form', ['$permissions' => $permission]);
+        return view('new-position-form', ['permission' => $permission]);
     }
 
     public function enableordisable($id)
@@ -52,6 +52,7 @@ class positions_permissionsController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
     public function update(Request $request, Position $manager,$id)
     {
         $currentValues = Position::find($id);

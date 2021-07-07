@@ -91,6 +91,8 @@ class ManagerController extends Controller
 
     public function update(Request $request, manager $manager,$id)
     {
+        $positions = Position::all();
+
         $currentValues = manager::find($id);
 //        $data->ManagerName=$request->ManagerName;
 //        $data->ManagerPhone=$request->ManagerPhone;
@@ -99,7 +101,7 @@ class ManagerController extends Controller
 //        $data->ManagerPassword=$request->ManagerPassword;
 //        $data->save();
 //        dd($currentValuues);
-        return view('new-manager-form')->with('currentValues' , $currentValues)
+        return view('new-manager-form',['positions' => $positions])->with('currentValues' , $currentValues)
             ->with('id', $id);
     }
 
