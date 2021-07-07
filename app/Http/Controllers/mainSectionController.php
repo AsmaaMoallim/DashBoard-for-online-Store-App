@@ -70,4 +70,5 @@ class mainSectionController extends Controller
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
 
     }
+
 }

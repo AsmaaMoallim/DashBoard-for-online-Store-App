@@ -68,4 +68,5 @@ class bannerController extends Controller
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
 
     }
+
 }
