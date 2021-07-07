@@ -52,6 +52,11 @@
                                         value="{{$mainSection->main_id}}"
                                             selected="selected">{{$CurrentmainSection}}
                                 </option>
+                                    @else
+                                        <option
+
+                                            value="{{$mainSection->main_id}}"> {{$mainSection->main_name}}
+                                        </option>
                                     @endif
 
                             @else

@@ -46,7 +46,27 @@
                                             <label>المنصب</label>
                                             <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">
                                                 @foreach($positions as $position)
-                                                    <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>
+
+                                                    @if(isset($id))
+
+                                                        @if ($currentValues->pos_id == $position->pos_id)
+                                                            <option
+
+                                                                value="{{$position->pos_id}}"
+                                                                selected="selected">{{$CurrentPosition->pos_name}}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>
+                                                        @endif
+
+                                                    @else
+                                                        <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>
+
+
+                                                    @endif
+                                                /////////
+
+
                                                 @endforeach
                                             </select>
                                         </div>
