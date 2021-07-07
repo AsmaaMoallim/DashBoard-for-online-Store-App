@@ -38,6 +38,7 @@ class ManagerController extends Controller
 //                dd($rows);
 //                dd($col);
 
+
         return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
@@ -74,7 +75,7 @@ class ManagerController extends Controller
     function store(Request $request)
     {
         $manager = new Manager();
-        $manager->man_id=660;
+        $manager->man_id=59;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
         $manager->pos_id = $request->pos_id;

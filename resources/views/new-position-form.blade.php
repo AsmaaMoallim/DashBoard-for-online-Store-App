@@ -32,7 +32,7 @@
                         <label>الصلاحيات</label>
                         <br>
                         @foreach($permissions as $permission)
-                            <input type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}}
+                            <input name="per_id" type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}}
                             <br>
                         @endforeach
                     </div>

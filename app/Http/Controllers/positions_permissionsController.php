@@ -76,13 +76,22 @@ class positions_permissionsController extends Controller
 
     public function store(Request $request){
         $position = new Position();
-        $position->pos_id = 100;
+        $permission =new Permission();
+
+        $position->pos_id = 12077;
         $position->pos_name = $request->pos_name;
+
+        $p = AppModelsPosition::pos_includes()::class;
+        $position->p->save($permission);
         $position->fakeId = 55;
         $position->state = 0;
         $position->save();
+
+        $permission->fakeId = 0;
+        $permission->save();
         return redirect('/');
     }
+
 
 
 }
