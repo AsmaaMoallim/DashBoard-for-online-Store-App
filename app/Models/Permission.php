@@ -42,8 +42,8 @@ class Permission extends Model
 		'state'
 	];
 
-	public function pos_includes()
-	{
+    public function pos_includes()
+    {
 		return $this->hasMany(PosInclude::class, 'per_id');
 	}
 }

@@ -17,14 +17,15 @@ class positions_permissionsController extends Controller
         $addNew = "إضافة منصب جديد";
         $showRecords = "0";
         $tables = 'position';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('position');
+        $columns = \DB::getSchemaBuilder()->getColumnListing('position');
         $rows = \DB::table('position')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        return view('master_tables_view')->with('rows', $rows)->with
+        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
     }
 
-    public function insertData(){
+    public function insertData()
+    {
         $permission = Permission::all();
         return view('new-position-form', ['permissions' => $permission]);
     }
@@ -35,12 +36,11 @@ class positions_permissionsController extends Controller
         $data = Position::find($id);
 
 
-        if($data->state==false){
-            $data->state=true;
+        if ($data->state == false) {
+            $data->state = true;
             $data->save();
-        }
-        else{
-            $data->state= false;
+        } else {
+            $data->state = false;
             $data->save();
         }
         return redirect()->back();
@@ -53,7 +53,8 @@ class positions_permissionsController extends Controller
         $data->delete();
         return redirect()->back();
     }
-    public function update(Request $request, Position $manager,$id)
+
+    public function update(Request $request, Position $manager, $id)
     {
         $currentValues = Position::find($id);
         $permission = Permission::all();
@@ -61,7 +62,7 @@ class positions_permissionsController extends Controller
         dd($CurrentPermission);
 //        $per = $CurrentPermission->pos_id;
 //        dd($per);
-        return view('new-position-form',['permission' => $permission])->with('currentValues' , $currentValues)
+        return view('new-position-form', ['permission' => $permission])->with('currentValues', $currentValues)
             ->with('id', $id);
 
 //        $data->ManagerName=$request->ManagerName;
@@ -74,24 +75,52 @@ class positions_permissionsController extends Controller
 
     }
 
-    public function store(Request $request){
+//    public function store(Request $request){
+//        $position = new Position();
+////        $permission = new Permission();
+//        $posInclude = new PosInclude();
+//        $position->pos_id = 12077;
+//        $position->pos_name = $request->pos_name;
+//        $position->fakeId = 55;
+//        $position->state = 0;
+//        $posInclude = $request->input('per_id');
+////        foreach ($posInclude as $posInclude){
+////            PosInclude::creat($posInclude);
+////        }
+////        $posInclude->fakeId = 0;
+//////        $permission->fakeId = 0;
+////        $position->pos_includes()->saveMany($posInclude);
+//////        $permission->save();
+////
+//
+//        $posInclude->fakeId = 0;
+////        $permission->fakeId = 0;
+//        $position->pos_includes()->save($posInclude);
+////        $permission->save();
+//
+//
+//        return redirect()->back();
+//    }
+
+    public function store(Request $request)
+    {
         $position = new Position();
-        $permission =new Permission();
-
-        $position->pos_id = 12077;
+        $position->pos_id = 13;
         $position->pos_name = $request->pos_name;
-
-        $p = AppModelsPosition::pos_includes()::class;
-        $position->p->save($permission);
         $position->fakeId = 55;
         $position->state = 0;
         $position->save();
+        $per_id = $request->input('per_id');
 
-        $permission->fakeId = 0;
-        $permission->save();
+        foreach ($per_id as $per_id) {
+            $posInclude = new PosInclude();
+            $posInclude->pos_id = $position->pos_id;
+            $posInclude->fakeId = 0;
+            $posInclude->per_id = $per_id;
+            $posInclude->save();
+        }
+
         return redirect('/');
     }
-
-
 
 }
