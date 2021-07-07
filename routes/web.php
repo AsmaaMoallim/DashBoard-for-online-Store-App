@@ -136,10 +136,10 @@ Route::Post('/store-banner',[App\Http\Controllers\bannerController::class,'store
 Route::Post('/store-main-section',[App\Http\Controllers\mainSectionController::class,'store'])->name("store_main_section");
 Route::Post('/store-sub-section',[App\Http\Controllers\subSectionController::class,'store'])->name("store_sub_section");
 Route::Post('/store-client',[App\Http\Controllers\clientController::class,'store'])->name("store-client");
+Route::Post('/store-position',[App\Http\Controllers\positions_permissionsController::class,'store'])->name("store-position");
 Route::Post('/store-product',[App\Http\Controllers\productController::class,'store'])->name("store-product");
 Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksController::class,'store'])->name("store-social-media-links");
 Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
-
 
 
 
