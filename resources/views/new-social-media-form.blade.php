@@ -7,18 +7,18 @@
 
             <x-form.header-card title="إضافة موقع تواصل إجتماعي جديد "/>
 
-            <form>
+            <form action="/store-social-media-links" method="post">
                 <div class="card-body fc-direction-rtl">
-
-                    <x-form.input name="" class="form-control" type="name"
+                    @csrf
+                    <x-form.input name="social_site_name" class="form-control" type="name"
                                   label="اسم موقع التواصل " placeholder=" أدخل اسم موقع التواصل الاجتماعي الجديد" />
 
-                    <x-form.photo-input name="" label="صورة الموقع"/>
+                    <x-form.photo-input name="social_img" label="صورة الموقع"/>
 
-                    <x-form.input name="" class="form-control" type="url"
+                    <x-form.input name="social_url" class="form-control" type="url"
                                   label=" رابط موقع التواصل" placeholder=" أدخل رابط موقع التواصل الاجتماعي الجديد " />
 
-                    <x-form.cancel-button/>
+{{--                    <x-form.cancel-button/>--}}
                     <x-form.save-button/>
 
                 </div>

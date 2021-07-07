@@ -7,51 +7,85 @@
 
             <x-form.header-card title="إضافة منتج جديد"/>
 
-            <form method="post" enctype="multipart/form-data">
+            <form action="/store-product" method="GET" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body fc-direction-rtl">
 
                     <x-form.input name="prod_name" class="form-control" type="name"
                                   label="اسم المنتج " placeholder="أدخل اسم المنتج الجديد " />
 
-{{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'القسم الفرعي'])--}}
 
                     <x-form.input name="prod_price" class="form-control" type="price"
                                   label="السعر " placeholder=" أدخل سعر المنتج الجديد" />
 
-                    <div>
-                        <label for="file">صور المنتج</label>
-                        <br>
-                        <input type="file" id="file" name="file" multiple>
+
+                    <div class="form-group col-sm-10 ">
+                        <label>القسم الفرعي</label>
+                        <select  name="sub_id" >
+                            @foreach($sections as $section)
+                                <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>
+                            @endforeach
+                        </select>
                     </div>
-                    <br>
+
+                    <label>صور المنتح</label>
+                    <div class="form-group col-sm-10 ">
+                        <select  name="medl_id" id="pos_id" multiple>
+                            @foreach( $mediaImgs as $mediaImg)
+                                <option value="{{$mediaImg->medl_id}}"> {{$mediaImg->medl_img_ved}} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <x-form.input name="prod_avil_amount" class="form-control" type="number"
                                   label="الكمية المتوفرة حالياً " placeholder=" أدخل الكمية المتوفرة حالياً للمنتج الجديد " />
 
-
-                    <x-form.input name="" class="form-control" type="text"
-                                  label="المقاسات " placeholder="أدخل مقاسات المنتج و افصل كل قياس عن الآخر بـ',' " />
+                    <div class="form-group col-sm-10 ">
+                        <label>المقاسات</label>
+                        <br>
+                        @foreach( $measures as $measure)
+                            <input name="mesu_value" type="checkbox" value="{{$measure->mesu_id}}"> {{$measure->mesu_value}}
+                            <br>
+                        @endforeach
+                    </div>
 
                     <div class="form-group col-sm-10 ">
                         <label>الألوان المتاحة</label>
-                        <input id="color" type="color" class="mr-1" >
-                        <input id="hex" class="form-control" name="prod_avil_color" type="text" placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','" >
+                        <input id="color" type="color" class="mr-1" onchange="pushData()">
+                        <input id="hex" class="form-control" name="prod_avil_color[] [prod_avil_color]" type="text" placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','" >
                     </div>
 
                     <script>
+                        var myArry = ["#","#","#"]
 
-                        let colorInput = document.querySelector('#color');
-                        let hexInput = document.querySelector('#hex');
+                        function  pushData(){
+                            // var inputColor = document.getElementById('color').value;
+                            // let colorInput = document.querySelector('#color');
+                            // let colorInput = document.querySelector('#color');
+                            var colorInput = document.querySelector('#color');
 
+                            colorInput.addEventListener('input',()=>{
+                                let color = colorInput.value;
+                                myArry.push(color);
+                            });
 
-                        colorInput.addEventListener('input',()=>{
-                            let color = colorInput.value;
-                            hexInput.value = color;
-                          //  document.body.style.background = color;
-                        });
+                            var c = "";
+                            for (i = 0; i<myArry.length; i++){
+                                // hexInput.value = color;
+                                c = c + myArry[i];
+                            }
+                            document.getElementById('hex').innerHTML = c;
+                        }
 
+                        // let colorInput = document.querySelector('#color');
+                        // let hexInput = document.querySelector('#hex');
+                        //
+                        // colorInput.addEventListener('input',()=>{
+                        //     let color = colorInput.value;
+                        //     hexInput.value = color;
+                        // });
                     </script>
+
 
                     <div class="form-group col-sm-10" >
                         <label>معلومات المنتج</label>

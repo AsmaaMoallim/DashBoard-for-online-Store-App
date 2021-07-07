@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainSection;
+use App\Models\Measure;
+use App\Models\MediaLibrary;
 use App\Models\Product;
 use App\Models\ProductProdAvilColor;
+use App\Models\SubSection;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -22,14 +26,22 @@ class productController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-        function addNew(Request $request)
+        function store(Request $request)
     {
         $product = new Product();
         $prod_avil_color = new ProductProdAvilColor();
+        $measure = new Measure();
+        $product->prod_id = 100;
         $product->prod_name = $request->prod_name;
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
+        $product->sub_id = $request->sub_id;
+        $measure->mesu_value = $request->mesu_value;
+        $product->medl_id = $request->medl_id;
         $product->prod_desc_img = $request->prod_desc_img;
+
+        $product->state = 0;
+        $product->fakeId = 1;
         $product->save();
         $prod_avil_color->save();
         return redirect('/home');
@@ -50,7 +62,11 @@ class productController extends Controller
     }
 
     public function insertData(){
-        return view('new-product-form');
+        $measures = Measure::all();
+        $sections = SubSection::all();
+        $mediaImg = MediaLibrary::all();
+        return view('new-product-form', ['measures' => $measures,
+            'sections' => $sections, 'mediaImgs' => $mediaImg]);
     }
 
 

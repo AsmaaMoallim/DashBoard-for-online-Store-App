@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Models\Notification;
 
 class notificationsController extends Controller
 {
@@ -23,6 +24,18 @@ class notificationsController extends Controller
 
     public function insertData(){
         $client = Client::all();
-        return view('new-notifications-form', ['client' => $client]);
+        return view('new-notifications-form', ['clients' => $client]);
+    }
+
+    function store(Request $request)
+    {
+        $notification = new Notification();
+        $notification->notifi_id=90;
+        $notification->notifi_title = $request->notifi_title;
+        $notification->notifi_content = $request->notifi_content;
+        $notification->man_id = $request->man_id;
+        $notification->fakeId = 1;
+        $notification->save();
+        return redirect('/home');
     }
 }

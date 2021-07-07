@@ -25,7 +25,7 @@
                     @endif
                     {{--                    {{ "manager/1/update"==request()->path()? $currentValues->man_frist_name : "" }}--}}
                     {{--                    {{  request()->path() == 'manager/'.$id ?? '' ?? ''.'/update' ? $currentValues->man_frist_name: "" }}--}}
-                    <x-form.input name="man_first_name" class="form-control" type="name" label="الاسم الأول"
+                    <x-form.input name="man_frist_name" class="form-control" type="name" label="الاسم الأول"
                                   placeholder="أدخل الأسم الأول للمدير الجديد"
                                   value="{{$man_frist_name ?? ''}}"></x-form.input>
 

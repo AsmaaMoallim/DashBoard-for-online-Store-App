@@ -74,7 +74,7 @@ class ManagerController extends Controller
     function store(Request $request)
     {
         $manager = new Manager();
-        $manager->man_id=90;
+        $manager->man_id=66;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
         $manager->pos_id = $request->pos_id;
