@@ -39,7 +39,6 @@ class productController extends Controller
         $measure->mesu_value = $request->mesu_value;
         $product->medl_id = $request->medl_id;
         $product->prod_desc_img = $request->prod_desc_img;
-
         $product->state = 0;
         $product->fakeId = 1;
         $product->save();

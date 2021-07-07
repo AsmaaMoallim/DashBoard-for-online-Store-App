@@ -25,7 +25,6 @@ class ManagerController extends Controller
         $formPage = "new-manager-form";
         $addNew = "اضف مدير جديد";
         $showRecords = "سجل عمليات المديرين";
-        //these var does not in compo
         $tables = 'manager';
 
         $qry = \DB::table('manager')
@@ -38,6 +37,7 @@ class ManagerController extends Controller
         $rows = \DB::table('manager')->get();
 //                dd($rows);
 //                dd($col);
+
 
         return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
@@ -75,7 +75,7 @@ class ManagerController extends Controller
     function store(Request $request)
     {
         $manager = new Manager();
-        $manager->man_id=66;
+        $manager->man_id=59;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
         $manager->pos_id = $request->pos_id;

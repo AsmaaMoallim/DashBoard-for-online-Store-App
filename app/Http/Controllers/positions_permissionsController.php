@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\PosInclude;
 use App\Models\Position;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class positions_permissionsController extends Controller
@@ -25,7 +26,7 @@ class positions_permissionsController extends Controller
 
     public function insertData(){
         $permission = Permission::all();
-        return view('new-position-form', ['permission' => $permission]);
+        return view('new-position-form', ['permissions' => $permission]);
     }
 
     public function enableordisable($id)
@@ -52,7 +53,6 @@ class positions_permissionsController extends Controller
         $data->delete();
         return redirect()->back();
     }
-
     public function update(Request $request, Position $manager,$id)
     {
         $currentValues = Position::find($id);
@@ -73,6 +73,25 @@ class positions_permissionsController extends Controller
 //        dd($currentValuues);
 
     }
+
+    public function store(Request $request){
+        $position = new Position();
+        $permission =new Permission();
+
+        $position->pos_id = 12077;
+        $position->pos_name = $request->pos_name;
+
+        $p = AppModelsPosition::pos_includes()::class;
+        $position->p->save($permission);
+        $position->fakeId = 55;
+        $position->state = 0;
+        $position->save();
+
+        $permission->fakeId = 0;
+        $permission->save();
+        return redirect('/');
+    }
+
 
 
 }

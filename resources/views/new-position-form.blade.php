@@ -7,8 +7,8 @@
 
             <x-form.header-card title="إضافة منصب جديد"></x-form.header-card>
 
-            <form action="/store-product" method="post">
-            @csrf
+            <form action="/store-position" method="post">
+                @csrf
 
                 @if(isset($id))
 
@@ -23,7 +23,7 @@
                 @endif
 
                 <div class="card-body fc-direction-rtl">
-                    <x-form.input name="pos_id" class="form-control" type="text"
+                    <x-form.input name="pos_name" class="form-control" type="text"
                                   label="اسم المنصب" placeholder="أدخل اسم المنصب الجديد" ></x-form.input>
 
 
@@ -31,8 +31,8 @@
                     <div class="form-group col-sm-10 ">
                         <label>الصلاحيات</label>
                         <br>
-                        @foreach($permission as $permission)
-                            <input type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}} >
+                        @foreach($permissions as $permission)
+                            <input name="per_id" type="checkbox" value="{{$permission['per_id']}}"> {{$permission->per_name}}
                             <br>
                         @endforeach
                     </div>
