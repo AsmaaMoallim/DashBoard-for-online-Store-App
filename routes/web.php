@@ -104,13 +104,13 @@ Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'inde
 
 
 
-
 ////////////////////////////////////////////////////   go to forms
 Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
 Route::get('position/new-position-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);
 Route::get('media_library/new-mediaLibrary-form/insertData',[App\Http\Controllers\MediaLibraryController::class,'insertData']);
 Route::get('banners/new-banner-form/insertData',[App\Http\Controllers\bannerController::class,'insertData']);
 Route::get('main_sections/new-maninSection-form/insertData',[App\Http\Controllers\mainSectionController::class,'insertData']);
+Route::get('social_media_link/new-social-media-form/insertData',[App\Http\Controllers\socialMediaLinksController::class,'insertData']);
 Route::get('sub_sections/new-subSection-form/insertData',[App\Http\Controllers\subSectionController::class,'insertData']);
 Route::get('products/new-product-form/insertData',[App\Http\Controllers\productController::class,'insertData']);
 Route::get('clients/new-client-form/insertData',[App\Http\Controllers\clientController::class,'insertData']);
@@ -137,6 +137,8 @@ Route::Post('/store-main-section',[App\Http\Controllers\mainSectionController::c
 Route::Post('/store-sub-section',[App\Http\Controllers\subSectionController::class,'store'])->name("store_sub_section");
 Route::Post('/store-client',[App\Http\Controllers\clientController::class,'store'])->name("store-client");
 Route::Post('/store-product',[App\Http\Controllers\productController::class,'store'])->name("store-product");
+Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksController::class,'store'])->name("store-social-media-links");
+Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
 
 
 

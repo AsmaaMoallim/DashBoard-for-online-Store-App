@@ -25,7 +25,7 @@
                     @endif
                     {{--                    {{ "manager/1/update"==request()->path()? $currentValues->man_frist_name : "" }}--}}
                     {{--                    {{  request()->path() == 'manager/'.$id ?? '' ?? ''.'/update' ? $currentValues->man_frist_name: "" }}--}}
-                    <x-form.input name="man_first_name" class="form-control" type="name" label="الاسم الأول"
+                    <x-form.input name="man_frist_name" class="form-control" type="name" label="الاسم الأول"
                                   placeholder="أدخل الأسم الأول للمدير الجديد"
                                   value="{{$man_frist_name ?? ''}}"></x-form.input>
 
@@ -42,30 +42,15 @@
                                   value="{{$man_email ?? ''}}"></x-form.input>
 
 
-                    {{--                    <div class="form-group col-sm-10 ">--}}
-                    {{--                        <label>المنصب</label>--}}
-                    {{--                        <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">--}}
-                    {{--                            @foreach($positions as $position)--}}
-                    {{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
+                                        <div class="form-group col-sm-10 ">
+                                            <label>المنصب</label>
+                                            <select  name="pos_id" id="pos_id" onchange="GetSelectedItem">
+                                                @foreach($positions as $position)
+                                                    <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-
-                    {{--                    @include('components.form.dynamic-dropdown-list', ['label'=>'المنصب', 'onchange'=>'GetSelectedItem(this.value)', 'data'=>'positions','name'=>'pos_name'])--}}
-
-
-                    {{--                    <div class="form-group col-sm-10 ">--}}
-                    {{--                        <label>المنصب</label>--}}
-                    {{--                        <select  name="ManagerRole" onchange="GetSelectedItem">--}}
-                    {{--                            @foreach($positions as $position)--}}
-                    {{--                                <option value="{{$position->pos_id}}"> {{$position->pos_name}} </option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
-
-
-                    {{--                    <x-form.dynamic-dropdown-list :data="$positions" id="pos_id" name="man_firs_name" label=""></x-form.dynamic-dropdown-list>--}}
 
                     <script>
                         function GetSelectedItem(pos_id) {
