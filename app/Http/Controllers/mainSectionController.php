@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainSection;
+use App\Models\MediaLibrary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -58,5 +59,15 @@ class mainSectionController extends Controller
         $mainSection->fakeId =1;
         $mainSection->save();
         return redirect('/manager');
+    }
+
+    public function update(Request $request, MainSection $mainSection, $id)
+    {
+        $currentValues = MainSection::find($id);
+
+        $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
+        return view('new-maninSection-form')->with('currentValues', $currentValues)
+            ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
+
     }
 }

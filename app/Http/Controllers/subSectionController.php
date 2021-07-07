@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MainSection;
+use App\Models\MediaLibrary;
 use App\Models\SubSection;
 use Illuminate\Http\Request;
 
@@ -62,4 +63,14 @@ class subSectionController extends Controller
         return redirect('/manager');
     }
 
+    public function update(Request $request, SubSection $subSection, $id)
+    {
+        $mainSection = MainSection::all();
+        $currentValues = SubSection::find($id);
+        $CurrentmainSection = MainSection::find($currentValues->main_id);
+        $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
+        return view('new-subSection-form',  ['CurrentmainSection' => $CurrentmainSection, 'mainSections' => $mainSection])->with('currentValues', $currentValues)
+            ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
+
+    }
 }

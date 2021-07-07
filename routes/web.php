@@ -72,6 +72,11 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 //indexPage=""
 ////////////////////////////////////////////////////  update button
 Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
+Route::get('/position/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'update'])->name('positions_permissions.update');
+Route::get('/media_library/{int}/update', [\App\Http\Controllers\MediaLibraryController::class, 'update'])->name('media_Library.update');
+Route::get('/banners/{int}/update', [\App\Http\Controllers\bannerController::class, 'update'])->name('banners.update');
+Route::get('/main_sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'update'])->name('main_sections.update');
+Route::get('/sub_sections/{int}/update', [\App\Http\Controllers\subSectionController::class, 'update'])->name('sub_sections.update');
 
 
 

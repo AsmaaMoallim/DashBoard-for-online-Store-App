@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\MediaLibrary;
 use Illuminate\Http\Request;
 
 class bannerController extends Controller
@@ -59,4 +60,12 @@ class bannerController extends Controller
         return redirect('/manager');
     }
 
+    public function update(Request $request, Banner $banner, $id)
+    {
+        $currentValues = Banner::find($id);
+        $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
+        return view('new-banner-form')->with('currentValues', $currentValues)
+            ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
+
+    }
 }
