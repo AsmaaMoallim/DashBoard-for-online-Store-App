@@ -45,8 +45,9 @@ class bannerController extends Controller
     }
 
     public function insertData(){
-    return view('new-banner-form');
-}
+        $ban_img = MediaLibrary::all();
+    return view('new-banner-form',['ban_img'=>$ban_img]);
+    }
 
     function store(Request $request)
     {
