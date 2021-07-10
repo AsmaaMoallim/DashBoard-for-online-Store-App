@@ -20,6 +20,8 @@ class positions_permissionsController extends Controller
 
         $columns = \DB::getSchemaBuilder()->getColumnListing('position');
         $rows = \DB::table('position')->get();
+
+
         return view('master_tables_view')->with('rows', $rows)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);

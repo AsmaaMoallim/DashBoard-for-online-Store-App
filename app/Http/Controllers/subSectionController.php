@@ -16,9 +16,16 @@ class subSectionController extends Controller
         $addNew = "إضافة قسم فرعي جديد";
         $showRecords = "0";
         $tables = 'sub_sections';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('sub_section');
-        $rows = \DB::table('sub_section')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        $qry = \DB::table('sub_section')
+            ->join('media_library', 'sub_section.medl_id', '=', 'media_library.medl_id')
+            ->join('main_sections','sub_section.main_id','=','main_sections.main_id')
+            ->select('sub_name AS اسم القسم الفرعي' , 'medl_img_ved AS الصورة','main_name AS اسم القسم الرئيسي', 'sub_section.state','sub_section.fakeId')
+            ->get();
+
+        $columns= ['اسم القسم الفرعي','الصورة','اسم القسم الرئيسي','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }

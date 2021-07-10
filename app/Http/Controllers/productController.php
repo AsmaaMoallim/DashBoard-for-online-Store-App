@@ -19,36 +19,41 @@ class productController extends Controller
         $addNew = "إضافة منتج جديد";
         $showRecords = "عرض التفاصيل";
         $tables = 'products';
-
-        //SELECT `prod_name` AS "اسم المنتج", `sub_name` AS "القسم الفرعي" , `prod_price` AS "السعر"
-        //FROM `product`
-        //JOIN `sub_section`
-        //ON `product`.`sub_id` = `sub_section`.`sub_id`;
-
-        $qry=\DB::table('product')
-            ->join('sub_section','product.sub_id', '=', 'sub_section.sub_id')
-            ->select('prod_name AS اسم المنتج','sub_name AS القسم الفرعي','prod_price AS السعر','product.fakeId')
+        $qry = \DB::table('product')
+            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+            ->select('prod_name AS اسم المنتج', 'sub_name AS القسم الفرعي', 'prod_price AS السعر', 'product.fakeId')
             ->get();
-        $columns=['اسم المنتج','القسم الفرعي','السعر','fakeId'];
-        return view('master_tables_view')->with('rows',$qry)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'fakeId'];
+        return view('master_tables_view')->with('rows', $qry)->with
+        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
+    }
 
+    public function display(){
         // for details
-//        $qry = \DB::table('product')
-//
-//            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-//            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
-//            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-//            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-//            ->join('product_prod_avil_color AS Color', 'product`.prod_id', '=', 'color.prod_id')
-//
-//            ->select('product.prod_name As اسم المنتج' , 'sub_section.sub_name As القسم الفرعي', 'product.prod_price AS السعر',
-//                'media_library.medl_img_ved AS الصورة','prod_avil_amount As الكمية المتوفرة حاليًا','measure.mesu_value AS المقاسات',
-//                'Color.prod_avil_color AS "الألوان المتاحة','product.prod_desc_img AS معلومات الصورة','product.fakeId')
-//            ->get();
-//
-//        $columns=['اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','المقاسات','الألوان المتاحة','معلومات الصورة','fakeId'];
+
+        $recordPage = "0";
+        $formPage = "0";
+        $addNew = "0";
+        $showRecords = "0";
+        $tables = 'products';
+
+        $qry = \DB::table('product')
+            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
+
+            ->select('product.prod_name AS اسم المنتج' , 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
+                'media_library.medl_img_ved AS الصورة','prod_avil_amount AS الكمية المتوفرة حاليًا','measure.mesu_value AS المقاسات',
+                'color.prod_avil_color AS الألوان المتاحة','product.prod_desc_img AS معلومات الصورة','product.fakeId')
+            ->get();
+        $columns=['اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','المقاسات','الألوان المتاحة','معلومات الصورة','fakeId'];
+
+        return view('master_tables_view')->with('rows', $qry)->with
+        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
 
     }
 
