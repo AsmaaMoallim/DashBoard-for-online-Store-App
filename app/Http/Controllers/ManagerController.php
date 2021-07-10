@@ -37,7 +37,7 @@ class ManagerController extends Controller
         $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
         $rows = \DB::table('manager')->get();
 //                dd($rows);
-//                dd($col);
+//                dd($columns);
 
 
         return view('master_tables_view')->with('rows',$qry)->with

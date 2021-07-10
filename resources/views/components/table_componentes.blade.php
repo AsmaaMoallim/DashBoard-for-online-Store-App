@@ -13,7 +13,8 @@
 
                             <div style="float:right!important; margin-left:2%">
 
-                                <a class="btn btn-block btn-info" href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
+                                <a class="btn btn-block btn-info"
+                                   href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
                                     <i class="fa ">
                                     </i>
                                     {{$addNew}}
@@ -21,49 +22,50 @@
                             </div>
                         @endif
 
-                            @if($showRecords)
+                        @if($showRecords)
 
-                                <div style="float:right!important;">
+                            <div style="float:right!important;">
 
-                                    <a class="btn btn-block btn-info" href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
-                                        <i class="fa ">
-                                        </i>
-                                        {{$showRecords}}
-                                    </a>
-                                </div>
+                                <a class="btn btn-block btn-info"
+                                   href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
+                                    <i class="fa ">
+                                    </i>
+                                    {{$showRecords}}
+                                </a>
+                            </div>
                         @endif
 
                         <div style="align-items:flex-start; float:left!important;">
 
-                                    <div class="input-group input-group-sm" style="width:400px;">
+                            <div class="input-group input-group-sm" style="width:400px;">
 
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                       placeholder="Search">
 
-                                        <div class="input-group-append">
+                                <div class="input-group-append">
 
 
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
-
-                                    </div>
-
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
+
+                            </div>
+
+                        </div>
 
 
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
-                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>
                         <table id="tableprofider" class="table table-hover text-nowrap">
                             <thead>
                             <tr>
                                 @for( $i = 0 ; $i<=10 ; $i++)
 
                                     @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                        <th>{{$columns[$i]}}</th> @endif
+                                        <th>{{$columns[$i]}}</th>
+                                    @endif
 
                                 @endfor
 
@@ -73,17 +75,12 @@
                             <tr>
 
                                 @foreach( $rows as $rows)
-                                    @for( $i = 0 ; $i<=10; $i++)
 
                                         @for( $i = 0 ; $i<=10; $i++)
                                             @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-
                                                 <?php $val = (string)$columns[$i] ?>
-                                                @if($val)
-                                                    <td> {{$rows->$val}}</td> @endif
-
-                                            @endif
-
+                                                    <td> {{$rows->$val}}</td>
+                                        @endif
                                         @endfor
 
                                         <td class="project-actions text-right">
@@ -104,8 +101,8 @@
                                                     </a>
                                                 @endif
                                             @endif
-
-                                            <a class="btn btn-info btn-sm" href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                            <a class="btn btn-info btn-sm"
+                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
                                                 <i class="fa fa-pencil">
 
                                                 </i>
@@ -117,12 +114,10 @@
                                                 </i>
                                                 حذف
                                             </a>
-
-                                        <?php  $arrays[$x] = $x++    ?>
+                                        </td>
 
 
                             </tr>
-                            @endfor
 
                             @endforeach
 
