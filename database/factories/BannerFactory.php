@@ -24,10 +24,8 @@ class BannerFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $ban_id =0 ;
 
         return [
-            'ban_id'=>++$ban_id,
             'ban_name' =>$this->faker->name,
             'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),
             'state' => $this->faker->boolean(50),

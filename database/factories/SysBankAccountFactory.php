@@ -22,9 +22,7 @@ class SysBankAccountFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $sys_bank_id =0;
         return [
-            'sys_bank_id' => ++$sys_bank_id,
             'sys_bank_account_num' => $this->faker->randomDigit,
             'sys_bank_name'=>$this->faker->name,
             'state' => $this->faker->boolean(50),

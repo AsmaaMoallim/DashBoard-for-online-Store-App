@@ -22,9 +22,7 @@ class ClientFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $cla_id = 0;
         return [
-            'cla_id' => ++$cla_id,
             'cla_frist_name'=>$this->faker->firstName(),
             'cla_last_name' => $this->faker->name(),
             'cla_img'=>$this->faker->image(),

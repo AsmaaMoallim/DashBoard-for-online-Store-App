@@ -30,11 +30,12 @@ class notificationsController extends Controller
     function store(Request $request)
     {
         $notification = new Notification();
-        $notification->notifi_id=90;
         $notification->notifi_title = $request->notifi_title;
         $notification->notifi_content = $request->notifi_content;
         $notification->man_id = $request->man_id;
-        $notification->fakeId = 1;
+        $max = Notification::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $notification->fakeId = $maxFakeId;
         $notification->save();
         return redirect('/home');
     }

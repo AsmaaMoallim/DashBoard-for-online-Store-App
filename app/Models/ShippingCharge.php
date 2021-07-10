@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class ShippingCharge
  *
- * @property string $ship_id
- * @property string $ord_id
+ * @property int $ship_id
+ * @property int $ord_id
  * @property int $ship_price
  * @property int $fakeId
  *
@@ -24,12 +24,13 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingCharge extends Model
 {
     use HasFactory;
-	protected $table = 'shipping_charge';
+
+    protected $table = 'shipping_charge';
 	protected $primaryKey = 'ship_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'ord_id' => 'int',
 		'ship_price' => 'int',
 		'fakeId' => 'int'
 	];

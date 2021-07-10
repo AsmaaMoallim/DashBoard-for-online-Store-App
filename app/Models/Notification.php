@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Notification
  *
- * @property string $notifi_id
+ * @property int $notifi_id
  * @property string $notifi_title
  * @property string $notifi_content
- * @property string $man_id
+ * @property int $man_id
  * @property int $fakeId
  *
  * @property Manager $manager
@@ -30,10 +30,10 @@ class Notification extends Model
 
     protected $table = 'notifications';
 	protected $primaryKey = 'notifi_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'man_id' => 'int',
 		'fakeId' => 'int'
 	];
 

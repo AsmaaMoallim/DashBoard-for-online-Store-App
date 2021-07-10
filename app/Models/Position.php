@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Position
  *
- * @property string $pos_id
+ * @property int $pos_id
  * @property string $pos_name
  * @property int $fakeId
  * @property bool $state
@@ -29,7 +29,6 @@ class Position extends Model
 
     protected $table = 'position';
 	protected $primaryKey = 'pos_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

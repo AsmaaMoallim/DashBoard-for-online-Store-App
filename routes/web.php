@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 ////////////////////////////////////////////////////  enableordisable state
 Route::get('/manager/{int}/enableordisable', [\App\Http\Controllers\ManagerController::class, 'enableordisable'])->name('manager.enableordisable');
-Route::get('/positions_permissionsController/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
+Route::get('/position/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
 Route::get('/media_library/{int}/enableordisable', [App\Http\Controllers\MediaLibraryController::class, 'enableordisable'])->name('media_Library.enableordisable');
 Route::get('/banners/{int}/enableordisable', [App\Http\Controllers\bannerController::class, 'enableordisable'])->name('banners.enableordisable');
 Route::get('/main_sections/{int}/enableordisable', [\App\Http\Controllers\mainSectionController::class, 'enableordisable'])->name('main_Sections.enableordisable');
@@ -52,7 +52,7 @@ Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentCont
 
 ////////////////////////////////////////////////////   delete row
 Route::get('/manager/{int}/delete', [\App\Http\Controllers\ManagerController::class, 'delete'])->name('manager.delete');
-Route::get('/positions_permissionsController/{int}/delete', [App\Http\Controllers\positions_permissionsController::class, 'delete'])->name('positions_permissionsController.delete');
+Route::get('/position/{int}/delete', [App\Http\Controllers\positions_permissionsController::class, 'delete'])->name('positions_permissionsController.delete');
 Route::get('/media_library/{int}/delete', [App\Http\Controllers\MediaLibraryController::class, 'delete'])->name('media_Library.delete');
 Route::get('/banners/{int}/delete', [App\Http\Controllers\bannerController::class, 'delete'])->name('banners.delete');
 Route::get('/main_sections/{int}/delete', [\App\Http\Controllers\mainSectionController::class, 'delete'])->name('main_Sections.delete');

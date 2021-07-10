@@ -25,9 +25,7 @@ class BankTransactionFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $trans_id = 0;
         return [
-            'trans_id' => ++$trans_id,
             'ord_id' => $this->faker->randomElement(Order::pluck('ord_id')->toArray()),
             'cla_id' =>  $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
             'sys_bank_id' =>  $this->faker->randomElement(SysBankAccount::pluck('sys_bank_id')->toArray()),

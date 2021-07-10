@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SubSection
  *
- * @property string $sub_id
+ * @property int $sub_id
  * @property string $sub_name
- * @property string $main_id
- * @property string $medl_id
+ * @property int $main_id
+ * @property int $medl_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -32,10 +32,11 @@ class SubSection extends Model
 
     protected $table = 'sub_section';
 	protected $primaryKey = 'sub_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'main_id' => 'int',
+		'medl_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Product
  *
- * @property string $prod_id
+ * @property int $prod_id
  * @property string $prod_name
- * @property string $sub_id
+ * @property int $sub_id
  * @property float $prod_price
  * @property int $prod_avil_amount
  * @property boolean $prod_desc_img
- * @property string $medl_id
+ * @property int $medl_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -38,13 +38,14 @@ class Product extends Model
 
     protected $table = 'product';
 	protected $primaryKey = 'prod_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'sub_id' => 'int',
 		'prod_price' => 'float',
 		'prod_avil_amount' => 'int',
 		'prod_desc_img' => 'boolean',
+		'medl_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

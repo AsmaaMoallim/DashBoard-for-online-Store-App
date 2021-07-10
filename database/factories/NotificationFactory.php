@@ -24,10 +24,8 @@ class NotificationFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $notifi_id = 0;
 
         return [
-            'notifi_id' => ++$notifi_id,
             'notifi_title' => $this->faker->name,
             'notifi_content' => $this->faker->name,
             'man_id' => $this->faker->randomElement(Manager::pluck('man_id')->toArray()),

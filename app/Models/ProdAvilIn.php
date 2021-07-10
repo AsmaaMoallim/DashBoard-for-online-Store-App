@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class ProdAvilIn
  *
- * @property string $prod_id
- * @property string $mesu_id
+ * @property int $prod_id
+ * @property int $mesu_id
  * @property int $fakeId
  *
  * @property Product $product
@@ -24,11 +24,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProdAvilIn extends Model
 {
     use HasFactory;
-	protected $table = 'prod_avil_in';
+
+    protected $table = 'prod_avil_in';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'prod_id' => 'int',
+		'mesu_id' => 'int',
 		'fakeId' => 'int'
 	];
 

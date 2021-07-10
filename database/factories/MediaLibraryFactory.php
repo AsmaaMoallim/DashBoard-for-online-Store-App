@@ -21,10 +21,8 @@ class MediaLibraryFactory extends Factory
      */
     public function definition()
     {
-        static $medl_id=0;
         static $fakeID=0;
         return [
-            'medl_id'=>++$medl_id,
             'medl_name' => $this->faker->firstName(),
             'medl_description'=>$this->faker->image(),
             'medl_img_ved'=>$this->faker->image(),

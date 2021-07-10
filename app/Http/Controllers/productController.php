@@ -31,7 +31,6 @@ class productController extends Controller
         $product = new Product();
         $prod_avil_color = new ProductProdAvilColor();
         $measure = new Measure();
-        $product->prod_id = 100;
         $product->prod_name = $request->prod_name;
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
@@ -39,8 +38,9 @@ class productController extends Controller
         $measure->mesu_value = $request->mesu_value;
         $product->medl_id = $request->medl_id;
         $product->prod_desc_img = $request->prod_desc_img;
-        $product->state = 0;
-        $product->fakeId = 1;
+        $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $product->fakeId = $maxFakeId;
         $product->save();
         $prod_avil_color->save();
         return redirect('/home');

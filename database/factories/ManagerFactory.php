@@ -25,12 +25,9 @@ class ManagerFactory extends Factory
      */
     public function definition()
     {
-        DB::table('manager')->delete();
-        static $man_id= 0;
         static $fakeID = 0;
         return [
 
-            'man_id' => ++$man_id,
             'man_frist_name' => $this->faker->firstName(),
             'man_last_name' => $this->faker->name(),
             'man_phone_num' => $this->faker->phoneNumber,

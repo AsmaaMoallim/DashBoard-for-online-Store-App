@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Comment
  *
- * @property string $com_id
- * @property string $cla_id
- * @property string $prod_id
+ * @property int $com_id
+ * @property int $cla_id
+ * @property int $prod_id
  * @property string $com_content
  * @property int $com_rateing
  * @property int $fakeId
@@ -31,10 +31,11 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = 'comments';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'cla_id' => 'int',
+		'prod_id' => 'int',
 		'com_rateing' => 'int',
 		'fakeId' => 'int'
 	];

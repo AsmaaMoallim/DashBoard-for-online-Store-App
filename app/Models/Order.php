@@ -14,12 +14,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Order
  *
- * @property string $ord_id
- * @property string $cla_id
+ * @property int $ord_id
+ * @property int $cla_id
  * @property string $ord_number
  * @property Carbon $ord_date
- * @property string $payment_method_id
- * @property string $stage_id
+ * @property int $payment_method_id
+ * @property int $stage_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -38,10 +38,12 @@ class Order extends Model
 
     protected $table = 'orders';
 	protected $primaryKey = 'ord_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'cla_id' => 'int',
+		'payment_method_id' => 'int',
+		'stage_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

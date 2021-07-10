@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class PaymentMethod
  *
- * @property string $payment_method_id
+ * @property int $payment_method_id
  * @property string $pay_method_name
  * @property int $fakeId
  *
@@ -23,11 +23,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PaymentMethod extends Model
 {
+
     use HasFactory;
 
     protected $table = 'payment_method';
 	protected $primaryKey = 'payment_method_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

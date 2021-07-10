@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class MainSection
  *
- * @property string $main_id
+ * @property int $main_id
  * @property string $main_name
- * @property string $medl_id
+ * @property int $medl_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -30,10 +30,10 @@ class MainSection extends Model
 
     protected $table = 'main_sections';
 	protected $primaryKey = 'main_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'medl_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class NotifiSendTo
  *
- * @property string $notifi_id
- * @property string $cla_id
+ * @property int $notifi_id
+ * @property int $cla_id
  * @property int $fakeId
  *
  * @property Notification $notification
@@ -24,11 +24,12 @@ use Illuminate\Database\Eloquent\Model;
 class NotifiSendTo extends Model
 {
     use HasFactory;
-	protected $table = 'notifi_send_to';
-	public $incrementing = false;
+
+    protected $table = 'notifi_send_to';
 	public $timestamps = false;
 
 	protected $casts = [
+		'cla_id' => 'int',
 		'fakeId' => 'int'
 	];
 

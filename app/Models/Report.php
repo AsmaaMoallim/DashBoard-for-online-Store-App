@@ -12,30 +12,35 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Report
  *
- * @property string $report_id
- * @property string $cla_id
- * @property string $prod_id
- * @property string $com_id
+ * @property int $report_id
+ * @property int $cla_id
+ * @property int $prod_id
+ * @property int $com_id
+ * @property bool $ignored
  * @property int $fakeId
  *
  * @property Client $client
  * @property Comment $comment
- * @property IgnoredReport $ignored_report
  *
  * @package App\Models
  */
 class Report extends Model
 {
     use HasFactory;
-	protected $table = 'report';
-	public $incrementing = false;
+
+    protected $table = 'report';
 	public $timestamps = false;
 
 	protected $casts = [
+		'cla_id' => 'int',
+		'prod_id' => 'int',
+		'com_id' => 'int',
+		'ignored' => 'bool',
 		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
+		'ignored',
 		'fakeId'
 	];
 
@@ -49,10 +54,5 @@ class Report extends Model
 		return $this->belongsTo(Comment::class, 'prod_id', 'prod_id')
 					->where('comments.prod_id', '=', 'report.prod_id')
 					->where('comments.com_id', '=', 'report.com_id');
-	}
-
-	public function ignored_report()
-	{
-		return $this->hasOne(IgnoredReport::class);
 	}
 }

@@ -24,9 +24,7 @@ class SubSectionFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $sub_id = 0;
         return [
-            'sub_id' => ++$sub_id,
             'sub_name'=>$this->faker->name,
             'main_id'=>$this->faker->randomElement(MainSection::pluck('main_id')->toArray()),
             'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),

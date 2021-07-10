@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class MediaLibrary
  *
- * @property string $medl_id
+ * @property int $medl_id
  * @property string $medl_name
  * @property string $medl_description
  * @property boolean $medl_img_ved
@@ -33,7 +33,6 @@ class MediaLibrary extends Model
 
     protected $table = 'media_library';
 	protected $primaryKey = 'medl_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SysInfoEmail
  *
- * @property string $sys_email_id
+ * @property int $sys_email_id
  * @property string $sys_email
  * @property bool $state
  * @property int $fakeId
@@ -24,9 +24,9 @@ use Illuminate\Database\Eloquent\Model;
 class SysInfoEmail extends Model
 {
     use HasFactory;
-	protected $table = 'sys_info_email';
+
+    protected $table = 'sys_info_email';
 	protected $primaryKey = 'sys_email_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

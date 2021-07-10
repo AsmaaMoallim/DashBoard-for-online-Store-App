@@ -61,12 +61,12 @@ class MediaLibraryController extends Controller
     function store(Request $request)
     {
         $media_library = new MediaLibrary();
-        $media_library->medl_id = 90;
         $media_library->medl_name = $request->medl_name;
         $media_library->medl_description = $request->medl_description;
         $media_library->medl_img_ved = $request->medl_img_ved;
-        $media_library->state = 1;
-        $media_library->fakeId = 1;
+        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $media_library->fakeId = $maxFakeId;
         $media_library->save();
         return redirect('/manager');
     }

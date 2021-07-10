@@ -76,15 +76,15 @@ class ManagerController extends Controller
     function store(Request $request)
     {
         $manager = new Manager();
-        $manager->man_id=59;
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
         $manager->pos_id = $request->pos_id;
         $manager->man_phone_num = $request->man_phone_num;
         $manager->man_email = $request->man_email;
         $manager->man_password = $request->man_password;
-        $manager->fakeId = 1;
-        $manager->state = 1;
+        $max = Manager::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $manager->fakeId = $maxFakeId;
         $manager->save();
         return redirect('/manager');
     }

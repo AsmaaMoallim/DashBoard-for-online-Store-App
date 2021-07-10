@@ -53,12 +53,12 @@ class subSectionController extends Controller
     function store(Request $request)
     {
         $sub_section = new SubSection();
-        $sub_section->sub_id=11;
         $sub_section->sub_name = $request->sub_name;
         $sub_section->main_id = $request->main_id;
         $sub_section->medl_id = $request->medl_id;
-        $sub_section->state = 1;
-        $sub_section->fakeId =1;
+        $max = SubSection::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $sub_section->fakeId =$maxFakeId;
         $sub_section->save();
         return redirect('/manager');
     }

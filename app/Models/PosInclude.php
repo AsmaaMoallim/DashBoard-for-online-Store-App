@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class PosInclude
  *
- * @property string $pos_id
- * @property string $per_id
+ * @property int $pos_id
+ * @property int $per_id
  * @property int $fakeId
  *
  * @property Position $position
@@ -23,12 +23,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PosInclude extends Model
 {
+
     use HasFactory;
-	protected $table = 'pos_include';
-	public $incrementing = false;
+
+    protected $table = 'pos_include';
 	public $timestamps = false;
 
 	protected $casts = [
+		'per_id' => 'int',
 		'fakeId' => 'int'
 	];
 

@@ -23,9 +23,7 @@ class ManagerOperationsRecordFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $man_oper_record_id = 0;
         return [
-            "man_oper_record_id" => ++$man_oper_record_id,
             'man_id'=> $this->faker->randomElement(Manager::pluck('man_id')->toArray()),
             'man_oper_date' =>$this->faker->date(),
             'man_oper_time' =>$this->faker->time(),

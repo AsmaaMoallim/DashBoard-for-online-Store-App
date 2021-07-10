@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SocialMediaLink
  *
- * @property string $social_id
+ * @property int $social_id
  * @property string $social_site_name
  * @property boolean|null $social_img
  * @property string $social_url
@@ -24,9 +24,9 @@ use Illuminate\Database\Eloquent\Model;
 class SocialMediaLink extends Model
 {
     use HasFactory;
-	protected $table = 'social_media_link';
+
+    protected $table = 'social_media_link';
 	protected $primaryKey = 'social_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

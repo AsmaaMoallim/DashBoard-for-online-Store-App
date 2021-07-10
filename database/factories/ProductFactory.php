@@ -24,9 +24,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $prod_id = 0;
         return [
-            'prod_id' => ++$prod_id,
             'prod_name' =>$this->faker->firstName,
             'sub_id' =>$this->faker->randomElement(SubSection::pluck('sub_id')->toArray()),
             'prod_price' => $this->faker->randomDigit,

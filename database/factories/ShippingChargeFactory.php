@@ -23,9 +23,7 @@ class ShippingChargeFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $ship_id =0 ;
         return [
-            'ship_id' => ++$ship_id,
             'ship_price' => $this->faker->randomDigit(),
             'ord_id' => $this->faker->randomElement(Order::pluck('ord_id')->toArray()),
             'fakeID'=> ++$fakeID,

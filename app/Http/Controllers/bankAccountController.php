@@ -53,11 +53,11 @@ class bankAccountController extends Controller
     function store(Request $request)
     {
         $sys_bank_account = new SysBankAccount();
-        $sys_bank_account->sys_bank_id=90;
         $sys_bank_account->sys_bank_name = $request->sys_bank_name;
         $sys_bank_account->sys_bank_account_num = $request->sys_bank_account_num;
-        $sys_bank_account->state = 1;
-        $sys_bank_account->fakeId =1;
+        $max = SysBankAccount::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $sys_bank_account->fakeId = $maxFakeId;
         $sys_bank_account->save();
         return redirect('/manager');
     }

@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Banner
  *
- * @property string $ban_id
+ * @property int $ban_id
  * @property string $ban_name
- * @property string $medl_id
+ * @property int $medl_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -25,12 +25,13 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends Model
 {
     use HasFactory;
-	protected $table = 'banner';
+
+    protected $table = 'banner';
 	protected $primaryKey = 'ban_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'medl_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

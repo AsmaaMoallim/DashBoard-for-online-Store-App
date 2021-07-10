@@ -82,23 +82,19 @@ class positions_permissionsController extends Controller
     public function store(Request $request)
     {
         $position = new Position();
-        $qy = \DB::table("Position")->max("pos_id");
-//        $max = Position::orderBy("pos_id", 'desc')->first(); // gets the whole row
-//        $maxValue = $newestCliente->id;
-//        select(\DB::raw("select max(`pos_id`) from position"));
-        dd($max);
-
-        $position->pos_id = Position::max("pos_id")+1;
         $position->pos_name = $request->pos_name;
-        $position->fakeId = 66;
-        $position->state = 0;
+        $max = Position::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $position->fakeId = $maxFakeId;
         $position->save();
         $per_id = $request->input('per_id');
-
         foreach ($per_id as $per_id) {
+            $maxFakeId = 0;
             $posInclude = new PosInclude();
             $posInclude->pos_id = $position->pos_id;
-            $posInclude->fakeId = 0;
+            $max = PosInclude::orderBy("fakeId", 'desc')->first(); // gets the whole row
+            $maxFakeId = $max? $max->fakeId + 1 : 1;
+            $posInclude->fakeId = $maxFakeId;
             $posInclude->per_id = $per_id;
             $posInclude->save();
         }

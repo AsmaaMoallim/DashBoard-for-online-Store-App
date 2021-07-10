@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class EmailBox
  *
- * @property string $sys_email_id
+ * @property int $sys_email_id
  * @property string $email_cla_name
  * @property string $email_cla_email
  * @property string $email_cla_phone
@@ -26,9 +26,9 @@ use Illuminate\Database\Eloquent\Model;
 class EmailBox extends Model
 {
     use HasFactory;
-	protected $table = 'email_box';
+
+    protected $table = 'email_box';
 	protected $primaryKey = 'sys_email_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

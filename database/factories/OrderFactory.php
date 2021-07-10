@@ -25,11 +25,9 @@ class OrderFactory extends Factory
     public function definition()
     {
         static $ord_number = 0;
-        static $ord_id = 0;
         static $fakeID = 0;
 
         return [
-            'ord_id' => ++$ord_id,
             'ord_number' => ++$ord_number,
             'cla_id' =>  $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
             'ord_date'=> $this->faker->date(),

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class ProductProdAvilColor
  *
  * @property string $prod_avil_color
- * @property string $prod_id
+ * @property int $prod_id
  * @property int $fakeId
  *
  * @property Product $product
@@ -23,11 +23,13 @@ use Illuminate\Database\Eloquent\Model;
 class ProductProdAvilColor extends Model
 {
     use HasFactory;
-	protected $table = 'product_prod_avil_color';
+
+    protected $table = 'product_prod_avil_color';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'prod_id' => 'int',
 		'fakeId' => 'int'
 	];
 

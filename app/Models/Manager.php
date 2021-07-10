@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Manager
  *
- * @property string $man_id
+ * @property int $man_id
  * @property string $man_frist_name
  * @property string $man_last_name
  * @property string $man_phone_num
  * @property string $man_email
  * @property string $man_password
- * @property string $pos_id
+ * @property int $pos_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -35,10 +35,10 @@ class Manager extends Model
 
     protected $table = 'manager';
 	protected $primaryKey = 'man_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'pos_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

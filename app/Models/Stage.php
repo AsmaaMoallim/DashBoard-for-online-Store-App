@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Stage
  *
- * @property string $stage_id
+ * @property int $stage_id
  * @property string $stage_name
  * @property int $fakeId
  *
@@ -27,7 +27,6 @@ class Stage extends Model
 
     protected $table = 'stage';
 	protected $primaryKey = 'stage_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

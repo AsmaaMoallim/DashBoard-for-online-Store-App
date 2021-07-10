@@ -24,11 +24,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         static $fakeID =0;
-        static $com_id =0;
         return [
             'prod_id' => $this->faker->randomElement(Product::pluck('prod_id')->toArray()),
             'cla_id' => $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
-            'com_id' => ++$com_id,
             'com_content' => $this->faker->randomLetter,
             'com_rateing' => $this->faker->randomDigit,
             'fakeID'=> ++$fakeID,

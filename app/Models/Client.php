@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Client
  *
- * @property string $cla_id
+ * @property int $cla_id
  * @property string $cla_frist_name
  * @property string $cla_last_name
  * @property boolean|null $cla_img
@@ -32,11 +32,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Client extends Model
 {
+
     use HasFactory;
 
     protected $table = 'clients';
 	protected $primaryKey = 'cla_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

@@ -22,9 +22,7 @@ class SysInfoPhoneFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $sys_phone_id = 0;
         return [
-            'sys_phone_id' => ++$sys_phone_id,
             'sys_phone_num' => $this->faker->phoneNumber,
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,

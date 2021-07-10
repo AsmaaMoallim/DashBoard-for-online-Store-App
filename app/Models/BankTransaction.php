@@ -12,10 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class BankTransaction
  *
- * @property string $trans_id
- * @property string $ord_id
- * @property string $cla_id
- * @property string $sys_bank_id
+ * @property int $trans_id
+ * @property int $ord_id
+ * @property int $cla_id
+ * @property int $sys_bank_id
  * @property float $banktran_amount
  * @property boolean $banktran_img
  * @property int $fakeId
@@ -30,10 +30,12 @@ class BankTransaction extends Model
 {
     use HasFactory;
 	protected $table = 'bank_transaction';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'ord_id' => 'int',
+		'cla_id' => 'int',
+		'sys_bank_id' => 'int',
 		'banktran_amount' => 'float',
 		'banktran_img' => 'boolean',
 		'fakeId' => 'int'

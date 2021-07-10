@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Measure
  *
- * @property string $mesu_id
+ * @property int $mesu_id
  * @property string $mesu_value
  * @property int $fakeId
  *
@@ -27,7 +27,6 @@ class Measure extends Model
 
     protected $table = 'measure';
 	protected $primaryKey = 'mesu_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

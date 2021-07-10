@@ -49,12 +49,12 @@ class socialMediaLinksController extends Controller
 
     public function store(Request $request){
         $socialMedial = new SocialMediaLink();
-        $socialMedial->social_id =100;
         $socialMedial->social_site_name = $request->social_site_name;
         $socialMedial->social_img = $request->social_img;
         $socialMedial->social_url = $request->social_url;
-        $socialMedial->state = 0;
-        $socialMedial->fakeId = 00;
+        $max = SocialMediaLink::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $socialMedial->fakeId = $maxFakeId;
         $socialMedial->save();
         return redirect('/');
     }

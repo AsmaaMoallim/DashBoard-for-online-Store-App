@@ -25,11 +25,10 @@ class ReportFactory extends Factory
     public function definition()
     {
         static $fakeID = 0;
-        static $report_id = 0;
         return [
-            'report_id' => ++$report_id,
             'prod_id' => $this->faker->randomElement(Product::pluck('prod_id')->toArray()),
             'cla_id' => $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
+            'ignored' => $this->faker->boolean(50),
             'com_id' => $this->faker->randomElement(Comment::pluck('com_id')->toArray()),
             'fakeID' => ++$fakeID,
         ];

@@ -52,11 +52,11 @@ class mainSectionController extends Controller
     function store(Request $request)
     {
         $mainSection = new MainSection();
-        $mainSection->main_id=11;
         $mainSection->main_name = $request->main_name;
         $mainSection->medl_id = $request->medl_id;
-        $mainSection->state = 0;
-        $mainSection->fakeId =1;
+        $max = MainSection::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $mainSection->fakeId =$maxFakeId;
         $mainSection->save();
         return redirect('/manager');
     }

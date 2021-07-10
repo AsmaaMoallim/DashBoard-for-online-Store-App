@@ -13,10 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Permission
  *
- * @property string $per_id
+ * @property int $per_id
  * @property string $per_name
  * @property int $fakeId
- * @property bool $state
  *
  * @property Collection|PosInclude[] $pos_includes
  *
@@ -28,22 +27,19 @@ class Permission extends Model
 
     protected $table = 'permission';
 	protected $primaryKey = 'per_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'fakeId' => 'int',
-		'state' => 'bool'
+		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
 		'per_name',
-		'fakeId',
-		'state'
+		'fakeId'
 	];
 
-    public function pos_includes()
-    {
+	public function pos_includes()
+	{
 		return $this->hasMany(PosInclude::class, 'per_id');
 	}
 }

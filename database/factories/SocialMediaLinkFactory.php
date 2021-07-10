@@ -22,9 +22,7 @@ class SocialMediaLinkFactory extends Factory
     public function definition()
     {
         static $fakeID =0 ;
-        static $social_id =0 ;
         return [
-            'social_id'=> ++$social_id,
             'social_site_name' => $this->faker->name,
             'social_img' => $this->faker->image(),
             'social_url' => $this->faker->url,

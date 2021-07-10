@@ -24,10 +24,8 @@ class MainSectionFactory extends Factory
     public function definition()
     {
         static $fakeID =0;
-        static $main_id =0;
 
         return [
-            'main_id' => ++$main_id,
             'main_name' => $this->faker->name(),
             'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),
             'state' => $this->faker->boolean(50),

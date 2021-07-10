@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class OrdHasItemOf
  *
- * @property string $prod_id
+ * @property int $prod_id
  * @property int $prod_ord_amount
- * @property string $ord_id
+ * @property int $ord_id
  * @property int $fakeId
  *
  * @property Order $order
@@ -25,12 +25,15 @@ use Illuminate\Database\Eloquent\Model;
 class OrdHasItemOf extends Model
 {
     use HasFactory;
-	protected $table = 'ord_has_item_of';
+
+    protected $table = 'ord_has_item_of';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
+		'prod_id' => 'int',
 		'prod_ord_amount' => 'int',
+		'ord_id' => 'int',
 		'fakeId' => 'int'
 	];
 

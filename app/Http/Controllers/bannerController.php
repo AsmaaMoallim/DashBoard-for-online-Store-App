@@ -61,11 +61,11 @@ class bannerController extends Controller
     function store(Request $request)
     {
         $banner = new Banner();
-        $banner->ban_id=11;
         $banner->ban_name = $request->ban_name;
         $banner->medl_id = $request->medl_id;
-        $banner->state = 0;
-        $banner->fakeId =1;
+        $max = Banner::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max->fakeId + 1;
+        $banner->fakeId =$maxFakeId;
         $banner->save();
         return redirect('/manager');
     }
