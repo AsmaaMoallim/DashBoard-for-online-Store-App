@@ -16,9 +16,13 @@ class mainSectionController extends Controller
         $addNew = "إضافة قسم رئيسي جديد";
         $showRecords = "0";
         $tables = 'main_sections';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('main_sections');
-        $rows = \DB::table('main_sections')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+        $qry = \DB::table('main_sections')
+            ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
+            ->select('main_name AS اسم القسم الرئيسي','medl_img_ved AS الصورة','main_sections.state','main_sections.fakeId')
+            ->get();
+        $columns = ['اسم القسم الرئيسي','الصورة','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }

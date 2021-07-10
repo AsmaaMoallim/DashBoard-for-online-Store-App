@@ -20,11 +20,14 @@ class MediaLibraryController extends Controller
         $formPage = "new-mediaLibrary-form";
         $addNew = "إضافة صورة/فيديو جديد";
         $showRecords = "0";
-        //these var does not in compo
         $tables = 'media_library';
-        $columns = \DB::getSchemaBuilder()->getColumnListing('media_library');
-        $rows = \DB::table('media_library')->get();
-        return view('master_tables_view')->with('rows', $rows)->with
+
+        $qry = \DB::table('media_library')
+            ->select('medl_name AS اسم الصورة/الفيديو', 'medl_description AS التعريف','medl_img_ved AS الصورة/رابط الفيديو',
+                'media_library.state','media_library.fakeId')->get();
+        $columns = ['اسم الصورة/الفيديو','التعريف','الصورة/رابط الفيديو','fakeId'];
+
+        return view('master_tables_view')->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
     }

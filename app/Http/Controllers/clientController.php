@@ -14,9 +14,14 @@ class clientController extends Controller
         $addNew = "إضافة عميل جديد";
         $showRecords = "0";
         $tables = 'clients';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('clients');
-        $rows = \DB::table('clients')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        $qry = \DB::table('clients')
+            ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'cla_img AS الصورة الشخصية',
+                'cla_phone_num AS رقم الجوال','cla_email AS البريد الالكتروني','clients.state','clients.fakeId')
+            ->get();
+        $columns= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
