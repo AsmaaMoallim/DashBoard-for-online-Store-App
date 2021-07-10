@@ -142,10 +142,7 @@ Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksCo
 Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
 
 
-
-
-
-
+Route::view('/test','test');
 
 //
 ////Ruba

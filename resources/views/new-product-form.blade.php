@@ -28,14 +28,80 @@
                         </select>
                     </div>
 
-                    <label>صور المنتح</label>
-                    <div class="form-group col-sm-10 ">
-                        <select  name="medl_id" id="pos_id" multiple>
-                            @foreach( $mediaImgs as $mediaImg)
-                                <option value="{{$mediaImg->medl_id}}"> {{$mediaImg->medl_img_ved}} </option>
-                            @endforeach
-                        </select>
+
+                    <div class="form-group col-sm-10" >
+                        <label>صور المنتح</label>
+                        <div class="card-body table-responsive p-0">
+                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>
+                        <table id="tableprofider" class="table table-hover text-nowrap">
+                            <thead>
+                            <tr>
+                                @for( $i = 0 ; $i<=10 ; $i++)
+
+                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                        <th>{{$columns[$i]}}</th> @endif
+                                @endfor
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                @foreach( $rows as $row)
+                                    @for( $i = 0 ; $i<=10; $i++)
+
+                                        @for( $i = 0 ; $i<=10; $i++)
+                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+
+                                                <?php $val = (string)$columns[$i] ?>
+                                                @if($val)
+                                              <td> {{$row->medl_img_ved}} </td>
+
+{{--                                            @else--}}
+{{--                                                {{$row->medl_img_ved = NULL}}--}}
+                                            @endif
+                                            @endif
+                                                        @endfor
+                                                        @endfor
+                                                        @endforeach
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    </div>
+
+
+
+                    {{--                                <select>--}}
+                    {{--                                @foreach( $rows as $rows)--}}
+
+                    {{--                                    <option value="{{$rows->medl_id}}"> <img {{$rows->medl_img_ved}} > </option>--}}
+
+                    {{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
+
+                    {{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
+                    {{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+
+                    {{--                                                {{ $val = (string)$columns[$i] }}--}}
+                    {{--                                                @if($val)--}}
+                    {{--                                                    <td> {{$rows->$val}}</td> @endif--}}
+
+                    {{--                                            @endif--}}
+
+                    {{--                                        @endfor--}}
+
+                    {{--                                    @endfor--}}
+
+                    {{--                    <button type="button" value="اختر صورة" onclick="window.location='{{ url('/media_Library') }}" ></button>--}}
+
+
+{{--                    <div class="form-group col-sm-10 ">--}}
+{{--                        <select  name="medl_id" id="pos_id" multiple>--}}
+{{--                            @foreach( $mediaImgs as $mediaImg)--}}
+{{--                                <option value="{{$mediaImg->medl_id}}"> {{$mediaImg->medl_img_ved}} </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
 
                     <x-form.input name="prod_avil_amount" class="form-control" type="number"
                                   label="الكمية المتوفرة حالياً " placeholder=" أدخل الكمية المتوفرة حالياً للمنتج الجديد " />
@@ -127,7 +193,7 @@
                     <x-form.cancel-button indexPage="products" />
                     <x-form.save-button/>
 
-                </div>
+                    </div>
             </form>
         </div>
     </div>
