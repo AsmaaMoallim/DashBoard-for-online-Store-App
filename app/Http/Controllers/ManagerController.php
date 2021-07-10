@@ -31,8 +31,9 @@ class ManagerController extends Controller
             ->join('position', 'manager.pos_id', '=', 'position.pos_id')
             ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
             ->get();
-//        dd($qry);
+
         $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
+
         $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
         $rows = \DB::table('manager')->get();
 //                dd($rows);

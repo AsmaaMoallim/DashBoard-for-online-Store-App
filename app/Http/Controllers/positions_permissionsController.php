@@ -17,9 +17,12 @@ class positions_permissionsController extends Controller
         $addNew = "إضافة منصب جديد";
         $showRecords = "0";
         $tables = 'position';
+
         $columns = \DB::getSchemaBuilder()->getColumnListing('position');
-        $rows = \DB::table('position')->get();
-        return view('master_tables_view')->with('rows', $rows)->with
+        $qry = \DB::table('position')->get();
+
+
+        return view('master_tables_view')->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
     }

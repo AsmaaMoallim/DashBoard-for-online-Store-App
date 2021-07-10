@@ -47,7 +47,7 @@
                             <tbody>
                             <tr>
 
-                                @foreach( $rows as $rows)
+                                @foreach( $rows as $row)
                                     @for( $i = 0 ; $i<=10; $i++)
 
                                         @for( $i = 0 ; $i<=10; $i++)
@@ -55,9 +55,11 @@
 
                                                 <?php $val = (string)$columns[$i] ?>
                                                 @if($val)
-                                                    <td> {{$rows->medl_img_ved}}</td>
+                                              <td> {{$row->medl_img_ved}} </td>
 
-                                                        @endif
+{{--                                            @else--}}
+{{--                                                {{$row->medl_img_ved = NULL}}--}}
+                                            @endif
                                             @endif
                                                         @endfor
                                                         @endfor

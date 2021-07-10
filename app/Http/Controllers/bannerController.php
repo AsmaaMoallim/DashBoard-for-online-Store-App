@@ -16,9 +16,18 @@ class bannerController extends Controller
         $addNew = "إضافة بانر جديد";
         $showRecords = "0";
         $tables = 'banners';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('banner');
-        $rows = \DB::table('banner')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+//        $columns= \DB::getSchemaBuilder()->getColumnListing('banner');
+
+        $qry = \DB::table('banner')
+            ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
+            ->select(\DB::raw('banner.ban_name', 'medl_img_ved'))
+            ->get();
+
+        $columns=['اسم البانر','الصورة','fakeId'];
+
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }

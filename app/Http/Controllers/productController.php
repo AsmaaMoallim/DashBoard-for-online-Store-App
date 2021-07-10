@@ -63,12 +63,12 @@ class productController extends Controller
     public function insertData(){
         $measures = Measure::all();
         $sections = SubSection::all();
-//        $mediaImg = MediaLibrary::all();
+//      $mediaImg = MediaLibrary::all();
 
-        $columns =['اسم الصورة/الفيديو','الصورة/رابط الفيديو'];
+        $columns =['الصورة/رابط الفيديو'];
 
         $rows = \DB::table('media_library')
-            ->select(\DB::raw("medl_name AS 'اسم الصورة/الفيديو' ",'medl_img_ved AS "الصورة/رابط الفيديو" ') )
+            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
             ->get();
 
         return view('new-product-form', ['measures' => $measures,
