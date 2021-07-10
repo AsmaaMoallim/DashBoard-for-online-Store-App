@@ -15,8 +15,9 @@
                     @if("position/".$id."/update"==request()->path())
                         <?php
                         $pos_name = $currentValues->pos_name;
-                        $medl_description = $currentValues->medl_description;
-                        $medl_img_ved = $currentValues->medl_img_ved;
+
+//                        $medl_description = $currentValues->medl_description;
+//                        $medl_img_ved = $currentValues->medl_img_ved;
 
                         ?>
                     @endif
@@ -24,7 +25,8 @@
 
                 <div class="card-body fc-direction-rtl">
                     <x-form.input name="pos_name" class="form-control" type="text"
-                                  label="اسم المنصب" placeholder="أدخل اسم المنصب الجديد" ></x-form.input>
+                                  label="اسم المنصب" placeholder="أدخل اسم المنصب الجديد"
+                                  value="{{$pos_name ?? ''}}"></x-form.input>
 
 
                     <!-- Dynamic dropDownList -->
@@ -32,7 +34,24 @@
                         <label>الصلاحيات</label>
                         <br>
                         @foreach($permissions as $permission)
-                            <input type="checkbox" name="per_id[]" value="{{$permission['per_id']}}"> {{$permission->per_name}}
+
+                            <input type="checkbox" name="per_id[]" value="{{$permission['per_id']}}"
+
+                            @if(isset($id))
+                                @foreach($currentPermissions as $currentPermission)
+
+                                    @if($permission->per_id == $currentPermission->per_id)
+
+                                        checked="checked"
+                                        @endif
+
+
+                                    @endforeach
+
+                                    @endif
+
+
+                            > {{$permission->per_name}}
                             <br>
                         @endforeach
                     </div>

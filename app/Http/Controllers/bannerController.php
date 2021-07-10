@@ -21,9 +21,9 @@ class bannerController extends Controller
 
         $qry = \DB::table('banner')
             ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
-            ->select(\DB::raw('banner.ban_name', 'medl_img_ved'))
+            ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة', 'banner.fakeId')
             ->get();
-
+//        $qry = \DB::table('banner')->get();
         $columns=['اسم البانر','الصورة','fakeId'];
 
 
