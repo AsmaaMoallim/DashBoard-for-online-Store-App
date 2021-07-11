@@ -19,9 +19,14 @@ class MeasureController extends Controller
         $addNew = "تعديل المقاسات";
         $showRecords = "0";
         $tables = 'measure';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('measure');
-        $rows = \DB::table('measure')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        $qry = \DB::table('measure')
+            ->select('mesu_value AS المقاسات','measure.fakeId')
+        ->get();
+
+        $columns = ['المقاسات','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
 

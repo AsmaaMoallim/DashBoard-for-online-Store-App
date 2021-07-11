@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
 
 class orderController extends Controller
 {
@@ -14,6 +15,24 @@ class orderController extends Controller
         $addNew = "0";
         $showRecords = "عرض";
         $tables = 'orders';
+
+//
+//        $qry = \DB::table('orders')
+//            ->join('clients', 'orders.cla_id', '=', 'clients.cla_id')
+//            ->join('stage','orders.stage_id','=','stage.stage_id')
+//            ->join('product','ord_has_item_of.prod_id','=','product.prod_id')
+//            ->join('ord_has_item_of', 'ord_has_item_of.ord_id','=', 'orders.ord_id')
+//            ->join('payment_method','orders.payment_method_id','=','payment_method.payment_method_id')
+//
+//            ->select('ord_number AS رقم الطلب')
+//            ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'ord_date AS تاريخ الطلب')
+//            ->select(\DB::raw('SUM( (ord_has_item_of.prod_ord_amount) * product.prod_price) AS إجمالي تكلفة الطلب'))
+//             ->select('payment_method.pay_method_name AS طريقة الدفع', 'stage_name AS حالة الطلب', 'orders.state', 'orders.fakeId')
+//            ->get();
+//
+//        $columns = ['رقم الطلب','الاسم','تاريخ الطلب','إجمالي تكلفة الطلب','طريقة الدفع','fakeId'];
+
+
         $qry = \DB::table('orders')
             ->join('clients', 'orders.cla_id','=','clients.cla_id')
             ->join('stage','orders.stage_id','=','stage.stage_id')
@@ -25,7 +44,6 @@ class orderController extends Controller
             ->select(\DB::raw("(SUM(ord_has_item_of.prod_ord_amount) * product.prod_price ) AS إجمالي تكلفة الطلب"))
             ->select('stage_name AS حالة الطلب','orders.state','orders.fakeId')
             ->get();
-
         $columns = ['رقم الطلب','الأسم','تاريخ الطلب','إجمالي تكلفة الطلب','حالة الطلب','fakeId'];
 
         return view('master_tables_view')->with('rows',$qry)->with

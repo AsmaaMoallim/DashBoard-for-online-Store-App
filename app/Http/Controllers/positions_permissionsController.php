@@ -18,11 +18,14 @@ class positions_permissionsController extends Controller
         $showRecords = "0";
         $tables = 'position';
 
-        $columns = \DB::getSchemaBuilder()->getColumnListing('position');
-        $rows = \DB::table('position')->get();
+        $qry = \DB::table('position')
+            ->join('pos_include','pos_include.pos_id','=','position.pos_id')
+            ->join('permission','permission.per_id','=','pos_include.per_id')
+            ->select('pos_name AS اسم المنصب','per_name AS اسم الصلاحية','position.state','position.fakeId')
+            ->get();
+        $columns = ['اسم المنصب','اسم الصلاحية','fakeId'];
 
-
-        return view('master_tables_view')->with('rows', $rows)->with
+        return view('master_tables_view')->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
     }

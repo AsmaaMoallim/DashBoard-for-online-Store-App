@@ -15,13 +15,18 @@ class bankAccountController extends Controller
         $addNew = "إضافة حساب بنكي جديد";
         $showRecords = "0";
         $tables = 'sys_bank_account';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
-        $rows = \DB::table('sys_bank_account')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        $qry =\DB::table('sys_bank_account')
+            ->select('sys_bank_account.sys_bank_name AS اسم البنك',
+                'sys_bank_account.sys_bank_account_num AS رقم الحساب','sys_bank_account.fakeId')
+            ->get();
+
+        $columns = ['اسم البنك','رقم الحساب','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
-
 
 
     public function enableOrdisable($id)
