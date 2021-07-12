@@ -14,21 +14,16 @@ class notificationsController extends Controller
         $formPage = "new-notifications-form";
         $addNew = "إرسال إشعار جديد";
         $tables = 'notifications';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('notifications');
-//        $rows = \DB::table('notifications')->get();
 
-        //SELECT CONCAT(`cla_frist_name`, '  ', `cla_last_name`) AS "اسم العميل", `notifi_title` AS "عنوان الاشعار", `notifi_content` AS "نص الاشعار"
-        //FROM `clients`
-        //JOIN `notifications`
-        //JOIN `notifi_send_to`
-        //ON `notifications`.`notifi_id` = `notifi_send_to`.`notifi_id`
-        //AND `notifi_send_to`.`cla_id` = `clients`.`cla_id`
-
-        $qry = \DB::table('clients')
-            ->join('notifications','notifications.notifi_id','=','notifi_send_to.notifi_id')
-            ->join('notifi_send_to','notifi_send_to.cla_id','=','clients.cla_id')
-            ->select('');
-
+        $qry = \DB::table('notifications')
+            ->join('manager','manager.man_id','=','notifications.man_id')
+            ->join('notifi_send_to','notifi_send_to.notifi_id','=','notifications.notifi_id')
+            ->join('clients','clients.cla_id','=','notifi_send_to.cla_id')
+            ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS 'اسم المدير'"),
+                \DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم العميل' "),
+                'notifications.notifi_title AS عنوان الاشعار','notifications.notifi_content AS نص الاشعار','notifications.fakeId')
+            ->get();
+        $columns = ['اسم المدير','اسم العميل','عنوان الاشعار','نص الاشعار','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with

@@ -22,23 +22,28 @@ class orderController extends Controller
             ->join('stage', 'stage.stage_id', '=', 'orders.stage_id')
             ->join('product', 'product.prod_id', '=', 'ord_has_item_of.prod_id')
 
-
-            ->select('orders.ord_number AS رقم الطلب', \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  رقمالطلب"),
-                'orders.ord_date AS تاريخ الطلب',\DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS اجمالي'),
-                'stage.stage_name AS حالة الطلب','orders.state','orders.fakeId')
-
+            ->select ("orders.ord_number AS رقم الطلب", \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  'اسم العميل'"),
+                'orders.ord_date AS تاريخ الطلب',
+                \DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS "اجمالي تكلفة الطلب"'),'stage.stage_name AS حالة الطلب',
+                    'orders.state','orders.fakeId')
+                ->groupBy('ord_has_item_of.prod_ord_amount','orders.ord_number'
+                    ,'clients.cla_frist_name','clients.cla_last_name','orders.ord_date',
+                'ord_has_item_of.prod_ord_amount','product.prod_price','orders.state'
+                ,'orders.fakeId','stage.stage_name')
             ->get();
-        $columns = ['رقم الطلب','رقمالطلب','تاريخ الطلب','اجمالي','حالة الطلب','fakeId'];
+
+//        $t = \DB::table('product')
+//            ->join('ord_has_item_of','ord_has_item_of.prod_id','=','product.prod_id')
+//            ->select(DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS اجمالي'))
+//            ->groupBy('ord_has_item_of.prod_ord_amount')
+//            ->get();
+
+        $columns = ['رقم الطلب','اسم العميل','تاريخ الطلب','اجمالي تكلفة الطلب','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with
         ('showRecords',$showRecords)->with('recordPage',$recordPage);
     }
-
-
-
-
-
 
     public function display(){
 
@@ -46,16 +51,22 @@ class orderController extends Controller
 
         $tables = 'product';
         $qry = \DB::table('product')
-            ->join('ord_has_item_of','product.prod_id','=','ord_has_item_of.prod_id')
-            ->join('orders','orders.ord_id','=','ord_has_item_of.ord_id')
-            ->select(\DB::raw("SUM(prod_ord_amount) AS الكمية"),'product.fakeId')
+
+            ->join('product_prod_avil_color','product_prod_avil_color.prod_id','=','product.prod_id')
+            ->join('prod_avil_in','prod_avil_in.prod_id','=','product.prod_id')
+            ->join('measure','measure.mesu_id','=','prod_avil_in.mesu_id')
+            ->join('ord_has_item_of','ord_has_item_of.prod_id','=','product.prod_id')
+            ->select('product.prod_name AS اسم المنتج','product_prod_avil_color.prod_avil_color AS اللون',
+                'measure.mesu_value AS المقاس',\DB::raw("sum(ord_has_item_of.prod_ord_amount) AS الكمية"),
+                'product.prod_price AS السعر','product.fakeId')
+            ->groupBy('اسم المنتج','اللون','المقاس','السعر','fakeId')
             ->get();
-        $columns=['الكمية','fakeId'];
+
+        $columns=['اسم المنتج','اللون','المقاس','الكمية','السعر','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables);
     }
-
 
     public function enableOrdisable($id)
     {

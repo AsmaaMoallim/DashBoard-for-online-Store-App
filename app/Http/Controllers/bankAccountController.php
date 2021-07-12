@@ -23,7 +23,7 @@ class bankAccountController extends Controller
 
         $columns = ['اسم البنك','رقم الحساب','fakeId'];
 
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
+       return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }

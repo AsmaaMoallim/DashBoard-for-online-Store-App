@@ -81,47 +81,48 @@
                             </select>
                         </div>
 
+{{--                    <div class="form-group col-sm-10" >--}}
+{{--                        <label>صور المنتح</label>--}}
 
-                        {{--                        <div class="form-group col-sm-10">--}}
-                        {{--                            <label>صور المنتح</label>--}}
-                        {{--                            <div class="card-body table-responsive p-0">--}}
-                        {{--                                <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
-                        {{--                                <table id="tableprofider" class="table table-hover text-nowrap">--}}
-                        {{--                                    <thead>--}}
-                        {{--                                    <tr>--}}
-                        {{--                                        @for( $i = 0 ; $i<=10 ; $i++)--}}
+{{--                        <div class="card-body table-responsive p-0">--}}
+{{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
+{{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}
+{{--                            <thead>--}}
+{{--                            <tr>--}}
+{{--                                @for( $i = 0 ; $i<=10 ; $i++)--}}
 
-                        {{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-                        {{--                                                <th>{{$columns[$i]}}</th> @endif--}}
-                        {{--                                        @endfor--}}
+{{--                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+{{--                                        <th>{{$columns[$i]}}</th> @endif--}}
+{{--                                @endfor--}}
 
-                        {{--                                    </tr>--}}
-                        {{--                                    </thead>--}}
-                        {{--                                    <tbody>--}}
-                        {{--                                    <tr>--}}
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+{{--                            <tr>--}}
 
-                        {{--                                        @foreach( $rows as $row)--}}
-                        {{--                                            @for( $i = 0 ; $i<=10; $i++)--}}
+{{--                                @foreach( $rows as $row)--}}
+{{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
 
-                        {{--                                                @for( $i = 0 ; $i<=10; $i++)--}}
-                        {{--                                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+{{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
+{{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
 
-                        {{--                                                        <?php $val = (string)$columns[$i] ?>--}}
-                        {{--                                                        @if($val)--}}
-                        {{--                                                            <td> {{$row->medl_img_ved}} </td>--}}
+{{--                                                <?php $val = (string)$columns[$i] ?>--}}
+{{--                                                @if($val)--}}
+{{--                                              <td> {{$row->medl_img_ved}} </td>--}}
 
-                        {{--                                                            --}}{{--                                            @else--}}
-                        {{--                                                            --}}{{--                                                {{$row->medl_img_ved = NULL}}--}}
-                        {{--                                                        @endif--}}
-                        {{--                                                    @endif--}}
-                        {{--                                                @endfor--}}
-                        {{--                                            @endfor--}}
-                        {{--                                        @endforeach--}}
-                        {{--                                    </tr>--}}
-                        {{--                                    </tbody>--}}
-                        {{--                                </table>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
+{{--                                            @else--}}
+{{--                                                {{$row->medl_img_ved = NULL}}--}}
+{{--                                            @endif--}}
+{{--                                            @endif--}}
+{{--                                                        @endfor--}}
+{{--                                                        @endfor--}}
+{{--                                                        @endforeach--}}
+{{--                            </tr>--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
+{{--                    </div>--}}
+
 
 
                         {{--                                <select>--}}

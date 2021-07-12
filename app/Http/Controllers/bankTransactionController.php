@@ -19,9 +19,11 @@ class bankTransactionController extends Controller
             ->join('clients','clients.cla_id','=','bank_transaction.cla_id')
             ->join('sys_bank_account','sys_bank_account.sys_bank_id','=','bank_transaction.sys_bank_id')
 
-            ->select('bank_transaction.ord_id AS رقم الطلب')
-            ->select(\DB::raw("CONCAT(cla_frist_name, ' ', cla_last_name) AS الاسم"))
-            ->select('bank_transaction.banktran_amount AS قيمة التحويل','bank_transaction.banktran_img AS صورة التحويل','bank_transaction.fakeId')
+            ->select('bank_transaction.ord_id AS رقم الطلب',
+                \DB::raw("CONCAT(cla_frist_name, ' ', cla_last_name) AS الاسم"),
+            'bank_transaction.banktran_amount AS قيمة التحويل',
+            'bank_transaction.banktran_img AS صورة التحويل',
+            'bank_transaction.fakeId')
             ->get();
 
         $columns =['رقم الطلب','الاسم','قيمة التحويل','صورة التحويل','fakeId'];
