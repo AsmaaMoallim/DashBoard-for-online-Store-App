@@ -2,6 +2,33 @@
 
 @section('content')
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">{{$pagename ?? ""}}</h1>
+                    </div><!-- /.col -->
+                    {{--                    <div class="col-sm-6">--}}
+                    {{--                        <ol class="breadcrumb float-sm-left ">--}}
+                    {{--                            <li class=" ml-3">--}}
+                    {{--                                <button type="button" class="btn btn-primary float-right">--}}
+                    {{--                                    <i class="fa fa-plus"></i>  إضافة مدير </button>--}}
+                    {{--                            </li>--}}
+
+                    {{--                            <li>--}}
+                    {{--                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>--}}
+                    {{--                            </li>--}}
+                    {{--                        </ol>--}}
+                    {{--                    </div> <!-- /.col -->--}}
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+
+
 
     <div>
         <div class="row">
@@ -63,6 +90,7 @@
                             <tr>
                                 @for( $i = 0 ; $i<=10 ; $i++)
 
+
                                     @if(isset($columns[$i]) && $columns[$i]!='fakeId')
                                         <th>{{$columns[$i]}}</th>
                                     @endif
@@ -77,7 +105,12 @@
                                 @foreach( $rows as $rows)
 
                                         @for( $i = 0 ; $i<=10; $i++)
-                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+
+                                        @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
+                                            <td>  <img src="Storage::url(/storage/app/{{$columns[$i]}}"/></td>
+
+
+                                        @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
                                                 <?php $val = (string)$columns[$i] ?>
                                                     <td> {{$rows->$val}}</td>
                                         @endif
@@ -131,5 +164,6 @@
         </div>
 
     </div>
+        </section>
 @endsection
 

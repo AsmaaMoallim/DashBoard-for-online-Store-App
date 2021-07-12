@@ -10,9 +10,8 @@ class orderController extends Controller
 {
     public function index()
     {
+        $pagename = "الطلبات";
         $recordPage = "order_details";
-        $formPage = "0";
-        $addNew = "0";
         $showRecords = "عرض";
         $tables = 'orders';
 
@@ -31,9 +30,9 @@ class orderController extends Controller
             ->get();
         $columns = ['رقم الطلب','رقمالطلب','تاريخ الطلب','اجمالي','حالة الطلب','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
+        ('columns', $columns)->with('tables',$tables)->with
+        ('showRecords',$showRecords)->with('recordPage',$recordPage);
     }
 
 
@@ -43,10 +42,8 @@ class orderController extends Controller
 
     public function display(){
 
-        $recordPage = "0";
-        $formPage = "0";
-        $addNew = "0";
-        $showRecords = "0";
+        $pagename = "عرض التفاصيل";
+
         $tables = 'product';
         $qry = \DB::table('product')
             ->join('ord_has_item_of','product.prod_id','=','ord_has_item_of.prod_id')
@@ -55,15 +52,14 @@ class orderController extends Controller
             ->get();
         $columns=['الكمية','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
+        ('columns', $columns)->with('tables',$tables);
     }
 
 
     public function enableOrdisable($id)
     {
-        $data = Order::find($id);
+        $data = Order::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -78,7 +74,7 @@ class orderController extends Controller
 
     public function delete($id)
     {
-        $data = Order::find($id);
+        $data = Order::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }

@@ -14,47 +14,48 @@ class MeasureController extends Controller
      */
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "دليل المقاسات";
         $formPage = "update-measures-form";
         $addNew = "تعديل المقاسات";
         $showRecords = "0";
         $tables = 'measure';
 
         $qry = \DB::table('measure')
-            ->select('mesu_value AS المقاسات','measure.fakeId')
-        ->get();
+            ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
 
-        $columns = ['المقاسات','fakeId'];
+        $columns = ['المقاسات', 'fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
+        return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
+        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage);
+    }
 
-    public function insertData(){
+    public function insertData()
+    {
         return view('update-measures-form');
     }
 
 
     public function destroy($id)
     {
-        $data = Measure::find($id);
+
+        $data = Measure::where("fakeId","=","$id")->first();;
         $data->delete();
 
         return redirect()->back();
     }
 
-    public function enableOrdisable( $id)
+    public function enableOrdisable($id)
     {
 
-        $data = Measure::find($id);
+        $data = Measure::where("fakeId","=","$id")->first();;
 
 
-        if($data->state==false){
-            $data->state=true;
+        if ($data->state == false) {
+            $data->state = true;
             $data->save();
-        }
-        else{
-            $data->state= false;
+        } else {
+            $data->state = false;
             $data->save();
         }
         return redirect()->back();

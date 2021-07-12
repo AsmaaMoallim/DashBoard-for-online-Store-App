@@ -1,12 +1,21 @@
 @extends('adminLayout')
 
 @section('content')
+    <div class="content-wrapper">
+        <div class="content-header">
+        </div>
     <div class="col-lg-6 pr-xl-5">
         <div class=" card card-dark " style="background-color: silver ">
 
             <x-form.header-card title=" إضافة قسم رئيسي جديد"></x-form.header-card>
 
-            <form action="/store-sub-section" method="post">
+            <form
+                  @if(isset($id))
+                  action="/sub_sections/{{$id}}/update"
+                  @else
+                  action="/store-sub-section"
+                  @endif
+                  method="Post">
                 <div class="card-body fc-direction-rtl">
                     @csrf
                     @if(isset($id))
@@ -86,4 +95,6 @@
             </form>
         </div>
     </div>
+    </div>
+
 @endsection

@@ -11,10 +11,9 @@ class subSectionController extends Controller
 {
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "الاقسام الفرعية";
         $formPage = "new-subSection-form";
         $addNew = "إضافة قسم فرعي جديد";
-        $showRecords = "0";
         $tables = 'sub_sections';
 
         $qry = \DB::table('sub_section')
@@ -25,14 +24,14 @@ class subSectionController extends Controller
 
         $columns= ['اسم القسم الفرعي','الصورة','اسم القسم الرئيسي','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = SubSection::find($id);
+        $data = SubSection::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -51,7 +50,7 @@ class subSectionController extends Controller
 
     public function delete($id)
     {
-        $data = SubSection::find($id);
+        $data = SubSection::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -64,20 +63,26 @@ class subSectionController extends Controller
         $sub_section->main_id = $request->main_id;
         $sub_section->medl_id = $request->medl_id;
         $max = SubSection::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $sub_section->fakeId =$maxFakeId;
         $sub_section->save();
-        return redirect('/manager');
+        return redirect('/sub_Sections');
     }
 
     public function update(Request $request, SubSection $subSection, $id)
     {
         $mainSection = MainSection::all();
-        $currentValues = SubSection::find($id);
+        $currentValues = SubSection::where("fakeId","=","$id")->first();;
         $CurrentmainSection = MainSection::find($currentValues->main_id);
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
         return view('new-subSection-form',  ['CurrentmainSection' => $CurrentmainSection, 'mainSections' => $mainSection])->with('currentValues', $currentValues)
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
 
+    }
+
+    public function store_update(Request $request, $id){
+        $data = SubSection::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/sub_Sections');
     }
 }

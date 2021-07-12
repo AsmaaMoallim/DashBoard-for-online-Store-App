@@ -9,21 +9,20 @@ class socialMediaLinksController extends Controller
 {
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "روابط التواصل الاجتماعي";
         $formPage = "new-social-media-form";
         $addNew = "إضافة موقع تواصل إجتماعي جديد";
-        $showRecords = "0";
         $tables = 'social_media_link';
         $columns= \DB::getSchemaBuilder()->getColumnListing('social_media_link');
         $rows = \DB::table('social_media_link')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = SocialMediaLink::find($id);
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -38,7 +37,7 @@ class socialMediaLinksController extends Controller
 
     public function delete($id)
     {
-        $data = SocialMediaLink::find($id);
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
@@ -53,7 +52,7 @@ class socialMediaLinksController extends Controller
         $socialMedial->social_img = $request->social_img;
         $socialMedial->social_url = $request->social_url;
         $max = SocialMediaLink::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $socialMedial->fakeId = $maxFakeId;
         $socialMedial->save();
         return redirect('/');

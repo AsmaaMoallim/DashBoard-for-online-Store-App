@@ -11,10 +11,10 @@ class bannerController extends Controller
 
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "البانارات";
+
         $formPage = "new-banner-form";
         $addNew = "إضافة بانر جديد";
-        $showRecords = "0";
         $tables = 'banners';
 
 //        $columns= \DB::getSchemaBuilder()->getColumnListing('banner');
@@ -27,14 +27,14 @@ class bannerController extends Controller
         $columns=['اسم البانر','الصورة','fakeId'];
 
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = Banner::find($id);
+        $data = Banner::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -48,7 +48,7 @@ class bannerController extends Controller
 
     public function delete($id)
     {
-        $data = Banner::find($id);
+        $data = Banner::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -64,19 +64,24 @@ class bannerController extends Controller
         $banner->ban_name = $request->ban_name;
         $banner->medl_id = $request->medl_id;
         $max = Banner::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $banner->fakeId =$maxFakeId;
         $banner->save();
-        return redirect('/manager');
+        return redirect('/banners');
     }
 
     public function update(Request $request, Banner $banner, $id)
     {
-        $currentValues = Banner::find($id);
+        $currentValues = Banner::where("fakeId","=","$id")->first();
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
         return view('new-banner-form')->with('currentValues', $currentValues)
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
 
+    }
+    public function store_update(Request $request, $id){
+        $data = Banner::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/banners');
     }
 
 }

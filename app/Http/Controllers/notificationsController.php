@@ -10,13 +10,12 @@ class notificationsController extends Controller
 {
     public function index()
     {
-        $recordPage = "";
+        $pagename = "الاشعارات";
         $formPage = "new-notifications-form";
         $addNew = "إرسال إشعار جديد";
-        $showRecords = "0";
         $tables = 'notifications';
         $columns= \DB::getSchemaBuilder()->getColumnListing('notifications');
-        $rows = \DB::table('notifications')->get();
+//        $rows = \DB::table('notifications')->get();
 
         //SELECT CONCAT(`cla_frist_name`, '  ', `cla_last_name`) AS "اسم العميل", `notifi_title` AS "عنوان الاشعار", `notifi_content` AS "نص الاشعار"
         //FROM `clients`
@@ -30,9 +29,10 @@ class notificationsController extends Controller
             ->join('notifi_send_to','notifi_send_to.cla_id','=','clients.cla_id')
             ->select('');
 
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function insertData(){
@@ -47,7 +47,7 @@ class notificationsController extends Controller
         $notification->notifi_content = $request->notifi_content;
         $notification->man_id = $request->man_id;
         $max = Notification::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
         $notification->save();
         return redirect('/home');

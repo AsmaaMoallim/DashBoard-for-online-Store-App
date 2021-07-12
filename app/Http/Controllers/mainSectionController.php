@@ -11,10 +11,10 @@ class mainSectionController extends Controller
 {
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "الاقسام الرئيسية";
+
         $formPage = "new-maninSection-form";
         $addNew = "إضافة قسم رئيسي جديد";
-        $showRecords = "0";
         $tables = 'main_sections';
         $qry = \DB::table('main_sections')
             ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
@@ -22,9 +22,9 @@ class mainSectionController extends Controller
             ->get();
         $columns = ['اسم القسم الرئيسي','الصورة','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function insertData(){
@@ -33,7 +33,7 @@ class mainSectionController extends Controller
 
     public function enableordisable($id)
     {
-        $data = MainSection::find($id);
+        $data = MainSection::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -48,7 +48,7 @@ class mainSectionController extends Controller
 
     public function delete($id)
     {
-        $data = MainSection::find($id);
+        $data = MainSection::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -59,20 +59,26 @@ class mainSectionController extends Controller
         $mainSection->main_name = $request->main_name;
         $mainSection->medl_id = $request->medl_id;
         $max = MainSection::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $mainSection->fakeId =$maxFakeId;
         $mainSection->save();
-        return redirect('/manager');
+        return redirect('/main_Sections');
     }
 
     public function update(Request $request, MainSection $mainSection, $id)
     {
-        $currentValues = MainSection::find($id);
+        $currentValues = MainSection::where("fakeId","=","$id")->first();
 
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
         return view('new-maninSection-form')->with('currentValues', $currentValues)
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
 
+    }
+
+    public function store_update(Request $request, $id){
+        $data = MainSection::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/main_Sections');
     }
 
 }
