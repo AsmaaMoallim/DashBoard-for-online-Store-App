@@ -1,12 +1,22 @@
 @extends('adminLayout')
 
 @section('content')
+    <div class="content-wrapper">
+        <div class="content-header">
+        </div>
 
     <div class="col-lg-6 pr-xl-5">
         <div class=" card card-dark " style="background-color: silver ">
 
             <x-form.header-card title="إضافة منصب جديد"></x-form.header-card>
 
+            <form
+                @if(isset($id))
+                action="/position/{{$id}}/update"
+                @else
+                action="/store-position"
+                @endif
+                method="Post">
             <form action="/store-position" method="post">
             @csrf
 
@@ -57,12 +67,14 @@
                     </div>
 
 
-                    <x-form.cancel-button  indexPage="positions_permissionsController" ></x-form.cancel-button>
+                    <x-form.cancel-button  indexPage="positions_permissions" ></x-form.cancel-button>
                     <x-form.save-button></x-form.save-button>
 
                 </div>
             </form>
         </div>
+    </div>
+
     </div>
 @endsection
 

@@ -21,6 +21,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
+        $pagename = "الادارة";
         $recordPage = "manager_operations_record";
         $formPage = "new-manager-form";
         $addNew = "اضف مدير جديد";
@@ -40,21 +41,21 @@ class ManagerController extends Controller
 //                dd($columns);
 
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view' ,['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
     public function delete($id)
     {
-       $data = Manager::find($id);
+       $data = Manager::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
 
     public function enableordisable($id)
     {
-        $data = Manager::find($id);
+        $data = Manager::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -75,6 +76,8 @@ class ManagerController extends Controller
 
     function store(Request $request)
     {
+
+
         $manager = new Manager();
         $manager->man_frist_name = $request->man_frist_name;
         $manager->man_last_name = $request->man_last_name;
@@ -83,7 +86,7 @@ class ManagerController extends Controller
         $manager->man_email = $request->man_email;
         $manager->man_password = $request->man_password;
         $max = Manager::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $manager->fakeId = $maxFakeId;
         $manager->save();
         return redirect('/manager');
@@ -93,19 +96,21 @@ class ManagerController extends Controller
     public function update(Request $request, manager $manager,$id)
     {
         $positions = Position::all();
-        $currentValues = manager::find($id);
-
+        $currentValues = Manager::where("fakeId","=","$id")->first();
         $CurrentPosition = Position::find($currentValues->pos_id);
 
-//        $data->ManagerName=$request->ManagerName;
-//        $data->ManagerPhone=$request->ManagerPhone;
-//        $data->ManagerRole=$request->ManagerRole;
-//        $data->ManagerEmail=$request->ManagerEmail;
-//        $data->ManagerPassword=$request->ManagerPassword;
-//        $data->save();
-//        dd($currentValuues);
         return view('new-manager-form',['positions' => $positions, 'CurrentPosition' =>$CurrentPosition])->with('currentValues' , $currentValues)
             ->with('id', $id);
     }
+
+
+
+    public function store_update(Request $request, $id){
+        $data = Manager::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/manager');
+    }
+
+
 
 }

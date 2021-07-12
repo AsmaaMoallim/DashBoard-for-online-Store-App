@@ -16,10 +16,10 @@ class MediaLibraryController extends Controller
      */
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "مكتبة الصور والفيديوهات";
+
         $formPage = "new-mediaLibrary-form";
         $addNew = "إضافة صورة/فيديو جديد";
-        $showRecords = "0";
         $tables = 'media_library';
 
         $qry = \DB::table('media_library')
@@ -27,9 +27,9 @@ class MediaLibraryController extends Controller
                 'media_library.state','media_library.fakeId')->get();
         $columns = ['اسم الصورة/الفيديو','التعريف','الصورة/رابط الفيديو','fakeId'];
 
-        return view('master_tables_view')->with('rows', $qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
-        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
+        ('formPage', $formPage);
     }
 
     public function insertData()
@@ -39,7 +39,7 @@ class MediaLibraryController extends Controller
 
     public function enableordisable($id)
     {
-        $data = MediaLibrary::find($id);
+        $data = MediaLibrary::where("fakeId","=","$id")->first();
         if ($data->state == false) {
             $data->state = true;
             $data->save();
@@ -50,16 +50,6 @@ class MediaLibraryController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
 
     function store(Request $request)
     {
@@ -68,35 +58,34 @@ class MediaLibraryController extends Controller
         $media_library->medl_description = $request->medl_description;
         $media_library->medl_img_ved = $request->medl_img_ved;
         $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;;
         $media_library->fakeId = $maxFakeId;
         $media_library->save();
-        return redirect('/manager');
+        return redirect('/media_Library');
     }
 
-    public function show(MediaLibrary $mediaLibrary)
+    public function delete($id)
     {
-        //
+        $data = MediaLibrary::where("fakeId","=","$id")->first();;
+        $data->delete();
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\MediaLibrary $mediaLibrary
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MediaLibrary $mediaLibrary)
-    {
-        //
-    }
+
+
 
     public function update(Request $request, MediaLibrary $mediaLibrary, $id)
     {
-        $currentValues = MediaLibrary::find($id);
+        $currentValues = MediaLibrary::where("fakeId","=","$id")->first();
 
         return view('new-mediaLibrary-form')->with('currentValues', $currentValues)
             ->with('id', $id);
 
+    }
+    public function store_update(Request $request, $id){
+        $data = MediaLibrary::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/media_Library');
     }
 
 }

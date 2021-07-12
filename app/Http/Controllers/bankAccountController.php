@@ -10,23 +10,23 @@ class bankAccountController extends Controller
 {
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "الحسابات البنكية";
+
         $formPage = "new-bank-account-form";
         $addNew = "إضافة حساب بنكي جديد";
-        $showRecords = "0";
         $tables = 'sys_bank_account';
         $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
         $rows = \DB::table('sys_bank_account')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
 
 
     public function enableOrdisable($id)
     {
-        $data = SysBankAccount::find($id);
+        $data = SysBankAccount::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -41,7 +41,7 @@ class bankAccountController extends Controller
 
     public function delete($id)
     {
-        $data = SysBankAccount::find($id);
+        $data = SysBankAccount::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
@@ -56,7 +56,7 @@ class bankAccountController extends Controller
         $sys_bank_account->sys_bank_name = $request->sys_bank_name;
         $sys_bank_account->sys_bank_account_num = $request->sys_bank_account_num;
         $max = SysBankAccount::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId =$max? $max->fakeId + 1 : 1;
         $sys_bank_account->fakeId = $maxFakeId;
         $sys_bank_account->save();
         return redirect('/manager');

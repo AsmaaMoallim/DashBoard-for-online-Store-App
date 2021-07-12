@@ -14,16 +14,17 @@ class MeasureController extends Controller
      */
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "دليل المقاسات";
         $formPage = "update-measures-form";
         $addNew = "تعديل المقاسات";
         $showRecords = "0";
         $tables = 'measure';
         $columns= \DB::getSchemaBuilder()->getColumnListing('measure');
         $rows = \DB::table('measure')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
+
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);    }
+        ('showRecords',$showRecords)->with('formPage',$formPage);    }
 
     public function insertData(){
         return view('update-measures-form');
@@ -32,7 +33,8 @@ class MeasureController extends Controller
 
     public function destroy($id)
     {
-        $data = Measure::find($id);
+
+        $data = Measure::where("fakeId","=","$id")->first();;
         $data->delete();
 
         return redirect()->back();
@@ -41,7 +43,7 @@ class MeasureController extends Controller
     public function enableOrdisable( $id)
     {
 
-        $data = Measure::find($id);
+        $data = Measure::where("fakeId","=","$id")->first();;
 
 
         if($data->state==false){

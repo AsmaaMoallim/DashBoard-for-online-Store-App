@@ -189,7 +189,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('positions_permissionsController.index')}}" class="nav-link {{"positions_permissionsController"==request()->path()?"active":""}}">
+                                    <a href="{{ route('positions_permissions.index')}}" class="nav-link {{"positions_permissions"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الصلاحيات والمناصب</p>
                                     </a>
@@ -304,37 +304,10 @@
         <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">الادارة</h1>
-                    </div><!-- /.col -->
-                    {{--                    <div class="col-sm-6">--}}
-                    {{--                        <ol class="breadcrumb float-sm-left ">--}}
-                    {{--                            <li class=" ml-3">--}}
-                    {{--                                <button type="button" class="btn btn-primary float-right">--}}
-                    {{--                                    <i class="fa fa-plus"></i>  إضافة مدير </button>--}}
-                    {{--                            </li>--}}
-
-                    {{--                            <li>--}}
-                    {{--                                <button type="button" class="btn btn-primary float-right">سجل عمليات المديرين </button>--}}
-                    {{--                            </li>--}}
-                    {{--                        </ol>--}}
-                    {{--                    </div> <!-- /.col -->--}}
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
 
         <!-- /.content-header -->
     @yield('content')
     <!-- Main content -->
-        <section class="content">
-
-        </section>
 
         <!-- jQuery -->
         <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>

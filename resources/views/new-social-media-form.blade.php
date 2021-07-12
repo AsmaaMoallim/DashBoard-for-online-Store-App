@@ -2,6 +2,9 @@
 
 @section('content')
 
+    <div class="content-wrapper">
+        <div class="content-header">
+        </div>
     <div class="col-lg-6 pr-xl-5">
         <div class=" card card-dark " style="background-color: silver ">
 
@@ -25,4 +28,6 @@
             </form>
         </div>
     </div>
+    </div>
+
 @endsection

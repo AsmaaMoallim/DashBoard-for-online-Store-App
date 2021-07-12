@@ -9,10 +9,9 @@ class clientController extends Controller
 {
     public function index()
     {
-        $recordPage = "0";
+        $pagename = "العملاء";
         $formPage = "new-client-form";
         $addNew = "إضافة عميل جديد";
-        $showRecords = "0";
         $tables = 'clients';
 
         $qry = \DB::table('clients')
@@ -21,14 +20,14 @@ class clientController extends Controller
             ->get();
         $columns= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = Client::find($id);
+        $data = Client::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -40,16 +39,12 @@ class clientController extends Controller
         return redirect()->back();
     }
     public function contactinfo(){
-        $recordPage = "0";
-        $formPage = "0";
-        $addNew = "0";
-        $showRecords = "0";
+
         $tables = 'clients';
         $columns= DB::getSchemaBuilder()->getColumnListing('clients');
         $rows = DB::table('clients')->get();
         return view('master_tables_view')->with('rows',$rows)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
+        ('columns', $columns)->with('tables',$tables);
     }
 
     public function insertData(){
@@ -58,7 +53,7 @@ class clientController extends Controller
 
     public function delete($id)
     {
-        $data = Client::find($id);
+        $data = Client::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
@@ -73,7 +68,7 @@ class clientController extends Controller
         $client->cla_phone_num = $request->cla_phone_num;
         $client->cla_email = $request->cla_email;
         $max = Client::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max->fakeId + 1;
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
         $client->fakeId =$maxFakeId;
         $client->save();
         return redirect('/');
