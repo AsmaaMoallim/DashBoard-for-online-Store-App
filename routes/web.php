@@ -78,6 +78,10 @@ Route::get('/banners/{int}/update', [\App\Http\Controllers\bannerController::cla
 Route::get('/main_sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'update'])->name('main_sections.update');
 Route::get('/sub_sections/{int}/update', [\App\Http\Controllers\subSectionController::class, 'update'])->name('sub_sections.update');
 Route::get('/products/{int}/update', [\App\Http\Controllers\productController::class, 'update'])->name('products.update');
+Route::get('/clients/{int}/update', [\App\Http\Controllers\clientController::class, 'update'])->name('clients.update');
+Route::get('/measure/{int}/update', [App\Http\Controllers\MeasureController::class, 'update'])->name('measure.update');
+Route::get('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'update'])->name('social_media_link.update');
+Route::get('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'update'])->name('bank_accounts.update');
 
 ////////////////////////////////////////////////////  store_update button
 Route::post('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'store_update'])->name('manager.store_update');
@@ -87,6 +91,10 @@ Route::post('/banners/{int}/update', [\App\Http\Controllers\bannerController::cl
 Route::post('/main_Sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'store_update'])->name('main_sections.store_update');
 Route::post('/sub_sections/{int}/update', [\App\Http\Controllers\subSectionController::class, 'store_update'])->name('sub_sections.store_update');
 Route::post('/products/{int}/update', [\App\Http\Controllers\productController::class, 'store_update'])->name('products.store_update');
+Route::post('/clients/{int}/update', [\App\Http\Controllers\clientController::class, 'store_update'])->name('clients.store_update');
+Route::post('/measure/{int}/update', [App\Http\Controllers\MeasureController::class, 'store_update'])->name('measure.store_update');
+Route::post('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'store_update'])->name('social_media_link.store_update');
+Route::post('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'store_update'])->name('bank_accounts.store_update');
 
 
 
@@ -149,6 +157,7 @@ Route::Post('/store-position',[App\Http\Controllers\positions_permissionsControl
 Route::Post('/store-product',[App\Http\Controllers\productController::class,'store'])->name("store-product");
 Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksController::class,'store'])->name("store-social-media-links");
 Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
+Route::post('/store-measure', [App\Http\Controllers\MeasureController::class, 'store'])->name('store-measure');
 
 
 Route::view('/test','test');

@@ -71,6 +71,23 @@ class clientController extends Controller
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $client->fakeId =$maxFakeId;
         $client->save();
-        return redirect('/');
+        return redirect('/clients');
+    }
+
+    public function update(Request $request, Client $client,$id)
+    {
+        $currentValues = Client::where("fakeId","=","$id")->first();
+//        $CurrentPosition = Position::find($currentValues->pos_id);
+
+        return view('new-client-form')->with('currentValues' , $currentValues)
+            ->with('id', $id);
+    }
+
+
+
+    public function store_update(Request $request, $id){
+        $data = Client::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/clients');
     }
 }

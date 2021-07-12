@@ -55,7 +55,23 @@ class socialMediaLinksController extends Controller
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $socialMedial->fakeId = $maxFakeId;
         $socialMedial->save();
-        return redirect('/');
+        return redirect('/social_media_link');
+    }
+
+    public function update(Request $request, SocialMediaLink $socialMediaLink,$id)
+    {
+        $currentValues = SocialMediaLink::where("fakeId","=","$id")->first();
+
+        return view('new-social-media-form')->with('currentValues' , $currentValues)
+            ->with('id', $id);
+    }
+
+
+
+    public function store_update(Request $request, $id){
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/social_media_link');
     }
 
 }

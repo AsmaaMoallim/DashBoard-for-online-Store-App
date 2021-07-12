@@ -15,18 +15,15 @@ class bankAccountController extends Controller
         $formPage = "new-bank-account-form";
         $addNew = "إضافة حساب بنكي جديد";
         $tables = 'sys_bank_account';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
-        $rows = \DB::table('sys_bank_account')->get();
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
 
         $qry =\DB::table('sys_bank_account')
             ->select('sys_bank_account.sys_bank_name AS اسم البنك',
-                'sys_bank_account.sys_bank_account_num AS رقم الحساب','sys_bank_account.fakeId')
+                'sys_bank_account.sys_bank_account_num AS رقم الحساب', 'sys_bank_account.state','sys_bank_account.fakeId')
             ->get();
 
         $columns = ['اسم البنك','رقم الحساب','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }
@@ -68,10 +65,24 @@ class bankAccountController extends Controller
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $sys_bank_account->fakeId = $maxFakeId;
         $sys_bank_account->save();
-        return redirect('/manager');
+        return redirect('/bank_accounts');
+    }
+
+
+    public function update(Request $request, SysBankAccount $sysBankAccount,$id)
+    {
+        $currentValues = SysBankAccount::where("fakeId","=","$id")->first();
+
+        return view('new-bank-account-form')->with('currentValues' , $currentValues)
+            ->with('id', $id);
     }
 
 
 
+    public function store_update(Request $request, $id){
+        $data = SysBankAccount::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/bank_accounts');
+    }
 
 }

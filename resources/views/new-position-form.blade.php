@@ -17,7 +17,6 @@
                 action="/store-position"
                 @endif
                 method="Post">
-            <form action="/store-position" method="post">
             @csrf
 
                 @if(isset($id))

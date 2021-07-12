@@ -112,22 +112,40 @@ class productController extends Controller
         return redirect()->back();
     }
 ///
-    public function update(Request $request, manager $manager,$id)
+    public function update(Request $request, Product $product,$id)
     {
-        $positions = Position::all();
-        $currentValues = Manager::where("fakeId","=","$id")->first();
-        $CurrentPosition = Position::find($currentValues->pos_id);
+        $currentValues = Product::where("fakeId","=","$id")->first();
+        $measures = Measure::all();
+        $sections = SubSection::all();
+        $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
 
-        return view('new-manager-form',['positions' => $positions, 'CurrentPosition' =>$CurrentPosition])->with('currentValues' , $currentValues)
-            ->with('id', $id);
+//        foreach($productProdAvilColor as $productProdAvilColor){
+//            dd($productProdAvilColor->prod_avil_color);
+//        }
+//        dd($productProdAvilColor);
+//      $mediaImg = MediaLibrary::all();
+
+        $columns =['الصورة/رابط الفيديو'];
+
+        $rows = \DB::table('media_library')
+            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
+            ->get();
+
+        return view('new-product-form', ['measures' => $measures,
+            'sections' => $sections, 'columns'=>$columns, 'rows'=>$rows , 'productProdAvilColor'=>$productProdAvilColor])->with('currentValues' , $currentValues) ->with('id', $id);
+//        $positions = Position::all();
+//        $CurrentPosition = Position::find($currentValues->pos_id);
+
     }
 
 
 
     public function store_update(Request $request, $id){
-        $data = Manager::where("fakeId","=","$id")->first();
-        $data->update($request->all());
-        return redirect('/manager');
+
+        dd($request->input('ColorBox'));
+//        $data = Manager::where("fakeId","=","$id")->first();
+//        $data->update($request->all());
+//        return redirect('/manager');
     }
 
 }

@@ -16,7 +16,7 @@ class MeasureController extends Controller
     {
         $pagename = "دليل المقاسات";
         $formPage = "update-measures-form";
-        $addNew = "تعديل المقاسات";
+        $addNew = "تعديل الصورة";
         $showRecords = "0";
         $tables = 'measure';
 
@@ -60,6 +60,27 @@ class MeasureController extends Controller
         }
         return redirect()->back();
 
+    }
+
+
+    function store(Request $request)
+    {
+    }
+
+        public function update(Request $request, Measure $measure,$id)
+    {
+        $currentValues = Measure::where("fakeId","=","$id")->first();
+
+        return view('update-measures-form')->with('currentValues' , $currentValues)
+            ->with('id', $id);
+    }
+
+
+
+    public function store_update(Request $request, $id){
+        $data = Measure::where("fakeId","=","$id")->first();
+        $data->update($request->all());
+        return redirect('/measure');
     }
 
 //    function addNew(Request $request)
