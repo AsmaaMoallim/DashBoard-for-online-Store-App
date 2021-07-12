@@ -17,20 +17,24 @@ class commentController extends Controller
         $tables = 'comments';
 
         $qry = \DB::table('comments')
+            ->join('product','product.prod_id','=','comments.prod_id')
+            ->join('clients','clients.cla_id','=','comments.cla_id')
+            ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم المنتج' "),\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم العميل' "),'comments.com_rateing AS التعليق','comments.com_content AS التقييم','comments.fakeId')
+            ->get();
 
-            ->join('product', 'product.prod_id', ' = ', 'comments.prod_id')
-            ->join('clients', 'clients.cla_id', ' = ', 'comments.cla_id')
+//            ->join('product', 'product.prod_id', ' = ', 'comments.prod_id')
+//            ->join('clients', 'clients.cla_id', ' = ', 'comments.cla_id')
 
 //            ->join('comments', 'comments.prod_id', ' = ', 'product.prod_id')
 //            ->join('clients', 'clients.cla_id', ' = ', 'comments.cla_id')
+//
+//            ->select(\DB::raw("CONCAT(clients.cla_frist_name,' ',clients.cla_last_name AS الاسم"),
+//                'product.prod_name AS المنتج','comments.com_rateing AS التقييم',
+////                'comments.com_content AS التعليق','product.fakeId')
+//
+//            ->get();
 
-            ->select(\DB::raw("CONCAT(clients.cla_frist_name,' ',clients.cla_last_name AS الاسم"),
-                'product.prod_name AS المنتج','comments.com_rateing AS التقييم',
-                'comments.com_content AS التعليق','product.fakeId')
-
-            ->get();
-
-        $columns = ['الاسم','اسم المنتج','التقييم','التعليق','fakeId'];
+        $columns = ['اسم المنتج','اسم العميل','التعليق','التقييم','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with

@@ -19,11 +19,11 @@ class notificationsController extends Controller
             ->join('manager','manager.man_id','=','notifications.man_id')
             ->join('notifi_send_to','notifi_send_to.notifi_id','=','notifications.notifi_id')
             ->join('clients','clients.cla_id','=','notifi_send_to.cla_id')
-            ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS المدير"),
-                \DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS العميل"),
+            ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS 'اسم المدير'"),
+                \DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم العميل' "),
                 'notifications.notifi_title AS عنوان الاشعار','notifications.notifi_content AS نص الاشعار','notifications.fakeId')
             ->get();
-        $columns = ['المدير','العميل','عنوان الاشعار','نص الاشعار','fakeId'];
+        $columns = ['اسم المدير','اسم العميل','عنوان الاشعار','نص الاشعار','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
