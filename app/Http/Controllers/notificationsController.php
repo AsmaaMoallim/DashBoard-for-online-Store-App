@@ -30,7 +30,6 @@ class notificationsController extends Controller
             ->join('notifi_send_to','notifi_send_to.cla_id','=','clients.cla_id')
             ->select('');
 
-
         return view('master_tables_view')->with('rows',$rows)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
