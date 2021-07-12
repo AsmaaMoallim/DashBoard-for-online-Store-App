@@ -30,47 +30,47 @@
                         </select>
                     </div>
 
-
                     <div class="form-group col-sm-10" >
                         <label>صور المنتح</label>
-                        <div class="card-body table-responsive p-0">
-                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>
-                        <table id="tableprofider" class="table table-hover text-nowrap">
-                            <thead>
-                            <tr>
-                                @for( $i = 0 ; $i<=10 ; $i++)
 
-                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                        <th>{{$columns[$i]}}</th> @endif
-                                @endfor
+{{--                        <div class="card-body table-responsive p-0">--}}
+{{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
+{{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}
+{{--                            <thead>--}}
+{{--                            <tr>--}}
+{{--                                @for( $i = 0 ; $i<=10 ; $i++)--}}
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
+{{--                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+{{--                                        <th>{{$columns[$i]}}</th> @endif--}}
+{{--                                @endfor--}}
 
-                                @foreach( $rows as $row)
-                                    @for( $i = 0 ; $i<=10; $i++)
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+{{--                            <tr>--}}
 
-                                        @for( $i = 0 ; $i<=10; $i++)
-                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+{{--                                @foreach( $rows as $row)--}}
+{{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
 
-                                                <?php $val = (string)$columns[$i] ?>
-                                                @if($val)
-                                              <td> {{$row->medl_img_ved}} </td>
+{{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
+{{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+
+{{--                                                <?php $val = (string)$columns[$i] ?>--}}
+{{--                                                @if($val)--}}
+{{--                                              <td> {{$row->medl_img_ved}} </td>--}}
 
 {{--                                            @else--}}
 {{--                                                {{$row->medl_img_ved = NULL}}--}}
-                                            @endif
-                                            @endif
-                                                        @endfor
-                                                        @endfor
-                                                        @endforeach
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
+{{--                                            @endif--}}
+{{--                                            @endif--}}
+{{--                                                        @endfor--}}
+{{--                                                        @endfor--}}
+{{--                                                        @endforeach--}}
+{{--                            </tr>--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
+{{--                    </div>--}}
 
 
 

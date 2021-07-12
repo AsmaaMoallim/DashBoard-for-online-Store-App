@@ -15,9 +15,6 @@ class bankAccountController extends Controller
         $formPage = "new-bank-account-form";
         $addNew = "إضافة حساب بنكي جديد";
         $tables = 'sys_bank_account';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
-        $rows = \DB::table('sys_bank_account')->get();
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
 
         $qry =\DB::table('sys_bank_account')
             ->select('sys_bank_account.sys_bank_name AS اسم البنك',
@@ -26,7 +23,7 @@ class bankAccountController extends Controller
 
         $columns = ['اسم البنك','رقم الحساب','fakeId'];
 
-        return view('master_tables_view')->with('rows',$qry)->with
+       return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }
