@@ -19,14 +19,19 @@ class MeasureController extends Controller
         $addNew = "تعديل المقاسات";
         $showRecords = "0";
         $tables = 'measure';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('measure');
-        $rows = \DB::table('measure')->get();
 
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
-        ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage);    }
+        $qry = \DB::table('measure')
+            ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
 
-    public function insertData(){
+        $columns = ['المقاسات', 'fakeId'];
+
+        return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
+        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage);
+    }
+
+    public function insertData()
+    {
         return view('update-measures-form');
     }
 
@@ -40,18 +45,17 @@ class MeasureController extends Controller
         return redirect()->back();
     }
 
-    public function enableOrdisable( $id)
+    public function enableOrdisable($id)
     {
 
         $data = Measure::where("fakeId","=","$id")->first();;
 
 
-        if($data->state==false){
-            $data->state=true;
+        if ($data->state == false) {
+            $data->state = true;
             $data->save();
-        }
-        else{
-            $data->state= false;
+        } else {
+            $data->state = false;
             $data->save();
         }
         return redirect()->back();

@@ -18,6 +18,15 @@ class bankAccountController extends Controller
         $columns= \DB::getSchemaBuilder()->getColumnListing('sys_bank_account');
         $rows = \DB::table('sys_bank_account')->get();
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
+
+        $qry =\DB::table('sys_bank_account')
+            ->select('sys_bank_account.sys_bank_name AS اسم البنك',
+                'sys_bank_account.sys_bank_account_num AS رقم الحساب','sys_bank_account.fakeId')
+            ->get();
+
+        $columns = ['اسم البنك','رقم الحساب','fakeId'];
+
+        return view('master_tables_view')->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }

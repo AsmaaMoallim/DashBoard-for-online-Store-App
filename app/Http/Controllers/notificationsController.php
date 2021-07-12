@@ -15,8 +15,22 @@ class notificationsController extends Controller
         $addNew = "إرسال إشعار جديد";
         $tables = 'notifications';
         $columns= \DB::getSchemaBuilder()->getColumnListing('notifications');
-        $rows = \DB::table('notifications')->get();
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
+//        $rows = \DB::table('notifications')->get();
+
+        //SELECT CONCAT(`cla_frist_name`, '  ', `cla_last_name`) AS "اسم العميل", `notifi_title` AS "عنوان الاشعار", `notifi_content` AS "نص الاشعار"
+        //FROM `clients`
+        //JOIN `notifications`
+        //JOIN `notifi_send_to`
+        //ON `notifications`.`notifi_id` = `notifi_send_to`.`notifi_id`
+        //AND `notifi_send_to`.`cla_id` = `clients`.`cla_id`
+
+        $qry = \DB::table('clients')
+            ->join('notifications','notifications.notifi_id','=','notifi_send_to.notifi_id')
+            ->join('notifi_send_to','notifi_send_to.cla_id','=','clients.cla_id')
+            ->select('');
+
+
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }

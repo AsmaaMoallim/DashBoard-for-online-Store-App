@@ -11,9 +11,13 @@ class shippingChargeController extends Controller
         $pagename = "تكلفة الشحن";
 
         $tables = 'shipping_charge';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('shipping_charge');
-        $rows = \DB::table('shipping_charge')->get();
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
+
+        $qry =\DB::table('shipping_charge')
+            ->select('shipping_charge.ship_price AS التكلفة','shipping_charge.fakeId')
+            ->get();
+        $columns = ['التكلفة','fakeId'];
+
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables);
     }
 }
