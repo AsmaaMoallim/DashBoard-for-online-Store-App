@@ -12,6 +12,7 @@
         width: 20px;
         border: 1px solid black;
         margin-right: 5px;
+        margin-top: 2%;
         float: right;
         text-align: center;
         cursor: pointer;
@@ -19,7 +20,6 @@
 
     .delete {
         display: none;
-        position: sticky;
     }
 
     .box:hover + .delete {
@@ -64,12 +64,12 @@
 
                         <x-form.input name="prod_name" class="form-control" type="name"
                                       label="اسم المنتج " placeholder="أدخل اسم المنتج الجديد "
-                                      value="{{$prod_name ?? ''}}"/>
+                                      value="{{$prod_name ?? ''}}"></x-form.input>
 
 
                         <x-form.input name="prod_price" class="form-control" type="price"
                                       label="السعر " placeholder=" أدخل سعر المنتج الجديد"
-                                      value="{{$prod_price ?? ''}}"/>
+                                      value="{{$prod_price ?? ''}}"></x-form.input>
 
 
                         <div class="form-group col-sm-10 ">
@@ -81,47 +81,47 @@
                             </select>
                         </div>
 
-{{--                    <div class="form-group col-sm-10" >--}}
-{{--                        <label>صور المنتح</label>--}}
+                        {{--                    <div class="form-group col-sm-10" >--}}
+                        {{--                        <label>صور المنتح</label>--}}
 
-{{--                        <div class="card-body table-responsive p-0">--}}
-{{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
-{{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                @for( $i = 0 ; $i<=10 ; $i++)--}}
+                        {{--                        <div class="card-body table-responsive p-0">--}}
+                        {{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
+                        {{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}
+                        {{--                            <thead>--}}
+                        {{--                            <tr>--}}
+                        {{--                                @for( $i = 0 ; $i<=10 ; $i++)--}}
 
-{{--                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-{{--                                        <th>{{$columns[$i]}}</th> @endif--}}
-{{--                                @endfor--}}
+                        {{--                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+                        {{--                                        <th>{{$columns[$i]}}</th> @endif--}}
+                        {{--                                @endfor--}}
 
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-{{--                            <tr>--}}
+                        {{--                            </tr>--}}
+                        {{--                            </thead>--}}
+                        {{--                            <tbody>--}}
+                        {{--                            <tr>--}}
 
-{{--                                @foreach( $rows as $row)--}}
-{{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
+                        {{--                                @foreach( $rows as $row)--}}
+                        {{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
 
-{{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
-{{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
+                        {{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
+                        {{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
 
-{{--                                                <?php $val = (string)$columns[$i] ?>--}}
-{{--                                                @if($val)--}}
-{{--                                              <td> {{$row->medl_img_ved}} </td>--}}
+                        {{--                                                <?php $val = (string)$columns[$i] ?>--}}
+                        {{--                                                @if($val)--}}
+                        {{--                                              <td> {{$row->medl_img_ved}} </td>--}}
 
-{{--                                            @else--}}
-{{--                                                {{$row->medl_img_ved = NULL}}--}}
-{{--                                            @endif--}}
-{{--                                            @endif--}}
-{{--                                                        @endfor--}}
-{{--                                                        @endfor--}}
-{{--                                                        @endforeach--}}
-{{--                            </tr>--}}
-{{--                            </tbody>--}}
-{{--                        </table>--}}
-{{--                    </div>--}}
-{{--                    </div>--}}
+                        {{--                                            @else--}}
+                        {{--                                                {{$row->medl_img_ved = NULL}}--}}
+                        {{--                                            @endif--}}
+                        {{--                                            @endif--}}
+                        {{--                                                        @endfor--}}
+                        {{--                                                        @endfor--}}
+                        {{--                                                        @endforeach--}}
+                        {{--                            </tr>--}}
+                        {{--                            </tbody>--}}
+                        {{--                        </table>--}}
+                        {{--                    </div>--}}
+                        {{--                    </div>--}}
 
 
 
@@ -159,7 +159,7 @@
                         <x-form.input name="prod_avil_amount" class="form-control" type="number"
                                       label="الكمية المتوفرة حالياً "
                                       placeholder=" أدخل الكمية المتوفرة حالياً للمنتج الجديد "
-                                      value="{{$prod_avil_amount ?? ''}}"/>
+                                      value="{{$prod_avil_amount ?? ''}}"></x-form.input>
 
                         <div class="form-group col-sm-10 ">
                             <label>المقاسات</label>
@@ -173,26 +173,34 @@
 
                         <div class="form-group col-sm-10 ">
                             <label>الألوان المتاحة</label>
-                            <input id="color" type="color" class="mr-1" onchange="pushData()">
-                            <input id="hex" class="form-control" name="prod_avil_color[] [prod_avil_color]" type="text"
-                                   placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','"
+                            <a style="background-color: #00c0ef" onclick="catshColor()"> اضف اللون </a>
+
+                            <input id="color" type="color" class="mr-1">
+
+                            {{--                            <input id="hex" class="form-control" name="prod_avil_color[] [prod_avil_color]" type="text"--}}
+                            {{--                                   placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','"--}}
 
                             @if(isset($id))
                                 <div>
 
 
-                                <div class="row ">
-                                    @foreach($productProdAvilColor as $productProdAvilColor)
-                                        <div class='box'
-                                             style="background-color:{{$productProdAvilColor->prod_avil_color}}"
-                                             id="box"
-                                             onclick="destroyColor()">
-                                            <input type="hidden" value="{{$productProdAvilColor->prod_avil_color}}"
-                                                   name="ColorBox[]">
-                                        </div>
-                                        <span class="delete">X</span>
-                                    @endforeach
-                                </div>
+                                    <div class="row" id="ColorRow">
+                                        @foreach($productProdAvilColor as $productProdAvilColor)
+                                            <div class='box'
+                                                 style="background-color:{{$productProdAvilColor->prod_avil_color}}"
+                                                 id="{{$productProdAvilColor->prod_avil_color}}"
+{{--                                                 value="{{$productProdAvilColor->prod_avil_color}}"--}}
+                                                 name="box[]"
+                                                 onclick="try1()"
+                                                 >
+                                                <input type="hidden" value="{{$productProdAvilColor->prod_avil_color}}"
+                                                       name="ColorBox[]" class="ColorBox">
+
+                                            </div>
+                                            <div class="delete" id="delete">X</div>
+
+                                        @endforeach
+                                    </div>
                                 </div>
                             @else
                             @endif
@@ -200,31 +208,193 @@
                         </div>
 
                         <script>
-                            function destroyColor() {
-                                var elem = document.getElementById('box');
-                                elem.remove(elem);
-                            }
 
-                            var myArry = ["#", "#", "#"]
+                            function catshColor() {
+                                var elem = document.getElementById('color').value;
 
-                            function pushData() {
-                                // var inputColor = document.getElementById('color').value;
-                                // let colorInput = document.querySelector('#color');
-                                // let colorInput = document.querySelector('#color');
-                                var colorInput = document.querySelector('#color');
+                                var ColorArray = $('[name^=ColorBox]').map(function(i) {
+                                    //return this.name;
+                                    return this.value; // for real values of input
+                                }).get();
 
-                                colorInput.addEventListener('input', () => {
-                                    let color = colorInput.value;
-                                    myArry.push(color);
-                                });
-
-                                var c = "";
-                                for (i = 0; i < myArry.length; i++) {
-                                    // hexInput.value = color;
-                                    c = c + myArry[i];
+                                for (var i = 0; i < ColorArray.length; i++) {
+                                    if (ColorArray[i] == elem){
+                                        alert("اللون موجود مسبقًا");
+                                        var display = false;
+                                    }
+                                    else {
+                                        var display = true;
+                                    }
                                 }
-                                document.getElementById('hex').innerHTML = c;
+
+                                if (display === true){
+                                    var colorRow = document.getElementById('ColorRow');
+                                    var colorInput = document.createElement('input');
+                                    colorInput.type = 'hidden';
+                                    colorInput.value = elem;
+                                    colorInput.name = 'ColorBox[]';
+                                    var colorDeleteDiv = document.createElement('div');
+                                    colorDeleteDiv.className = 'delete';
+                                    var text = document.createTextNode('X');
+                                    var colorDiv = document.createElement('div');
+                                    colorDiv.className = 'box';
+                                    colorDiv.style.backgroundColor = elem;
+                                    colorDiv.id = elem
+                                    // colorDiv.onclick = checkIndex();
+                                    // colorDiv.onclick = function () {
+                                    //     destroyColor();
+                                    //     // var elem = document.getElementById('box');
+                                    //     // elem.remove(elem);
+                                    // };
+                                    colorDiv.appendChild(colorInput);
+                                    colorDeleteDiv.appendChild(text);
+                                    // colorDiv.appendChild(colorDeleteDiv);
+                                    colorRow.appendChild(colorDiv);
+                                    colorRow.appendChild(colorDeleteDiv);
+                                    display = false;
+                                }
+                            };
+                            // document.addEventListener('click',function(e){
+                            //     if(e.target && e.target.id== 'box'){
+                            //         var checks = document.querySelectorAll('.box');
+                            //         alert( Array.from(checks).indexOf(event.target) );
+                            // }
+                            // });
+
+                            function checkIndex(event){
+
+                                var checks = document.querySelectorAll('.box');
+                                // checks.forEach(function(check){
+                                //     check.addEventListener('click', checkIndex);
+                                // })
+                                // for (var i = 0; i < ColorArray.length; i++) {
+                                //         if (Array.from(checks).indexOf(event.target) === i){
+                                //             alert("اللون موجود مسبقًا");
+                                //             // elem1.item(i).remove();
+                                //         }
+                                //         else {
+                                //             alert("اللون d مسبقًا");
+                                //         }
+                                //     }
+                                alert( Array.from(checks).indexOf(event.target) );}
+
+
+                            function try1() {
+
+                                document.addEventListener('click', function (e) {
+                                    // if(e.target && e.target.id== 'box'){
+                                    //
+                                    // }
+                                    //     alert("h");
+                                    // }
+                                    e = e || window.event;
+                                    var target = e.target;
+                                    text = target.id;
+                                    alert(text);
+                                    remo();
+                                    // target.removeEventListener('click', clickHandler);
+                                }, false);
+
                             }
+                            function remo(){
+                                document.removeEventListener('click',function(){
+                                    alert("removed")
+                                })
+                            }
+
+
+                            function destroyColor() {
+
+                                var elem1 = document.getElementsByClassName('box');
+                                var ColorArray = $('[name^=ColorBox]').map(function(i) {
+                                    //return this.name;
+                                    return this.value; // for real values of input
+                                }).get();
+                                var checks = document.querySelectorAll('.box');
+                                for (var i = 0; i < ColorArray.length; i++) {
+
+                                    // alert(elem1.item(i).getAttribute('id'));
+
+                                    // checkIndex(checks);
+
+
+                                    // if (ColorArray[i] == elem){
+                                    //     alert("اللون موجود مسبقًا");
+                                    //     var display = false;
+                                    // }
+                                    // else {
+                                    //     var display = true;
+                                    // }
+                                }
+                                // var checks = $('[name^=box]').map(function(i) {
+                                //     //return this.name;
+                                //     return this.value; // for real values of input
+                                // }).get();
+                                // //
+
+//
+//                                 var checks = document.querySelectorAll('.box');
+
+                                // checks.forEach(function(check){
+                                //     check.addEventListener('click', checkIndex);
+                                // })
+// alert(Array.from(checks).indexOf(event.target))
+                                function checkIndex(event){
+                                    // for (var i = 0; i < ColorArray.length; i++) {
+                                    //         if (Array.from(checks).indexOf(event.target) === i){
+                                    //             alert("اللون موجود مسبقًا");
+                                    //             // elem1.item(i).remove();
+                                    //         }
+                                    //         else {
+                                    //             alert("اللون d مسبقًا");
+                                    //         }
+                                    //     }
+                                    alert( Array.from(checks).indexOf(event.target) );}}
+
+                                // $(document).click(function (event) {
+                                //     alert($(this).value);
+                                // });
+
+                                // jQuery("box").click(function() {
+                                //     var contentPanelId = jQuery(this).attr("value");
+                                //     alert(contentPanelId);
+                                // });
+                                // alert(elem1.item(this).getAttribute("value"))
+                                // for (var i = 0; i < ColorArray.length; i++) {
+                                //     if (ColorArray[i] == elem1.item(i).getAttribute("value")){
+                                //         alert("اللون موجود مسبقًا");
+                                //         var display = false;
+                                //     }
+                                //     else {
+                                //         // var display = true;
+                                //     }
+                                // }
+                                // var elem2 = document.getElementById('delete');
+                                // alert(elem1.value);
+                                // elem1.remove(elem1);
+                                // elem2.remove(elem2);
+
+
+                            // var myArry = ["#", "#", "#"]
+                            //
+                            // function pushData() {
+                            //     // var inputColor = document.getElementById('color').value;
+                            //     // let colorInput = document.querySelector('#color');
+                            //     // let colorInput = document.querySelector('#color');
+                            //     var colorInput = document.querySelector('#color');
+                            //
+                            //     colorInput.addEventListener('input', () => {
+                            //         let color = colorInput.value;
+                            //         myArry.push(color);
+                            //     });
+                            //
+                            //     var c = "";
+                            //     for (i = 0; i < myArry.length; i++) {
+                            //         // hexInput.value = color;
+                            //         c = c + myArry[i];
+                            //     }
+                            //     document.getElementById('hex').innerHTML = c;
+                            // }
 
                             // let colorInput = document.querySelector('#color');
                             // let hexInput = document.querySelector('#hex');
