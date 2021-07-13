@@ -55,7 +55,6 @@
                             $prod_price = $currentValues->prod_price;
                             $prod_avil_amount = $currentValues->prod_avil_amount;
                             $man_email = $currentValues->man_email;
-                            //                            $man_password = $currentValues->man_password;
                             ?>
                         @endif
                     @endif
@@ -76,7 +75,26 @@
                             <label>القسم الفرعي</label>
                             <select name="sub_id">
                                 @foreach($sections as $section)
-                                    <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>
+
+                                    @if(isset($id))
+
+                                        @if ($section->sub_id == $currentSections->sub_id)
+                                            <option
+
+                                                value="{{$section->sub_id}}"
+                                                selected="selected">{{$currentSections->sub_name}}
+                                            </option>
+                                        @else
+                                            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>
+                                        @endif
+
+                                    @else
+                                        <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>
+
+
+                                    @endif
+                                    /////////
+
                                 @endforeach
                             </select>
                         </div>
@@ -165,69 +183,101 @@
                             <label>المقاسات</label>
                             <br>
                             @foreach( $measures as $measure)
-                                <input name="mesu_value" type="checkbox"
-                                       value="{{$measure->mesu_id}}"> {{$measure->mesu_value}}
+                                <input name="mesu_id[]" type="checkbox"
+                                       value="{{$measure->mesu_id}}"
+
+                                       @if(isset($id))
+
+                                       @foreach($currentMeasures as $currentMeasure)
+
+                                       @if($measure->mesu_id == $currentMeasure->mesu_id)
+
+                                       checked="checked"
+                                    @endif
+
+
+                                    @endforeach
+
+                                    @endif
+
+
+                                > {{$measure->mesu_value}}
                                 <br>
                             @endforeach
                         </div>
 
                         <div class="form-group col-sm-10 ">
                             <label>الألوان المتاحة</label>
-                            <a style="background-color: #00c0ef" onclick="catshColor()"> اضف اللون </a>
+                            <div>
+                                <input id="color" type="color" class="mr-1">
+                                <a style=" color: red" onclick="catshColor()"> اضغط لاضافة اللون </a>
 
-                            <input id="color" type="color" class="mr-1">
-
-                            {{--                            <input id="hex" class="form-control" name="prod_avil_color[] [prod_avil_color]" type="text"--}}
-                            {{--                                   placeholder="أدخل ألوان المنتج افصل كل لون عن الآخر بـ','"--}}
-
-                            @if(isset($id))
-                                <div>
+                            </div>
 
 
-                                    <div class="row" id="ColorRow">
+                            <div>
+
+                                <div class="row" id="ColorRow">
+
+                                    @if(isset($id))
                                         @foreach($productProdAvilColor as $productProdAvilColor)
                                             <div class='box'
                                                  style="background-color:{{$productProdAvilColor->prod_avil_color}}"
                                                  id="{{$productProdAvilColor->prod_avil_color}}"
-{{--                                                 value="{{$productProdAvilColor->prod_avil_color}}"--}}
                                                  name="box[]"
-                                                 onclick="try1()"
-                                                 >
-                                                <input type="hidden" value="{{$productProdAvilColor->prod_avil_color}}"
+                                                 value="false"
+                                                 onclick="destroyColor()"
+                                            >
+                                                <input type="hidden"
+                                                       value="{{$productProdAvilColor->prod_avil_color}}"
                                                        name="ColorBox[]" class="ColorBox">
 
                                             </div>
                                             <div class="delete" id="delete">X</div>
 
                                         @endforeach
-                                    </div>
+                                    @endif
+
                                 </div>
-                            @else
-                            @endif
+                            </div>
+
 
                         </div>
 
                         <script>
 
                             function catshColor() {
-                                var elem = document.getElementById('color').value;
+                                let elem = document.getElementById('color');
 
-                                var ColorArray = $('[name^=ColorBox]').map(function(i) {
+                                var ColorArray = $('[name^=ColorBox]').map(function (i) {
                                     //return this.name;
+
                                     return this.value; // for real values of input
                                 }).get();
+                                var i = 0;
 
-                                for (var i = 0; i < ColorArray.length; i++) {
-                                    if (ColorArray[i] == elem){
+                                var display ;
+                                do {
+                                        // alert(elem.id)
+                                    if(ColorArray[i] === elem.value){
                                         alert("اللون موجود مسبقًا");
-                                        var display = false;
+                                        display = false;
+                                    }else {
+                                        // alert("here")
+                                         display = true;
                                     }
-                                    else {
-                                        var display = true;
-                                    }
-                                }
+                                    i++;
 
-                                if (display === true){
+                                } while (i < ColorArray.length)
+                                // for (var i = 0; i < ColorArray.length; i++) {
+                                //     if (ColorArray[i] == elem) {
+                                //         alert("اللون موجود مسبقًا");
+                                //         var display = false;
+                                //     } else {
+                                //         var display = true;
+                                //     }
+                                // }
+                                if (display) {
                                     var colorRow = document.getElementById('ColorRow');
                                     var colorInput = document.createElement('input');
                                     colorInput.type = 'hidden';
@@ -239,170 +289,41 @@
                                     var colorDiv = document.createElement('div');
                                     colorDiv.className = 'box';
                                     colorDiv.style.backgroundColor = elem;
-                                    colorDiv.id = elem
-                                    // colorDiv.onclick = checkIndex();
-                                    // colorDiv.onclick = function () {
-                                    //     destroyColor();
-                                    //     // var elem = document.getElementById('box');
-                                    //     // elem.remove(elem);
-                                    // };
+                                    colorDiv.id = elem;
+                                    colorDiv.value = false;
+                                    colorDiv.onclick = function () {
+                                        destroyColor();
+                                    };
                                     colorDiv.appendChild(colorInput);
                                     colorDeleteDiv.appendChild(text);
-                                    // colorDiv.appendChild(colorDeleteDiv);
                                     colorRow.appendChild(colorDiv);
                                     colorRow.appendChild(colorDeleteDiv);
                                     display = false;
                                 }
+                                else{
+                                    alert("do not print")
+                                }
                             };
-                            // document.addEventListener('click',function(e){
-                            //     if(e.target && e.target.id== 'box'){
-                            //         var checks = document.querySelectorAll('.box');
-                            //         alert( Array.from(checks).indexOf(event.target) );
-                            // }
-                            // });
-
-                            function checkIndex(event){
-
-                                var checks = document.querySelectorAll('.box');
-                                // checks.forEach(function(check){
-                                //     check.addEventListener('click', checkIndex);
-                                // })
-                                // for (var i = 0; i < ColorArray.length; i++) {
-                                //         if (Array.from(checks).indexOf(event.target) === i){
-                                //             alert("اللون موجود مسبقًا");
-                                //             // elem1.item(i).remove();
-                                //         }
-                                //         else {
-                                //             alert("اللون d مسبقًا");
-                                //         }
-                                //     }
-                                alert( Array.from(checks).indexOf(event.target) );}
 
 
-                            function try1() {
+                            function destroyColor(e) {
 
-                                document.addEventListener('click', function (e) {
-                                    // if(e.target && e.target.id== 'box'){
-                                    //
-                                    // }
-                                    //     alert("h");
-                                    // }
-                                    e = e || window.event;
-                                    var target = e.target;
-                                    text = target.id;
-                                    alert(text);
-                                    remo();
-                                    // target.removeEventListener('click', clickHandler);
-                                }, false);
+                                var elem = document.getElementsByClassName('box');
 
-                            }
-                            function remo(){
-                                document.removeEventListener('click',function(){
-                                    alert("removed")
-                                })
-                            }
-
-
-                            function destroyColor() {
-
-                                var elem1 = document.getElementsByClassName('box');
-                                var ColorArray = $('[name^=ColorBox]').map(function(i) {
+                                var ColorArray = $('[name^=ColorBox]').map(function (i) {
                                     //return this.name;
                                     return this.value; // for real values of input
                                 }).get();
-                                var checks = document.querySelectorAll('.box');
+
+                                e = e || window.event;
+                                var t = e.target;
                                 for (var i = 0; i < ColorArray.length; i++) {
-
-                                    // alert(elem1.item(i).getAttribute('id'));
-
-                                    // checkIndex(checks);
-
-
-                                    // if (ColorArray[i] == elem){
-                                    //     alert("اللون موجود مسبقًا");
-                                    //     var display = false;
-                                    // }
-                                    // else {
-                                    //     var display = true;
-                                    // }
+                                    if (t.id == ColorArray[i]) {
+                                        elem.item(i).remove();
+                                    }
                                 }
-                                // var checks = $('[name^=box]').map(function(i) {
-                                //     //return this.name;
-                                //     return this.value; // for real values of input
-                                // }).get();
-                                // //
+                            }
 
-//
-//                                 var checks = document.querySelectorAll('.box');
-
-                                // checks.forEach(function(check){
-                                //     check.addEventListener('click', checkIndex);
-                                // })
-// alert(Array.from(checks).indexOf(event.target))
-                                function checkIndex(event){
-                                    // for (var i = 0; i < ColorArray.length; i++) {
-                                    //         if (Array.from(checks).indexOf(event.target) === i){
-                                    //             alert("اللون موجود مسبقًا");
-                                    //             // elem1.item(i).remove();
-                                    //         }
-                                    //         else {
-                                    //             alert("اللون d مسبقًا");
-                                    //         }
-                                    //     }
-                                    alert( Array.from(checks).indexOf(event.target) );}}
-
-                                // $(document).click(function (event) {
-                                //     alert($(this).value);
-                                // });
-
-                                // jQuery("box").click(function() {
-                                //     var contentPanelId = jQuery(this).attr("value");
-                                //     alert(contentPanelId);
-                                // });
-                                // alert(elem1.item(this).getAttribute("value"))
-                                // for (var i = 0; i < ColorArray.length; i++) {
-                                //     if (ColorArray[i] == elem1.item(i).getAttribute("value")){
-                                //         alert("اللون موجود مسبقًا");
-                                //         var display = false;
-                                //     }
-                                //     else {
-                                //         // var display = true;
-                                //     }
-                                // }
-                                // var elem2 = document.getElementById('delete');
-                                // alert(elem1.value);
-                                // elem1.remove(elem1);
-                                // elem2.remove(elem2);
-
-
-                            // var myArry = ["#", "#", "#"]
-                            //
-                            // function pushData() {
-                            //     // var inputColor = document.getElementById('color').value;
-                            //     // let colorInput = document.querySelector('#color');
-                            //     // let colorInput = document.querySelector('#color');
-                            //     var colorInput = document.querySelector('#color');
-                            //
-                            //     colorInput.addEventListener('input', () => {
-                            //         let color = colorInput.value;
-                            //         myArry.push(color);
-                            //     });
-                            //
-                            //     var c = "";
-                            //     for (i = 0; i < myArry.length; i++) {
-                            //         // hexInput.value = color;
-                            //         c = c + myArry[i];
-                            //     }
-                            //     document.getElementById('hex').innerHTML = c;
-                            // }
-
-                            // let colorInput = document.querySelector('#color');
-                            // let hexInput = document.querySelector('#hex');
-                            //
-                            // colorInput.addEventListener('input',()=>{
-                            //     let color = colorInput.value;
-                            //     hexInput.value = color;
-                            // });
                         </script>
 
 
@@ -422,7 +343,8 @@
                         <script src="../../dist/js/demo.js"></script>
                         <script src="../../plugins/ckeditor/ckeditor.js"></script>
 
-                        <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+                        <script
+                            src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
                         <script>
                             $(function () {
                                 // Replace the <textarea id="editor1"> with a CKEditor

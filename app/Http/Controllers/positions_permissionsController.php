@@ -132,6 +132,7 @@ class positions_permissionsController extends Controller
             $posInclude->per_id = $per_id2;
             $posInclude->save();
         }
+        $data->update($request->all());
 
         return redirect('/positions_permissions');
     }
