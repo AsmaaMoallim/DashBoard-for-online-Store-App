@@ -247,7 +247,7 @@
                         <script>
 
                             function catshColor() {
-                                let elem = document.getElementById('color');
+                                var elemen = document.getElementById('color');
 
                                 var ColorArray = $('[name^=ColorBox]').map(function (i) {
                                     //return this.name;
@@ -259,7 +259,7 @@
                                 var display ;
                                 do {
                                         // alert(elem.id)
-                                    if(ColorArray[i] === elem.value){
+                                    if(ColorArray[i] === elemen.value){
                                         alert("اللون موجود مسبقًا");
                                         display = false;
                                     }else {
@@ -277,19 +277,21 @@
                                 //         var display = true;
                                 //     }
                                 // }
-                                if (display) {
+                                if (display === true) {
+                                    // var elemen = document.getElementById('color');
+
                                     var colorRow = document.getElementById('ColorRow');
                                     var colorInput = document.createElement('input');
                                     colorInput.type = 'hidden';
-                                    colorInput.value = elem;
+                                    colorInput.value = elemen.value;
                                     colorInput.name = 'ColorBox[]';
                                     var colorDeleteDiv = document.createElement('div');
                                     colorDeleteDiv.className = 'delete';
                                     var text = document.createTextNode('X');
                                     var colorDiv = document.createElement('div');
                                     colorDiv.className = 'box';
-                                    colorDiv.style.backgroundColor = elem;
-                                    colorDiv.id = elem;
+                                    colorDiv.style.backgroundColor = elemen.value;
+                                    colorDiv.id = elemen.value;
                                     colorDiv.value = false;
                                     colorDiv.onclick = function () {
                                         destroyColor();
@@ -318,7 +320,7 @@
                                 e = e || window.event;
                                 var t = e.target;
                                 for (var i = 0; i < ColorArray.length; i++) {
-                                    if (t.id == ColorArray[i]) {
+                                    if (t.id === ColorArray[i]) {
                                         elem.item(i).remove();
                                     }
                                 }
