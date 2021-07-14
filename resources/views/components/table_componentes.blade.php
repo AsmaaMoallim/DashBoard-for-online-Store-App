@@ -88,31 +88,48 @@
                                     </div>
                                 @endif
 
-                                <div style="align-items:flex-start; float:left!important;">
+                                <form action="{{ route($tables.'.search') }}" method="get">
+                                    @csrf
 
-                                    <div class="input-group input-group-sm" style="width:400px;">
+                                    <div style="align-items:flex-start; float:left!important;">
 
-                                        <x-form.input name="man_frist_name" class="form-control" type="name" label="الاسم الأول"
-                                                      placeholder="أدخل الأسم الأول للمدير الجديد"
-                                                      value="{{$man_frist_name ?? ''}}"></x-form.input>
-
-                                        <input type="name" name="search" class="form-control float-right"
-                                               placeholder="Search">
-
-                                        <div class="input-group-append">
+                                        <div class="input-group input-group-sm" style="width:400px;">
 
 
-                                            <a class="btn btn-default"
-                                               href="{{ url('/'.$tables . '/search') }}">
-                                                <i class="fa fa-search"></i>
+                                            <input name="search" type="text" class="form-control float-right"
 
-                                            </a>
+
+                                                   @if($tables. "/search"==request()->path())
+                                                   placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
+                                                   required
+
+                                                   @else
+                                                   placeholder="Search"
+                                                   required
+                                                @endif
+                                            >
+                                            <div class="input-group-append">
+
+
+                                                <button type="submit" name="btnSearch" class="btn btn-default">
+                                                    <i class="fa fa-search"></i>
+
+                                                </button>
+                                                <button type="submit" name="btnCancel"
+                                                        onclick="window.location='{{ url('/'.$tables ) }}"
+                                                        class="btn btn-default">
+                                                    <i class="fa fa-close"></i>
+
+                                                </button>
+
+
+                                            </div>
+
+
                                         </div>
 
                                     </div>
-
-                                </div>
-
+                                </form>
 
                             </div>
                             <!-- /.card-header -->
@@ -147,31 +164,39 @@
                                                     <?php $color = (string)$rows->$val ?>
 
                                                     <td>
-{{--                                                        @foreach($columns as $columns)--}}
+                                                        {{--                                                        @foreach($columns as $columns)--}}
                                                         <div class='box'
                                                              style="background-color:{{$color}} !important;">
                                                             hh
                                                         </div>
-{{--                                                        @endforeach--}}
+                                                        {{--                                                        @endforeach--}}
                                                     </td>
 
                                                 @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
                                                     <?php $val = (string)$columns[$i] ?>
-{{--                                                    @if(str_contains($rows->$val, "#"))--}}
-                                                        {{--                                                    @dd($rows->$val)--}}
+                                                    {{--                                                    @if(str_contains($rows->$val, "#"))--}}
+                                                    {{--                                                    @dd($rows->$val)--}}
 
-                                                        {{--                                                        <td>--}}
+                                                    {{--                                                        <td>--}}
 
-                                                        {{--                                                            <div class='box'--}}
-                                                        {{--                                                                  style="background-color:red !important;">--}}
-                                                        {{--hh--}}
-                                                        {{--                                                            </div>--}}
+                                                    {{--                                                            <div class='box'--}}
+                                                    {{--                                                                  style="background-color:red !important;">--}}
+                                                    {{--hh--}}
+                                                    {{--                                                            </div>--}}
 
-                                                        {{--                                                        </td>--}}
+                                                    {{--                                                        </td>--}}
 
-{{--                                                    @else--}}
+                                                    {{--                                                    @else--}}
+                                                    @if($key)
+                                                        @if(str_contains($rows->$val, $key) && isset($_GET['btnSearch']))
+                                                            <td style="background-color: yellow ">{{$rows->$val}}</td>
+                                                        @else
+                                                            <td>{{$rows->$val}}</td>
+                                                        @endif
+                                                    @else
                                                         <td>{{$rows->$val}}</td>
-{{--                                                    @endif--}}
+                                                    @endif
+                                                    {{--                                                    @endif--}}
 
                                                 @endif
                                             @endfor

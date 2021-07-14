@@ -52,6 +52,7 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 
 
 ////////////////////////////////////////////////////   search row
+//Route::post('/manager/search', [\App\Http\Controllers\ManagerController::class, 'search'])->name('manager.possearch');
 Route::get('/manager/search', [\App\Http\Controllers\ManagerController::class, 'search'])->name('manager.search');
 //Route::get('/position/search', [App\Http\Controllers\positions_permissionsController::class, 'search'])->name('positions_permissionsController.search');
 //Route::get('/media_library/search', [App\Http\Controllers\MediaLibraryController::class, 'search'])->name('media_Library.search');
