@@ -256,27 +256,33 @@
                                 }).get();
                                 var i = 0;
 
-                                var display ;
-                                do {
-                                        // alert(elem.id)
-                                    if(ColorArray[i] === elemen.value){
-                                        alert("اللون موجود مسبقًا");
-                                        display = false;
-                                    }else {
-                                        // alert("here")
-                                         display = true;
-                                    }
-                                    i++;
+                                var display;
 
-                                } while (i < ColorArray.length)
-                                // for (var i = 0; i < ColorArray.length; i++) {
-                                //     if (ColorArray[i] == elem) {
-                                //         alert("اللون موجود مسبقًا");
-                                //         var display = false;
-                                //     } else {
-                                //         var display = true;
-                                //     }
-                                // }
+                                if (ColorArray.length === 0) {
+                                    do {
+                                        // alert(elem.id)
+                                        if (ColorArray[i] == elemen.value) {
+                                            alert("اللون موجود مسبقًا");
+                                            display = false;
+                                        } else {
+                                            alert("here")
+                                            display = true;
+                                        }
+                                        i++;
+                                    } while (i < ColorArray.length)
+                                } else {
+                                    for (var i = 0; i < ColorArray.length; i++) {
+                                        if (ColorArray[i] == elemen.value) {
+                                            alert("اللون موجود مسبقًا");
+                                            var display = false;
+                                        } else {
+                                            var display = true;
+                                        }
+                                    }
+                                }
+
+
+
                                 if (display === true) {
                                     // var elemen = document.getElementById('color');
 
@@ -301,8 +307,7 @@
                                     colorRow.appendChild(colorDiv);
                                     colorRow.appendChild(colorDeleteDiv);
                                     display = false;
-                                }
-                                else{
+                                } else {
                                     alert("do not print")
                                 }
                             };

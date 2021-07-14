@@ -16,13 +16,15 @@ class positions_permissionsController extends Controller
         $formPage = "new-position-form";
         $addNew = "إضافة منصب جديد";
         $tables = 'position';
-
+        $line =  "\r\n" . "hi" . "\n" . "hi";
+//        dd($line);
         $qry = \DB::table('position')
             ->join('pos_include','pos_include.pos_id','=','position.pos_id')
             ->join('permission','permission.per_id','=','pos_include.per_id')
-            ->select('pos_name AS اسم المنصب','per_name AS اسم الصلاحية','position.state','position.fakeId')
+            ->select('pos_name AS اسم المنصب',\DB::raw("GROUP_CONCAT('\r\n' , permission.per_name, '\r\n' SEPARATOR ' //  ') AS الصلاحيات"),'position.state','position.fakeId')
+            ->groupBy('اسم المنصب','position.state', 'position.fakeId')
             ->get();
-        $columns = ['اسم المنصب','اسم الصلاحية','fakeId'];
+        $columns = ['اسم المنصب','الصلاحيات','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
