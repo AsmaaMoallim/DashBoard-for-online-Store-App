@@ -81,9 +81,48 @@
                             </select>
                         </div>
 
-                        {{--                    <div class="form-group col-sm-10" >--}}
-                        {{--                        <label>صور المنتح</label>--}}
+                                            <div class="form-group col-sm-10" >
+                                                <label>صور المنتج</label>
 
+{{--                                                @foreach($imgs as $img)--}}
+<!--                                                -->
+{{--//                                                $connection = mysqli_connect("localhost","root","");--}}
+{{--//                                                $db = mysqli_select_db($connection, 'dashboard');--}}
+{{--//                                                $query = "SELECT 'media_library.medl_img_ved' FROM 'media_library' ";--}}
+{{--//                                                $mysqli_result = mysqli_query($connection,$query);--}}
+{{--//                                                while ($row= mysqli_fetch_array($mysqli_result)){--}}
+{{--//--}}
+{{--                                                --}}
+
+                                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                                                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+                                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+                                                <table class="table table-bordered table-striped">
+                                                    <tr>
+                                                        <th width="30%">Image</th>
+                                                        <th width="70%">Name</th>
+                                                    </tr>
+                                                    @foreach($imgs as $img)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="media_library/new-mediaLibrary-form/{{ $img->medl_img_ved }}"  class="img-thumbnail" width="75" />
+                                                            </td>
+{{--                                                            <td>{{ $img->medl_img_ved }}</td>--}}
+                                                        </tr>
+                                                    @endforeach
+                                                </table>
+
+
+{{--                                                <tr>--}}
+{{--                                                    <td> <?php echo '<img src="data:image;base64,'.base64_decode($row['medl_img_ved']).'"alt="Image" style="">'; ?> </td>--}}
+{{--                                                </tr>--}}
+{{--                                                <?php--}}
+{{--                                                }--}}
+{{--                                                ?>--}}
+
+{{--                                                @endforeach--}}
+                                            </div>
                         {{--                        <div class="card-body table-responsive p-0">--}}
                         {{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
                         {{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}

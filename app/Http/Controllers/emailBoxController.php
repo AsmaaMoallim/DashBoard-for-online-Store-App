@@ -23,7 +23,6 @@ class emailBoxController extends Controller
             ->get();
 
         $columns = ['بريد النظام','نوع البريد','اسم العميل','بريد العميل','جوال العميل','fakeId'];
-        $columns = \DB::getSchemaBuilder()->getColumnListing('email_box');
 
         $rows = \DB::table('email_box')->get();
         return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with

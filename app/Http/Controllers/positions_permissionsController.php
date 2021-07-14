@@ -22,6 +22,16 @@ class positions_permissionsController extends Controller
             ->join('permission','permission.per_id','=','pos_include.per_id')
             ->select('pos_name AS اسم المنصب','per_name AS اسم الصلاحية','position.state','position.fakeId')
             ->get();
+
+//            ->select ("orders.ord_number AS رقم الطلب", \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  'اسم العميل'"),
+//                'orders.ord_date AS تاريخ الطلب',
+//                \DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS "اجمالي تكلفة الطلب"'),'stage.stage_name AS حالة الطلب',
+//                'orders.state','orders.fakeId')
+//            ->groupBy('ord_has_item_of.prod_ord_amount','orders.ord_number'
+//                ,'clients.cla_frist_name','clients.cla_last_name','orders.ord_date',
+//                'ord_has_item_of.prod_ord_amount','product.prod_price','orders.state'
+//                ,'orders.fakeId','stage.stage_name')
+//            ->get();
         $columns = ['اسم المنصب','اسم الصلاحية','fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with

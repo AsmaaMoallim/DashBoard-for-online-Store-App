@@ -9,9 +9,14 @@ use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Images;
+use Image;
 
 class productController extends Controller
 {
+   public $medl_id = null;
+
     public function index()
     {
         $pagename = "المنتجات";
@@ -38,12 +43,11 @@ class productController extends Controller
         $tables = 'products';
 
         $qry = \DB::table('product')
-            ->join([" 'sub_section', 'product.sub_id', '=', 'sub_section.sub_id' ",
-                " 'media_library', 'product.medl_id', '=', 'media_library.medl_id' ",
-                " 'prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id' ",
-                " 'measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id' "
-            ," 'product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id' "])
-
+            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id' )
+            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
             ->select('product.prod_name AS اسم المنتج' , 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
                 'media_library.medl_img_ved AS الصورة','prod_avil_amount AS الكمية المتوفرة حاليًا','measure.mesu_value AS المقاسات',
                 'color.prod_avil_color AS الألوان المتاحة','product.prod_desc_img AS معلومات الصورة','product.state','product.fakeId')
@@ -52,7 +56,6 @@ class productController extends Controller
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables);
-
     }
 
         function store(Request $request)
@@ -92,16 +95,43 @@ class productController extends Controller
     public function insertData(){
         $measures = Measure::all();
         $sections = SubSection::all();
-//      $mediaImg = MediaLibrary::all();
 
-        $columns =['الصورة/رابط الفيديو'];
-
-        $rows = \DB::table('media_library')
-            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
+        $medlibrary = MediaLibrary::all();
+        $qry = \DB::table('media_library')
+            ->select('medl_img_ved')
             ->get();
 
+
+//        $img = dd(MediaLibrary::find('medl_img_ved'));
+//        $image_file = MediaLibrary::make($img->medl_img_ved);
+//        $response = Response::make($qry->urlencode('jpeg'));
+//        $response->header('Content-Type', 'image/png');
+
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections, 'columns'=>$columns, 'rows'=>$rows]);
+            'sections' => $sections,'imgs'=>$medlibrary]);
+
+//       dd($img = $media::find($media->medl_img_ved));
+//        $qry = \DB::table('media_library')
+//            ->select('media_library.medl_img_ved')
+//            ->get();
+//        $columns = ['الصورة/رابط الفيديو'];
+//
+//        $rows = \DB::table('media_library')
+//            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
+//            ->get();
+
+//        $image = MediaLibrary::findOrFail($medl_id);
+//
+//        $image_file = MediaLibrary::make($image->medl_img_ved);
+//
+//        $response = Response::make($image_file->encode('png'));
+//
+//        $response->header('Content-Type', 'image/jpeg/png/jpg');
+//
+//        return dd($response);
+
+//        $image_file = $request-->medl_img_ved;
+
     }
 
 

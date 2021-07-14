@@ -92,7 +92,6 @@ class ManagerController extends Controller
         return redirect('/manager');
     }
 
-
     public function update(Request $request, manager $manager,$id)
     {
         $positions = Position::all();
