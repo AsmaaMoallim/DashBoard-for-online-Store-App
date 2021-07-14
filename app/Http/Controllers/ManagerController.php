@@ -112,5 +112,10 @@ class ManagerController extends Controller
     }
 
 
+    public function search(Request $request){
+        $key = $request->man_frist_name;
+        dd($key);
+    }
+
 
 }

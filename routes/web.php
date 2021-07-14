@@ -51,6 +51,20 @@ Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountC
 Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::class, 'delete'])->name('comments.delete');
 
 
+////////////////////////////////////////////////////   search row
+Route::get('/manager/search', [\App\Http\Controllers\ManagerController::class, 'search'])->name('manager.search');
+//Route::get('/position/search', [App\Http\Controllers\positions_permissionsController::class, 'search'])->name('positions_permissionsController.search');
+//Route::get('/media_library/search', [App\Http\Controllers\MediaLibraryController::class, 'search'])->name('media_Library.search');
+//Route::get('/banners/search', [App\Http\Controllers\bannerController::class, 'search'])->name('banners.search');
+//Route::get('/main_sections/search', [\App\Http\Controllers\mainSectionController::class, 'search'])->name('main_Sections.search');
+//Route::get('/sub_sections/search', [\App\Http\Controllers\subSectionController::class, 'search'])->name('sub_Sections.search');
+//Route::get('/products/search', [\App\Http\Controllers\productController::class, 'search'])->name('products.search');
+//Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
+//Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
+//Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
+//Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('bank_accounts.search');
+//Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
+
 /////// temporary end pages
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 //Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');

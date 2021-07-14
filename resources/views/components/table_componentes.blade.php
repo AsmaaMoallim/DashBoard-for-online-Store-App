@@ -92,15 +92,21 @@
 
                                     <div class="input-group input-group-sm" style="width:400px;">
 
-                                        <input type="text" name="table_search" class="form-control float-right"
+                                        <x-form.input name="man_frist_name" class="form-control" type="name" label="الاسم الأول"
+                                                      placeholder="أدخل الأسم الأول للمدير الجديد"
+                                                      value="{{$man_frist_name ?? ''}}"></x-form.input>
+
+                                        <input type="name" name="search" class="form-control float-right"
                                                placeholder="Search">
 
                                         <div class="input-group-append">
 
 
-                                            <button type="submit" class="btn btn-default">
+                                            <a class="btn btn-default"
+                                               href="{{ url('/'.$tables . '/search') }}">
                                                 <i class="fa fa-search"></i>
-                                            </button>
+
+                                            </a>
                                         </div>
 
                                     </div>
