@@ -10,9 +10,14 @@ use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Images;
+use Image;
 
 class productController extends Controller
 {
+   public $medl_id = null;
+
     public function index()
     {
         $displayDetailes = 1;
@@ -129,16 +134,43 @@ class productController extends Controller
     public function insertData(){
         $measures = Measure::all();
         $sections = SubSection::all();
-//      $mediaImg = MediaLibrary::all();
 
-        $columns =['الصورة/رابط الفيديو'];
+        $medlibrary = MediaLibrary::all();
 
-        $rows = \DB::table('media_library')
-            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
-            ->get();
+//        $qry = \DB::table('media_library')
+//            ->select('medl_img_ved')
+//            ->get();
+
+//        $image_file = dd(MediaLibrary::make($qry));
+
+//        dd($response = Response::make($qry->encode('jpeg')));
+//        $response->header('Content-Type', 'image/png');
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections, 'columns'=>$columns, 'rows'=>$rows]);
+            'sections' => $sections,'imgs'=>$medlibrary]);
+
+//       dd($img = $media::find($media->medl_img_ved));
+//        $qry = \DB::table('media_library')
+//            ->select('media_library.medl_img_ved')
+//            ->get();
+//        $columns = ['الصورة/رابط الفيديو'];
+//
+//        $rows = \DB::table('media_library')
+//            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
+//            ->get();
+
+//        $image = MediaLibrary::findOrFail($medl_id);
+//
+//        $image_file = MediaLibrary::make($image->medl_img_ved);
+//
+//        $response = Response::make($image_file->encode('png'));
+//
+//        $response->header('Content-Type', 'image/jpeg/png/jpg');
+//
+//        return dd($response);
+
+//        $image_file = $request-->medl_img_ved;
+
     }
 
 

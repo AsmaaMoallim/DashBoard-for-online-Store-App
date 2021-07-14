@@ -56,7 +56,22 @@ class MediaLibraryController extends Controller
         $media_library = new MediaLibrary();
         $media_library->medl_name = $request->medl_name;
         $media_library->medl_description = $request->medl_description;
-        $media_library->medl_img_ved = $request->medl_img_ved;
+
+//        $media_library->medl_img_ved = $request->medl_img_ved;
+//        $size = $request->file('medl_img_ved')->getSize();
+//        $name = $request->file('medl_img_ved')->getClientOriginalName();
+//        $request->file('medl_img_ved')->storeAs('public/images',$name);
+//      $media_library->medl_img_ved->('public/images/images', $name);
+
+        if($request->hasFile('medl_img_ved'))
+        {
+            $file = $request->file('medl_img_ved');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('uploads/mediaLibrary/'.$filename);
+            $media_library->medl_img_ved = $filename;
+        }
+
         $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;;
         $media_library->fakeId = $maxFakeId;
