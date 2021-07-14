@@ -1,5 +1,32 @@
 @extends('adminLayout')
 
+<style>
+    .row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .box {
+        height: 20px;
+        width: 20px;
+        border: 1px solid black;
+        margin-right: 5px;
+        margin-top: 2%;
+        float: right;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .delete {
+        display: none;
+    }
+
+    .box:hover + .delete {
+        display: block;
+    }
+
+</style>
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -29,141 +56,176 @@
         <section class="content">
 
 
+            <div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                @if($addNew)
 
-    <div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"></h3>
-                        @if($addNew)
+                                    <div style="float:right!important; margin-left:2%">
 
-                            <div style="float:right!important; margin-left:2%">
+                                        <a class="btn btn-block btn-info"
+                                           href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
+                                            <i class="fa ">
+                                            </i>
+                                            {{$addNew}}
+                                        </a>
+                                    </div>
+                                @endif
 
-                                <a class="btn btn-block btn-info"
-                                   href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
-                                    <i class="fa ">
-                                    </i>
-                                    {{$addNew}}
-                                </a>
-                            </div>
-                        @endif
+                                @if($showRecords)
 
-                        @if($showRecords)
+                                    <div style="float:right!important;">
 
-                            <div style="float:right!important;">
+                                        <a class="btn btn-block btn-info"
+                                           href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
+                                            <i class="fa ">
+                                            </i>
+                                            {{$showRecords}}
+                                        </a>
+                                    </div>
+                                @endif
 
-                                <a class="btn btn-block btn-info"
-                                   href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
-                                    <i class="fa ">
-                                    </i>
-                                    {{$showRecords}}
-                                </a>
-                            </div>
-                        @endif
+                                <div style="align-items:flex-start; float:left!important;">
 
-                        <div style="align-items:flex-start; float:left!important;">
+                                    <div class="input-group input-group-sm" style="width:400px;">
 
-                            <div class="input-group input-group-sm" style="width:400px;">
+                                        <input type="text" name="table_search" class="form-control float-right"
+                                               placeholder="Search">
 
-                                <input type="text" name="table_search" class="form-control float-right"
-                                       placeholder="Search">
-
-                                <div class="input-group-append">
+                                        <div class="input-group-append">
 
 
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
+
                             </div>
-
-                        </div>
-
-
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table id="tableprofider" class="table table-hover text-nowrap">
-                            <thead>
-                            <tr>
-                                @for( $i = 0 ; $i<=10 ; $i++)
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table id="tableprofider" class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        @for( $i = 0 ; $i<=10 ; $i++)
 
 
-                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                        <th>{{$columns[$i]}}</th>
-                                    @endif
+                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                <th>{{$columns[$i]}}</th>
+                                            @endif
 
-                                @endfor
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-
-                                @foreach( $rows as $rows)
-
-                                        @for( $i = 0 ; $i<=10; $i++)
-
-                                        @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
-                                            <td>  <img src="Storage::url(/storage/app/{{$columns[$i]}}"/></td>
-
-
-                                        @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                                <?php $val = (string)$columns[$i] ?>
-                                                    <td> {{$rows->$val}}</td>
-                                        @endif
                                         @endfor
 
-                                        <td class="project-actions text-right">
-                                            @if(isset($rows->state))
-                                                @if($rows->state)
-                                                    <a class="btn btn-success btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                        @foreach( $rows as $rows)
+
+                                            @for( $i = 0 ; $i<=10; $i++)
+
+                                                @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
+
+                                                    <td><img src="Storage::url(/storage/app/{{$columns[$i]}}"/></td>
+
+                                                @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")
+                                                    <?php $val = (string)$columns[$i] ?>
+                                                    <?php $color = (string)$rows->$val ?>
+
+                                                    <td>
+{{--                                                        @foreach($columns as $columns)--}}
+                                                        <div class='box'
+                                                             style="background-color:{{$color}} !important;">
+                                                            hh
+                                                        </div>
+{{--                                                        @endforeach--}}
+                                                    </td>
+
+                                                @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                    <?php $val = (string)$columns[$i] ?>
+{{--                                                    @if(str_contains($rows->$val, "#"))--}}
+                                                        {{--                                                    @dd($rows->$val)--}}
+
+                                                        {{--                                                        <td>--}}
+
+                                                        {{--                                                            <div class='box'--}}
+                                                        {{--                                                                  style="background-color:red !important;">--}}
+                                                        {{--hh--}}
+                                                        {{--                                                            </div>--}}
+
+                                                        {{--                                                        </td>--}}
+
+{{--                                                    @else--}}
+                                                        <td>{{$rows->$val}}</td>
+{{--                                                    @endif--}}
+
+                                                @endif
+                                            @endfor
+
+                                            <td class="project-actions text-right">
+                                                @if($displayDetailes)
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/displayDetailes') }}">
                                                         <i class="fa ">
                                                         </i>
-                                                        تعطيل
-                                                    </a>
-                                                @elseif(!$rows->state)
-                                                    <a class="btn btn-primary btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
-                                                        <i class="fa ">
-                                                        </i>
-                                                        تفعيل
+                                                        عرض التفاصيل
                                                     </a>
                                                 @endif
-                                            @endif
-                                            <a class="btn btn-info btn-sm"
-                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
-                                                <i class="fa fa-pencil">
+                                                @if(isset($rows->state))
+                                                    @if($rows->state)
+                                                        <a class="btn btn-success btn-sm"
+                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                                            <i class="fa ">
+                                                            </i>
+                                                            تعطيل
+                                                        </a>
+                                                    @elseif(!$rows->state)
+                                                        <a class="btn btn-primary btn-sm"
+                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                                            <i class="fa ">
+                                                            </i>
+                                                            تفعيل
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                                <a class="btn btn-info btn-sm"
+                                                   href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                                    <i class="fa fa-pencil">
 
-                                                </i>
-                                                تعديل
-                                            </a>
-                                            <a class="btn btn-danger btn-sm deletee"
-                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
-                                                <i class="fa fa-trash">
-                                                </i>
-                                                حذف
-                                            </a>
-                                        </td>
+                                                    </i>
+                                                    تعديل
+                                                </a>
+                                                <a class="btn btn-danger btn-sm deletee"
+                                                   href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
+                                                    <i class="fa fa-trash">
+                                                    </i>
+                                                    حذف
+                                                </a>
+                                            </td>
 
 
-                            </tr>
+                                    </tr>
 
-                            @endforeach
+                                    @endforeach
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-            </div>
-        </div>
 
-    </div>
+            </div>
         </section>
 @endsection
 

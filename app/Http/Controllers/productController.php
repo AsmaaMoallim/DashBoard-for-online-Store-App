@@ -15,50 +15,80 @@ class productController extends Controller
 {
     public function index()
     {
+        $displayDetailes = 1;
         $pagename = "المنتجات";
         $recordPage = "product_details";
         $formPage = "new-product-form";
         $addNew = "إضافة منتج جديد";
-        $showRecords = "عرض التفاصيل";
+//        $showRecords = "عرض التفاصيل";
         $tables = 'products';
         $qry = \DB::table('product')
             ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
             ->select('prod_name AS اسم المنتج', 'sub_name AS القسم الفرعي', 'prod_price AS السعر', 'product.state','product.fakeId')
             ->get();
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'fakeId'];
-        return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with
+        return view('master_tables_view',['pagename' => $pagename , 'displayDetailes' => $displayDetailes])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
-        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage);
+        ('formPage', $formPage)->with('recordPage', $recordPage);
     }
 
-    public function display(){
+    public function displayDetailes($id){
         // for details
 
         $pagename = "عرض التفاصيل";
 
         $tables = 'products';
+
+//       $qry = \DB::table('product')
+//           ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+//           ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+//           ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+//           ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+//           ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
 //
-//        $qry = \DB::table('product')
-//            ->join([" 'sub_section', 'product.sub_id', '=', 'sub_section.sub_id' ",
-//                " 'media_library', 'product.medl_id', '=', 'media_library.medl_id' ",
-//                " 'prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id' ",
-//                " 'measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id' "
-//            ," 'product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id' "])
-       $qry = \DB::table('product')
-           ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-           ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
-           ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-           ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-           ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
+//            ->select('product.prod_name AS اسم المنتج' , 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
+//                'media_library.medl_img_ved AS الصورة','prod_avil_amount AS الكمية المتوفرة حاليًا',\DB::raw("GROUP_CONCAT(measure.mesu_value  SEPARATOR ' //  ') AS المقاسات"),
+//                \DB::raw("GROUP_CONCAT(color.prod_avil_color SEPARATOR ' //  ') AS الألوان"),'product.prod_desc_img AS معلومات الصورة','product.state','product.fakeId')
+//           ->where("product.fakeId","=","$id")
+//           ->groupBy('اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','معلومات الصورة','product.state','fakeId')
+//
+//           ->get();
+
+        $currentValues = Product::where("fakeId","=","$id")->first();
+        $measures = Measure::all();
+        $currentSections = SubSection::find($currentValues->sub_id);
+        $sections = SubSection::all();
+        $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
+        $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
+
+//        foreach($productProdAvilColor as $productProdAvilColor){
+//            dd($productProdAvilColor->prod_avil_color);
+//        }
+//        dd($productProdAvilColor);
+//      $mediaImg = MediaLibrary::all();
+
+        $rows = \DB::table('product')
+            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
 
             ->select('product.prod_name AS اسم المنتج' , 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
                 'media_library.medl_img_ved AS الصورة','prod_avil_amount AS الكمية المتوفرة حاليًا','measure.mesu_value AS المقاسات',
-                'color.prod_avil_color AS الألوان المتاحة','product.prod_desc_img AS معلومات الصورة','product.state','product.fakeId')
-            ->get();
-        $columns=['اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','المقاسات','الألوان المتاحة','معلومات الصورة','fakeId'];
+                'color.prod_avil_color AS الألوان','product.prod_desc_img AS معلومات الصورة','product.state','product.fakeId')
+            ->where("product.fakeId","=","$id")
 
-        return view('master_tables_view',['pagename' => $pagename])->with('rows', $qry)->with
-        ('columns', $columns)->with('tables', $tables);
+            ->get();
+
+
+        $columns=['اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','المقاسات','الألوان','معلومات الصورة','fakeId'];
+//
+//        return view('displayDetailes',['pagename' => $pagename])->with('rows', $qry)->with
+//        ('columns', $columns)->with('tables', $tables);
+        return view('displayDetailes', ['tables' => $tables,'pagename' => $pagename ,'measures' => $measures, 'currentMeasures' => $currentMeasures,
+            'sections' => $sections, 'columns'=>$columns, 'rows'=>$rows ,'currentSections' =>$currentSections,
+            'productProdAvilColor'=>$productProdAvilColor])->with('currentValues' , $currentValues) ->with('id', $id);
 
     }
 
@@ -116,8 +146,7 @@ class productController extends Controller
     {
         $data = Product::where("fakeId","=","$id")->first();;
         $data->delete();
-        return redirect()->back();
-    }
+        return redirect('/products');    }
 ///
     public function update(Request $request, Product $product,$id)
     {

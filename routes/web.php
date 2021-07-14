@@ -13,26 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('adminLayout');
-});
+Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
 
-//Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
-//Route::get('/manager/{id}/delete', [\App\Http\Controllers\ManagerController::class, 'destroy'])->name('manager.destroy');
-//Route::get('/manager/{int}/enable_or_disable', [\App\Http\Controllers\ManagerController::class, 'enableOrdisable'])->name('manager.enableOrdisable');
-//
-//Route::get('/position', [\App\Http\Controllers\PositionController::class, 'index'])->name('position.index');
-//Route::get('/position/{id}/delete', [\App\Http\Controllers\PositionController::class, 'destroy'])->name('position.destroy');
-//Route::get('/position/{int}/enable_or_disable', [\App\Http\Controllers\PositionController::class, 'enableOrdisable'])->name('position.enableOrdisable');
-//
-//
-//Route::get('/permission', [\App\Http\Controllers\PermissionController::class, 'index'])->name('permission.index');
-//Route::get('/permission/{id}/delete', [\App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy');
-//Route::get('/permission/{int}/enableordisable', [\App\Http\Controllers\PermissionController::class, 'enableordisable'])->name('permission.enableordisable');
-//
-//Route::get('/measure', [\App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
-//Route::get('/measure/{id}/delete', [\App\Http\Controllers\MeasureController::class, 'destroy'])->name('measure.destroy');
-//Route::get('/measure/{int}/enable_or_disable', [\App\Http\Controllers\MeasureController::class, 'enableOrdisable'])->name('measure.enableOrdisable');
+////////////////////////////////////////////////////  store_update button
+Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
+//Route::get('/displayDetailes/{int}', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
+
 
 
 ////////////////////////////////////////////////////  enableordisable state
