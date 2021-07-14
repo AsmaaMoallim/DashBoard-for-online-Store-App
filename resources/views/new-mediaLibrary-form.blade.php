@@ -9,7 +9,7 @@
 
             <x-form.header-card title="إضافة صورة جديدة"></x-form.header-card>
 
-            <form
+            <form enctype="multipart/form-data"
                   @if(isset($id))
                   action="/media_library/{{$id}}/update"
                   @else
@@ -52,14 +52,15 @@
                         </div>
                             <div class="form-group col-sm-10">
                                 <label>الصورة/رابط الفيديو</label>
-                                <textarea name="medl_img_ved" class="form-control" id="editor1" name="editor1"
+                                <textarea name="medl_img_ved" class="form-control" id="editor1" type="file" name="medl_img_ved"
                                           style="width:100%"> </textarea>
                             </div>
                     @else()
                         <div class="form-group col-sm-10">
                             <label>الصورة/رابط الفيديو</label>
-                            <textarea name="medl_img_ved" class="form-control" id="editor1" name="editor1"
-                                      style="width:100%"> </textarea>
+                            <input type="file" name="medl_img_ved">
+{{--                            <textarea  type="file" name="medl_img_ved" class="form-control" id="editor1"--}}
+{{--                                      style="width:100%"> </textarea>--}}
                         </div>
 
                     @endif

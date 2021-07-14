@@ -95,7 +95,6 @@
 {{--                                                --}}
 
                                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-                                                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
                                                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
                                                 <table class="table table-bordered table-striped">
@@ -106,13 +105,12 @@
                                                     @foreach($imgs as $img)
                                                         <tr>
                                                             <td>
-                                                                <img src="media_library/new-mediaLibrary-form/{{ $img->medl_img_ved }}"  class="img-thumbnail" width="75" />
+                                                                <img src="{{asset('uploads/mediaLibrary/'.$img->medl_img_ved) }}"  class="img-thumbnail" width="75" />
                                                             </td>
-{{--                                                            <td>{{ $img->medl_img_ved }}</td>--}}
+                                                            <td>{{ $img->medl_name}}</td>
                                                         </tr>
                                                     @endforeach
                                                 </table>
-
 
 {{--                                                <tr>--}}
 {{--                                                    <td> <?php echo '<img src="data:image;base64,'.base64_decode($row['medl_img_ved']).'"alt="Image" style="">'; ?> </td>--}}

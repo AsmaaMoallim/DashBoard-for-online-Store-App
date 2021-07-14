@@ -97,14 +97,14 @@ class productController extends Controller
         $sections = SubSection::all();
 
         $medlibrary = MediaLibrary::all();
-        $qry = \DB::table('media_library')
-            ->select('medl_img_ved')
-            ->get();
 
+//        $qry = \DB::table('media_library')
+//            ->select('medl_img_ved')
+//            ->get();
 
-//        $img = dd(MediaLibrary::find('medl_img_ved'));
-//        $image_file = MediaLibrary::make($img->medl_img_ved);
-//        $response = Response::make($qry->urlencode('jpeg'));
+//        $image_file = dd(MediaLibrary::make($qry));
+
+//        dd($response = Response::make($qry->encode('jpeg')));
 //        $response->header('Content-Type', 'image/png');
 
         return view('new-product-form', ['measures' => $measures,
