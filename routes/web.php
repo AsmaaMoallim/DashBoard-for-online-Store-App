@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
 
-////////////////////////////////////////////////////  store_update button
+////////////////////////////////////////////////////  displayDetailes
 Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
-//Route::get('/displayDetailes/{int}', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
+Route::get('/email_box/{int}/displayDetailes', [App\Http\Controllers\emailBoxController::class, 'displayDetailes'])->name('email_box.displayDetailes');
 
 
 
@@ -63,11 +63,13 @@ Route::get('/products/search', [\App\Http\Controllers\productController::class, 
 Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
 Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
 Route::get('/measure/search', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search');
-//Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');
 Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
 Route::get('/shipping_charge/search', [\App\Http\Controllers\shippingChargeController::class, 'search'])->name('shipping_charge.search');
-//Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('bank_accounts.search');
-//Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
+Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('sys_bank_account.search');
+Route::get('/bank_transaction/search', [\App\Http\Controllers\bankTransactionController::class, 'search'])->name('bank_transaction.search');
+Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
+Route::get('/notifications/search', [\App\Http\Controllers\notificationsController::class, 'search'])->name('notifications.search');
+Route::get('/email_box/search', [\App\Http\Controllers\emailBoxController::class, 'search'])->name('email_box.search');
 
 /////// temporary end pages
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
@@ -119,7 +121,7 @@ Route::get('/measure', [App\Http\Controllers\MeasureController::class, 'index'])
 Route::get('/contact_information', [\App\Http\Controllers\sysContactInfoController::class, 'index'])->name('contact_information.index');
 Route::get('/social_media_link', [\App\Http\Controllers\socialMediaLinksController::class, 'index'])->name('social_media_link.index');
 Route::get('/shipping_charge', [\App\Http\Controllers\shippingChargeController::class, 'index'])->name('shipping_charge.index');
-Route::get('/bank_accounts', [\App\Http\Controllers\bankAccountController::class, 'index'])->name('bank_accounts.index');
+Route::get('/sys_bank_account', [\App\Http\Controllers\bankAccountController::class, 'index'])->name('bank_accounts.index');
 Route::get('/bank_transaction', [\App\Http\Controllers\bankTransactionController::class, 'index'])->name('bank_transaction.index');
 Route::get('/comments', [\App\Http\Controllers\commentController::class, 'index'])->name('comments.index');
 Route::get('/notifications', [\App\Http\Controllers\notificationsController::class, 'index'])->name('notifications.index');
@@ -149,7 +151,7 @@ Route::get('products/product_details/display', [App\Http\Controllers\productCont
 Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
 Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
 Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
-Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'index'])->name('email_box');
+Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
 
 ////////////////////////////////////////////////////   save btn

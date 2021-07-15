@@ -120,14 +120,14 @@
                                                         <th width="30%">Image</th>
                                                         <th width="70%">Name</th>
                                                     </tr>
-                                                    @foreach($imgs as $img)
-                                                        <tr>
-                                                            <td>
-                                                                <img src="{{asset('uploads/mediaLibrary/'.$img->medl_img_ved) }}"  class="img-thumbnail" width="75" />
-                                                            </td>
-                                                            <td>{{ $img->medl_name}}</td>
-                                                        </tr>
-                                                    @endforeach
+{{--                                                    @foreach($imgs as $img)--}}
+{{--                                                        <tr>--}}
+{{--                                                            <td>--}}
+{{--                                                                <img src="{{asset('uploads/mediaLibrary/'.$img->medl_img_ved) }}"  class="img-thumbnail" width="75" />--}}
+{{--                                                            </td>--}}
+{{--                                                            <td>{{ $img->medl_name}}</td>--}}
+{{--                                                        </tr>--}}
+{{--                                                    @endforeach--}}
                                                 </table>
 
 {{--                                                <tr>--}}

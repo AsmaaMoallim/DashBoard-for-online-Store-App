@@ -134,6 +134,7 @@
                                 </form>
                                 {{-- search --}}
                             </div>
+
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table id="tableprofider" class="table table-hover text-nowrap">
@@ -229,20 +230,28 @@
                                                         </a>
                                                     @endif
                                                 @endif
-                                                <a class="btn btn-info btn-sm"
+
+                                                    @if(!$noUpdateBtn)
+
+                                                    <a class="btn btn-info btn-sm"
                                                    href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
                                                     <i class="fa fa-pencil">
 
                                                     </i>
                                                     تعديل
                                                 </a>
-                                                <a class="btn btn-danger btn-sm deletee"
+                                                    @endif
+
+                                                @if(!$noDeleteBtn)
+
+                                                        <a class="btn btn-danger btn-sm deletee"
                                                    href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
                                                     <i class="fa fa-trash">
                                                     </i>
                                                     حذف
                                                 </a>
                                             </td>
+                                                @endif
 
 
                                     </tr>

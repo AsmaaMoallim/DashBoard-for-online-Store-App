@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Notification::factory(10)->create();
 //        \App\Models\Stage::factory(10)->create();
 //        \App\Models\Order::factory(10)->create();
-//        \App\Models\Comment::factory(10)->create();
+        \App\Models\Comments::factory(10)->create();
 //        \App\Models\ShippingCharge::factory(10)->create();
 //        \App\Models\Report::factory(10)->create();
 //        \App\Models\SysInfoEmail::factory(10)->create();

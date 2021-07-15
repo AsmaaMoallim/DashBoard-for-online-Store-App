@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property MediaLibrary $media_library
  * @property SubSection $sub_section
- * @property Collection|Comment[] $comments
+ * @property Collection|Comments[] $comments
  * @property Collection|OrdHasItemOf[] $ord_has_item_ofs
  * @property Collection|ProdAvilIn[] $prod_avil_ins
  * @property Collection|ProductProdAvilColor[] $product_prod_avil_colors
@@ -73,7 +73,7 @@ class Product extends Model
 
 	public function comments()
 	{
-		return $this->hasMany(Comment::class, 'prod_id');
+		return $this->hasMany(Comments::class, 'prod_id');
 	}
 
 	public function ord_has_item_ofs()

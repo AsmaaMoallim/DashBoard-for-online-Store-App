@@ -262,7 +262,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('bank_accounts.index')}}" class="nav-link {{"bank_accounts"==request()->path()?"active":""}}">
+                                    <a href="{{ route('bank_accounts.index')}}" class="nav-link {{"sys_bank_account"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الحسابات البنكية</p>
                                     </a>
