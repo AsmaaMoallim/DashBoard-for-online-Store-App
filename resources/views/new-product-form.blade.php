@@ -33,6 +33,8 @@
         </div>
         <div class="col-lg-6 pr-xl-5">
             <div class=" card card-dark " style="background-color: silver ">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
                 <x-form.header-card title="إضافة منتج جديد"/>
 
@@ -94,9 +96,6 @@
 {{--//--}}
 {{--                                                --}}
 
-                                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-                                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
                                                 <table class="table table-bordered table-striped">
                                                     <tr>
                                                         <th width="30%">Image</th>
@@ -105,12 +104,12 @@
                                                     @foreach($imgs as $img)
                                                         <tr>
                                                             <td>
-                                                                <img src="{{asset('uploads/mediaLibrary/'.$img->medl_img_ved) }}"  class="img-thumbnail" width="75" />
+                                                                <img src="/storage/medialLibrary/{{ $img }}" class="img-thumbnail" width="75" />
                                                             </td>
-                                                            <td>{{ $img->medl_name}}</td>
                                                         </tr>
                                                     @endforeach
                                                 </table>
+                                            </div>
 
 {{--                                                <tr>--}}
 {{--                                                    <td> <?php echo '<img src="data:image;base64,'.base64_decode($row['medl_img_ved']).'"alt="Image" style="">'; ?> </td>--}}
@@ -120,7 +119,7 @@
 {{--                                                ?>--}}
 
 {{--                                                @endforeach--}}
-                                            </div>
+
                         {{--                        <div class="card-body table-responsive p-0">--}}
                         {{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
                         {{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}

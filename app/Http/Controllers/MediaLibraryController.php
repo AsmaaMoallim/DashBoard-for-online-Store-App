@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\MediaLibrary;
-use App\Models\Position;
+//use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Image;
+
 
 class MediaLibraryController extends Controller
 {
@@ -56,27 +58,48 @@ class MediaLibraryController extends Controller
         $media_library = new MediaLibrary();
         $media_library->medl_name = $request->medl_name;
         $media_library->medl_description = $request->medl_description;
+//      $media_library->medl_img_ved = $request->medl_img_ved;
 
-//        $media_library->medl_img_ved = $request->medl_img_ved;
-//        $size = $request->file('medl_img_ved')->getSize();
-//        $name = $request->file('medl_img_ved')->getClientOriginalName();
-//        $request->file('medl_img_ved')->storeAs('public/images',$name);
-//      $media_library->medl_img_ved->('public/images/images', $name);
+        $img_path = 'public/medialLibrary';
+        $img_file = $request->medl_img_ved;
+        $image = Image::make($img_file);
 
-        if($request->hasFile('medl_img_ved'))
-        {
-            $file = $request->file('medl_img_ved');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('uploads/mediaLibrary/'.$filename);
-            $media_library->medl_img_ved = $filename;
-        }
+        $img_name = $request->file('medl_img_ved')->getClientOriginalName();
+        $request->file('medl_img_ved')->storeAs($img_path,$img_name);
+        Response::make($image->encode('jpeg'));
+
+        $media_library->medl_img_ved = $img_name;
 
         $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;;
         $media_library->fakeId = $maxFakeId;
         $media_library->save();
-        return redirect('/media_Library');
+//        return redirect('/media_Library');
+        return redirect()->back();
+
+//        if($request->hasFile('medl_img_ved'))
+//        {
+//            $destination_path = 'public/images/products';
+//            $image = $request->file('medl_img_ved');
+//            $image_name = $image->getClientOriginalName();
+//            $path = $request->file('medl_img_ved')->store($destination_path, $image_name);
+//            $media_library['medl_img_ved'] = $path;
+//            }
+
+//        $size = $request->file('medl_img_ved')->getSize();
+//        $name = $request->file('medl_img_ved')->getClientOriginalName();
+//        $request->file('medl_img_ved')->storeAs('public/images',$name);
+//      $media_library->medl_img_ved->('public/images/images', $name);
+
+//        if($request->hasFile('medl_img_ved'))
+//        {
+//            $file = $request->file('medl_img_ved');
+//            $extention = $file->getClientOriginalExtension();
+//            $filename = time().'.'.$extention;
+//            $file->move('uploads/mediaLibrary/'.$filename);
+//            $media_library->medl_img_ved = $filename;
+//        }
+
     }
 
     public function delete($id)

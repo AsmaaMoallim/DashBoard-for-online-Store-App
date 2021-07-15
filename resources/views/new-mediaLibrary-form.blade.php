@@ -13,7 +13,7 @@
                   @if(isset($id))
                   action="/media_library/{{$id}}/update"
                   @else
-                  action="/store-media-library"
+                  action="{{ url('/store-media-library"') }}
                   @endif
                   method="Post">
                 <div class="card-body fc-direction-rtl">

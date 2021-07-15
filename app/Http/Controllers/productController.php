@@ -10,7 +10,6 @@ use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use App\Images;
 use Image;
 
 class productController extends Controller
@@ -92,45 +91,40 @@ class productController extends Controller
         return redirect()->back();
     }
 
-    public function insertData(){
+    public function insertData(Product $product){
         $measures = Measure::all();
         $sections = SubSection::all();
 
-        $medlibrary = MediaLibrary::all();
-
-//        $qry = \DB::table('media_library')
+        //get url image col
+//        $i = MediaLibrary::first('medl_img_ved');
+//        $i = \DB::table('media_library')
 //            ->select('medl_img_ved')
 //            ->get();
 
-//        $image_file = dd(MediaLibrary::make($qry));
+//        $currV = Product::all()->where('fakeId','=', '$id')
+//            ->first();
+//        $medlibrary = MediaLibrary::all()
+//            ->where('image_id','=','$currV->medl_id');
+//
+//        $currV = MediaLibrary::all()->where('fakeId','!=', 'image_id')
+//            ->first();
+//        $image_id = MediaLibrary::all()
+//            ->find($i->image_id)->first();
+//        dd($i);
 
-//        dd($response = Response::make($qry->encode('jpeg')));
-//        $response->header('Content-Type', 'image/png');
+
+        //< start >
+        $medlibrary = MediaLibrary::all();
+        $image = MediaLibrary::findOrFail($medlibrary->isNotEmpty());
+        $image_file = Image::make($image->medl_img_ved);
+
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections,'imgs'=>$medlibrary]);
+            'sections' => $sections,'imgs'=> $response]);
+//<./>
 
-//       dd($img = $media::find($media->medl_img_ved));
-//        $qry = \DB::table('media_library')
-//            ->select('media_library.medl_img_ved')
-//            ->get();
-//        $columns = ['الصورة/رابط الفيديو'];
-//
-//        $rows = \DB::table('media_library')
-//            ->select(\DB::raw('medl_img_ved AS "الصورة/رابط الفيديو" ') )
-//            ->get();
-
-//        $image = MediaLibrary::findOrFail($medl_id);
-//
-//        $image_file = MediaLibrary::make($image->medl_img_ved);
-//
-//        $response = Response::make($image_file->encode('png'));
-//
-//        $response->header('Content-Type', 'image/jpeg/png/jpg');
-//
-//        return dd($response);
-
-//        $image_file = $request-->medl_img_ved;
 
     }
 
