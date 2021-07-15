@@ -196,7 +196,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="{{ route('media_Library.index')}}" class="nav-link {{"media_Library"==request()->path()?"active":""}}">
+                                    <a href="{{ route('media_Library.index')}}" class="nav-link {{"media_library"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>مكتبة الصور والفيديوهات</p>
                                     </a>
@@ -208,13 +208,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('main_Sections.index')}}" class="nav-link {{"main_Sections"==request()->path()?"active":""}}">
+                                    <a href="{{ route('main_sections.index')}}" class="nav-link {{"main_sections"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الاقسام الرئيسية</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('sub_Sections.index')}}" class="nav-link {{"sub_Sections"==request()->path()?"active":""}}">
+                                    <a href="{{ route('sub_sections.index')}}" class="nav-link {{"sub_sections"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>الاقسام الفرعية</p>
                                     </a>

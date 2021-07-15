@@ -15,7 +15,8 @@
                   @else
                   action="/store-media-library"
                   @endif
-                  method="Post">
+                  method="Post"
+                  enctype="multipart/form-data">
                 <div class="card-body fc-direction-rtl">
                     @csrf
                     @if(isset($id))

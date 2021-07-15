@@ -23,11 +23,11 @@ Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productCont
 
 ////////////////////////////////////////////////////  enableordisable state
 Route::get('/manager/{int}/enableordisable', [\App\Http\Controllers\ManagerController::class, 'enableordisable'])->name('manager.enableordisable');
-Route::get('/position/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
+Route::get('/positions_permissions/{int}/enableordisable', [App\Http\Controllers\positions_permissionsController::class, 'enableordisable'])->name('positions_permissionsController.enableordisable');
 Route::get('/media_library/{int}/enableordisable', [App\Http\Controllers\MediaLibraryController::class, 'enableordisable'])->name('media_Library.enableordisable');
 Route::get('/banners/{int}/enableordisable', [App\Http\Controllers\bannerController::class, 'enableordisable'])->name('banners.enableordisable');
 Route::get('/main_sections/{int}/enableordisable', [\App\Http\Controllers\mainSectionController::class, 'enableordisable'])->name('main_Sections.enableordisable');
-Route::get('/sub_sections/{int}/enableordisable', [\App\Http\Controllers\subSectionController::class, 'enableordisable'])->name('sub_Sections.index');
+Route::get('/sub_sections/{int}/enableordisable', [\App\Http\Controllers\subSectionController::class, 'enableordisable'])->name('sub_sections.index');
 Route::get('/products/{int}/enableordisable', [\App\Http\Controllers\productController::class, 'enableordisable'])->name('products.enableordisable');
 Route::get('/clients/{int}/enableordisable', [\App\Http\Controllers\clientController::class, 'enableordisable'])->name('clients.enableordisable');
 Route::get('/orders/{int}/enableordisable', [\App\Http\Controllers\orderController::class, 'enableordisable'])->name('orders.enableordisable');
@@ -38,11 +38,11 @@ Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentCont
 
 ////////////////////////////////////////////////////   delete row
 Route::get('/manager/{int}/delete', [\App\Http\Controllers\ManagerController::class, 'delete'])->name('manager.delete');
-Route::get('/position/{int}/delete', [App\Http\Controllers\positions_permissionsController::class, 'delete'])->name('positions_permissionsController.delete');
+Route::get('/positions_permissions/{int}/delete', [App\Http\Controllers\positions_permissionsController::class, 'delete'])->name('positions_permissionsController.delete');
 Route::get('/media_library/{int}/delete', [App\Http\Controllers\MediaLibraryController::class, 'delete'])->name('media_Library.delete');
 Route::get('/banners/{int}/delete', [App\Http\Controllers\bannerController::class, 'delete'])->name('banners.delete');
 Route::get('/main_sections/{int}/delete', [\App\Http\Controllers\mainSectionController::class, 'delete'])->name('main_Sections.delete');
-Route::get('/sub_sections/{int}/delete', [\App\Http\Controllers\subSectionController::class, 'delete'])->name('sub_Sections.delete');
+Route::get('/sub_sections/{int}/delete', [\App\Http\Controllers\subSectionController::class, 'delete'])->name('sub_sections.delete');
 Route::get('/products/{int}/delete', [\App\Http\Controllers\productController::class, 'delete'])->name('products.delete');
 Route::get('/clients/{int}/delete', [\App\Http\Controllers\clientController::class, 'delete'])->name('clients.delete');
 Route::get('/orders/{int}/delete', [\App\Http\Controllers\orderController::class, 'delete'])->name('orders.delete');
@@ -52,16 +52,16 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 
 
 ////////////////////////////////////////////////////   search row
-//Route::post('/manager/search', [\App\Http\Controllers\ManagerController::class, 'search'])->name('manager.possearch');
 Route::get('/manager/search', [\App\Http\Controllers\ManagerController::class, 'search'])->name('manager.search');
-//Route::get('/position/search', [App\Http\Controllers\positions_permissionsController::class, 'search'])->name('positions_permissionsController.search');
-//Route::get('/media_library/search', [App\Http\Controllers\MediaLibraryController::class, 'search'])->name('media_Library.search');
-//Route::get('/banners/search', [App\Http\Controllers\bannerController::class, 'search'])->name('banners.search');
-//Route::get('/main_sections/search', [\App\Http\Controllers\mainSectionController::class, 'search'])->name('main_Sections.search');
-//Route::get('/sub_sections/search', [\App\Http\Controllers\subSectionController::class, 'search'])->name('sub_Sections.search');
-//Route::get('/products/search', [\App\Http\Controllers\productController::class, 'search'])->name('products.search');
-//Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
-//Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
+Route::get('/positions_permissions/search', [App\Http\Controllers\positions_permissionsController::class, 'search'])->name('positions_permissions.search');
+Route::get('/media_library/search', [App\Http\Controllers\MediaLibraryController::class, 'search'])->name('media_library.search');
+Route::get('/banners/search', [App\Http\Controllers\bannerController::class, 'search'])->name('banners.search');
+Route::get('/main_sections/search', [\App\Http\Controllers\mainSectionController::class, 'search'])->name('main_sections.search');
+Route::get('/sub_sections/search', [\App\Http\Controllers\subSectionController::class, 'search'])->name('sub_sections.search');
+Route::get('/products/search', [\App\Http\Controllers\productController::class, 'search'])->name('products.search');
+Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
+Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
+Route::get('/measure/search', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search');
 //Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
 //Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('bank_accounts.search');
 //Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
@@ -73,7 +73,7 @@ Route::get('/manager/search', [\App\Http\Controllers\ManagerController::class, '
 //indexPage=""
 ////////////////////////////////////////////////////  update button
 Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
-Route::get('/position/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'update'])->name('positions_permissions.update');
+Route::get('/positions_permissions/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'update'])->name('positions_permissions.update');
 Route::get('/media_library/{int}/update', [\App\Http\Controllers\MediaLibraryController::class, 'update'])->name('media_Library.update');
 Route::get('/banners/{int}/update', [\App\Http\Controllers\bannerController::class, 'update'])->name('banners.update');
 Route::get('/main_sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'update'])->name('main_sections.update');
@@ -86,10 +86,10 @@ Route::get('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountC
 
 ////////////////////////////////////////////////////  store_update button
 Route::post('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'store_update'])->name('manager.store_update');
-Route::post('/position/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'store_update'])->name('positions_permissions.store_update');
+Route::post('/positions_permissions/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'store_update'])->name('positions_permissions.store_update');
 Route::post('/media_library/{int}/update', [\App\Http\Controllers\MediaLibraryController::class, 'store_update'])->name('media_Library.store_update');
 Route::post('/banners/{int}/update', [\App\Http\Controllers\bannerController::class, 'store_update'])->name('banners.store_update');
-Route::post('/main_Sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'store_update'])->name('main_sections.store_update');
+Route::post('/main_sections/{int}/update', [\App\Http\Controllers\mainSectionController::class, 'store_update'])->name('main_sections.store_update');
 Route::post('/sub_sections/{int}/update', [\App\Http\Controllers\subSectionController::class, 'store_update'])->name('sub_sections.store_update');
 Route::post('/products/{int}/update', [\App\Http\Controllers\productController::class, 'store_update'])->name('products.store_update');
 Route::post('/clients/{int}/update', [\App\Http\Controllers\clientController::class, 'store_update'])->name('clients.store_update');
@@ -103,10 +103,10 @@ Route::post('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccount
 Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
 Route::get('/positions_permissions', [App\Http\Controllers\positions_permissionsController::class, 'index'])->name('positions_permissions.index');
-Route::get('/media_Library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
+Route::get('/media_library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
 Route::get('/banners', [App\Http\Controllers\bannerController::class, 'index'])->name('banners.index');
-Route::get('/main_Sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_Sections.index');
-Route::get('/sub_Sections', [\App\Http\Controllers\subSectionController::class, 'index'])->name('sub_Sections.index');
+Route::get('/main_sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_sections.index');
+Route::get('/sub_sections', [\App\Http\Controllers\subSectionController::class, 'index'])->name('sub_sections.index');
 Route::get('/products', [\App\Http\Controllers\productController::class, 'index'])->name('products.index');
 Route::get('/clients', [\App\Http\Controllers\clientController::class, 'index'])->name('clients.index');
 Route::get('/orders', [\App\Http\Controllers\orderController::class, 'index'])->name('orders.index');
@@ -124,7 +124,7 @@ Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'inde
 
 ////////////////////////////////////////////////////   go to forms
 Route::get('manager/new-manager-form/insertData',[App\Http\Controllers\managerController::class,'insertData']);
-Route::get('position/new-position-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);
+Route::get('positions_permissions/new-position-form/insertData',[App\Http\Controllers\positions_permissionsController::class,'insertData']);
 Route::get('media_library/new-mediaLibrary-form/insertData',[App\Http\Controllers\MediaLibraryController::class,'insertData']);
 Route::get('banners/new-banner-form/insertData',[App\Http\Controllers\bannerController::class,'insertData']);
 Route::get('main_sections/new-maninSection-form/insertData',[App\Http\Controllers\mainSectionController::class,'insertData']);
@@ -149,7 +149,7 @@ Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxCont
 ////////////////////////////////////////////////////   save btn
 Route::Post('/store-manager',[App\Http\Controllers\managerController::class,'store'])->name("store_new_manager");
 Route::Post('/store-bank-account',[App\Http\Controllers\bankAccountController::class,'store'])->name("store_new_bank_account");
-Route::Post('/store-media-library',[App\Http\Controllers\MediaLibraryController::class,'store'])->name("store_media_library");
+Route::Post('/store-media-library',[App\Http\Controllers\MediaLibraryController::class,'store'])->name("store-media-library");
 Route::Post('/store-banner',[App\Http\Controllers\bannerController::class,'store'])->name("store_banner");
 Route::Post('/store-main-section',[App\Http\Controllers\mainSectionController::class,'store'])->name("store_main_section");
 Route::Post('/store-sub-section',[App\Http\Controllers\subSectionController::class,'store'])->name("store_sub_section");

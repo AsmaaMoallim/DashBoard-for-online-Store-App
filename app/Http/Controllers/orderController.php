@@ -89,4 +89,91 @@ class orderController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "الطلبات";
+        $recordPage = "order_details";
+        $showRecords = "عرض";
+        $tables = 'orders';
+
+        $qry = \DB::table('orders')
+
+            ->join('clients', 'clients.cla_id', '=', 'orders.cla_id')
+            ->join('ord_has_item_of', 'ord_has_item_of.ord_id', '=', 'orders.ord_id')
+            ->join('stage', 'stage.stage_id', '=', 'orders.stage_id')
+            ->join('product', 'product.prod_id', '=', 'ord_has_item_of.prod_id')
+            ->select ("orders.ord_number AS رقم الطلب", \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  'اسم العميل'"),
+                'orders.ord_date AS تاريخ الطلب',
+                \DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS "اجمالي تكلفة الطلب"'),'stage.stage_name AS حالة الطلب',
+                'orders.state','orders.fakeId')
+            ->Where('orders.ord_number', 'LIKE', "%{$key}%")
+            ->orWhere('clients.cla_frist_name', 'LIKE', "%{$key}%")
+            ->orWhere('clients.cla_last_name', 'LIKE', "%{$key}%")
+//            ->orWhere('ord_has_item_of.prod_ord_amount', 'LIKE', "%{$key}%")
+//            ->orWhere(\DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price)'), 'LIKE', "%{$key}%")
+            ->orWhere('stage.stage_name', 'LIKE', "%{$key}%")
+            ->groupBy('ord_has_item_of.prod_ord_amount','orders.ord_number'
+                ,'clients.cla_frist_name','clients.cla_last_name','orders.ord_date',
+                'ord_has_item_of.prod_ord_amount','product.prod_price','orders.state'
+                ,'orders.fakeId','stage.stage_name')
+            ->get();
+
+        $col = ['رقم الطلب','اسم العميل','تاريخ الطلب','اجمالي تكلفة الطلب','fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('orders')
+
+                ->join('clients', 'clients.cla_id', '=', 'orders.cla_id')
+                ->join('ord_has_item_of', 'ord_has_item_of.ord_id', '=', 'orders.ord_id')
+                ->join('stage', 'stage.stage_id', '=', 'orders.stage_id')
+                ->join('product', 'product.prod_id', '=', 'ord_has_item_of.prod_id')
+                ->select ("orders.ord_number AS رقم الطلب", \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  'اسم العميل'"),
+                    'orders.ord_date AS تاريخ الطلب',
+                    \DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS "اجمالي تكلفة الطلب"'),'stage.stage_name AS حالة الطلب',
+                    'orders.state','orders.fakeId')
+                ->groupBy('ord_has_item_of.prod_ord_amount','orders.ord_number'
+                    ,'clients.cla_frist_name','clients.cla_last_name','orders.ord_date',
+                    'ord_has_item_of.prod_ord_amount','product.prod_price','orders.state'
+                    ,'orders.fakeId','stage.stage_name')
+                ->get();
+
+            $col = ['رقم الطلب','اسم العميل','تاريخ الطلب','اجمالي تكلفة الطلب','fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('orders')
+
+                ->join('clients', 'clients.cla_id', '=', 'orders.cla_id')
+                ->join('ord_has_item_of', 'ord_has_item_of.ord_id', '=', 'orders.ord_id')
+                ->join('stage', 'stage.stage_id', '=', 'orders.stage_id')
+                ->join('product', 'product.prod_id', '=', 'ord_has_item_of.prod_id')
+                ->select ("orders.ord_number AS رقم الطلب", \DB::raw("CONCAT(clients.cla_frist_name, ' ',  clients.cla_last_name) AS  'اسم العميل'"),
+                    'orders.ord_date AS تاريخ الطلب',
+                    \DB::raw('sum(ord_has_item_of.prod_ord_amount * product.prod_price) AS "اجمالي تكلفة الطلب"'),'stage.stage_name AS حالة الطلب',
+                    'orders.state','orders.fakeId')
+                ->groupBy('ord_has_item_of.prod_ord_amount','orders.ord_number'
+                    ,'clients.cla_frist_name','clients.cla_last_name','orders.ord_date',
+                    'ord_has_item_of.prod_ord_amount','product.prod_price','orders.state'
+                    ,'orders.fakeId','stage.stage_name')
+                ->get();
+
+            $col = ['رقم الطلب','اسم العميل','تاريخ الطلب','اجمالي تكلفة الطلب','fakeId'];
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with
+        ('showRecords',$showRecords)->with('recordPage',$recordPage)->with('key', $key);
+
+    }
+
+
 }

@@ -115,12 +115,15 @@
                                                     <i class="fa fa-search"></i>
 
                                                 </button>
-                                                <button type="submit" name="btnCancel"
-                                                        onclick="window.location='{{ url('/'.$tables ) }}"
+                                                <a name="btnCancel"  href="{{ url('/'.$tables) }}"
+{{--                                                        @if(input.value('search')==0)--}}
+{{--                                                        onclick="window.location='{{ url('/'.$tables ) }}"--}}
+{{--                                                        @endif--}}
+{{--                                                        onclick="window.location='{{ url('/'.$tables ) }}"--}}
                                                         class="btn btn-default">
                                                     <i class="fa fa-close"></i>
 
-                                                </button>
+                                                </a>
 
 
                                             </div>
@@ -188,7 +191,7 @@
 
                                                     {{--                                                    @else--}}
                                                     @if($key)
-                                                        @if(str_contains($rows->$val, $key) && isset($_GET['btnSearch']))
+                                                        @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))
                                                             <td style="background-color: yellow ">{{$rows->$val}}</td>
                                                         @else
                                                             <td>{{$rows->$val}}</td>

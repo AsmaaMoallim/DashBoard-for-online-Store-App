@@ -15,9 +15,8 @@ class positions_permissionsController extends Controller
         $pagename = "الصلاحيات والمنصاب";
         $formPage = "new-position-form";
         $addNew = "إضافة منصب جديد";
-        $tables = 'position';
-        $line =  "\r\n" . "hi" . "\n" . "hi";
-//        dd($line);
+        $tables = 'positions_permissions';
+
         $qry = \DB::table('position')
             ->join('pos_include','pos_include.pos_id','=','position.pos_id')
             ->join('permission','permission.per_id','=','pos_include.per_id')
@@ -138,4 +137,59 @@ class positions_permissionsController extends Controller
 
         return redirect('/positions_permissions');
     }
+
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "الصلاحيات والمنصاب";
+        $formPage = "new-position-form";
+        $addNew = "إضافة منصب جديد";
+        $tables = 'positions_permissions';
+
+        $qry = \DB::table('position')
+            ->join('pos_include','pos_include.pos_id','=','position.pos_id')
+            ->join('permission','permission.per_id','=','pos_include.per_id')
+            ->select('pos_name AS اسم المنصب',\DB::raw("GROUP_CONCAT('\r\n' , permission.per_name, '\r\n' SEPARATOR ' //  ') AS الصلاحيات"),'position.state','position.fakeId')
+            ->groupBy('اسم المنصب','position.state', 'position.fakeId')
+            ->Where('pos_name', 'LIKE', "%{$key}%")
+            ->orWhere('per_name', 'LIKE', "%{$key}%")
+            ->get();
+        $col = ['اسم المنصب','الصلاحيات','fakeId'];
+
+
+
+//            dd($_GET['btnSearch']);
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('position')
+                ->join('pos_include','pos_include.pos_id','=','position.pos_id')
+                ->join('permission','permission.per_id','=','pos_include.per_id')
+                ->select('pos_name AS اسم المنصب',\DB::raw("GROUP_CONCAT('\r\n' , permission.per_name, '\r\n' SEPARATOR ' //  ') AS الصلاحيات"),'position.state','position.fakeId')
+                ->groupBy('اسم المنصب','position.state', 'position.fakeId')
+                ->get();
+            $col = ['اسم المنصب','الصلاحيات','fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('position')
+                ->join('pos_include','pos_include.pos_id','=','position.pos_id')
+                ->join('permission','permission.per_id','=','pos_include.per_id')
+                ->select('pos_name AS اسم المنصب',\DB::raw("GROUP_CONCAT('\r\n' , permission.per_name, '\r\n' SEPARATOR ' //  ') AS الصلاحيات"),'position.state','position.fakeId')
+                ->groupBy('اسم المنصب','position.state', 'position.fakeId')
+                ->get();
+            $col = ['اسم المنصب','الصلاحيات','fakeId'];
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
 }

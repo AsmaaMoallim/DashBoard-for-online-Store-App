@@ -81,4 +81,49 @@ class mainSectionController extends Controller
         return redirect('/main_Sections');
     }
 
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "الاقسام الرئيسية";
+
+        $formPage = "new-maninSection-form";
+        $addNew = "إضافة قسم رئيسي جديد";
+        $tables = 'main_sections';
+
+        $qry = \DB::table('main_sections')
+            ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
+            ->select('main_name AS اسم القسم الرئيسي','medl_img_ved AS الصورة','main_sections.state','main_sections.fakeId')
+            ->Where('main_name', 'LIKE', "%{$key}%")
+            ->orWhere('medl_img_ved', 'LIKE', "%{$key}%")
+            ->get();
+        $col = ['اسم القسم الرئيسي','الصورة','fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('main_sections')
+                ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
+                ->select('main_name AS اسم القسم الرئيسي','medl_img_ved AS الصورة','main_sections.state','main_sections.fakeId')
+                ->get();
+            $col = ['اسم القسم الرئيسي','الصورة','fakeId'];
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('main_sections')
+                ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
+                ->select('main_name AS اسم القسم الرئيسي','medl_img_ved AS الصورة','main_sections.state','main_sections.fakeId')
+                ->get();
+            $col = ['اسم القسم الرئيسي','الصورة','fakeId'];
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
+
 }

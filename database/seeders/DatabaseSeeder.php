@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-////        DatabaseSeeder::emptyData();
+//        DatabaseSeeder::emptyData();
 //        \App\Models\Position::factory(10)->create();
-////        \App\Models\Permission::factory(16)->create();
+//        \App\Models\Permission::factory(16)->create();
 //        \App\Models\Manager::factory(10)->create();
 //        \App\Models\Measure::factory(10)->create();
 //        \App\Models\MediaLibrary::factory(10)->create();
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Banner::factory(10)->create();
 //        \App\Models\PaymentMethod::factory(10)->create();
 //        \App\Models\Notification::factory(10)->create();
-////        \App\Models\Stage::factory(10)->create();
+//        \App\Models\Stage::factory(10)->create();
 //        \App\Models\Order::factory(10)->create();
 //        \App\Models\Comment::factory(10)->create();
 //        \App\Models\ShippingCharge::factory(10)->create();
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\PosInclude::factory(10)->create();
 //        \App\Models\NotifiSendTo::factory(10)->create();
 //        \App\Models\OrdHasItemOf::factory(10)->create();
-////        \App\Models\User::factory(10)->create();
+//        \App\Models\User::factory(10)->create();
 
     }
     public function emptyData(){

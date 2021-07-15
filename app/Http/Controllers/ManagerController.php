@@ -115,29 +115,17 @@ class ManagerController extends Controller
         $showRecords = "سجل عمليات المديرين";
         $tables = 'manager';
 
-
         $qry = \DB::table('manager')
             ->join('position', 'manager.pos_id', '=', 'position.pos_id')
             ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
-            ->where('man_frist_name', 'like', "%%{$key}%")
-            ->orWhere('man_last_name', 'like', "%%{$key}%")
-            ->orWhere('man_email', 'like', "%%{$key}%")
-            ->orWhere('man_phone_num', 'like', "%%{$key}%")
-            ->orWhere('pos_name', 'like', "%%{$key}%")
+            ->where('man_frist_name', 'LIKE', "%".$key."%")
+            ->orWhere('man_last_name', 'LIKE', "%{$key}%")
+            ->orWhere('man_email', 'LIKE', "%{$key}%")
+            ->orWhere('man_phone_num', 'LIKE', "%{$key}%")
+            ->orWhere('pos_name', 'LIKE', "%%{$key}%")
             ->get();
 
-//            if ($qry->isEmpty()){
-//                $qry = \DB::table('manager')
-//                    ->join('position', 'manager.pos_id', '=', 'position.pos_id')
-//                    ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
-//                    ->get();
 //
-//                $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
-//
-//            }else{
-//                $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
-//
-//            }
         $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
 
 //            dd($_GET['btnSearch']);
@@ -161,18 +149,6 @@ class ManagerController extends Controller
             $placeHolder = 'Search';
         }
 
-
-
-//            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//            // Something posted
-//
-//                // btnDelete
-//            } else {
-//                // Assume btnSubmit
-//                $placeHolder = 0;
-//
-//            }
-//        }
         return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage)->with('key', $key);
