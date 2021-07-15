@@ -62,7 +62,8 @@ Route::get('/products/search', [\App\Http\Controllers\productController::class, 
 Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
 Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
 Route::get('/measure/search', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search');
-//Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
+//Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');
+Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
 //Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('bank_accounts.search');
 //Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
 
