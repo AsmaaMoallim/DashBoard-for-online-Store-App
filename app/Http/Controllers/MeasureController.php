@@ -95,4 +95,49 @@ class MeasureController extends Controller
 //        return redirect('/home');
 //   }
 
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "دليل المقاسات";
+        $formPage = "update-measures-form";
+        $addNew = "تعديل الصورة";
+        $showRecords = "0";
+        $tables = 'measure';
+
+        $qry = \DB::table('measure')
+            ->select('mesu_value AS المقاسات', 'measure.fakeId')
+            ->Where('mesu_value', 'LIKE', "%{$key}%")
+            ->get();
+
+        $col = ['المقاسات', 'fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('measure')
+                ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
+
+            $col = ['المقاسات', 'fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('measure')
+                ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
+
+            $col = ['المقاسات', 'fakeId'];
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('showRecords',$showRecords)->with('formPage',$formPage)->with('key', $key);
+
+    }
+
+
 }

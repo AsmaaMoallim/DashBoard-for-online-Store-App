@@ -47,7 +47,7 @@ class bankAccountController extends Controller
 
     public function delete($id)
     {
-        $data = SysBankAccount::where("fakeId","=","$id")->first();;
+        $data = SysBankAccount::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -84,5 +84,52 @@ class bankAccountController extends Controller
         $data->update($request->all());
         return redirect('/bank_accounts');
     }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "الحسابات البنكية";
+
+        $formPage = "new-bank-account-form";
+        $addNew = "إضافة حساب بنكي جديد";
+        $tables = 'sys_bank_account';
+
+        $qry =\DB::table('sys_bank_account')
+            ->select('sys_bank_account.sys_bank_name AS اسم البنك',
+                'sys_bank_account.sys_bank_account_num AS رقم الحساب', 'sys_bank_account.state','sys_bank_account.fakeId')
+            ->Where('sys_bank_name', 'LIKE', "%{$key}%")
+            ->orWhere('sys_bank_name', 'LIKE', "%{$key}%")
+            ->get();
+
+        $col = ['اسم البنك','رقم الحساب','fakeId'];
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry =\DB::table('sys_bank_account')
+                ->select('sys_bank_account.sys_bank_name AS اسم البنك',
+                    'sys_bank_account.sys_bank_account_num AS رقم الحساب', 'sys_bank_account.state','sys_bank_account.fakeId')
+                ->get();
+
+            $col = ['اسم البنك','رقم الحساب','fakeId'];
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry =\DB::table('sys_bank_account')
+                ->select('sys_bank_account.sys_bank_name AS اسم البنك',
+                    'sys_bank_account.sys_bank_account_num AS رقم الحساب', 'sys_bank_account.state','sys_bank_account.fakeId')
+                ->get();
+
+            $col = ['اسم البنك','رقم الحساب','fakeId'];
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
 
 }

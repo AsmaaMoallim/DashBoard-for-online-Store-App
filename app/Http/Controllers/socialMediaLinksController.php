@@ -13,16 +13,20 @@ class socialMediaLinksController extends Controller
         $formPage = "new-social-media-form";
         $addNew = "إضافة موقع تواصل إجتماعي جديد";
         $tables = 'social_media_link';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('social_media_link');
-        $rows = \DB::table('social_media_link')->get();
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
+
+        $qry = \DB::table('social_media_link')
+            ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+            ->get();
+        $columns = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -37,7 +41,7 @@ class socialMediaLinksController extends Controller
 
     public function delete($id)
     {
-        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -72,6 +76,50 @@ class socialMediaLinksController extends Controller
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/social_media_link');
+    }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "روابط التواصل الاجتماعي";
+        $formPage = "new-social-media-form";
+        $addNew = "إضافة موقع تواصل إجتماعي جديد";
+        $tables = 'social_media_link';
+
+        $qry = \DB::table('social_media_link')
+            ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+            ->Where('social_site_name', 'LIKE', "%{$key}%")
+            ->orWhere('social_img', 'LIKE', "%{$key}%")
+            ->orWhere('social_url', 'LIKE', "%{$key}%")
+            ->get();
+        $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('social_media_link')
+                ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+                ->get();
+            $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('social_media_link')
+                ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+                ->get();
+            $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
     }
 
 }

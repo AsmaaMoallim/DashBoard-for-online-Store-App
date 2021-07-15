@@ -90,4 +90,54 @@ class clientController extends Controller
         $data->update($request->all());
         return redirect('/clients');
     }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "العملاء";
+        $formPage = "new-client-form";
+        $addNew = "إضافة عميل جديد";
+        $tables = 'clients';
+
+        $qry = \DB::table('clients')
+            ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'cla_img AS الصورة الشخصية',
+                'cla_phone_num AS رقم الجوال','cla_email AS البريد الالكتروني','clients.state','clients.fakeId')
+            ->Where('cla_frist_name', 'LIKE', "%{$key}%")
+            ->orWhere('cla_last_name', 'LIKE', "%{$key}%")
+            ->orWhere('cla_img', 'LIKE', "%{$key}%")
+            ->orWhere('cla_phone_num', 'LIKE', "%{$key}%")
+            ->orWhere('cla_email', 'LIKE', "%{$key}%")
+            ->get();
+        $col= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('clients')
+                ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'cla_img AS الصورة الشخصية',
+                    'cla_phone_num AS رقم الجوال','cla_email AS البريد الالكتروني','clients.state','clients.fakeId')
+                ->get();
+            $col= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('clients')
+                ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'cla_img AS الصورة الشخصية',
+                    'cla_phone_num AS رقم الجوال','cla_email AS البريد الالكتروني','clients.state','clients.fakeId')
+                ->get();
+            $col= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
+
 }

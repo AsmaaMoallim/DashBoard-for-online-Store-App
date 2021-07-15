@@ -23,7 +23,6 @@ class bannerController extends Controller
             ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
             ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة','banner.state', 'banner.fakeId')
             ->get();
-//        $qry = \DB::table('banner')->get();
         $columns=['اسم البانر','الصورة','fakeId'];
 
 
@@ -83,5 +82,51 @@ class bannerController extends Controller
         $data->update($request->all());
         return redirect('/banners');
     }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+        $pagename = "البانارات";
+
+        $formPage = "new-banner-form";
+        $addNew = "إضافة بانر جديد";
+        $tables = 'banners';
+
+
+        $qry = \DB::table('banner')
+            ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
+            ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة','banner.state', 'banner.fakeId')
+            ->Where('banner.ban_name', 'LIKE', "%{$key}%")
+            ->orWhere('media_library.medl_img_ved', 'LIKE', "%{$key}%")
+            ->get();
+        $col=['اسم البانر','الصورة','fakeId'];
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('banner')
+                ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
+                ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة','banner.state', 'banner.fakeId')
+                ->get();
+            $col=['اسم البانر','الصورة','fakeId'];
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('banner')
+                ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
+                ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة','banner.state', 'banner.fakeId')
+                ->get();
+            $col=['اسم البانر','الصورة','fakeId'];
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
+
 
 }

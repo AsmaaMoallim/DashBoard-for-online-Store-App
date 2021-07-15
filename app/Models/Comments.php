@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Comment
+ * Class Comments
  *
  * @property int $com_id
  * @property int $cla_id
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Comment extends Model
+class Comments extends Model
 {
     use HasFactory;
 

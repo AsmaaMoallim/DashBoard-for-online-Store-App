@@ -17,7 +17,7 @@ class ManagerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -34,12 +34,6 @@ class ManagerController extends Controller
             ->get();
 
         $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
-
-        $columns= \DB::getSchemaBuilder()->getColumnListing('manager');
-        $rows = \DB::table('manager')->get();
-//                dd($rows);
-//                dd($columns);
-
 
         return view('master_tables_view' ,['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
@@ -110,6 +104,57 @@ class ManagerController extends Controller
         return redirect('/manager');
     }
 
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "الادارة";
+        $recordPage = "manager_operations_record";
+        $formPage = "new-manager-form";
+        $addNew = "اضف مدير جديد";
+        $showRecords = "سجل عمليات المديرين";
+        $tables = 'manager';
+
+        $qry = \DB::table('manager')
+            ->join('position', 'manager.pos_id', '=', 'position.pos_id')
+            ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
+            ->where('man_frist_name', 'LIKE', "%".$key."%")
+            ->orWhere('man_last_name', 'LIKE', "%{$key}%")
+            ->orWhere('man_email', 'LIKE', "%{$key}%")
+            ->orWhere('man_phone_num', 'LIKE', "%{$key}%")
+            ->orWhere('pos_name', 'LIKE', "%%{$key}%")
+            ->get();
+
+//
+        $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
+
+//            dd($_GET['btnSearch']);
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('manager')
+                ->join('position', 'manager.pos_id', '=', 'position.pos_id')
+                ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
+                ->get();
+
+            $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('manager')
+                ->join('position', 'manager.pos_id', '=', 'position.pos_id')
+                ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
+                ->get();
+            $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage)->with('key', $key);
+
+    }
 
 
 }
