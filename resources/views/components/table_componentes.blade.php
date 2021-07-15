@@ -90,51 +90,48 @@
 
                                 {{-- search --}}
 
-{{--                                <form action="{{ route($tables.'.search') }}" method="get">--}}
-{{--                                    @csrf--}}
+                                <form action="{{ route($tables.'.search') }}" method="get">
+                                    @csrf
 
-{{--                                    <div style="align-items:flex-start; float:left!important;">--}}
+                                    <div style="align-items:flex-start; float:left!important;">
 
-{{--                                        <div class="input-group input-group-sm" style="width:400px;">--}}
-
-
-{{--                                            <input name="search" type="text" class="form-control float-right"--}}
+                                        <div class="input-group input-group-sm" style="width:400px;">
 
 
-{{--                                                   @if($tables. "/search"==request()->path())--}}
-{{--                                                   placeholder="{{$placeHolder? $placeHolder : 'Search'}}"--}}
-{{--                                                   required--}}
-
-{{--                                                   @else--}}
-{{--                                                   placeholder="Search"--}}
-{{--                                                   required--}}
-{{--                                                @endif--}}
-{{--                                            >--}}
-{{--                                            <div class="input-group-append">--}}
+                                            <input name="search" type="text" class="form-control float-right"
 
 
-{{--                                                <button type="submit" name="btnSearch" class="btn btn-default">--}}
-{{--                                                    <i class="fa fa-search"></i>--}}
+                                                   @if($tables. "/search"==request()->path())
+                                                   placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
+                                                   required
 
-{{--                                                </button>--}}
-{{--                                                <a name="btnCancel" href="{{ url('/'.$tables) }}"--}}
-{{--                                                   --}}{{--                                                        @if(input.value('search')==0)--}}
-{{--                                                   --}}{{--                                                        onclick="window.location='{{ url('/'.$tables ) }}"--}}
-{{--                                                   --}}{{--                                                        @endif--}}
-{{--                                                   --}}{{--                                                        onclick="window.location='{{ url('/'.$tables ) }}"--}}
-{{--                                                   class="btn btn-default">--}}
-{{--                                                    <i class="fa fa-close"></i>--}}
-
-{{--                                                </a>--}}
+                                                   @else
+                                                   placeholder="Search"
+                                                   required
+                                                @endif
+                                            >
+                                            <div class="input-group-append">
 
 
-{{--                                            </div>--}}
+                                                <button type="submit" name="btnSearch" class="btn btn-default">
+                                                    <i class="fa fa-search"></i>
+
+                                                </button>
+                                                <a name="btnCancel" href="{{ url('/'.$tables) }}"
+                                                   onclick="window.location='{{ url('/'.$tables ) }}"
+                                                   class="btn btn-default">
+                                                    <i class="fa fa-close"></i>
+
+                                                </a>
 
 
-{{--                                        </div>--}}
+                                            </div>
 
-{{--                                    </div>--}}
-{{--                                </form>--}}
+
+                                        </div>
+
+                                    </div>
+                                </form>
                                 {{-- search --}}
                             </div>
                             <!-- /.card-header -->

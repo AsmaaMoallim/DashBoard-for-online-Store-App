@@ -49,6 +49,7 @@ Route::get('/orders/{int}/delete', [\App\Http\Controllers\orderController::class
 Route::get('/social_media_link/{int}/delete', [\App\Http\Controllers\socialMediaLinksController::class, 'delete'])->name('social_media_link.delete');
 Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');
 Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::class, 'delete'])->name('comments.delete');
+Route::get('/shipping_charge/{int}/delete', [App\Http\Controllers\shippingChargeController::class, 'delete'])->name("shipping_charge.delete");
 
 
 ////////////////////////////////////////////////////   search row
@@ -64,6 +65,7 @@ Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'sea
 Route::get('/measure/search', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search');
 //Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');
 Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
+Route::get('/shipping_charge/search', [\App\Http\Controllers\shippingChargeController::class, 'search'])->name('shipping_charge.search');
 //Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('bank_accounts.search');
 //Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
 
@@ -84,6 +86,7 @@ Route::get('/clients/{int}/update', [\App\Http\Controllers\clientController::cla
 Route::get('/measure/{int}/update', [App\Http\Controllers\MeasureController::class, 'update'])->name('measure.update');
 Route::get('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'update'])->name('social_media_link.update');
 Route::get('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'update'])->name('bank_accounts.update');
+Route::get('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'update'])->name("shipping_charge.update");
 
 ////////////////////////////////////////////////////  store_update button
 Route::post('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'store_update'])->name('manager.store_update');
@@ -97,6 +100,7 @@ Route::post('/clients/{int}/update', [\App\Http\Controllers\clientController::cl
 Route::post('/measure/{int}/update', [App\Http\Controllers\MeasureController::class, 'store_update'])->name('measure.store_update');
 Route::post('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'store_update'])->name('social_media_link.store_update');
 Route::post('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'store_update'])->name('bank_accounts.store_update');
+Route::post('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'store_update'])->name('shipping_charge.store_update');
 
 
 
@@ -136,6 +140,7 @@ Route::get('clients/new-client-form/insertData',[App\Http\Controllers\clientCont
 Route::get('measure/update-measures-form/insertData',[App\Http\Controllers\MeasureController::class,'insertData']);
 Route::get('sys_bank_account/new-bank-account-form/insertData',[App\Http\Controllers\bankAccountController::class,'insertData']);
 Route::get('notifications/new-notifications-form/insertData',[App\Http\Controllers\notificationsController::class,'insertData']);
+Route::get('shipping_charge/new-shipping-charge-form/insertData', [\App\Http\Controllers\shippingChargeController::class, 'insertData']);
 
 
 ////////////////////////////////////////////////////   display
@@ -160,6 +165,7 @@ Route::Post('/store-product',[App\Http\Controllers\productController::class,'sto
 Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksController::class,'store'])->name("store-social-media-links");
 Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
 Route::post('/store-measure', [App\Http\Controllers\MeasureController::class, 'store'])->name('store-measure');
+Route::post('/store-shipping-charge', [App\Http\Controllers\shippingChargeController::class, 'store'])->name("store-shipping-charge");
 
 
 Route::view('/test','test');

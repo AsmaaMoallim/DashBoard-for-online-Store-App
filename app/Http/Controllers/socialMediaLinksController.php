@@ -13,18 +13,20 @@ class socialMediaLinksController extends Controller
         $formPage = "new-social-media-form";
         $addNew = "إضافة موقع تواصل إجتماعي جديد";
         $tables = 'social_media_link';
-        $columns= \DB::getSchemaBuilder()->getColumnListing('social_media_link');
-        $rows = \DB::table('social_media_link')->get();
 
+        $qry = \DB::table('social_media_link')
+            ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+            ->get();
+        $columns = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
 
-        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
+        return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
         ('formPage',$formPage);
     }
 
     public function enableordisable($id)
     {
-        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
             $data->save();
@@ -39,7 +41,7 @@ class socialMediaLinksController extends Controller
 
     public function delete($id)
     {
-        $data = SocialMediaLink::where("fakeId","=","$id")->first();;
+        $data = SocialMediaLink::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
@@ -85,38 +87,29 @@ class socialMediaLinksController extends Controller
         $addNew = "إضافة موقع تواصل إجتماعي جديد";
         $tables = 'social_media_link';
 
-        $rows = \DB::table('social_media_link')->get();
-
-        $col= \DB::getSchemaBuilder()->getColumnListing('social_media_link');
-
-        $qry = \DB::table('manager')
-            ->join('position', 'manager.pos_id', '=', 'position.pos_id')
-            ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
-            ->where('man_frist_name', 'LIKE', "%".$key."%")
-            ->orWhere('man_last_name', 'LIKE', "%{$key}%")
-            ->orWhere('man_email', 'LIKE', "%{$key}%")
-            ->orWhere('man_phone_num', 'LIKE', "%{$key}%")
-            ->orWhere('pos_name', 'LIKE', "%%{$key}%")
+        $qry = \DB::table('social_media_link')
+            ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+            ->Where('social_site_name', 'LIKE', "%{$key}%")
+            ->orWhere('social_img', 'LIKE', "%{$key}%")
+            ->orWhere('social_url', 'LIKE', "%{$key}%")
             ->get();
+        $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
 
-//
-        $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
 
-//            dd($_GET['btnSearch']);
         if (isset($_GET['btnSearch']) && $qry->isEmpty()){
-            $qry = \DB::table('manager')
-                ->join('position', 'manager.pos_id', '=', 'position.pos_id')
-                ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
+            $qry = \DB::table('social_media_link')
+                ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
                 ->get();
+            $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
 
-            $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
             $placeHolder = "لا توجد نتائج";
         } elseif (isset($_GET['btnCancel'])){
-            $qry = \DB::table('manager')
-                ->join('position', 'manager.pos_id', '=', 'position.pos_id')
-                ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS الاسم"), 'man_phone_num AS رقم الجوال','man_email AS البريد الالكتروني', 'pos_name AS المنصب', 'manager.state', 'manager.fakeId')
+            $qry = \DB::table('social_media_link')
+                ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
                 ->get();
-            $col = ['الاسم', 'رقم الجوال', 'البريد الالكتروني', 'المنصب', 'fakeId'];
+            $col = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+
+
             $placeHolder = 'Search';
         }
         else{
@@ -125,9 +118,8 @@ class socialMediaLinksController extends Controller
 
         return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
         ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage)->with('key', $key);
+        ('formPage',$formPage)->with('key', $key);
 
     }
-
 
 }
