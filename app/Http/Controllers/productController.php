@@ -150,7 +150,6 @@ class productController extends Controller
 //            ->find($i->image_id)->first();
 //        dd($i);
 
-
         //< start >
         $medlibrary = MediaLibrary::all();
         $image = MediaLibrary::findOrFail($medlibrary->isNotEmpty());
