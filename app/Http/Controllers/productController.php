@@ -150,18 +150,21 @@ class productController extends Controller
 //            ->find($i->image_id)->first();
 //        dd($i);
 
-        //< start >
-        $medlibrary = MediaLibrary::all();
-        $image = MediaLibrary::findOrFail($medlibrary->isNotEmpty());
-        $image_file = Image::make($image->medl_img_ved);
-
-        $response = Response::make($image_file->encode('jpeg'));
-        $response->header('Content-Type', 'image/jpeg');
-
-        return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections,'imgs'=> $response]);
+//        //< start >
+//        $medlibrary = MediaLibrary::all();
+//        $image = MediaLibrary::findOrFail($medlibrary->isNotEmpty());
+//        $image_file = Image::make($image->medl_img_ved);
+//
+//        $response = Response::make($image_file->encode('jpeg'));
+//        $response->header('Content-Type', 'image/jpeg');
 //<./>
 
+        $data = MediaLibrary::latest()->paginate(7);
+//        return view('store_image', compact('data'))
+//            ->with('i', (request()->input('page', 1) - 1) * 5);
+
+        return view('new-product-form', ['measures' => $measures,
+            'sections' => $sections,])->with( compact('data'));
 
     }
 
