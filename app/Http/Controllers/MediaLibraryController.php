@@ -61,14 +61,13 @@ class MediaLibraryController extends Controller
         $media_library->medl_description = $request->medl_description;
 //      $media_library->medl_img_ved = $request->medl_img_ved;
 
-        $img_path = 'public/medialLibrary';
+        $img_path = 'public/images';
         $img_file = $request->medl_img_ved;
         $image = Image::make($img_file);
 
         $img_name = $request->file('medl_img_ved')->getClientOriginalName();
         $request->file('medl_img_ved')->storeAs($img_path,$img_name);
         Response::make($image->encode('jpeg'));
-
 
         $media_library->medl_img_ved = $img_name;
 

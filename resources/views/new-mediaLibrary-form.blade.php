@@ -13,7 +13,7 @@
                   @if(isset($id))
                   action="/media_library/{{$id}}/update"
                   @else
-                  action="{{ url('/store-media-library"') }}
+                  action="/store-media-library"
                   @endif
                   method="Post"
                   enctype="multipart/form-data">

@@ -120,7 +120,9 @@
                                                     @foreach($data as $row)
                                                         <tr>
                                                             <td>
-                                                                <img src='storage/medialLibrary/'{{$row->medl_img_ved}}class="img-thumbnail" width="75" />
+
+                                                                <img src="storage/images/{{$row->medl_img_ved}}"class="img-thumbnail" width="75" />
+
                                                             </td>
                                                             <td> {{$row->medl_name}} </td>
                                                         </tr>
