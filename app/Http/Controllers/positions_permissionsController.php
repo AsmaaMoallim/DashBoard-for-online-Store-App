@@ -92,6 +92,7 @@ class positions_permissionsController extends Controller
         $maxFakeIdPos= $max? $max->fakeId + 1 : 1;
         $position->fakeId = $maxFakeIdPos;
         $position->save();
+
         $per_id = $request->input('per_id');
         foreach ($per_id as $per_id) {
             $maxFakeIdPosIN = 0;
