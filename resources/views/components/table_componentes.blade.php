@@ -159,9 +159,19 @@
                                             @for( $i = 0 ; $i<=10; $i++)
 
                                                 @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
-                                                        <td>
-                                                            <img src="{{$tables}}/fetch_image/{{ $rows->medl_id }}">
-                                                        </td>
+                                                    <td>
+                                                        {{--                                                            <a  herf="{{ url('/'.$tables .'/fetch_image/'. $rows->medl_id ) }}">--}}
+
+                                                        <img width="60"
+                                                             height="60"
+                                                             class="img"
+                                                             name="{{$rows->medl_id}}"
+                                                             id="img"
+                                                             src="{{$tables}}/fetch_image/{{ $rows->medl_id }}"
+                                                             onclick="displayImage()">
+
+                                                        {{--                                                            </a>--}}
+                                                    </td>
                                                 @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")
                                                     <?php $val = (string)$columns[$i] ?>
                                                     <?php $color = (string)$rows->$val ?>
@@ -260,7 +270,7 @@
 
                                     </tbody>
                                 </table>
-{{--                                {!! $rows->links() !!}--}}
+                                {{--                                {!! $rows->links() !!}--}}
 
                             </div>
                             <!-- /.card-body -->
@@ -271,5 +281,21 @@
 
             </div>
         </section>
+        <script>
+
+            function displayImage(e) {
+                var elem = document.getElementsByClassName('img');
+                e = e || window.event;
+                var t = e.target;
+                var imgArray = $('[id^=img]').map(function (i) {
+                    //return this.name;
+                    // alert(this.name)
+                    if (t.name == this.name) {
+                        window.location.href = t.src;
+                    }
+                    return this.value; // for real values of input
+                }).get();
+            }
+        </script>
 @endsection
 

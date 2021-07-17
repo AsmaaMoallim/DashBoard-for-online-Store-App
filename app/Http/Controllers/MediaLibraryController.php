@@ -57,7 +57,7 @@ class MediaLibraryController extends Controller
     function fetch_image($medl_id)
     {
         $image = MediaLibrary::findOrFail($medl_id);
-        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $image_file = Image::make($image->medl_img_ved);
         $response = Response::make($image_file->encode('jpeg'));
         $response->header('Content-Type', 'image/jpeg');
         return $response;
