@@ -6,9 +6,11 @@
 
 namespace App\Models;
 
+use Cassandra\Blob;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use MongoDB\BSON\Binary;
 
 /**
  * Class MediaLibrary
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $medl_id
  * @property string $medl_name
  * @property string $medl_description
- * @property boolean $medl_img_ved
+// * @property binary $medl_img_ved
  * @property bool $state
  * @property int $fakeId
  *
@@ -36,8 +38,7 @@ class MediaLibrary extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'medl_img_ved' => 'boolean',
-		'state' => 'bool',
+        'state' => 'bool',
 		'fakeId' => 'int'
 	];
 

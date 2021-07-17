@@ -9,13 +9,19 @@ use App\Models\ProdAvilIn;
 use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
+//use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Images;
-use Image;
+//use Intervention\Image;
+
+//use Image;
+use Intervention\Image\Facades\Image;
+
 
 class productController extends Controller
 {
+
     public $medl_id = null;
 
     public function index()
@@ -190,6 +196,7 @@ class productController extends Controller
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
 
+
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
 //        }
@@ -323,6 +330,133 @@ class productController extends Controller
 //        ('columns', $col)->with('tables', $tables)->with('addNew', $addNew)->with
 //        ('showRecords', $showRecords)->with('formPage', $formPage)->with('recordPage', $recordPage)->with('key', $key);
 
+    }
+    /**
+     * Encode array from latin1 to utf8 recursively
+     * @param $dat
+     * @return array|string
+     */
+    public static function convert_from_latin1_to_utf8_recursively($dat)
+    {
+        if (is_string($dat)) {
+            return utf8_encode($dat);
+        } elseif (is_array($dat)) {
+            $ret = [];
+            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $ret;
+        } elseif (is_object($dat)) {
+            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $dat;
+        } else {
+            return $dat;
+        }
+    }
+// Sample use
+// Just pass your array or string and the UTF8 encode will be fixed
+    public function img(Request $request, $id)
+    {
+
+
+//        $mediaImg = MediaLibrary::all()->where('medl_id', '=', $id);
+//
+//        foreach ($mediaImg as $mediaImg) {
+//            $data = $mediaImg->medl_img_ved;
+//
+//        }
+        $image = MediaLibrary::findOrFail(18);
+//        dd($image->medl_img_ved);
+//        $data = convert_from_latin1_to_utf8_recursively($image);
+
+//        mb_convert_encoding($image['medl_img_ved'], 'UTF-8', 'UTF-8');
+//        dd($image->medl_img_ved);
+//        $tt = json_encode( $image->medl_img_ved );
+//        dd($image->medl_img_ved );
+//        $tt = Response::json($image['medl_img_ved']);
+//        $tt = mb_convert_encoding($image['medl_img_ved'], 'UTF-8', 'UTF-8');
+//        $tt = base64_encode($image->medl_img_ved );
+//        $image->medl_img_ved = $tt;
+//                    dd($image);
+
+        $image_file = Image::make($image->medl_img_ved);
+//            dd($image);
+
+//        $image_file = Image::make($image);
+
+        $response = Response::make($image_file->encode('jpeg'));
+
+        $response->header('Content-Type', 'image/jpeg');
+
+//        dd($image_file);
+//
+//        $response = Response::make($image_file->encode('jpeg'));
+//        dd($response);
+//
+//        $response->header('Content-Type', 'image/jpeg');
+//
+
+
+//        dd($mediaImg);
+//        $image = Image::make()->encode('jpeg')->response('jpeg');
+
+//        dd($mediaImg->medl_img_ved);
+
+
+
+//        $image_file = $request->file('im');
+//        dd($image_file);
+
+        $image = Image::make($request->file('im'))->encode('jpeg')->response('jpeg');
+//        $image = Image::make($request->file('im'))->encode('png');
+//////        response('png');
+////
+////
+//////        $test = $image->response('jpeg');
+////
+        $newimdata = new MediaLibrary();
+        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max ? $max->fakeId + 1 : 1;
+            $newimdata->medl_name = 'please';
+            $newimdata->medl_description = 'hihi';
+            $newimdata->medl_img_ved = $image;
+            $newimdata->fakeId = $maxFakeId;
+
+//        MediaLibrary::create($form_data);
+
+
+
+        $newimdata->save();
+
+        return $response;
+//        return $image->response('png');
+
+//                dd($image);
+//
+//        Response::make($image->encode('jpeg'));
+//
+////        dd(Response);
+//        $mediaImg = MediaLibrary::all()->where('medl_id', '=', $id);
+////
+////        foreach ($mediaImg as $mediaImg) {
+////            $data = $mediaImg->medl_img_ved;
+////        }
+////
+////        dd($mediaImg->medl_img_ved);
+////        $img = Image::make($mediaImg->medl_img_ved)->resize(300, 200);
+//////        dd($img);
+//        return $image->response('jpeg');
+
+    }
+    public function insertimg(Request $request)
+    {
+
+
+//        $image_file = $request->medl_img_ved;
+//        dd($image_file);
+//        $image = \Intervention\Image\Facades\Image::make($image_file);
+
+        return view('testimg');
     }
 
 

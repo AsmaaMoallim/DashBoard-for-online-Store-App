@@ -12,11 +12,13 @@ use Intervention\Image\Facades\Image;
 
 class MediaLibraryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Display a listing of the resource.
+//     *
+//     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+//     */
+
+
     public function index()
     {
         $pagename = "مكتبة الصور والفيديوهات";
@@ -25,13 +27,13 @@ class MediaLibraryController extends Controller
         $addNew = "إضافة صورة/فيديو جديد";
         $tables = 'media_library';
 
-        $qry = \DB::table('media_library')
-            ->select('medl_name AS اسم الصورة/الفيديو', 'medl_description AS التعريف', 'medl_img_ved AS الصورة/رابط الفيديو',
-                'media_library.state', 'media_library.fakeId')->get();
-        $columns = ['اسم الصورة/الفيديو', 'التعريف', 'الصورة/رابط الفيديو', 'fakeId'];
+        $rows = \DB::table('media_library')
+            ->select('medl_id','medl_name AS اسم الصورة/الفيديو', 'medl_description AS التعريف',
+                'media_library.state','media_library.fakeId')->get();
+        $columns = ['اسم الصورة/الفيديو','التعريف','الصورة/رابط الفيديو','fakeId'];
 
 
-        return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
+        return view('master_tables_view' ,compact('rows'),['pagename' => $pagename])->with('rows', $rows)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('formPage', $formPage);
     }
@@ -54,9 +56,33 @@ class MediaLibraryController extends Controller
         return redirect()->back();
     }
 
+    function fetch_image($medl_id)
+    {
+        $image = MediaLibrary::findOrFail($medl_id);
+        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
+    }
 
     function store(Request $request)
     {
+        $image = Image::make($request->file('medl_img_ved'))->encode('jpeg');
+
+        $mediaLibrary = new MediaLibrary();
+        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max ? $max->fakeId + 1 : 1;
+        $mediaLibrary->medl_name = $request->medl_name;
+        $mediaLibrary->medl_description = $request->medl_description;
+        $mediaLibrary->medl_img_ved = $image;
+        $mediaLibrary->fakeId = $maxFakeId;
+
+        $mediaLibrary->save();
+
+
+
+
+
 //        $media_library = new MediaLibrary();
 //        $media_library->medl_name = $request->medl_name;
 //        $media_library->medl_description = $request->medl_description;
@@ -67,37 +93,36 @@ class MediaLibraryController extends Controller
 //        $request->file('medl_img_ved')->storeAs('public/images',$name);
 //      $media_library->medl_img_ved->('public/images/images', $name);
 
-        $image_file = $request->medl_img_ved;
-        $image = Image::make($image_file);
-
-        Response::make($image->encode('jpeg'));
-        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max ? $max->fakeId + 1 : 1;;
-//        $media_library->fakeId = $maxFakeId;
-        $form_data = array(
-            'medl_name' => $request->medl_name,
-            'medl_description' => $request->medl_description,
-            'medl_img_ved' => $image,
-            'fakeId' => $maxFakeId
-
-        );
+//        $image_file = $request->medl_img_ved;
 
 
-        MediaLibrary::create($form_data);
-//        if($request->hasFile('medl_img_ved'))
-//        {
-//            $file = $request->file('medl_img_ved');
-//            $extention = $file->getClientOriginalExtension();
-//            $filename = time().'.'.$extention;
-//            $file->move('uploads/mediaLibrary/'.$filename);
-//            $media_library->medl_img_ved = $filename;
-//        }
 
 
-//        $media_library->save();
-//        return redirect()->back()->with('success', 'Image store in database successfully');
+//        MediaLibrary::create($form_data);
 
-        return redirect('/media_Library');
+
+
+//        $image = Image::make($image_file);
+
+//        Response::make($image->encode('jpeg'));
+
+//        dd($image);
+
+//        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//        $maxFakeId = $max ? $max->fakeId + 1 : 1;;
+////        $media_library->fakeId = $maxFakeId;
+//        $form_data = array(
+//            'medl_name' => $request->medl_name,
+//            'medl_description' => $request->medl_description,
+//            'medl_img_ved' => $image,
+//            'fakeId' => $maxFakeId
+//
+//        );
+
+
+//        MediaLibrary::create($form_data);
+
+        return redirect('/media_library');
     }
 
     public function delete($id)
@@ -153,9 +178,6 @@ class MediaLibraryController extends Controller
             ->orWhere('pos_name', 'LIKE', "%%{$key}%")
             ->get();
 
-//
-
-//            dd($_GET['btnSearch']);
         if (isset($_GET['btnSearch']) && $qry->isEmpty()){
             $qry = \DB::table('media_library')
                 ->select('medl_name AS اسم الصورة/الفيديو', 'medl_description AS التعريف', 'medl_img_ved AS الصورة/رابط الفيديو',

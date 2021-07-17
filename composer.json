@@ -12,7 +12,9 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "yajra/laravel-datatables-oracle": "^9.18"
+        "yajra/laravel-datatables-oracle": "^9.18",
+        "ext-cassandra": "*",
+        "ext-mongodb": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

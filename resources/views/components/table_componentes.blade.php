@@ -159,9 +159,9 @@
                                             @for( $i = 0 ; $i<=10; $i++)
 
                                                 @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
-
-                                                    <td><img src="Storage::url(/storage/app/{{$columns[$i]}}"/></td>
-
+                                                        <td>
+                                                            <img src="{{$tables}}/fetch_image/{{ $rows->medl_id }}">
+                                                        </td>
                                                 @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")
                                                     <?php $val = (string)$columns[$i] ?>
                                                     <?php $color = (string)$rows->$val ?>
@@ -231,27 +231,27 @@
                                                     @endif
                                                 @endif
 
-                                                    @if(!$noUpdateBtn)
+                                                @if(!$noUpdateBtn)
 
                                                     <a class="btn btn-info btn-sm"
-                                                   href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
-                                                    <i class="fa fa-pencil">
+                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                                        <i class="fa fa-pencil">
 
-                                                    </i>
-                                                    تعديل
-                                                </a>
-                                                    @endif
+                                                        </i>
+                                                        تعديل
+                                                    </a>
+                                                @endif
 
                                                 @if(!$noDeleteBtn)
 
-                                                        <a class="btn btn-danger btn-sm deletee"
-                                                   href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
-                                                    <i class="fa fa-trash">
-                                                    </i>
-                                                    حذف
-                                                </a>
+                                                    <a class="btn btn-danger btn-sm deletee"
+                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
+                                                        <i class="fa fa-trash">
+                                                        </i>
+                                                        حذف
+                                                    </a>
                                             </td>
-                                                @endif
+                                            @endif
 
 
                                     </tr>
@@ -260,6 +260,8 @@
 
                                     </tbody>
                                 </table>
+{{--                                {!! $rows->links() !!}--}}
+
                             </div>
                             <!-- /.card-body -->
                         </div>

@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
+
+////////////////////////////////////////////////////  fetch_image
+Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
+
+
 
 ////////////////////////////////////////////////////  displayDetailes
 Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
