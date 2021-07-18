@@ -149,10 +149,10 @@ class productController extends Controller
     public function insertData(Product $product){
         $measures = Measure::all();
         $sections = SubSection::all();
-        $medialib = MediaLibrary::all();
+        $mediaLibrary = MediaLibrary::all();
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections])->with( compact('medialib'));
+            'sections' => $sections])->with( compact('mediaLibrary'));
     }
 
     public function fetch_image($medl_id)

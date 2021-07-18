@@ -128,9 +128,16 @@
                                                     @endif
                                                     @endforeach
                                                 >
+                                                <img src="update/fetch_image/{{$med}}" class="img-thumbnail"
+                                                     width="75"/>
+                                            @else
+
+                                                <img src="fetch_image/{{$med}}" class="img-thumbnail"
+                                                     width="75"/>
                                             @endif
-                                            <img src="update/fetch_image/{{$med}}" class="img-thumbnail"
-                                                 width="75"/>
+
+
+
 
                                         </td>
 
