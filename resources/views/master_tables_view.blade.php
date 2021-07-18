@@ -10,6 +10,11 @@
            :addNew="$addNew  ?? ''" :showRecords="$showRecords ?? ''"
            :formPage="$formPage ?? ''" :recordPage="$recordPage ?? ''"
            :noUpdateBtn="$noUpdateBtn ?? ''" :noDeleteBtn="$noDeleteBtn ?? ''"
+
+
+           :rows2="$rows2 ?? ''" :columns2="$columns2 ?? ''" :tables2="$tables2 ?? ''"
+           :addNew2="$addNew2  ?? ''" :showRecords2="$showRecords2 ?? ''"
+           :formPage2="$formPage2 ?? ''" :recordPage2="$recordPage2 ?? ''"
        ></x-table_componentes>
 
 @endsection

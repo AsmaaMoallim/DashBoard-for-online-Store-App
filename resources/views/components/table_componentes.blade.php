@@ -271,10 +271,9 @@
             </div>
 
 
+            {{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////            @if('contact_information' === $tables)--}}
 
-{{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////            @if('contact_information' === $tables)--}}
-
-   @if("contact_information" === $tables)
+            @if("contact_information" === $tables2)
                 <div>
                     <div class="row">
                         <div class="col-12">
@@ -286,30 +285,30 @@
                                         <div style="float:right!important; margin-left:2%">
 
                                             <a class="btn btn-block btn-info"
-                                               href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
+                                               href="{{ url('/'.$tables2 .'/'. $formPage2 . '/insertData') }}">
                                                 <i class="fa ">
                                                 </i>
-                                                {{$addNew}}
+                                                {{$addNew2}}
                                             </a>
                                         </div>
                                     @endif
 
-                                    @if($showRecords)
+                                    @if($showRecords2)
 
                                         <div style="float:right!important;">
 
                                             <a class="btn btn-block btn-info"
-                                               href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
+                                               href="{{ url('/'.$tables2 .'/'. $recordPage2 . '/display') }}">
                                                 <i class="fa ">
                                                 </i>
-                                                {{$showRecords}}
+                                                {{$showRecords2}}
                                             </a>
                                         </div>
                                     @endif
 
-{{--                                     search--}}
+                                    {{--                                     search--}}
 
-                                    <form action="{{ route($tables.'.search') }}" method="get">
+                                    <form action="{{ route($tables2.'.search') }}" method="get">
                                         @csrf
 
                                         <div style="align-items:flex-start; float:left!important;">
@@ -320,7 +319,7 @@
                                                 <input name="search" type="text" class="form-control float-right"
 
 
-                                                       @if($tables. "/search"==request()->path())
+                                                       @if($tables2. "/search"==request()->path())
                                                        placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
                                                        required
 
@@ -336,8 +335,8 @@
                                                         <i class="fa fa-search"></i>
 
                                                     </button>
-                                                    <a name="btnCancel" href="{{ url('/'.$tables) }}"
-                                                       onclick="window.location='{{ url('/'.$tables ) }}"
+                                                    <a name="btnCancel" href="{{ url('/'.$tables2) }}"
+                                                       onclick="window.location='{{ url('/'.$tables2 ) }}"
                                                        class="btn btn-default">
                                                         <i class="fa fa-close"></i>
 
@@ -351,7 +350,7 @@
 
                                         </div>
                                     </form>
-{{--                                     search--}}
+                                    {{--                                     search--}}
                                 </div>
 
                                 <!-- /.card-header -->
@@ -362,8 +361,8 @@
                                             @for( $i = 0 ; $i<=10 ; $i++)
 
 
-                                                @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                                    <th>{{$columns[$i]}}</th>
+                                                @if(isset($columns2[$i]) && $columns2[$i]!='fakeId')
+                                                    <th>{{$columns2[$i]}}</th>
                                                 @endif
 
                                             @endfor
@@ -373,119 +372,74 @@
                                         <tbody>
                                         <tr>
 
-{{--                                            @foreach( $rows as $rows)--}}
+                                            @foreach( $rows2 as $rows2)
 
-{{--                                                @for( $i = 0 ; $i<=10; $i++)--}}
+                                                @for( $i = 0 ; $i<=10; $i++)
+                                                    @if(isset($columns2[$i]) && $columns2[$i]!='fakeId')
 
-{{--                                                    @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")--}}
-{{--                                                        <td>--}}
-{{--                                                                                                                        <a  herf="{{ url('/'.$tables .'/fetch_image/'. $rows->medl_id ) }}">--}}
+                                                    <?php $val2 = (string)$columns2[$i] ?>
 
-{{--                                                            <img width="60"--}}
-{{--                                                                 height="60"--}}
-{{--                                                                 class="img"--}}
-{{--                                                                 name="{{$rows->medl_id}}"--}}
-{{--                                                                 id="img"--}}
-{{--                                                                 src="{{$tables}}/fetch_image/{{ $rows->medl_id }}"--}}
-{{--                                                                 onclick="displayImage()">--}}
 
-{{--                                                                                                                        </a>--}}
-{{--                                                        </td>--}}
-{{--                                                    @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")--}}
-{{--                                                        <?php $val = (string)$columns[$i] ?>--}}
-{{--                                                        <?php $color = (string)$rows->$val ?>--}}
-
-{{--                                                        <td>--}}
-{{--                                                                                                                    @foreach($columns as $columns)--}}
-{{--                                                            <div class='box'--}}
-{{--                                                                 style="background-color:{{$color}} !important;">--}}
-{{--                                                                hh--}}
-{{--                                                            </div>--}}
-{{--                                                                                                                    @endforeach--}}
-{{--                                                        </td>--}}
-
-{{--                                                    @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-{{--                                                        <?php $val = (string)$columns[$i] ?>--}}
-{{--                                                                                                            @if(str_contains($rows->$val, "#"))--}}
-{{--                                                                                                            @dd($rows->$val)--}}
-
-{{--                                                                                                                <td>--}}
-
-{{--                                                                                                                    <div class='box'--}}
-{{--                                                                                                                          style="background-color:red !important;">--}}
-{{--                                                        hh--}}
-{{--                                                                                                                    </div>--}}
-
-{{--                                                                                                                </td>--}}
-
-{{--                                                                                                            @else--}}
-{{--                                                        @if($key)--}}
-{{--                                                            @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))--}}
-{{--                                                                <td style="background-color: yellow ">{{$rows->$val}}</td>--}}
+                                                    {{--                                                            @if($key)--}}
+{{--                                                                @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))--}}
+{{--                                                                    <td style="background-color: yellow ">{{$rows->$val}}</td>--}}
+{{--                                                                @else--}}
+{{--                                                                    <td>{{$rows->$val}}</td>--}}
+{{--                                                                @endif--}}
 {{--                                                            @else--}}
-{{--                                                                <td>{{$rows->$val}}</td>--}}
+                                                                <td>{{$rows2->$val2}}</td>
 {{--                                                            @endif--}}
-{{--                                                        @else--}}
-{{--                                                            <td>{{$rows->$val}}</td>--}}
 {{--                                                        @endif--}}
-{{--                                                                                                            @endif--}}
 
-{{--                                                    @endif--}}
-{{--                                                @endfor--}}
+                                                    @endif
+                                                @endfor
 
-{{--                                                <td class="project-actions text-right">--}}
-{{--                                                    @if($displayDetailes)--}}
-{{--                                                        <a class="btn btn-default btn-sm"--}}
-{{--                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/displayDetailes') }}">--}}
-{{--                                                            <i class="fa ">--}}
-{{--                                                            </i>--}}
-{{--                                                            عرض التفاصيل--}}
-{{--                                                        </a>--}}
-{{--                                                    @endif--}}
-{{--                                                    @if(isset($rows->state))--}}
-{{--                                                        @if($rows->state)--}}
-{{--                                                            <a class="btn btn-success btn-sm"--}}
-{{--                                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">--}}
-{{--                                                                <i class="fa ">--}}
-{{--                                                                </i>--}}
-{{--                                                                تعطيل--}}
-{{--                                                            </a>--}}
-{{--                                                        @elseif(!$rows->state)--}}
-{{--                                                            <a class="btn btn-primary btn-sm"--}}
-{{--                                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">--}}
-{{--                                                                <i class="fa ">--}}
-{{--                                                                </i>--}}
-{{--                                                                تفعيل--}}
-{{--                                                            </a>--}}
-{{--                                                        @endif--}}
-{{--                                                    @endif--}}
+                                                <td class="project-actions text-right">
 
-{{--                                                    @if(!$noUpdateBtn)--}}
+                                                    @if(isset($rows2->state))
+                                                        @if($rows2->state)
+                                                            <a class="btn btn-success btn-sm"
+                                                               href="{{ url('/'.$tables2 .'_2/'. $rows2->fakeId . '/enableordisable') }}">
+                                                                <i class="fa ">
+                                                                </i>
+                                                                تعطيل
+                                                            </a>
+                                                        @elseif(!$rows2->state)
+                                                            <a class="btn btn-primary btn-sm"
+                                                               href="{{ url('/'.$tables2 .'_2/'. $rows2->fakeId . '/enableordisable') }}">
+                                                                <i class="fa ">
+                                                                </i>
+                                                                تفعيل
+                                                            </a>
+                                                        @endif
+                                                    @endif
 
-{{--                                                        <a class="btn btn-info btn-sm"--}}
-{{--                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">--}}
-{{--                                                            <i class="fa fa-pencil">--}}
+                                                    @if(!$noUpdateBtn)
 
-{{--                                                            </i>--}}
-{{--                                                            تعديل--}}
-{{--                                                        </a>--}}
-{{--                                                    @endif--}}
+                                                        <a class="btn btn-info btn-sm"
+                                                           href="{{ url('/'.$tables2 .'_2/'. $rows2->fakeId . '/update') }}">
+                                                            <i class="fa fa-pencil">
 
-{{--                                                    @if(!$noDeleteBtn)--}}
+                                                            </i>
+                                                            تعديل
+                                                        </a>
+                                                    @endif
 
-{{--                                                        <a class="btn btn-danger btn-sm deletee"--}}
-{{--                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">--}}
-{{--                                                            <i class="fa fa-trash">--}}
-{{--                                                            </i>--}}
-{{--                                                            حذف--}}
-{{--                                                        </a>--}}
-{{--                                                </td>--}}
-{{--                                                @endif--}}
+                                                    @if(!$noDeleteBtn)
+
+                                                        <a class="btn btn-danger btn-sm deletee"
+                                                           href="{{ url('/'.$tables2 .'_2/'. $rows2->fakeId . '/delete') }}">
+                                                            <i class="fa fa-trash">
+                                                            </i>
+                                                            حذف
+                                                        </a>
+                                                </td>
+                                                @endif
 
 
-{{--                                        </tr>--}}
+                                        </tr>
 
-{{--                                        @endforeach--}}
+                                        @endforeach
 
                                         </tbody>
                                     </table>
@@ -500,11 +454,9 @@
                 </div>
 
             @endif
-{{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////--}}
+            {{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////--}}
 
         </section>
-
-
 
 
         <script>
