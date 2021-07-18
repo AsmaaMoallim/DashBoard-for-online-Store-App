@@ -20,6 +20,8 @@ Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
 Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
+Route::get('products/{id}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
+
 //Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 
 
