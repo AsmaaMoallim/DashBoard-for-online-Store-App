@@ -65,6 +65,7 @@ Route::get('/sys_bank_account/{int}/enableordisable', [\App\Http\Controllers\ban
 Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentController::class, 'enableordisable'])->name('comments.enableordisable');
 Route::get('/contact_information/{int}/enableordisable', [App\Http\Controllers\sysContactInfoController::class, 'enableordisable'])->name("contact_information.enableordisable");
 Route::get('/contact_information_2/{int}/enableordisable', [App\Http\Controllers\sysContactInfoController::class, 'enableordisable2'])->name("contact_information.enableordisable2");
+Route::get('/reports/{int}/enableordisable', [App\Http\Controllers\reportController::class, 'enableordisable'])->name('report.enableordisable');
 
 
 ////////////////////////////////////////////////////   delete row
@@ -83,6 +84,7 @@ Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::c
 Route::get('/shipping_charge/{int}/delete', [App\Http\Controllers\shippingChargeController::class, 'delete'])->name("shipping_charge.delete");
 Route::get('/contact_information/{int}/delete', [App\Http\Controllers\sysContactInfoController::class, 'delete'])->name("contact_information.delete");
 Route::get('/contact_information_2/{int}/delete', [App\Http\Controllers\sysContactInfoController::class, 'delete2'])->name("contact_information.delete2");
+Route::get('/reports/{int}/delete', [App\Http\Controllers\reportController::class, 'delete'])->name('report.delete');
 
 
 ////////////////////////////////////////////////////   search row
@@ -105,6 +107,7 @@ Route::get('/notifications/search', [\App\Http\Controllers\notificationsControll
 Route::get('/email_box/search', [\App\Http\Controllers\emailBoxController::class, 'search'])->name('email_box.search');
 Route::get('/contact_information/search', [\App\Http\Controllers\sysContactInfoController::class, 'search'])->name('contact_information.search');
 Route::get('/contact_information_2/search', [\App\Http\Controllers\sysContactInfoController::class, 'search2'])->name('contact_information.search2');
+Route::get('/comment_reports/display', [App\Http\Controllers\reportController::class, 'search'])->name('reports.search');
 
 
 
@@ -207,7 +210,7 @@ Route::get('manager/manager_operations_record/display', [App\Http\Controllers\Ma
 Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
 Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
 //Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
-//Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
+Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
 Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
 

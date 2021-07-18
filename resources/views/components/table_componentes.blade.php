@@ -46,229 +46,247 @@
 
             @if(!$key2)
 
-            <div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"></h3>
-                                @if($addNew)
+                <div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title"></h3>
+                                    @if($addNew)
 
-                                    <div style="float:right!important; margin-left:2%">
+                                        <div style="float:right!important; margin-left:2%">
 
-                                        <a class="btn btn-block btn-info"
-                                           href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
-                                            <i class="fa ">
-                                            </i>
-                                            {{$addNew}}
-                                        </a>
-                                    </div>
-                                @endif
-
-                                @if($showRecords)
-
-                                    <div style="float:right!important;">
-
-                                        <a class="btn btn-block btn-info"
-                                           href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
-                                            <i class="fa ">
-                                            </i>
-                                            {{$showRecords}}
-                                        </a>
-                                    </div>
-                                @endif
-
-                                {{-- search --}}
-                                    <form action="{{ route($tables.'.search') }}" method="get">
-                                        @csrf
-
-                                        <div style="align-items:flex-start; float:left!important;">
-
-                                            <div class="input-group input-group-sm" style="width:400px;">
-
-
-                                                <input name="search" type="text" class="form-control float-right"
-
-
-                                                       @if($tables. "/search"==request()->path())
-                                                       placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
-                                                       required
-
-                                                       @else
-                                                       placeholder="Search"
-                                                       required
-                                                    @endif
-                                                >
-                                                <div class="input-group-append">
-
-
-                                                    <button type="submit" name="btnSearch" class="btn btn-default">
-                                                        <i class="fa fa-search"></i>
-
-                                                    </button>
-                                                    <a name="btnCancel" href="{{ url('/'.$tables) }}"
-                                                       onclick="window.location='{{ url('/'.$tables ) }}"
-                                                       class="btn btn-default">
-                                                        <i class="fa fa-close"></i>
-
-                                                    </a>
-
-
-                                                </div>
-
-
-                                            </div>
-
+                                            <a class="btn btn-block btn-info"
+                                               href="{{ url('/'.$tables .'/'. $formPage . '/insertData') }}">
+                                                <i class="fa ">
+                                                </i>
+                                                {{$addNew}}
+                                            </a>
                                         </div>
-                                    </form>
-                                    {{-- search --}}
-                            </div>
+                                    @endif
 
-                        <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table id="tableprofider" class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        @for( $i = 0 ; $i<=10 ; $i++)
+                                    @if($showRecords)
+
+                                        <div style="float:right!important;">
+
+                                            <a class="btn btn-block btn-info"
+                                               href="{{ url('/'.$tables .'/'. $recordPage . '/display') }}">
+                                                <i class="fa ">
+                                                </i>
+                                                {{$showRecords}}
+                                            </a>
+                                        </div>
+                                    @endif
+
+{{--                                                                     search --}}
+                                                                        <form action="{{ route($tables.'.search') }}" method="get">
+                                                                            @csrf
+
+                                                                            <div style="align-items:flex-start; float:left!important;">
+
+                                                                                <div class="input-group input-group-sm" style="width:400px;">
 
 
-                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                                <th>{{$columns[$i]}}</th>
-                                            @endif
+                                                                                    <input name="search" type="text" class="form-control float-right"
 
-                                        @endfor
 
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
+                                                                                           @if($tables. "/search"==request()->path())
+                                                                                           placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
+                                                                                           required
 
-                                        @foreach( $rows as $rows)
+                                                                                           @else
+                                                                                           placeholder="Search"
+                                                                                           required
+                                                                                        @endif
+                                                                                    >
+                                                                                    <div class="input-group-append">
 
-                                            @for( $i = 0 ; $i<=10; $i++)
 
-                                                @if(isset($columns[$i]) && ($columns[$i] == "الصورة/رابط الفيديو" || $columns[$i] == "الصورة" || $columns[$i] == "الصورة الشخصية"))
-                                                    <td>
-                                                        {{--                                                            <a  herf="{{ url('/'.$tables .'/fetch_image/'. $rows->medl_id ) }}">--}}
+                                                                                        <button type="submit" name="btnSearch" class="btn btn-default">
+                                                                                            <i class="fa fa-search"></i>
 
-                                                        <img width="60"
-                                                             height="60"
-                                                             class="img"
-                                                             name="{{$rows->medl_id ?? $rows->cla_id ?? $rows->social_id}}"
-                                                             id="img"
-                                                             src="{{$tables}}/fetch_image/{{ $rows->medl_id  ?? $rows->cla_id ?? $rows->social_id}}"
-                                                             onclick="displayImage()">
+                                                                                        </button>
+                                                                                        @if($tables === 'reports')
+                                                                                            <a name="btnCancel" href="{{ url('comments/comment_reports/display') }}"
+                                                                                               onclick="window.location='{{ url('/'.$tables ) }}"
+                                                                                               class="btn btn-default">
+                                                                                                <i class="fa fa-close"></i>
 
-                                                        {{--                                                            </a>--}}
-                                                    </td>
-                                                @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")
-                                                    <?php $val = (string)$columns[$i] ?>
-                                                    <?php $color = (string)$rows->$val ?>
+                                                                                            </a>                                                                                        @else
+                                                                                            <a name="btnCancel" href="{{ url('/'.$tables) }}"
+                                                                                               onclick="window.location='{{ url('/'.$tables ) }}"
+                                                                                               class="btn btn-default">
+                                                                                                <i class="fa fa-close"></i>
 
-                                                    <td>
-                                                        {{--                                                        @foreach($columns as $columns)--}}
-                                                        <div class='box'
-                                                             style="background-color:{{$color}} !important;">
-                                                            hh
-                                                        </div>
-                                                        {{--                                                        @endforeach--}}
-                                                    </td>
+                                                                                            </a>
+                                                                                        @endif
 
-                                                @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
-                                                    <?php $val = (string)$columns[$i] ?>
-                                                    {{--                                                    @if(str_contains($rows->$val, "#"))--}}
-                                                    {{--                                                    @dd($rows->$val)--}}
 
-                                                    {{--                                                        <td>--}}
 
-                                                    {{--                                                            <div class='box'--}}
-                                                    {{--                                                                  style="background-color:red !important;">--}}
-                                                    {{--hh--}}
-                                                    {{--                                                            </div>--}}
+                                                                                    </div>
 
-                                                    {{--                                                        </td>--}}
 
-                                                    {{--                                                    @else--}}
-                                                    @if($key)
-                                                        @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))
-                                                            <td style="background-color: yellow ">{{$rows->$val}}</td>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </form>
+{{--                                                                         search --}}
+                                </div>
+
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0">
+                                    <table id="tableprofider" class="table table-hover text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            @for( $i = 0 ; $i<=10 ; $i++)
+
+
+                                                @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                    <th>{{$columns[$i]}}</th>
+                                                @endif
+
+                                            @endfor
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+
+                                            @foreach( $rows as $rows)
+
+                                                @for( $i = 0 ; $i<=10; $i++)
+
+                                                    @if(isset($columns[$i]) && ($columns[$i] == "الصورة/رابط الفيديو" || $columns[$i] == "الصورة" || $columns[$i] == "الصورة الشخصية"))
+                                                        <td>
+                                                            {{--                                                            <a  herf="{{ url('/'.$tables .'/fetch_image/'. $rows->medl_id ) }}">--}}
+
+                                                            <img width="60"
+                                                                 height="60"
+                                                                 class="img"
+                                                                 name="{{$rows->medl_id ?? $rows->cla_id ?? $rows->social_id}}"
+                                                                 id="img"
+                                                                 src="{{$tables}}/fetch_image/{{ $rows->medl_id  ?? $rows->cla_id ?? $rows->social_id}}"
+                                                                 onclick="displayImage()">
+
+                                                            {{--                                                            </a>--}}
+                                                        </td>
+                                                    @elseif(isset($columns[$i]) && $columns[$i] == "الألوان")
+                                                        <?php $val = (string)$columns[$i] ?>
+                                                        <?php $color = (string)$rows->$val ?>
+
+                                                        <td>
+                                                            {{--                                                        @foreach($columns as $columns)--}}
+                                                            <div class='box'
+                                                                 style="background-color:{{$color}} !important;">
+                                                                hh
+                                                            </div>
+                                                            {{--                                                        @endforeach--}}
+                                                        </td>
+
+                                                    @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                        <?php $val = (string)$columns[$i] ?>
+                                                        {{--                                                    @if(str_contains($rows->$val, "#"))--}}
+                                                        {{--                                                    @dd($rows->$val)--}}
+
+                                                        {{--                                                        <td>--}}
+
+                                                        {{--                                                            <div class='box'--}}
+                                                        {{--                                                                  style="background-color:red !important;">--}}
+                                                        {{--hh--}}
+                                                        {{--                                                            </div>--}}
+
+                                                        {{--                                                        </td>--}}
+
+                                                        {{--                                                    @else--}}
+                                                        @if($key)
+                                                            @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))
+                                                                <td style="background-color: yellow ">{{$rows->$val}}</td>
+                                                            @else
+                                                                <td>{{$rows->$val}}</td>
+                                                            @endif
                                                         @else
                                                             <td>{{$rows->$val}}</td>
                                                         @endif
-                                                    @else
-                                                        <td>{{$rows->$val}}</td>
+                                                        {{--                                                    @endif--}}
+
                                                     @endif
-                                                    {{--                                                    @endif--}}
+                                                @endfor
 
-                                                @endif
-                                            @endfor
-
-                                            <td class="project-actions text-right">
-                                                @if($displayDetailes)
-                                                    <a class="btn btn-secondary btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/displayDetailes') }}">
-                                                        <i class="fa ">
-                                                        </i>
-                                                        عرض التفاصيل
-                                                    </a>
-                                                @endif
-                                                @if(isset($rows->state))
-                                                    @if($rows->state)
-                                                        <a class="btn btn-success btn-sm"
-                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                                <td class="project-actions text-right">
+                                                    @if($displayDetailes)
+                                                        <a class="btn btn-secondary btn-sm"
+                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/displayDetailes') }}">
                                                             <i class="fa ">
                                                             </i>
-                                                            تعطيل
-                                                        </a>
-                                                    @elseif(!$rows->state)
-                                                        <a class="btn btn-primary btn-sm"
-                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
-                                                            <i class="fa ">
-                                                            </i>
-                                                            تفعيل
+                                                            عرض التفاصيل
                                                         </a>
                                                     @endif
+                                                    @if(isset($rows->state))
+                                                        @if($rows->state)
+                                                            <a class="btn btn-success btn-sm"
+                                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                                                <i class="fa ">
+                                                                </i>
+                                                                @if($tables === 'reports')
+                                                                    تجاهل
+                                                                @else
+                                                                    تعطيل
+                                                                @endif
+
+                                                            </a>
+                                                        @elseif(!$rows->state)
+                                                            <a class="btn btn-primary btn-sm"
+                                                               href="{{ url('/'.$tables .'/'. $rows->fakeId . '/enableordisable') }}">
+                                                                <i class="fa ">
+                                                                </i>
+                                                                @if($tables === 'reports')
+                                                                    الغاء التجاهل
+                                                                @else
+                                                                    تفعيل
+                                                                @endif
+                                                            </a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if(!$noUpdateBtn)
+
+                                                        <a class="btn btn-info btn-sm"
+                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
+                                                            <i class="fa fa-pencil">
+
+                                                            </i>
+                                                            تعديل
+                                                        </a>
+                                                    @endif
+
+                                                    @if(!$noDeleteBtn)
+
+                                                        <a class="btn btn-danger btn-sm deletee"
+                                                           href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
+                                                            <i class="fa fa-trash">
+                                                            </i>
+                                                            حذف
+                                                        </a>
+                                                </td>
                                                 @endif
 
-                                                @if(!$noUpdateBtn)
 
-                                                    <a class="btn btn-info btn-sm"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/update') }}">
-                                                        <i class="fa fa-pencil">
+                                        </tr>
 
-                                                        </i>
-                                                        تعديل
-                                                    </a>
-                                                @endif
+                                        @endforeach
 
-                                                @if(!$noDeleteBtn)
+                                        </tbody>
+                                    </table>
+                                    {{--                                {!! $rows->links() !!}--}}
 
-                                                    <a class="btn btn-danger btn-sm deletee"
-                                                       href="{{ url('/'.$tables .'/'. $rows->fakeId . '/delete') }}">
-                                                        <i class="fa fa-trash">
-                                                        </i>
-                                                        حذف
-                                                    </a>
-                                            </td>
-                                            @endif
-
-
-                                    </tr>
-
-                                    @endforeach
-
-                                    </tbody>
-                                </table>
-                                {{--                                {!! $rows->links() !!}--}}
-
+                                </div>
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                </div>
 
-            </div>
+                </div>
             @endif
 
 
