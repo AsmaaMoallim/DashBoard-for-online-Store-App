@@ -95,15 +95,12 @@ class productController extends Controller
         $product = new Product();
         $measure = new Measure();
 
-        $product->prod_id = 1016;
         $product->prod_name = $request->prod_name;
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
-//        $product->sub_id = $request->sub_id;
-        $product->sub_id = 50;
+        $product->sub_id = $request->sub_id;
         $product->prod_desc_img = $request->prod_desc_img;
         $measure->mesu_value = $request->mesu_value;
-
         $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
         $product->fakeId = $maxFakeId;
@@ -111,43 +108,29 @@ class productController extends Controller
 
         //*** MED SAVE **
         $medl_id = $request->input('medl_id');
-//        foreach ($medl_id as $medl_id) {
-//            $new = new prodHasMedia();
-//            $new->prod_id = $product->prod_id;
-//            $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
-//            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
-//            $new->fakeId = $maxFakeIdProdHas;
-//            $new->medl_id = $medl_id;
-//            $new->save();
-//        }
+        foreach ($medl_id as $medl_id) {
+            $prodMedia = new prodHasMedia();
+            $prodMedia->prod_id = $product->prod_id;
+            $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
+            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
+            $prodMedia->fakeId = $maxFakeIdProdHas;
+            $prodMedia->medl_id = $medl_id;
+            $prodMedia->save();
+        }
 
         //** measure SAVE */
-//        $mesu_id = $request->input('mesu_id');
-//        foreach ($mesu_id as $m){
-//            $mesur = new ProdAvilIn();
-//            $max = ProdAvilIn::orderBy("fakeId", 'desc')->first(); // gets the whole row
-//            $maxFakeIdPosIN = $max? $max->fakeId + 1 : 1;
-//            $mesur->fakeId = $maxFakeIdPosIN;
-//            $mesur->mesu_id = $measure->mesu_id;
-//            $mesur->prod_id = $product->prod_id;
-//            $mesur->save();
-//    }
+        $mesu_id = $request->input('mesu_id');
+        foreach ($mesu_id as $mesu_id){
+         $prodMesu = new ProdAvilIn();
+         $prodMesu->prod_id = $product->prod_id;
+         $max = ProdAvilIn::orderBy("fakeId", 'desc')->first();
+         $maxFakeIdProdAvil = $max ? $max->fakeId + 1 : 1;
+         $prodMesu->fakeId = $maxFakeIdProdAvil;
+         $prodMesu->mesu_id = $mesu_id;
+         $prodMesu->save();
+        }
 
-//
-
-        //COLOR SAVE
-//        $color = $request->input('box');
-//        foreach ($color as $c){
-//            $prod_avil_color = new ProductProdAvilColor();
-//            $prod_avil_color->prod_id = $product->prod_id;
-//            $max = ProductProdAvilColor::orderBy("fakeId", 'desc')->first();
-//            $maxFake = $max? $max->fakeId + 1 : 1;
-//            $prod_avil_color->fakeId = $maxFakeId;
-//            $prod_avil_color->prod_avil_color = $c;
-//            $prod_avil_color->save();
-//        }
-
-        return redirect('/home');
+        return redirect('/products');
     }
 
     public function enableordisable($id)
@@ -166,10 +149,10 @@ class productController extends Controller
     public function insertData(Product $product){
         $measures = Measure::all();
         $sections = SubSection::all();
-        $data = MediaLibrary::all();
+        $medialib = MediaLibrary::all();
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections,'data'=>$data])->with( compact('data'));
+            'sections' => $sections])->with( compact('medialib'));
     }
 
     public function fetch_image($medl_id)
@@ -198,7 +181,8 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
-
+        $media = MediaLibrary::all();
+        $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
 
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
@@ -214,7 +198,8 @@ class productController extends Controller
 
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)->with('id', $id);
+            'productProdAvilColor' => $productProdAvilColor,'medialib'=>$media])
+            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
 

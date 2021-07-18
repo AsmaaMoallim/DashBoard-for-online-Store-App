@@ -80,7 +80,6 @@
 
                                         @if ($section->sub_id == $currentSections->sub_id)
                                             <option
-
                                                 value="{{$section->sub_id}}"
                                                 selected="selected">{{$currentSections->sub_name}}
                                             </option>
@@ -91,9 +90,7 @@
                                     @else
                                         <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>
 
-
                                     @endif
-                                    /////////
 
                                 @endforeach
                             </select>
@@ -109,11 +106,24 @@
                                     <th width="30%">اسم الصورة</th>
                                 </tr>
                                 </thead>
-                                @foreach($data as $row)
+                                @foreach($medialib as $media)
                                     <tbody>
                                     <tr>
-                                        <td> <input type="checkbox" name="medl_id[]" value="{{$row['medl_id']}}"> <img src="fetch_image/{{$row->medl_id}}" class="img-thumbnail" width="75" /> </td>
-                                        <td>  {{$row->medl_name}} </td>
+                                        <td>
+                                            <input type="checkbox" name="medl_id[]" value="{{$media['medl_id']}}"
+                                            @if(isset($id))
+                                                @foreach($currentMedia as $currentMedia)
+                                                    @if($media->medl_id == $currentMedia->medl_id)
+                                                        checked="checked"
+                                            @endif
+                                            @endforeach
+                                            @endif >
+{{--                                             <img src="fetch_image/{{$currentMedia->medl_id}}" class="img-thumbnail" width="75" >--}}
+                                            <img src="fetch_image/{{$media->medl_id}}" class="img-thumbnail" width="75" />
+
+                                        </td>
+
+                                        <td>  {{$media->medl_name}} </td>
                                     </tr>
                                     </tbody>
                                 @endforeach
@@ -141,11 +151,9 @@
                                        checked="checked"
                                     @endif
 
-
                                     @endforeach
 
                                     @endif
-
 
                                 > {{$measure->mesu_value}}
                                 <br>
@@ -155,16 +163,12 @@
                         <div class="form-group col-sm-10 ">
                             <label>الألوان المتاحة</label>
                             <div>
-                                <input id="color" type="color" class="mr-1">
+                                <input name="box[]" id="color" type="color" class="mr-1">
                                 <a style=" color: red" onclick="catshColor()"> اضغط لاضافة اللون </a>
 
                             </div>
-
-
                             <div>
-
                                 <div class="row" id="ColorRow"  name="box[]">
-
                                     @if(isset($id))
                                         @foreach($productProdAvilColor as $productProdAvilColor)
                                             <div class='box'

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\MediaLibrary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
 
 class bannerController extends Controller
 {
@@ -53,8 +55,17 @@ class bannerController extends Controller
     }
 
     public function insertData(){
-        $ban_img = MediaLibrary::all();
-    return view('new-banner-form',['ban_img'=>$ban_img]);
+        $data = MediaLibrary::all();
+    return view('new-banner-form')->with( compact('data'));
+    }
+
+    public function fetch_image($medl_id)
+    {
+        $image = MediaLibrary::findOrFail($medl_id);
+        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
     }
 
     function store(Request $request)
@@ -62,9 +73,9 @@ class bannerController extends Controller
         $banner = new Banner();
         $banner->ban_name = $request->ban_name;
         $banner->medl_id = $request->medl_id;
-        $max = Banner::orderBy("fakeId", 'desc')->first(); // gets the whole row
-        $maxFakeId = $max? $max->fakeId + 1 : 1;
-        $banner->fakeId =$maxFakeId;
+        $max = Banner::orderBy("fakeId", 'desc')->first();
+        $maxFakeId = $max ? $max->fakeId + 1 : 1;
+        $banner->fakeId = $maxFakeId;
         $banner->save();
         return redirect('/banners');
     }

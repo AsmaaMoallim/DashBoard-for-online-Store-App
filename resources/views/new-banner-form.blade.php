@@ -42,77 +42,56 @@
                             <x-form.photo-input name="medl_id" label="الصورة" ></x-form.photo-input>
 
                     @else
-{{--                        <x-form.photo-input name="medl_id" label="الصورة" ></x-form.photo-input>--}}
 
-                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-                        <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" ></script>
+                        <label class="pb-1">صورة البانر</label>
 
-                        <select id="demo-htmlselect">
-                            <option value="0" data-imagesrc="https://i.imgur.com/XkuTj3B.png"
-                                    data-description="Description with Facebook">Facebook</option>
-                            <option value="1" data-imagesrc="https://i.imgur.com/8ScLNnk.png"
-                                    data-description="Description with Twitter">Twitter</option>
-                            <option value="2" selected="selected" data-imagesrc="https://i.imgur.com/aDNdibj.png"
-                                    data-description="Description with LinkedIn">LinkedIn</option>
-                            <option value="3" data-imagesrc="https://i.imgur.com/kFAk2DX.png"
-                                    data-description="Description with Foursquare">Foursquare</option>
-                        </select>
+                        <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                            <table class="table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="70%">الصورة</th>
+                                    <th width="30%">اسم الصورة</th>
+                                </tr>
+                                </thead>
+                                @foreach($data as $row)
+                                    <tbody>
+                                    <tr>
+                                        <td> <input type="radio" name="medl_id" value="{{$row['medl_id']}}"> <img src="fetch_image/{{$row->medl_id}}" class="img-thumbnail" width="75" /> </td>
+                                        <td>  {{$row->medl_name}} </td>
+                                    </tr>
+                                    </tbody>
+                                @endforeach
+                            </table>
+                        </div>
 
+{{--                    <select>--}}
+{{--                        @foreach($data as $ban_img)--}}
+{{--                            <option onclick="setValue({{" $ban_img->medl_id"}}); showElement({{$ban_img->medl_img_ved}});"></option>--}}
+{{--                            <img src="{{asset($ban_img->medl_img_ved)}}" style="max-width: 130px;">Hatchback</li>--}}
 
+{{--                        @endforeach--}}
 
-{{--                    <script src="css/chosen.css" ></script>--}}
-{{--                        <script src="css/ImageSelect.css" ></script>--}}
+{{--                    </select>--}}
+{{--                        <script>--}}
+{{--                            /**--}}
+{{--                             * Show or hide the element with the matching id.--}}
+{{--                             * @param {string} divId The id of the element to show/hide.--}}
+{{--                             * @param {boolean} show True to show, false to hide.--}}
+{{--                             */--}}
+{{--                            function showElement(divId, show) {--}}
+{{--                                document.getElementById(divId).style.display = (show) ? "inline" : "none";--}}
+{{--                            }--}}
 
-{{--                        <script type="text/javascript">--}}
-{{--                            function swapImage(){--}}
-{{--                                var image = document.getElementById("imageToSwap");--}}
-{{--                                image = image.value;--}}
-{{--                            };--}}
+{{--                            /**--}}
+{{--                             * Set the value of the element with the matching id.--}}
+{{--                             * @param {string} divId The id of the element to change.--}}
+{{--                             * @param {string} value Value to set.--}}
+{{--                             */--}}
+{{--                            function setValue(divId, value) {--}}
+{{--                                document.getElementById(divId).value = value;--}}
+{{--                            }--}}
+
 {{--                        </script>--}}
-
-{{--                    --}}
-
-
-
-
-{{--                        <div class="form-group col-sm-10 ">--}}
-{{--                            <label>الصورة</label>--}}
-{{--                            <select name="pos_id" onchange="showImage">--}}
-{{--                                @foreach($ban_img as $ban_img)--}}
-{{--                                    <option  id="option" value="{{$ban_img->medl_id}}"> {{$ban_img->medl_img_ved}} </option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                            <img  id="img" src="">--}}
-{{--                        </div>--}}
-
-
-                    <select>
-                        @foreach($ban_img as $ban_img)
-                            <option onclick="setValue({{" $ban_img->medl_id"}}); showElement({{$ban_img->medl_img_ved}});"></option>
-                            <img src="{{asset($ban_img->medl_img_ved)}}" style="max-width: 130px;">Hatchback</li>
-
-                        @endforeach
-                    </select>
-                        <script>
-                            /**
-                             * Show or hide the element with the matching id.
-                             * @param {string} divId The id of the element to show/hide.
-                             * @param {boolean} show True to show, false to hide.
-                             */
-                            function showElement(divId, show) {
-                                document.getElementById(divId).style.display = (show) ? "inline" : "none";
-                            }
-
-                            /**
-                             * Set the value of the element with the matching id.
-                             * @param {string} divId The id of the element to change.
-                             * @param {string} value Value to set.
-                             */
-                            function setValue(divId, value) {
-                                document.getElementById(divId).value = value;
-                            }
-
-                        </script>
 
 
 
