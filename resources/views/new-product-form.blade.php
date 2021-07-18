@@ -163,7 +163,7 @@
 
                             <div>
 
-                                <div class="row" id="ColorRow">
+                                <div class="row" id="ColorRow"  name="box[]">
 
                                     @if(isset($id))
                                         @foreach($productProdAvilColor as $productProdAvilColor)

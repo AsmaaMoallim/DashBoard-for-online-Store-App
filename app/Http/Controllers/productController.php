@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
 //use Faker\Provider\Image;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Images;
@@ -81,10 +82,9 @@ class productController extends Controller
     function store(Request $request)
     {
         $product = new Product();
-        $prod_avil_color = new ProductProdAvilColor();
         $measure = new Measure();
 
-        $product->prod_id = 1003;
+        $product->prod_id = 1016;
         $product->prod_name = $request->prod_name;
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
@@ -97,19 +97,44 @@ class productController extends Controller
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
         $product->fakeId = $maxFakeId;
         $product->save();
-        $prod_avil_color->save();
 
+        //*** MED SAVE **
         $medl_id = $request->input('medl_id');
+//        foreach ($medl_id as $medl_id) {
+//            $new = new prodHasMedia();
+//            $new->prod_id = $product->prod_id;
+//            $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
+//            $new->fakeId = $maxFakeIdProdHas;
+//            $new->medl_id = $medl_id;
+//            $new->save();
+//        }
 
-        foreach ($medl_id as $medl_id) {
-            $new = new prodHasMedia();
-            $new->prod_id = $product->prod_id;
-            $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
-            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
-            $new->fakeId = $maxFakeIdProdHas;
-            $new->medl_id = $medl_id;
-            $new->save();
-        }
+        //** measure SAVE */
+//        $mesu_id = $request->input('mesu_id');
+//        foreach ($mesu_id as $m){
+//            $mesur = new ProdAvilIn();
+//            $max = ProdAvilIn::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//            $maxFakeIdPosIN = $max? $max->fakeId + 1 : 1;
+//            $mesur->fakeId = $maxFakeIdPosIN;
+//            $mesur->mesu_id = $measure->mesu_id;
+//            $mesur->prod_id = $product->prod_id;
+//            $mesur->save();
+//    }
+
+//
+
+        //COLOR SAVE
+//        $color = $request->input('box');
+//        foreach ($color as $c){
+//            $prod_avil_color = new ProductProdAvilColor();
+//            $prod_avil_color->prod_id = $product->prod_id;
+//            $max = ProductProdAvilColor::orderBy("fakeId", 'desc')->first();
+//            $maxFake = $max? $max->fakeId + 1 : 1;
+//            $prod_avil_color->fakeId = $maxFakeId;
+//            $prod_avil_color->prod_avil_color = $c;
+//            $prod_avil_color->save();
+//        }
 
         return redirect('/home');
     }
