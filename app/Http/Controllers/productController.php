@@ -119,18 +119,6 @@ class productController extends Controller
          $prodMesu->save();
         }
 
-//        //COLOR SAVE
-//        $color = $request->get('box');
-//        foreach ($color as $color){
-//            $prod_avil_color = new ProductProdAvilColor();
-//            $prod_avil_color->prod_id = $product->prod_id;
-//            $max = ProductProdAvilColor::orderBy("fakeId", 'desc')->first();
-//            $maxFake = $max? $max->fakeId + 1 : 1;
-//            $prod_avil_color->fakeId = $maxFake;
-//            $prod_avil_color->prod_avil_color = $color;
-//            $prod_avil_color->save();
-//        }
-
         return redirect('/products');
     }
 
@@ -150,10 +138,10 @@ class productController extends Controller
     public function insertData(Product $product){
         $measures = Measure::all();
         $sections = SubSection::all();
-        $data = MediaLibrary::all();
+        $medialib = MediaLibrary::all();
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections,'data'=>$data])->with( compact('data'));
+            'sections' => $sections])->with( compact('medialib'));
     }
 
     public function fetch_image($medl_id)
@@ -182,7 +170,8 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
-
+        $media = MediaLibrary::all();
+        $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
 
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
@@ -198,7 +187,8 @@ class productController extends Controller
 
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)->with('id', $id);
+            'productProdAvilColor' => $productProdAvilColor,'medialib'=>$media])
+            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
 
