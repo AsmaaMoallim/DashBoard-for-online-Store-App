@@ -171,7 +171,6 @@
                                     @endif
 
                                 > {{$measure->mesu_value}}
-                                <br>
                             @endforeach
                         </div>
                     </div>

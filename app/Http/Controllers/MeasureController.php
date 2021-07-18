@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Measure;
+use App\Models\measuresImages;
+use App\Models\MediaLibrary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
 
 class MeasureController extends Controller
 {
@@ -32,9 +36,18 @@ class MeasureController extends Controller
 
     public function insertData()
     {
-        return view('update-measures-form');
+        $mediaLibrary = MediaLibrary::all();
+        return view('update-measures-form')->with( compact('mediaLibrary'));
     }
 
+    public function fetch_image($mesu_id)
+    {
+        $image = Measure::findOrFail($mesu_id);
+        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
+    }
 
     public function destroy($id)
     {
@@ -65,14 +78,22 @@ class MeasureController extends Controller
 
     function store(Request $request)
     {
+        $mesuImage = new MediaLibrary();
+        $mesuImage->medl_id = $request->medl_id;
+
+        return redirect('/measure');
     }
 
         public function update(Request $request, Measure $measure,$id)
     {
-        $currentValues = Measure::where("fakeId","=","$id")->first();
+        $currentValues = measuresImages::where("fakeId","=","$id")->first();
+        $mediaLibrary = MediaLibrary::all();
+        $currentMedias = MediaLibrary::all()
+            ->where("medl_id","=","$currentValues->medl_id");
 
         return view('update-measures-form')->with('currentValues' , $currentValues)
-            ->with('id', $id);
+                ->with('mediaLibrary',$mediaLibrary)-with('currentMedias',$currentMedias)
+                ->with('id', $id);
     }
 
 
