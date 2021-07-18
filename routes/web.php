@@ -47,6 +47,7 @@ Route::get('social_media_link/{id}/update/fetch_image', [\App\Http\Controllers\s
 ////////////////////////////////////////////////////  displayDetailes
 Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productController::class, 'displayDetailes'])->name('products.displayDetailes');
 Route::get('/email_box/{int}/displayDetailes', [App\Http\Controllers\emailBoxController::class, 'displayDetailes'])->name('email_box.displayDetailes');
+Route::get('/orders/{int}/displayDetailes', [App\Http\Controllers\orderController::class, 'displayDetailes'])->name('order.displayDetailes');
 
 
 
@@ -208,7 +209,6 @@ Route::post('/store-contact-information-phone', [\App\Http\Controllers\sysContac
 ////////////////////////////////////////////////////   display
 Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
 Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
-Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
 //Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
 Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
 Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
