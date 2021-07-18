@@ -125,6 +125,26 @@
                                     </div>
                                     <!-- /.row -->
 
+                                    <div class="row invoice-info">
+                                        <div class="col-lg-4 invoice-col">
+                                            <address>
+                                                <strong>صور المنتج : </strong><br>
+
+                                            </address>
+
+                                            <address>
+
+                                                @foreach($rows as $rows)
+                                                    <img
+                                                        width="100"
+                                                        height="100"
+                                                        src="update/fetch_image/{{$rows->medl_id}}">
+                                                @endforeach
+                                            </address>
+                                        </div>
+
+                                    </div>
+
                                     {{--                            <!-- Table row -->--}}
                                     {{--                            <div class="row">--}}
                                     {{--                                <div class="col-12 table-responsive">--}}

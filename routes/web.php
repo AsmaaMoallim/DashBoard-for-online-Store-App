@@ -24,6 +24,7 @@ Route::get('banners/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryContro
 
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
+Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
 
 Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 Route::get('banners/{int}/update/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);

@@ -70,19 +70,29 @@ class productController extends Controller
 //                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
 //            ->where("product.fakeId", "=", "$id")
 //            ->get();
+//        $rows = \DB::table('product')
+//            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+//            ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
+//            ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
+//            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+//            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+//            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
+//            ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
+//                'media_library.medl_id AS الصورة', 'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
+//                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
+//            ->where("product.fakeId", "=", "$id")
+//            ->groupby('اسم المنتج', 'القسم الفرعي', 'السعر','الكمية المتوفرة حاليًا','المقاسات',)
+//            ->get();
+//        dd($rows);
+
         $rows = \DB::table('product')
-            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-//            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
-            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
-            ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
-                'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
-                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
+            ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
+            ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
+            ->select('product.prod_name', 'media_library.medl_id')
             ->where("product.fakeId", "=", "$id")
+            ->groupby('product.prod_name','media_library.medl_id')
             ->get();
-
-
+//        dd($rows);
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
 
         return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename, 'measures' => $measures, 'currentMeasures' => $currentMeasures,
