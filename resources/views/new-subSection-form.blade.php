@@ -35,17 +35,14 @@
                                   placeholder="ادخل اسم القسم الفرعي الجديد"
                                   value="{{$sub_name ?? ''}}"></x-form.input>
 
-
-
                     <div class="form-group col-sm-10 ">
                         <label>القسم الرئيسي التابع له</label>
-                        <select name="main_id" onchange="GetSelectedItem">
+                        <select onchange="GetSelectedItem">
                             @foreach($mainSections as $mainSection)
                                 @if(isset($id))
 
                                 @if ($mainSection->main_id == $currentValues->main_id)
                                     <option
-
                                         value="{{$mainSection->main_id}}"
                                             selected="selected">{{$CurrentmainSection}}
                                 </option>
@@ -67,44 +64,56 @@
                             @endforeach
                         </select>
                     </div>
-                    @if(isset($id))
+                    <label class="pb-1">صورة القسم الرئيسي</label>
+                    <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                        <table class="table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="70%">الصورة</th>
+                                <th width="30%">اسم الصورة</th>
+                            </tr>
+                            </thead>
 
+                            @foreach($mediaLibrary as $media)
+                                <?php  $med = $media->medl_id ?>
 
-                        <div class="form-group col-sm-10">
-
-                            <img src="{{$medl_img_ved}}">
-                        </div>
-                        <x-form.photo-input name="medl_id" label="الصورة" ></x-form.photo-input>
-
-                    @else
-                        <label class="pb-1">صورة القسم الفرعي</label>
-
-                        <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
-                            <table class="table-bordered">
-                                <thead>
+                                <tbody>
                                 <tr>
-                                    <th width="70%">الصورة</th>
-                                    <th width="30%">اسم الصورة</th>
+                                    <td>
+                                        @if(isset($id))
+                                            <input type="radio" name="medl_id"
+                                                   value="{{$media['medl_id']}}"
+
+                                                   @foreach($currentMedias as $currentMedia)
+                                                   <?php   $curMedi = $currentMedia->medl_id ?>
+
+                                                   @if($med == $curMedi)
+                                                   checked="checked"
+                                                @endif
+                                                @endforeach
+                                            >
+
+                                            <img src="update/fetch_image/{{$media->medl_id}}" class="img-thumbnail" width="75" />
+                                        @else
+                                            <input type="radio" name="medl_id" value="{{$media['medl_id']}}">
+                                            <img src="fetch_image/{{$med}}" class="img-thumbnail" width="75"/>
+                                        @endif
+                                    </td>
+
+                                    <td>  {{$media->medl_name}} </td>
+
                                 </tr>
-                                </thead>
-                                @foreach($data as $row)
-                                    <tbody>
-                                    <tr>
-                                        <td> <input type="radio" name="medl_id" value="{{$row['medl_id']}}"> <img src="fetch_image/{{$row->medl_id}}" class="img-thumbnail" width="75" /> </td>
-                                        <td>  {{$row->medl_name}} </td>
-                                    </tr>
-                                    </tbody>
-                                @endforeach
-                            </table>
-                        </div>
-                    @endif
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+
                     <script>
                         function GetSelectedItem(value) {
                             var option = document.getElementById(value);
                             var selectedop = option.options[option.selectedIndex].text;
                         }
                     </script>
-
 
                     <x-form.cancel-button indexPage="sub_sections"></x-form.cancel-button>
                     <x-form.save-button></x-form.save-button>

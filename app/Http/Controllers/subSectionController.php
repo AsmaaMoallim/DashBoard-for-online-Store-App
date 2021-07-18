@@ -47,8 +47,8 @@ class subSectionController extends Controller
 
     public function insertData(){
         $mainSection = MainSection::all();
-        $data = MediaLibrary::all();
-        return view('new-subSection-form', ['mainSections' => $mainSection])->with( compact('data'));;
+        $mediaLibrary = MediaLibrary::all();
+        return view('new-subSection-form', ['mainSections' => $mainSection])->with( compact('mediaLibrary'));;
     }
 
     public function delete($id)
@@ -94,9 +94,15 @@ class subSectionController extends Controller
         $mainSection = MainSection::all();
         $currentValues = SubSection::where("fakeId","=","$id")->first();;
         $CurrentmainSection = MainSection::find($currentValues->main_id);
+//        $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
+
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
+        $mediaLibrary = MediaLibrary::all();
+        $currentMedias = MediaLibrary::all()
+            ->where("medl_id","=","$currentValues->medl_id");
+
         return view('new-subSection-form',  ['CurrentmainSection' => $CurrentmainSection, 'mainSections' => $mainSection])->with('currentValues', $currentValues)
-            ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
+            ->with('id', $id)->with('currentforeignValues',$currentforeignValues)->with('mediaLibrary',$mediaLibrary)->with('currentMedias',$currentMedias);
 
     }
 

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $social_id
  * @property string $social_site_name
 // * @property boolean|null $social_img
+ * @property string $social_img
  * @property string $social_url
  * @property bool $state
  * @property int $fakeId

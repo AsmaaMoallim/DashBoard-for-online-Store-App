@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\NotifiSendTo;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 
@@ -43,11 +44,25 @@ class notificationsController extends Controller
         $notification = new Notification();
         $notification->notifi_title = $request->notifi_title;
         $notification->notifi_content = $request->notifi_content;
-        $notification->man_id = $request->man_id;
-        $max = Notification::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//        $notification->man_id = $request->man_id;
+        $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
         $notification->save();
+
+        $client_id = $request->input('man_id');
+        foreach ($client_id as $client_id){
+            $notiSent = new NotifiSendTo();
+            $notiSent->notifi_id = $notification->notifi_id;
+
+            $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
+            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
+            $notiSent->fakeId = $maxFakeIdProdHas;
+            $notiSent>$client_id = $client_id;
+            $notiSent->save();
+        }
+
+
         return redirect('/home');
     }
 

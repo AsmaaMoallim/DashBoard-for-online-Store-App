@@ -80,7 +80,6 @@ class socialMediaLinksController extends Controller
     }
 
 
-
     public function store_update(Request $request, $id){
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
         $data->update($request->all());

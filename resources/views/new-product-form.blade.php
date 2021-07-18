@@ -116,15 +116,11 @@
                                             @if(isset($id))
                                                 <input type="checkbox" name="medl_id[]"
                                                        value="{{$media['medl_id']}}"
+
                                                        @foreach($currentMedia as $currentMedias)
                                                        <?php   $curMedi = $currentMedias->medl_id ?>
-
                                                        @if($med == $curMedi)
-
-
                                                        checked="checked"
-
-
                                                     @endif
                                                     @endforeach
                                                 >
@@ -138,9 +134,6 @@
                                                 <img src="fetch_image/{{$med}}" class="img-thumbnail"
                                                      width="75"/>
                                             @endif
-
-
-
 
                                         </td>
 
@@ -252,7 +245,6 @@
                                     }
                                 }
                             }
-
 
                             if (display === true) {
                                 // var elemen = document.getElementById('color');

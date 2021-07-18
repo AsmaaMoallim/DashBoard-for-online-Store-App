@@ -30,9 +30,9 @@ class mainSectionController extends Controller
     }
 
     public function insertData(){
-        $data = MediaLibrary::all();
+        $mediaLibrary = MediaLibrary::all();
 
-        return view('new-maninSection-form')->with( compact('data'));
+        return view('new-maninSection-form')->with( compact('mediaLibrary'));
     }
 
     public function enableordisable($id)
@@ -90,11 +90,14 @@ class mainSectionController extends Controller
     public function update(Request $request, MainSection $mainSection, $id)
     {
         $currentValues = MainSection::where("fakeId","=","$id")->first();
-
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
-        return view('new-maninSection-form')->with('currentValues', $currentValues)
-            ->with('id', $id)->with('currentforeignValues',$currentforeignValues);
+        $mediaLibrary = MediaLibrary::all();
+        $currentMedias = MediaLibrary::all()
+            ->where("medl_id","=","$currentValues->medl_id");
 
+        return view('new-maninSection-form')->with('currentValues', $currentValues)
+            ->with('id', $id)->with('currentforeignValues',$currentforeignValues)
+            ->with('mediaLibrary',$mediaLibrary)->with('currentMedias',$currentMedias);
     }
 
     public function store_update(Request $request, $id){
