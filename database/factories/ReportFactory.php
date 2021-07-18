@@ -26,7 +26,6 @@ class ReportFactory extends Factory
     {
         static $fakeID = 0;
         return [
-            'prod_id' => $this->faker->randomElement(Product::pluck('prod_id')->toArray()),
             'cla_id' => $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
             'ignored' => $this->faker->boolean(50),
             'com_id' => $this->faker->randomElement(Comment::pluck('com_id')->toArray()),

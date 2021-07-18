@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $report_id
  * @property int $cla_id
- * @property int $prod_id
  * @property int $com_id
  * @property bool $ignored
  * @property int $fakeId
@@ -33,7 +32,6 @@ class Report extends Model
 
 	protected $casts = [
 		'cla_id' => 'int',
-		'prod_id' => 'int',
 		'com_id' => 'int',
 		'ignored' => 'bool',
 		'fakeId' => 'int'
