@@ -19,36 +19,31 @@
                                       label="عنوان الإشعار" placeholder="أدخل عنوان الإشعار"/>
 
                         <script>
-                            function selectAll()
-                            {
-                                options = document.getElementsByTagName("option");
-                                for ( i=0; i<options.length; i++)
-                                {
-                                    options[i].selected = "true";
+                            function toggle(source) {
+                                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    if (checkboxes[i] != source)
+                                        checkboxes[i].checked = source.checked;
                                 }
-                            }
-
-                                function GetSelectedItem(value) {
-                                var option = document.getElementById(value);
-                                var selectedop = option.options[option.selectedIndex].text;
                             }
                         </script>
 
                         <div class="form-group col-sm-10 ">
                             <label>العميل</label>
                             <br>
-                            <select name="man_id" onchange="GetSelectedItem" id="man_id" multiple >
+                        @foreach($clients as $clients)
+                            <?php $clienttt = $clients->cla_id?>
 
-                                <option
-                                    name="man_id" onclick="selectAll()"> الكل </option>
-                                @foreach($clients as $client)
-                                    <option id="man_id" name="man_id"
-                                            value="{{$client->cal_id}}"> {{$client->cal_frist_name}}{{$client->cla_last_name}}
-                                    </option>
-                                @endforeach
+                                <input type="checkbox"  name="cla_id[]" id="cal_id" value="{{$clienttt}}">
+                                {{$clients->cal_frist_name}}{{$clients->cla_last_name}}
+                                    <br>
+                            @endforeach
 
-                            </select>
+                            <input name="cla_id[]" type="checkbox"
+                                   value="{{$clienttt}}"
+                                   onclick="toggle(this);"/> الكل <br />
                         </div>
+
                         <div>
                             <label>نص الإشعار</label>
                             <br>
