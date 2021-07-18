@@ -21,8 +21,6 @@ Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibrary
 Route::get('main_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('sub_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('banners/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
-Route::get('clients/fetch_image/{id}', [\App\Http\Controllers\clientController::class, 'fetch_image']);
-Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
@@ -35,6 +33,12 @@ Route::get('main_sections/{int}/update/fetch_image/{id}', [\App\Http\Controllers
 
 Route::get('sub_sections/new-subSection-form/fetch_image/{id}', [\App\Http\Controllers\subSectionController::class, 'fetch_image']);
 Route::get('sub_sections/{int}/update/fetch_image/{id}', [\App\Http\Controllers\subSectionController::class, 'fetch_image']);
+
+Route::get('clients/fetch_image/{id}', [\App\Http\Controllers\clientController::class, 'fetch_image']);
+Route::get('clients/{id}/update/fetch_image', [\App\Http\Controllers\clientController::class, 'fetch_image']);
+
+Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
+Route::get('social_media_link/{id}/update/fetch_image', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 
 //Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 

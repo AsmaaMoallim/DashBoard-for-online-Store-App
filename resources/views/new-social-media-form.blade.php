@@ -38,13 +38,18 @@
 
                     @if(isset($id))
 
+                        <x-form.photo-input name="social_img" label="صورة الموقع"
+                                            value="{{$social_img ?? ''}}"></x-form.photo-input>
 
                         <div class="form-group col-sm-10">
+                            <label>الصورة الحالية:    </label>
 
-                            <img src="{{$social_img}}">
+                            <img
+                                width="100"
+                                height="100"
+                                src="update/fetch_image">
                         </div>
 
-                        <x-form.photo-input name="social_img" label="صورة الموقع"></x-form.photo-input>
 
                     @else
                         <x-form.photo-input name="social_img" label="صورة الموقع"></x-form.photo-input>
