@@ -52,13 +52,13 @@ class notificationsController extends Controller
         $notification->save();
 
         $cla_id = $request->input('cla_id');
-        foreach ($cla_id as $cla_id){
+        for ($x = 0; $x < sizeof($cla_id); $x++) {
             $notiSent = new NotifiSendTo();
             $notiSent->notifi_id = $notification->notifi_id;
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
             $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
             $notiSent->fakeId = $maxFakeIdProdHas;
-            $notiSent->cla_id = $cla_id;
+            $notiSent->cla_id = $cla_id[$x];
             $notiSent->save();
         }
 
