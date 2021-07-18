@@ -45,27 +45,25 @@ class notificationsController extends Controller
         $notification = new Notification();
         $notification->notifi_title = $request->notifi_title;
         $notification->notifi_content = $request->notifi_content;
-//        $notification->man_id = $request->man_id;
+        $notification->man_id = Manager::pluck('man_id')->first();
         $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
         $notification->man_id = Manager::pluck('man_id')->first();
 //        $notification->save();
 
-        $client_id = $request->input('man_id');
-        foreach ($client_id as $client_id){
+        $cla_id = $request->input('cla_id');
+        foreach ($cla_id as $cla_id){
             $notiSent = new NotifiSendTo();
             $notiSent->notifi_id = $notification->notifi_id;
-
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
             $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
             $notiSent->fakeId = $maxFakeIdProdHas;
-            $notiSent>$client_id = $client_id;
+            $notiSent->cla_id = $cla_id;
             $notiSent->save();
         }
 
-
-        return redirect('/home');
+        return redirect('/notifications');
     }
 
     public function search(Request $request){
