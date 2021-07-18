@@ -21,11 +21,10 @@ Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibrary
 Route::get('main_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('sub_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('banners/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
-Route::get('clients/fetch_image/{id}', [\App\Http\Controllers\clientController::class, 'fetch_image']);
-Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
+Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
 
 Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 Route::get('banners/{int}/update/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
@@ -35,6 +34,12 @@ Route::get('main_sections/{int}/update/fetch_image/{id}', [\App\Http\Controllers
 
 Route::get('sub_sections/new-subSection-form/fetch_image/{id}', [\App\Http\Controllers\subSectionController::class, 'fetch_image']);
 Route::get('sub_sections/{int}/update/fetch_image/{id}', [\App\Http\Controllers\subSectionController::class, 'fetch_image']);
+
+Route::get('clients/fetch_image/{id}', [\App\Http\Controllers\clientController::class, 'fetch_image']);
+Route::get('clients/{id}/update/fetch_image', [\App\Http\Controllers\clientController::class, 'fetch_image']);
+
+Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
+Route::get('social_media_link/{id}/update/fetch_image', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 
 //Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 
@@ -58,6 +63,8 @@ Route::get('/orders/{int}/enableordisable', [\App\Http\Controllers\orderControll
 Route::get('/social_media_link/{int}/enableordisable', [\App\Http\Controllers\socialMediaLinksController::class, 'enableordisable'])->name('social_media_link.enableordisable');
 Route::get('/sys_bank_account/{int}/enableordisable', [\App\Http\Controllers\bankAccountController::class, 'enableordisable'])->name('bank_accounts.enableordisable');
 Route::get('/comments/{int}/enableordisable', [\App\Http\Controllers\commentController::class, 'enableordisable'])->name('comments.enableordisable');
+Route::get('/contact_information/{int}/enableordisable', [App\Http\Controllers\sysContactInfoController::class, 'enableordisable'])->name("contact_information.enableordisable");
+Route::get('/contact_information_2/{int}/enableordisable', [App\Http\Controllers\sysContactInfoController::class, 'enableordisable2'])->name("contact_information.enableordisable2");
 
 
 ////////////////////////////////////////////////////   delete row
@@ -74,6 +81,8 @@ Route::get('/social_media_link/{int}/delete', [\App\Http\Controllers\socialMedia
 Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');
 Route::get('/comments/{int}/delete', [\App\Http\Controllers\commentController::class, 'delete'])->name('comments.delete');
 Route::get('/shipping_charge/{int}/delete', [App\Http\Controllers\shippingChargeController::class, 'delete'])->name("shipping_charge.delete");
+Route::get('/contact_information/{int}/delete', [App\Http\Controllers\sysContactInfoController::class, 'delete'])->name("contact_information.delete");
+Route::get('/contact_information_2/{int}/delete', [App\Http\Controllers\sysContactInfoController::class, 'delete2'])->name("contact_information.delete2");
 
 
 ////////////////////////////////////////////////////   search row
@@ -95,11 +104,10 @@ Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 
 Route::get('/notifications/search', [\App\Http\Controllers\notificationsController::class, 'search'])->name('notifications.search');
 Route::get('/email_box/search', [\App\Http\Controllers\emailBoxController::class, 'search'])->name('email_box.search');
 Route::get('/contact_information/search', [\App\Http\Controllers\sysContactInfoController::class, 'search'])->name('contact_information.search');
-/////// temporary end pages
-//Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
-//Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');
+Route::get('/contact_information_2/search', [\App\Http\Controllers\sysContactInfoController::class, 'search2'])->name('contact_information.search2');
 
-//indexPage=""
+
+
 ////////////////////////////////////////////////////  update button
 Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
 Route::get('/positions_permissions/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'update'])->name('positions_permissions.update');
@@ -113,6 +121,8 @@ Route::get('/measure/{int}/update', [App\Http\Controllers\MeasureController::cla
 Route::get('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'update'])->name('social_media_link.update');
 Route::get('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'update'])->name('bank_accounts.update');
 Route::get('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'update'])->name("shipping_charge.update");
+Route::get('/contact_information/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'update'])->name("contact_information.update");
+Route::get('/contact_information_2/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'update2'])->name("contact_information.update2");
 
 ////////////////////////////////////////////////////  store_update button
 Route::post('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'store_update'])->name('manager.store_update');
@@ -127,6 +137,8 @@ Route::post('/measure/{int}/update', [App\Http\Controllers\MeasureController::cl
 Route::post('/social_media_link/{int}/update', [\App\Http\Controllers\socialMediaLinksController::class, 'store_update'])->name('social_media_link.store_update');
 Route::post('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountController::class, 'store_update'])->name('bank_accounts.store_update');
 Route::post('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'store_update'])->name('shipping_charge.store_update');
+Route::post('/contact_information_email/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'store_update'])->name("contact_information.store_update");
+Route::post('/contact_information_phone/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'store_update2'])->name("contact_information.store_update2");
 
 
 
@@ -167,15 +179,9 @@ Route::get('measure/update-measures-form/insertData',[App\Http\Controllers\Measu
 Route::get('sys_bank_account/new-bank-account-form/insertData',[App\Http\Controllers\bankAccountController::class,'insertData']);
 Route::get('notifications/new-notifications-form/insertData',[App\Http\Controllers\notificationsController::class,'insertData']);
 Route::get('shipping_charge/new-shipping-charge-form/insertData', [\App\Http\Controllers\shippingChargeController::class, 'insertData']);
+Route::get('/contact_information/new-email-form/insertData', [\App\Http\Controllers\sysContactInfoController::class, 'insertData'])->name("contact_information.insertData");
+Route::get('/contact_information/new-phone-form/insertData', [App\Http\Controllers\sysContactInfoController::class, 'insertData2'])->name("contact_information.insertData2");
 
-
-////////////////////////////////////////////////////   display
-Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
-Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
-Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
-Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
-Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
-Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
 
 ////////////////////////////////////////////////////   save btn
@@ -192,6 +198,17 @@ Route::Post('/store-social-media-links',[App\Http\Controllers\socialMediaLinksCo
 Route::Post('/store-notification',[App\Http\Controllers\notificationsController::class,'store'])->name("store-social-media-links");
 Route::post('/store-measure', [App\Http\Controllers\MeasureController::class, 'store'])->name('store-measure');
 Route::post('/store-shipping-charge', [App\Http\Controllers\shippingChargeController::class, 'store'])->name("store-shipping-charge");
+Route::post('/store-contact-information-email', [\App\Http\Controllers\sysContactInfoController::class, 'store'])->name("contact_information.store");
+Route::post('/store-contact-information-phone', [\App\Http\Controllers\sysContactInfoController::class, 'store2'])->name("contact_information.store2");
+
+
+////////////////////////////////////////////////////   display
+Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
+Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
+Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
+//Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
+//Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
+Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
 
 Route::view('/test','test');

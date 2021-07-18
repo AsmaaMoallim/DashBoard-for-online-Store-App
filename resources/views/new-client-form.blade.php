@@ -45,13 +45,18 @@
 
                     @if(isset($id))
 
-
-                        <div class="form-group col-sm-10">
-
-                            <img src="{{$cla_img}}">
-                        </div>
                         <x-form.photo-input name="cla_img" label="الصورة"
                                             value="{{$cla_img ?? ''}}"></x-form.photo-input>
+
+                        <div class="form-group col-sm-10">
+                            <label>الصورة الحالية:    </label>
+
+                            <img
+                                width="100"
+                                height="100"
+                                src="update/fetch_image">
+                        </div>
+
                     @else
                         <div class="form-group col-sm-10">
                             <label>الصورة</label>
