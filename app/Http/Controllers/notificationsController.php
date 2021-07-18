@@ -49,16 +49,18 @@ class notificationsController extends Controller
         $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
+        $notification->man_id = Manager::pluck('man_id')->first();
         $notification->save();
 
         $cla_id = $request->input('cla_id');
+
         for ($x = 0; $x < sizeof($cla_id); $x++) {
             $notiSent = new NotifiSendTo();
             $notiSent->notifi_id = $notification->notifi_id;
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
             $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
             $notiSent->fakeId = $maxFakeIdProdHas;
-            $notiSent->cla_id = $cla_id[$x];
+            $notiSent->cla_id = $cla_id;
             $notiSent->save();
         }
 
