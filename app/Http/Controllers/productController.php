@@ -181,9 +181,9 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
-        $media = MediaLibrary::all();
+        $mediaLibrary = MediaLibrary::all();
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
-
+//        dd($currentMedia);
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
 //        }
@@ -198,7 +198,7 @@ class productController extends Controller
 
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor,'medialib'=>$media])
+            'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary])
             ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
