@@ -155,13 +155,23 @@ class productController extends Controller
             'sections' => $sections])->with( compact('mediaLibrary'));
     }
 
-    public function fetch_image($medl_id)
+    public function fetch_image($id, $medl_id = null)
     {
-        $image = MediaLibrary::findOrFail($medl_id);
-        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
-        $response = Response::make($image_file->encode('jpeg'));
-        $response->header('Content-Type', 'image/jpeg');
-        return $response;
+        if ($medl_id){
+            $image = MediaLibrary::findOrFail($medl_id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+        else{
+            $image = MediaLibrary::findOrFail($id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+
     }
 
 
@@ -173,7 +183,7 @@ class productController extends Controller
     }
 
 ///
-    public function update(Request $request, Product $product, $id)
+    public function update(Request $request, Product $product, $id )
     {
         $currentValues = Product::where("fakeId", "=", "$id")->first();
         $measures = Measure::all();

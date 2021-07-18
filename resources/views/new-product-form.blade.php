@@ -128,7 +128,8 @@
                                                     @endif
                                                     @endforeach
                                                 >
-                                                <img src="update/fetch_image/{{$med}}" class="img-thumbnail"
+
+                                                <img src="update/fetch_image/{{$media['medl_id']}}" class="img-thumbnail"
                                                      width="75"/>
                                             @else
                                                 <input type="checkbox" name="medl_id[]"
