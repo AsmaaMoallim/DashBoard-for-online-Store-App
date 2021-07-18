@@ -155,16 +155,12 @@
                         <div class="form-group col-sm-10 ">
                             <label>الألوان المتاحة</label>
                             <div>
-                                <input id="color" type="color" class="mr-1">
+                                <input name="box[]" id="color" type="color" class="mr-1">
                                 <a style=" color: red" onclick="catshColor()"> اضغط لاضافة اللون </a>
 
                             </div>
-
-
                             <div>
-
                                 <div class="row" id="ColorRow"  name="box[]">
-
                                     @if(isset($id))
                                         @foreach($productProdAvilColor as $productProdAvilColor)
                                             <div class='box'
