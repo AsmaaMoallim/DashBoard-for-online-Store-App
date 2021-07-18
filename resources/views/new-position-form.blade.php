@@ -25,9 +25,6 @@
                         <?php
                         $pos_name = $currentValues->pos_name;
 
-//                        $medl_description = $currentValues->medl_description;
-//                        $medl_img_ved = $currentValues->medl_img_ved;
-
                         ?>
                     @endif
                 @endif
@@ -38,7 +35,6 @@
                                   value="{{$pos_name ?? ''}}"></x-form.input>
 
 
-                    <!-- Dynamic dropDownList -->
                     <div class="form-group col-sm-10 ">
                         <label>الصلاحيات</label>
                         <br>

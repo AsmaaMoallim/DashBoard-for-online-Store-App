@@ -6,10 +6,12 @@ use App\Models\MainSection;
 use App\Models\Measure;
 use App\Models\MediaLibrary;
 use App\Models\ProdAvilIn;
+use App\Models\prodHasMedia;
 use App\Models\Product;
 use App\Models\ProductProdAvilColor;
 use App\Models\SubSection;
 //use Faker\Provider\Image;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Images;
@@ -31,7 +33,6 @@ class productController extends Controller
         $recordPage = "product_details";
         $formPage = "new-product-form";
         $addNew = "إضافة منتج جديد";
-//        $showRecords = "عرض التفاصيل";
         $tables = 'products';
         $qry = \DB::table('product')
             ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
@@ -51,33 +52,12 @@ class productController extends Controller
 
         $tables = 'products';
 
-//       $qry = \DB::table('product')
-//           ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-//           ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
-//           ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-//           ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-//           ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
-//
-//            ->select('product.prod_name AS اسم المنتج' , 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
-//                'media_library.medl_img_ved AS الصورة','prod_avil_amount AS الكمية المتوفرة حاليًا',\DB::raw("GROUP_CONCAT(measure.mesu_value  SEPARATOR ' //  ') AS المقاسات"),
-//                \DB::raw("GROUP_CONCAT(color.prod_avil_color SEPARATOR ' //  ') AS الألوان"),'product.prod_desc_img AS معلومات الصورة','product.state','product.fakeId')
-//           ->where("product.fakeId","=","$id")
-//           ->groupBy('اسم المنتج','القسم الفرعي','السعر','الصورة','الكمية المتوفرة حاليًا','معلومات الصورة','product.state','fakeId')
-//
-//           ->get();
-
         $currentValues = Product::where("fakeId", "=", "$id")->first();
         $measures = Measure::all();
         $currentSections = SubSection::find($currentValues->sub_id);
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
-
-//        foreach($productProdAvilColor as $productProdAvilColor){
-//            dd($productProdAvilColor->prod_avil_color);
-//        }
-//        dd($productProdAvilColor);
-//      $mediaImg = MediaLibrary::all();
 
         $rows = \DB::table('product')
             ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
@@ -93,32 +73,69 @@ class productController extends Controller
 
 
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
-//
-//        return view('displayDetailes',['pagename' => $pagename])->with('rows', $qry)->with
-//        ('columns', $columns)->with('tables', $tables);
+
         return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename, 'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)->with('id', $id);
-
     }
 
     function store(Request $request)
     {
         $product = new Product();
-        $prod_avil_color = new ProductProdAvilColor();
         $measure = new Measure();
+
+        $product->prod_id = 1016;
         $product->prod_name = $request->prod_name;
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
-        $product->sub_id = $request->sub_id;
-        $measure->mesu_value = $request->mesu_value;
-        $product->medl_id = $request->medl_id;
+//        $product->sub_id = $request->sub_id;
+        $product->sub_id = 50;
         $product->prod_desc_img = $request->prod_desc_img;
+        $measure->mesu_value = $request->mesu_value;
+
         $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
         $product->fakeId = $maxFakeId;
         $product->save();
-        $prod_avil_color->save();
+
+        //*** MED SAVE **
+        $medl_id = $request->input('medl_id');
+//        foreach ($medl_id as $medl_id) {
+//            $new = new prodHasMedia();
+//            $new->prod_id = $product->prod_id;
+//            $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
+//            $new->fakeId = $maxFakeIdProdHas;
+//            $new->medl_id = $medl_id;
+//            $new->save();
+//        }
+
+        //** measure SAVE */
+//        $mesu_id = $request->input('mesu_id');
+//        foreach ($mesu_id as $m){
+//            $mesur = new ProdAvilIn();
+//            $max = ProdAvilIn::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//            $maxFakeIdPosIN = $max? $max->fakeId + 1 : 1;
+//            $mesur->fakeId = $maxFakeIdPosIN;
+//            $mesur->mesu_id = $measure->mesu_id;
+//            $mesur->prod_id = $product->prod_id;
+//            $mesur->save();
+//    }
+
+//
+
+        //COLOR SAVE
+//        $color = $request->input('box');
+//        foreach ($color as $c){
+//            $prod_avil_color = new ProductProdAvilColor();
+//            $prod_avil_color->prod_id = $product->prod_id;
+//            $max = ProductProdAvilColor::orderBy("fakeId", 'desc')->first();
+//            $maxFake = $max? $max->fakeId + 1 : 1;
+//            $prod_avil_color->fakeId = $maxFakeId;
+//            $prod_avil_color->prod_avil_color = $c;
+//            $prod_avil_color->save();
+//        }
+
         return redirect('/home');
     }
 
@@ -138,40 +155,19 @@ class productController extends Controller
     public function insertData(Product $product){
         $measures = Measure::all();
         $sections = SubSection::all();
-
-        //get url image col
-//        $i = MediaLibrary::first('medl_img_ved');
-//        $i = \DB::table('media_library')
-//            ->select('medl_img_ved')
-//            ->get();
-
-//        $currV = Product::all()->where('fakeId','=', '$id')
-//            ->first();
-//        $medlibrary = MediaLibrary::all()
-//            ->where('image_id','=','$currV->medl_id');
-//
-//        $currV = MediaLibrary::all()->where('fakeId','!=', 'image_id')
-//            ->first();
-//        $image_id = MediaLibrary::all()
-//            ->find($i->image_id)->first();
-//        dd($i);
-
-//        //< start >
-//        $medlibrary = MediaLibrary::all();
-//        $image = MediaLibrary::findOrFail($medlibrary->isNotEmpty());
-//        $image_file = Image::make($image->medl_img_ved);
-//
-//        $response = Response::make($image_file->encode('jpeg'));
-//        $response->header('Content-Type', 'image/jpeg');
-//<./>
-
-        $data = MediaLibrary::latest()->paginate(7);
-//        return view('store_image', compact('data'))
-//            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $data = MediaLibrary::all();
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections,])->with( compact('data'));
+            'sections' => $sections,'data'=>$data])->with( compact('data'));
+    }
 
+    public function fetch_image($medl_id)
+    {
+        $image = MediaLibrary::findOrFail($medl_id);
+        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
     }
 
 

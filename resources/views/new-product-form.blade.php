@@ -97,119 +97,28 @@
 
                                 @endforeach
                             </select>
+
                         </div>
 
-                                            <div class="form-group col-sm-10" >
-                                                <label>صور المنتج</label>
-
-{{--                                                @foreach($imgs as $img)--}}
-<!--                                                -->
-{{--//                                                $connection = mysqli_connect("localhost","root","");--}}
-{{--//                                                $db = mysqli_select_db($connection, 'dashboard');--}}
-{{--//                                                $query = "SELECT 'media_library.medl_img_ved' FROM 'media_library' ";--}}
-{{--//                                                $mysqli_result = mysqli_query($connection,$query);--}}
-{{--//                                                while ($row= mysqli_fetch_array($mysqli_result)){--}}
-{{--//--}}
-{{--                                                --}}
-
-                                                <table class="table table-bordered table-striped">
-                                                    <tr>
-                                                        <th width="30%">Image</th>
-                                                        <th width="70%">Name</th>
-                                                    </tr>
-                                                    @foreach($data as $row)
-                                                        <tr>
-                                                            <td>
-
-                                                                <img src="storage/images/{{$row->medl_img_ved}}"class="img-thumbnail" width="75" />
-
-                                                            </td>
-                                                            <td> {{$row->medl_name}} </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </table>
-                                            </div>
-
-{{--                                                <tr>--}}
-{{--                                                    <td> <?php echo '<img src="data:image;base64,'.base64_decode($row['medl_img_ved']).'"alt="Image" style="">'; ?> </td>--}}
-{{--                                                </tr>--}}
-{{--                                                <?php--}}
-{{--                                                }--}}
-{{--                                                ?>--}}
-
-{{--                                                @endforeach--}}
-
-                        {{--                        <div class="card-body table-responsive p-0">--}}
-                        {{--                        <?php  $x = 0;  $arrays = array(); $arrays[$x] = 0   ?>--}}
-                        {{--                        <table id="tableprofider" class="table table-hover text-nowrap">--}}
-                        {{--                            <thead>--}}
-                        {{--                            <tr>--}}
-                        {{--                                @for( $i = 0 ; $i<=10 ; $i++)--}}
-
-                        {{--                                    @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-                        {{--                                        <th>{{$columns[$i]}}</th> @endif--}}
-                        {{--                                @endfor--}}
-
-                        {{--                            </tr>--}}
-                        {{--                            </thead>--}}
-                        {{--                            <tbody>--}}
-                        {{--                            <tr>--}}
-
-                        {{--                                @foreach( $rows as $row)--}}
-                        {{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
-
-                        {{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
-                        {{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-
-                        {{--                                                <?php $val = (string)$columns[$i] ?>--}}
-                        {{--                                                @if($val)--}}
-                        {{--                                              <td> {{$row->medl_img_ved}} </td>--}}
-
-                        {{--                                            @else--}}
-                        {{--                                                {{$row->medl_img_ved = NULL}}--}}
-                        {{--                                            @endif--}}
-                        {{--                                            @endif--}}
-                        {{--                                                        @endfor--}}
-                        {{--                                                        @endfor--}}
-                        {{--                                                        @endforeach--}}
-                        {{--                            </tr>--}}
-                        {{--                            </tbody>--}}
-                        {{--                        </table>--}}
-                        {{--                    </div>--}}
-                        {{--                    </div>--}}
-
-
-
-                        {{--                                <select>--}}
-                        {{--                                @foreach( $rows as $rows)--}}
-
-                        {{--                                    <option value="{{$rows->medl_id}}"> <img {{$rows->medl_img_ved}} > </option>--}}
-
-                        {{--                                    @for( $i = 0 ; $i<=10; $i++)--}}
-
-                        {{--                                        @for( $i = 0 ; $i<=10; $i++)--}}
-                        {{--                                            @if(isset($columns[$i]) && $columns[$i]!='fakeId')--}}
-
-                        {{--                                                {{ $val = (string)$columns[$i] }}--}}
-                        {{--                                                @if($val)--}}
-                        {{--                                                    <td> {{$rows->$val}}</td> @endif--}}
-
-                        {{--                                            @endif--}}
-
-                        {{--                                        @endfor--}}
-
-                        {{--                                    @endfor--}}
-
-                        {{--                    <button type="button" value="اختر صورة" onclick="window.location='{{ url('/media_Library') }}" ></button>--}}
-
-
-                        {{--                    <div class="form-group col-sm-10 ">--}}
-                        {{--                        <select  name="medl_id" id="pos_id" multiple>--}}
-                        {{--                            @foreach( $mediaImgs as $mediaImg)--}}
-                        {{--                                <option value="{{$mediaImg->medl_id}}"> {{$mediaImg->medl_img_ved}} </option>--}}
-                        {{--                            @endforeach--}}
-                        {{--                        </select>--}}
-                        {{--                    </div>--}}
+                        <label class="pb-1">صور المنتج</label>
+                        <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                            <table class="table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="70%">الصورة</th>
+                                    <th width="30%">اسم الصورة</th>
+                                </tr>
+                                </thead>
+                                @foreach($data as $row)
+                                    <tbody>
+                                    <tr>
+                                        <td> <input type="checkbox" name="medl_id[]" value="{{$row['medl_id']}}"> <img src="fetch_image/{{$row->medl_id}}" class="img-thumbnail" width="75" /> </td>
+                                        <td>  {{$row->medl_name}} </td>
+                                    </tr>
+                                    </tbody>
+                                @endforeach
+                            </table>
+                        </div>
 
                         <x-form.input name="prod_avil_amount" class="form-control" type="number"
                                       label="الكمية المتوفرة حالياً "
@@ -254,7 +163,7 @@
 
                             <div>
 
-                                <div class="row" id="ColorRow">
+                                <div class="row" id="ColorRow"  name="box[]">
 
                                     @if(isset($id))
                                         @foreach($productProdAvilColor as $productProdAvilColor)
