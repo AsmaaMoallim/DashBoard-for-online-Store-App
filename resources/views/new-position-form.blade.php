@@ -21,7 +21,7 @@
 
                 @if(isset($id))
 
-                    @if("position/".$id."/update"==request()->path())
+                    @if("positions_permissions/".$id."/update"==request()->path())
                         <?php
                         $pos_name = $currentValues->pos_name;
 

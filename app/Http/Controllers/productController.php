@@ -59,14 +59,25 @@ class productController extends Controller
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
 
+//        $rows = \DB::table('product')
+//            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
+//            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+//            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+//            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+//            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
+//            ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
+//                'media_library.medl_img_ved AS الصورة', 'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
+//                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
+//            ->where("product.fakeId", "=", "$id")
+//            ->get();
         $rows = \DB::table('product')
             ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
+//            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
             ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
             ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
             ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
             ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
-                'media_library.medl_img_ved AS الصورة', 'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
+                'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
                 'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
             ->where("product.fakeId", "=", "$id")
             ->get();
