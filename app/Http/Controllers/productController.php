@@ -184,6 +184,7 @@ class productController extends Controller
         $mediaLibrary = MediaLibrary::all();
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
 //        dd($currentMedia);
+//        dd($currentMedia);
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
 //        }

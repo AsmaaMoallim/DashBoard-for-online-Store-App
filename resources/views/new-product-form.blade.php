@@ -131,7 +131,9 @@
                                                 <img src="update/fetch_image/{{$med}}" class="img-thumbnail"
                                                      width="75"/>
                                             @else
-
+                                                <input type="checkbox" name="medl_id[]"
+                                                       value="{{$media['medl_id']}}"
+                                                >
                                                 <img src="fetch_image/{{$med}}" class="img-thumbnail"
                                                      width="75"/>
                                             @endif
