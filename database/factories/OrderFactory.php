@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Models\ShippingCharge;
 use App\Models\Stage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -33,6 +34,7 @@ class OrderFactory extends Factory
             'ord_date'=> $this->faker->date(),
             'payment_method_id'=>  $this->faker->randomElement(PaymentMethod::pluck('payment_method_id')->toArray()),
             'stage_id' =>  $this->faker->randomElement(Stage::pluck('stage_id')->toArray()),
+            'ship_id' => $this->faker->randomElement(ShippingCharge::pluck('ship_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];

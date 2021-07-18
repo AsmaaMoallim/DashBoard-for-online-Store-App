@@ -20,8 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  */
 class SysInfoPhone extends Model
-{
-    use HasFactory;
+{    use HasFactory;
 
     protected $table = 'sys_info_phone';
 	protected $primaryKey = 'sys_phone_id';

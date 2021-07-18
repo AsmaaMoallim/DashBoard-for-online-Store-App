@@ -6,9 +6,6 @@ use Illuminate\View\Component;
 use App\Http\Controllers\PositionController;
 class tableComponentes extends Component
 {
-    public $rows;
-    public $columns;
-    public $tables;
 
 
     /**
@@ -16,11 +13,9 @@ class tableComponentes extends Component
      *
      * @return void
      */
-    public function __construct($rows,$columns,$tables)
+    public function __construct()
     {
-        $this->rows = $rows;
-        $this->columns =$columns;
-        $this->tables =$tables;
+
     }
 
     /**

@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,11 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  * Class ShippingCharge
  *
  * @property int $ship_id
- * @property int $ord_id
  * @property int $ship_price
  * @property int $fakeId
  *
- * @property Order $order
+ * @property Collection|Order[] $orders
  *
  * @package App\Models
  */
@@ -30,19 +30,17 @@ class ShippingCharge extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'ord_id' => 'int',
 		'ship_price' => 'int',
 		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
-		'ord_id',
 		'ship_price',
 		'fakeId'
 	];
 
-	public function order()
+	public function orders()
 	{
-		return $this->belongsTo(Order::class, 'ord_id');
+		return $this->hasMany(Order::class, 'ship_id');
 	}
 }

@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $fakeId
  *
  * @property Client $client
- * @property Comments $comment
+ * @property Comment $comment
  *
  * @package App\Models
  */
@@ -51,7 +51,7 @@ class Report extends Model
 
 	public function comment()
 	{
-		return $this->belongsTo(Comments::class, 'prod_id', 'prod_id')
+		return $this->belongsTo(Comment::class, 'prod_id', 'prod_id')
 					->where('comments.prod_id', '=', 'report.prod_id')
 					->where('comments.com_id', '=', 'report.com_id');
 	}

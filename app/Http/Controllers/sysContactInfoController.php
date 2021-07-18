@@ -11,7 +11,7 @@ class sysContactInfoController extends Controller
         $pagename = "بيانات التواصل";
         $recordPage = "contact_info";
         $showRecords = "إضافة أرقام التواصل";
-        $tables = 'sys_info_phone';
+        $tables = 'contact_information';
 
         $qryt = \DB::table('sys_info_phone')
             ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')

@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $fakeId
  *
  * @property Collection|BankTransaction[] $bank_transactions
- * @property Collection|Comments[] $comments
+ * @property Collection|Comment[] $comments
  * @property Collection|NotifiSendTo[] $notifi_send_tos
  * @property Collection|Order[] $orders
  * @property Collection|Report[] $reports
@@ -32,7 +32,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Client extends Model
 {
-
     use HasFactory;
 
     protected $table = 'clients';
@@ -62,7 +61,7 @@ class Client extends Model
 
 	public function comments()
 	{
-		return $this->hasMany(Comments::class, 'cla_id');
+		return $this->hasMany(Comment::class, 'cla_id');
 	}
 
 	public function notifi_send_tos()

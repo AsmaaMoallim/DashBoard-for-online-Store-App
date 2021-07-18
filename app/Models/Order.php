@@ -20,15 +20,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $ord_date
  * @property int $payment_method_id
  * @property int $stage_id
+ * @property int $ship_id
  * @property bool $state
  * @property int $fakeId
  *
+ * @property ShippingCharge $shipping_charge
  * @property Client $client
  * @property PaymentMethod $payment_method
  * @property Stage $stage
  * @property Collection|BankTransaction[] $bank_transactions
  * @property Collection|OrdHasItemOf[] $ord_has_item_ofs
- * @property Collection|ShippingCharge[] $shipping_charges
  *
  * @package App\Models
  */
@@ -44,6 +45,7 @@ class Order extends Model
 		'cla_id' => 'int',
 		'payment_method_id' => 'int',
 		'stage_id' => 'int',
+		'ship_id' => 'int',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];
@@ -58,9 +60,15 @@ class Order extends Model
 		'ord_date',
 		'payment_method_id',
 		'stage_id',
+		'ship_id',
 		'state',
 		'fakeId'
 	];
+
+	public function shipping_charge()
+	{
+		return $this->belongsTo(ShippingCharge::class, 'ship_id');
+	}
 
 	public function client()
 	{
@@ -85,10 +93,5 @@ class Order extends Model
 	public function ord_has_item_ofs()
 	{
 		return $this->hasMany(OrdHasItemOf::class, 'ord_id');
-	}
-
-	public function shipping_charges()
-	{
-		return $this->hasMany(ShippingCharge::class, 'ord_id');
 	}
 }

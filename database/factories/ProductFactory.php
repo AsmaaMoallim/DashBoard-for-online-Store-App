@@ -30,7 +30,6 @@ class ProductFactory extends Factory
             'prod_price' => $this->faker->randomDigit,
             'prod_avil_amount' => $this->faker->randomDigit,
             'prod_desc_img' => $this->faker->image(),
-            'medl_id' => $this->faker->randomElement(MediaLibrary::pluck('medl_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];

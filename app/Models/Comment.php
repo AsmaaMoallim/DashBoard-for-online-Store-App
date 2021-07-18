@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Comments
+ * Class Comment
  *
  * @property int $com_id
  * @property int $cla_id
@@ -26,11 +26,12 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Comments extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $table = 'comments';
+	protected $primaryKey = 'com_id';
 	public $timestamps = false;
 
 	protected $casts = [
@@ -41,6 +42,8 @@ class Comments extends Model
 	];
 
 	protected $fillable = [
+		'cla_id',
+		'prod_id',
 		'com_content',
 		'com_rateing',
 		'fakeId'

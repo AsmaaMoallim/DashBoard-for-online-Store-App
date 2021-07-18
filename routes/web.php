@@ -76,7 +76,7 @@ Route::get('/bank_transaction/search', [\App\Http\Controllers\bankTransactionCon
 Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 'search'])->name('comments.search');
 Route::get('/notifications/search', [\App\Http\Controllers\notificationsController::class, 'search'])->name('notifications.search');
 Route::get('/email_box/search', [\App\Http\Controllers\emailBoxController::class, 'search'])->name('email_box.search');
-
+Route::get('/contact_information/search', [\App\Http\Controllers\sysContactInfoController::class, 'search'])->name('contact_information.search');
 /////// temporary end pages
 //Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
 //Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');

@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PosInclude extends Model
 {
-
     use HasFactory;
 
     protected $table = 'pos_include';
