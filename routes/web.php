@@ -104,11 +104,10 @@ Route::get('/comments/search', [\App\Http\Controllers\commentController::class, 
 Route::get('/notifications/search', [\App\Http\Controllers\notificationsController::class, 'search'])->name('notifications.search');
 Route::get('/email_box/search', [\App\Http\Controllers\emailBoxController::class, 'search'])->name('email_box.search');
 Route::get('/contact_information/search', [\App\Http\Controllers\sysContactInfoController::class, 'search'])->name('contact_information.search');
-/////// temporary end pages
-//Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
-//Route::get('/positions_permissionsController', [AppHttpControllersPermissionController::class, 'index'])->name('positions_permissionsController.index');
+Route::get('/contact_information_2/search', [\App\Http\Controllers\sysContactInfoController::class, 'search2'])->name('contact_information.search2');
 
-//indexPage=""
+
+
 ////////////////////////////////////////////////////  update button
 Route::get('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'update'])->name('manager.update');
 Route::get('/positions_permissions/{int}/update', [\App\Http\Controllers\positions_permissionsController::class, 'update'])->name('positions_permissions.update');
@@ -184,14 +183,6 @@ Route::get('/contact_information/new-email-form/insertData', [\App\Http\Controll
 Route::get('/contact_information/new-phone-form/insertData', [App\Http\Controllers\sysContactInfoController::class, 'insertData2'])->name("contact_information.insertData2");
 
 
-////////////////////////////////////////////////////   display
-Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
-Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
-Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
-//Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
-//Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
-Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
-
 
 ////////////////////////////////////////////////////   save btn
 Route::Post('/store-manager',[App\Http\Controllers\managerController::class,'store'])->name("store_new_manager");
@@ -209,6 +200,15 @@ Route::post('/store-measure', [App\Http\Controllers\MeasureController::class, 's
 Route::post('/store-shipping-charge', [App\Http\Controllers\shippingChargeController::class, 'store'])->name("store-shipping-charge");
 Route::post('/store-contact-information-email', [\App\Http\Controllers\sysContactInfoController::class, 'store'])->name("contact_information.store");
 Route::post('/store-contact-information-phone', [\App\Http\Controllers\sysContactInfoController::class, 'store2'])->name("contact_information.store2");
+
+
+////////////////////////////////////////////////////   display
+Route::get('manager/manager_operations_record/display', [App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
+Route::get('products/product_details/display', [App\Http\Controllers\productController::class, 'display'])->name('product_details.display');
+Route::get('orders/order_details/display', [App\Http\Controllers\orderController::class, 'display'])->name('order_details.display');
+//Route::get('sys_info_phone/contact_info/display', [App\Http\Controllers\sysContactInfoController::class, 'index'])->name('sys_info_phone.index');
+//Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
+Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
 
 Route::view('/test','test');

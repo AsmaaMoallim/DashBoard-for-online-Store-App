@@ -44,6 +44,7 @@
         </div>
         <section class="content">
 
+            @if(!$key2)
 
             <div>
                 <div class="row">
@@ -78,53 +79,52 @@
                                 @endif
 
                                 {{-- search --}}
+                                    <form action="{{ route($tables.'.search') }}" method="get">
+                                        @csrf
 
-                                <form action="{{ route($tables.'.search') }}" method="get">
-                                    @csrf
+                                        <div style="align-items:flex-start; float:left!important;">
 
-                                    <div style="align-items:flex-start; float:left!important;">
-
-                                        <div class="input-group input-group-sm" style="width:400px;">
-
-
-                                            <input name="search" type="text" class="form-control float-right"
+                                            <div class="input-group input-group-sm" style="width:400px;">
 
 
-                                                   @if($tables. "/search"==request()->path())
-                                                   placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
-                                                   required
-
-                                                   @else
-                                                   placeholder="Search"
-                                                   required
-                                                @endif
-                                            >
-                                            <div class="input-group-append">
+                                                <input name="search" type="text" class="form-control float-right"
 
 
-                                                <button type="submit" name="btnSearch" class="btn btn-default">
-                                                    <i class="fa fa-search"></i>
+                                                       @if($tables. "/search"==request()->path())
+                                                       placeholder="{{$placeHolder? $placeHolder : 'Search'}}"
+                                                       required
 
-                                                </button>
-                                                <a name="btnCancel" href="{{ url('/'.$tables) }}"
-                                                   onclick="window.location='{{ url('/'.$tables ) }}"
-                                                   class="btn btn-default">
-                                                    <i class="fa fa-close"></i>
+                                                       @else
+                                                       placeholder="Search"
+                                                       required
+                                                    @endif
+                                                >
+                                                <div class="input-group-append">
 
-                                                </a>
+
+                                                    <button type="submit" name="btnSearch" class="btn btn-default">
+                                                        <i class="fa fa-search"></i>
+
+                                                    </button>
+                                                    <a name="btnCancel" href="{{ url('/'.$tables) }}"
+                                                       onclick="window.location='{{ url('/'.$tables ) }}"
+                                                       class="btn btn-default">
+                                                        <i class="fa fa-close"></i>
+
+                                                    </a>
+
+
+                                                </div>
 
 
                                             </div>
 
-
                                         </div>
-
-                                    </div>
-                                </form>
-                                {{-- search --}}
+                                    </form>
+                                    {{-- search --}}
                             </div>
 
-                            <!-- /.card-header -->
+                        <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table id="tableprofider" class="table table-hover text-nowrap">
                                     <thead>
@@ -269,6 +269,7 @@
                 </div>
 
             </div>
+            @endif
 
 
             {{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////            @if('contact_information' === $tables)--}}
@@ -280,7 +281,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title"></h3>
-                                    @if($addNew)
+                                    @if($addNew2)
 
                                         <div style="float:right!important; margin-left:2%">
 
@@ -293,30 +294,17 @@
                                         </div>
                                     @endif
 
-                                    @if($showRecords2)
-
-                                        <div style="float:right!important;">
-
-                                            <a class="btn btn-block btn-info"
-                                               href="{{ url('/'.$tables2 .'/'. $recordPage2 . '/display') }}">
-                                                <i class="fa ">
-                                                </i>
-                                                {{$showRecords2}}
-                                            </a>
-                                        </div>
-                                    @endif
-
                                     {{--                                     search--}}
 
-                                    <form action="{{ route($tables2.'.search') }}" method="get">
+                                    <form action="{{ route($tables2.'.search2') }}" method="get">
                                         @csrf
 
-                                        <div style="align-items:flex-start; float:left!important;">
+                                        <div style="align-items:flex-start; float:left!important">
 
                                             <div class="input-group input-group-sm" style="width:400px;">
 
 
-                                                <input name="search" type="text" class="form-control float-right"
+                                                <input name="search2" type="text" class="form-control float-right"
 
 
                                                        @if($tables2. "/search"==request()->path())
@@ -331,11 +319,11 @@
                                                 <div class="input-group-append">
 
 
-                                                    <button type="submit" name="btnSearch" class="btn btn-default">
+                                                    <button type="submit" name="btnSearch2" class="btn btn-default">
                                                         <i class="fa fa-search"></i>
 
                                                     </button>
-                                                    <a name="btnCancel" href="{{ url('/'.$tables2) }}"
+                                                    <a name="btnCancel2" href="{{ url('/'.$tables2) }}"
                                                        onclick="window.location='{{ url('/'.$tables2 ) }}"
                                                        class="btn btn-default">
                                                         <i class="fa fa-close"></i>
@@ -377,21 +365,20 @@
                                                 @for( $i = 0 ; $i<=10; $i++)
                                                     @if(isset($columns2[$i]) && $columns2[$i]!='fakeId')
 
-                                                    <?php $val2 = (string)$columns2[$i] ?>
+                                                        <?php $val2 = (string)$columns2[$i] ?>
 
 
-                                                    {{--                                                            @if($key)--}}
-{{--                                                                @if(str_contains(strtolower($rows->$val), strtolower($key)) && isset($_GET['btnSearch']))--}}
-{{--                                                                    <td style="background-color: yellow ">{{$rows->$val}}</td>--}}
-{{--                                                                @else--}}
-{{--                                                                    <td>{{$rows->$val}}</td>--}}
-{{--                                                                @endif--}}
-{{--                                                            @else--}}
+                                                        @if($key2)
+                                                            @if(str_contains((string)$rows2->$val2, (string)$key2) && isset($_GET['btnSearch']))
+                                                                <td style="background-color: yellow ">{{$rows2->$val2}}</td>
+                                                            @else
                                                                 <td>{{$rows2->$val2}}</td>
-{{--                                                            @endif--}}
-{{--                                                        @endif--}}
-
+                                                            @endif
+                                                        @else
+                                                            <td>{{$rows2->$val2}}</td>
+                                                        @endif
                                                     @endif
+
                                                 @endfor
 
                                                 <td class="project-actions text-right">

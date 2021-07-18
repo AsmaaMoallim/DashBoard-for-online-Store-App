@@ -11,6 +11,7 @@ class sysContactInfoController extends Controller
     public function index()
     {
         $pagename = "بيانات التواصل";
+
         $addNew = "إضافة ايميلات التواصل";
         $formPage = "new-email-form";
         $tables = 'contact_information';
@@ -133,5 +134,98 @@ class sysContactInfoController extends Controller
         $data = SysInfoPhone::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/contact_information');
+    }
+
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+
+        $pagename = "بيانات التواصل";
+        $addNew = "إضافة ايميلات التواصل";
+        $formPage = "new-email-form";
+        $tables = 'contact_information';
+
+        $qry = \DB::table('sys_info_email')
+            ->select('sys_info_email.sys_email AS البريد الإلكتروني'
+                ,'sys_info_email.state','sys_info_email.fakeId')
+            ->Where('sys_info_email.sys_email', 'LIKE', "%{$key}%")
+            ->get();
+        $col = ['البريد الإلكتروني','fakeId'];
+
+
+
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+            $qry = \DB::table('sys_info_email')
+                ->select('sys_info_email.sys_email AS البريد الإلكتروني'
+                    ,'sys_info_email.state','sys_info_email.fakeId')
+                ->get();
+            $col = ['البريد الإلكتروني','fakeId'];
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel'])){
+            $qry = \DB::table('sys_info_email')
+                ->select('sys_info_email.sys_email AS البريد الإلكتروني'
+                    ,'sys_info_email.state','sys_info_email.fakeId')
+                ->get();
+            $col = ['البريد الإلكتروني','fakeId'];
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
+        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
+        ('formPage',$formPage)->with('key', $key);
+
+    }
+
+    public function search2(Request $request){
+        $key2 = trim($request->get('search2'));
+
+        $pagename = "بيانات التواصل";
+
+        $tables2 = 'contact_information';
+        $addNew2 = "إضافة أرقام التواصل";
+        $formPage2 = "new-phone-form";
+
+        $qry2 = \DB::table('sys_info_phone')
+            ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')
+            ->Where('sys_info_phone.sys_phone_num', 'LIKE', "%{$key2}%")
+            ->get();
+
+        $col2 = ['الجوال','fakeId'];
+
+
+        if (isset($_GET['btnSearch2']) && $qry2->isEmpty()){
+
+            $qry2 = \DB::table('sys_info_phone')
+                ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')
+                ->get();
+
+            $col2 = ['الجوال','fakeId'];
+
+
+            $placeHolder = "لا توجد نتائج";
+        } elseif (isset($_GET['btnCancel2'])){
+
+            $qry2 = \DB::table('sys_info_phone')
+                ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')
+                ->get();
+
+            $col2 = ['الجوال','fakeId'];
+
+
+            $placeHolder = 'Search';
+        }
+        else{
+            $placeHolder = 'Search';
+        }
+
+        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows2',$qry2)->with
+        ('columns2', $col2)->with('tables2',$tables2)->with('addNew2',$addNew2)->with
+        ('formPage2',$formPage2)->with('key2', $key2);
+
     }
 }
