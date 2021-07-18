@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Manager;
 use App\Models\NotifiSendTo;
 use Illuminate\Http\Request;
 use App\Models\Notification;
@@ -48,7 +49,8 @@ class notificationsController extends Controller
         $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
-        $notification->save();
+        $notification->man_id = Manager::pluck('man_id')->first();
+//        $notification->save();
 
         $client_id = $request->input('man_id');
         foreach ($client_id as $client_id){

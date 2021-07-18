@@ -40,9 +40,9 @@
                             <select name="man_id" onchange="GetSelectedItem" id="man_id" multiple >
 
                                 <option
-                                    name="man_id" onclick="selectAll()"> الكل </option>
+                                    name="man_id[]" onclick="selectAll()"> الكل </option>
                                 @foreach($clients as $client)
-                                    <option id="man_id" name="man_id"
+                                    <option id="man_id" name="man_id[]"
                                             value="{{$client->cal_id}}"> {{$client->cal_frist_name}}{{$client->cla_last_name}}
                                     </option>
                                 @endforeach
