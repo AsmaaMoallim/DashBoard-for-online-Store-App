@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class clientController extends Controller
 {
@@ -15,7 +17,7 @@ class clientController extends Controller
         $tables = 'clients';
 
         $qry = \DB::table('clients')
-            ->select(\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),'cla_img AS الصورة الشخصية',
+            ->select('cla_id',\DB::raw("CONCAT(cla_frist_name, ' ',  cla_last_name) AS الاسم"),
                 'cla_phone_num AS رقم الجوال','cla_email AS البريد الالكتروني','clients.state','clients.fakeId')
             ->get();
         $columns= ['الاسم','الصورة الشخصية','رقم الجوال','البريد الالكتروني','fakeId'];
@@ -57,19 +59,29 @@ class clientController extends Controller
         $data->delete();
         return redirect()->back();
     }
-
+    function fetch_image($cla_id)
+    {
+        $image = Client::findOrFail($cla_id);
+        $image_file = Image::make($image->cla_img);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
+    }
 
     function store(Request $request)
     {
-        $client= new Client();
+        $image = Image::make($request->file('cla_img'))->encode('jpeg');
+
+        $client= new client();
         $client->cla_frist_name = $request->cla_frist_name;
         $client->cla_last_name = $request->cla_last_name;
-        $client->cla_img = $request->cla_img;
+        $client->cla_img = $image;
         $client->cla_phone_num = $request->cla_phone_num;
-        $client->cla_email = $request->cla_email;
+        $client->cla_email = $request->cla_img;
         $max = Client::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $client->fakeId =$maxFakeId;
+
         $client->save();
         return redirect('/clients');
     }

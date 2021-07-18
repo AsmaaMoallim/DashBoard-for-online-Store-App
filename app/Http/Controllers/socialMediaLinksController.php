@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
 
 class socialMediaLinksController extends Controller
 {
@@ -15,9 +17,9 @@ class socialMediaLinksController extends Controller
         $tables = 'social_media_link';
 
         $qry = \DB::table('social_media_link')
-            ->select('social_site_name AS اسم موقع التواصل', 'social_img AS صورة','social_url AS الرابط', 'state', 'fakeId')
+            ->select('social_id','social_site_name AS اسم موقع التواصل','social_url AS الرابط', 'state', 'fakeId')
             ->get();
-        $columns = ['اسم موقع التواصل', 'صورة', 'الرابط', 'fakeId'];
+        $columns = ['اسم موقع التواصل', 'الصورة', 'الرابط', 'fakeId'];
 
         return view('master_tables_view',['pagename' => $pagename])->with('rows',$qry)->with
         ('columns', $columns)->with('tables',$tables)->with('addNew',$addNew)->with
@@ -49,7 +51,14 @@ class socialMediaLinksController extends Controller
     public function insertData(){
         return view('new-social-media-form');
     }
-
+    function fetch_image($social_id)
+    {
+        $image = SocialMediaLink::findOrFail($social_id);
+        $image_file = Image::make($image->social_img);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
+    }
     public function store(Request $request){
         $socialMedial = new SocialMediaLink();
         $socialMedial->social_site_name = $request->social_site_name;

@@ -147,16 +147,16 @@
 
                                             @for( $i = 0 ; $i<=10; $i++)
 
-                                                @if(isset($columns[$i]) && $columns[$i] == "الصورة/رابط الفيديو")
+                                                @if(isset($columns[$i]) && ($columns[$i] == "الصورة/رابط الفيديو" || $columns[$i] == "الصورة" || $columns[$i] == "الصورة الشخصية"))
                                                     <td>
                                                         {{--                                                            <a  herf="{{ url('/'.$tables .'/fetch_image/'. $rows->medl_id ) }}">--}}
 
                                                         <img width="60"
                                                              height="60"
                                                              class="img"
-                                                             name="{{$rows->medl_id}}"
+                                                             name="{{$rows->medl_id ?? $rows->cla_id ?? $rows->social_id}}"
                                                              id="img"
-                                                             src="{{$tables}}/fetch_image/{{ $rows->medl_id }}"
+                                                             src="{{$tables}}/fetch_image/{{ $rows->medl_id  ?? $rows->cla_id ?? $rows->social_id}}"
                                                              onclick="displayImage()">
 
                                                         {{--                                                            </a>--}}

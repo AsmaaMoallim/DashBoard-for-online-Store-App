@@ -6,6 +6,8 @@ use App\Models\MainSection;
 use App\Models\MediaLibrary;
 use App\Models\SubSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
 
 class subSectionController extends Controller
 {
@@ -19,7 +21,7 @@ class subSectionController extends Controller
         $qry = \DB::table('sub_section')
             ->join('media_library', 'sub_section.medl_id', '=', 'media_library.medl_id')
             ->join('main_sections','sub_section.main_id','=','main_sections.main_id')
-            ->select('sub_name AS اسم القسم الفرعي' , 'medl_img_ved AS الصورة','main_name AS اسم القسم الرئيسي', 'sub_section.state','sub_section.fakeId')
+            ->select('sub_section.medl_id','sub_name AS اسم القسم الفرعي' ,'main_name AS اسم القسم الرئيسي', 'sub_section.state','sub_section.fakeId')
             ->get();
 
         $columns= ['اسم القسم الفرعي','الصورة','اسم القسم الرئيسي','fakeId'];
@@ -45,7 +47,8 @@ class subSectionController extends Controller
 
     public function insertData(){
         $mainSection = MainSection::all();
-        return view('new-subSection-form', ['mainSections' => $mainSection]);
+        $data = MediaLibrary::all();
+        return view('new-subSection-form', ['mainSections' => $mainSection])->with( compact('data'));;
     }
 
     public function delete($id)
@@ -54,7 +57,24 @@ class subSectionController extends Controller
         $data->delete();
         return redirect()->back();
     }
+    public function fetch_image($id, $medl_id = null)
+    {
+        if ($medl_id){
+            $image = MediaLibrary::findOrFail($medl_id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+        else{
+            $image = MediaLibrary::findOrFail($id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
 
+    }
 
     function store(Request $request)
     {
@@ -66,7 +86,7 @@ class subSectionController extends Controller
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $sub_section->fakeId =$maxFakeId;
         $sub_section->save();
-        return redirect('/sub_Sections');
+        return redirect('/sub_sections');
     }
 
     public function update(Request $request, SubSection $subSection, $id)

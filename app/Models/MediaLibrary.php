@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Cassandra\Blob;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $medl_id
  * @property string $medl_name
  * @property string $medl_description
-// * @property boolean $medl_img_ved
+ * @property blob $medl_img_ved
  * @property bool $state
  * @property int $fakeId
  *
@@ -47,8 +48,11 @@ class MediaLibrary extends Model
 		'state',
 		'fakeId'
 	];
+    /**
+     * @var \Intervention\Image\Image|mixed
+     */
 
-	public function banners()
+    public function banners()
 	{
 		return $this->hasMany(Banner::class, 'medl_id');
 	}

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $social_id
  * @property string $social_site_name
- * @property boolean|null $social_img
+// * @property boolean|null $social_img
  * @property string $social_url
  * @property bool $state
  * @property int $fakeId
@@ -30,7 +30,7 @@ class SocialMediaLink extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'social_img' => 'boolean',
+//		'social_img' => 'boolean',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

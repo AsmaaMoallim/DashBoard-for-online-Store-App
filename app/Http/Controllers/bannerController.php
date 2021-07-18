@@ -23,7 +23,7 @@ class bannerController extends Controller
 
         $qry = \DB::table('banner')
             ->join('media_library', 'banner.medl_id', '=', 'media_library.medl_id')
-            ->select('banner.ban_name As اسم البانر' , 'media_library.medl_img_ved As الصورة','banner.state', 'banner.fakeId')
+            ->select('banner.medl_id','banner.ban_name As اسم البانر' ,'banner.state', 'banner.fakeId')
             ->get();
         $columns=['اسم البانر','الصورة','fakeId'];
 
@@ -59,13 +59,23 @@ class bannerController extends Controller
     return view('new-banner-form')->with( compact('data'));
     }
 
-    public function fetch_image($medl_id)
+    public function fetch_image($id, $medl_id = null)
     {
-        $image = MediaLibrary::findOrFail($medl_id);
-        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
-        $response = Response::make($image_file->encode('jpeg'));
-        $response->header('Content-Type', 'image/jpeg');
-        return $response;
+        if ($medl_id){
+            $image = MediaLibrary::findOrFail($medl_id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+        else{
+            $image = MediaLibrary::findOrFail($id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+
     }
 
     function store(Request $request)
@@ -76,6 +86,7 @@ class bannerController extends Controller
         $max = Banner::orderBy("fakeId", 'desc')->first();
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
         $banner->fakeId = $maxFakeId;
+        $banner->state = false;
         $banner->save();
         return redirect('/banners');
     }

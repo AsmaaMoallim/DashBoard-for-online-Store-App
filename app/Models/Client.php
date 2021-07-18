@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Cassandra\Blob;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $cla_id
  * @property string $cla_frist_name
  * @property string $cla_last_name
- * @property boolean|null $cla_img
+// * @property blob $cla_img
  * @property string $cla_phone_num
  * @property string $cla_email
  * @property bool $state
@@ -39,7 +40,7 @@ class Client extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'cla_img' => 'boolean',
+//		'cla_img' => 'boolean',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];
@@ -53,8 +54,11 @@ class Client extends Model
 		'state',
 		'fakeId'
 	];
+    /**
+     * @var \Intervention\Image\Image|mixed
+     */
 
-	public function bank_transactions()
+    public function bank_transactions()
 	{
 		return $this->hasMany(BankTransaction::class, 'cla_id');
 	}

@@ -15,7 +15,8 @@
                   @else
                   action="/store-client"
                   @endif
-                  method="Post">
+                  method="Post"
+                  enctype="multipart/form-data">
 
                 <div class="card-body fc-direction-rtl">
                     @csrf
@@ -52,8 +53,12 @@
                         <x-form.photo-input name="cla_img" label="الصورة"
                                             value="{{$cla_img ?? ''}}"></x-form.photo-input>
                     @else
-
-                    <x-form.photo-input name="cla_img" label="الصورة"></x-form.photo-input>
+                        <div class="form-group col-sm-10">
+                            <label>الصورة</label>
+                            <input type="file" name="cla_img">
+                            {{--                            <textarea  type="file" name="medl_img_ved" class="form-control" id="editor1"--}}
+                            {{--                                      style="width:100%"> </textarea>--}}
+                        </div>
                     @endif
                 <x-form.input name="cla_phone_num" class="form-control" type="tel"
                               label="رقم الجوال" placeholder="أدخل رقم الجوال  التابع للعميل الجديد"

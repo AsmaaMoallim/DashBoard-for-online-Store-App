@@ -6,6 +6,8 @@ use App\Models\MainSection;
 use App\Models\MediaLibrary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
 
 class mainSectionController extends Controller
 {
@@ -18,7 +20,7 @@ class mainSectionController extends Controller
         $tables = 'main_sections';
         $qry = \DB::table('main_sections')
             ->join('media_library','main_sections.medl_id','=','media_library.medl_id')
-            ->select('main_name AS اسم القسم الرئيسي','medl_img_ved AS الصورة','main_sections.state','main_sections.fakeId')
+            ->select('main_sections.medl_id','main_name AS اسم القسم الرئيسي','main_sections.state','main_sections.fakeId')
             ->get();
         $columns = ['اسم القسم الرئيسي','الصورة','fakeId'];
 
@@ -28,7 +30,9 @@ class mainSectionController extends Controller
     }
 
     public function insertData(){
-        return view('new-maninSection-form');
+        $data = MediaLibrary::all();
+
+        return view('new-maninSection-form')->with( compact('data'));
     }
 
     public function enableordisable($id)
@@ -53,6 +57,24 @@ class mainSectionController extends Controller
         return redirect()->back();
     }
 
+    public function fetch_image($id, $medl_id = null)
+    {
+        if ($medl_id){
+            $image = MediaLibrary::findOrFail($medl_id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+        else{
+            $image = MediaLibrary::findOrFail($id);
+            $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+
+    }
     function store(Request $request)
     {
         $mainSection = new MainSection();
@@ -62,7 +84,7 @@ class mainSectionController extends Controller
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $mainSection->fakeId =$maxFakeId;
         $mainSection->save();
-        return redirect('/main_Sections');
+        return redirect('/main_sections');
     }
 
     public function update(Request $request, MainSection $mainSection, $id)
