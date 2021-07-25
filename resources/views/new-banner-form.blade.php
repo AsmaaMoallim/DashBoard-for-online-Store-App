@@ -50,7 +50,7 @@
                                 </tr>
                                 </thead>
 
-                                @foreach($mediaLibrary as $media)
+                                @foreach($medialibrary as $media)
                                     <?php  $med = $media->medl_id ?>
 
                                     <tbody>
@@ -92,5 +92,6 @@
         </div>
     </div>
     </div>
+    
 @endsection
 
