@@ -88,6 +88,24 @@ class orderController extends Controller
         $data->delete();
         return redirect()->back();
     }
+    public function update(Request $request, Order $order,$id)
+    {
+        $currentValues = Order::where("fakeId","=","$id")->first();
+        $CurrentStage = Stage::find($currentValues->stage_id);
+        $stages = Stage::all();
+        return view('update-order-stage-form')->with('CurrentStage' , $CurrentStage)
+            ->with('id', $id)->with('stages',$stages);
+    }
+
+
+    public function store_update(Request $request, $id){
+        $data = Order::where("fakeId","=","$id")->first();
+//        $Stage = Stage::find($request->stage_name);
+//        dd($request->stage_id);
+//        stage_name
+        $data->update($request->all());
+        return redirect('/orders');
+    }
 
     public function search(Request $request)
     {

@@ -51,6 +51,24 @@ class socialMediaLinksController extends Controller
     public function insertData(){
         return view('new-social-media-form');
     }
+//    public function fetch_image($id, $social_id = null)
+//    {
+//        if ($social_id){
+//            $image = SocialMediaLink::findOrFail($social_id);
+//            $image_file = Image::make($image->social_img);
+//            $response = Response::make($image_file->encode('jpeg'));
+//            $response->header('Content-Type', 'image/jpeg');
+//            return $response;
+//        }
+//        else{
+//            $image = SocialMediaLink::findOrFail($id);
+//            $image_file = Image::make($image->social_img);
+//            $response = Response::make($image_file->encode('jpeg'));
+//            $response->header('Content-Type', 'image/jpeg');
+//            return $response;
+//        }
+//
+//    }
     function fetch_image($social_id)
     {
         $image = SocialMediaLink::findOrFail($social_id);

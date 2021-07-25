@@ -134,6 +134,7 @@ Route::get('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccountC
 Route::get('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'update'])->name("shipping_charge.update");
 Route::get('/contact_information/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'update'])->name("contact_information.update");
 Route::get('/contact_information_2/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'update2'])->name("contact_information.update2");
+Route::get('/orders/{int}/update', [\App\Http\Controllers\orderController::class, 'update'])->name('orders.update');
 
 ////////////////////////////////////////////////////  store_update button
 Route::post('/manager/{int}/update', [\App\Http\Controllers\ManagerController::class, 'store_update'])->name('manager.store_update');
@@ -150,6 +151,7 @@ Route::post('/sys_bank_account/{int}/update', [\App\Http\Controllers\bankAccount
 Route::post('/shipping_charge/{int}/update', [App\Http\Controllers\shippingChargeController::class, 'store_update'])->name('shipping_charge.store_update');
 Route::post('/contact_information_email/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'store_update'])->name("contact_information.store_update");
 Route::post('/contact_information_phone/{int}/update', [\App\Http\Controllers\sysContactInfoController::class, 'store_update2'])->name("contact_information.store_update2");
+Route::post('/orders/{int}/update', [\App\Http\Controllers\orderController::class, 'store_update'])->name('orders.store_update');
 
 
 
