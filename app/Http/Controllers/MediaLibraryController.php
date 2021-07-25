@@ -61,15 +61,15 @@ class MediaLibraryController extends Controller
     {
         $image = Image::make($request->file('medl_img_ved'))->encode('jpeg');
 
-        $mediaLibrary = new MediaLibrary();
+        $medialibrary = new MediaLibrary();
         $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
-        $mediaLibrary->medl_name = $request->medl_name;
-        $mediaLibrary->medl_description = $request->medl_description;
-        $mediaLibrary->medl_img_ved = $image;
-        $mediaLibrary->fakeId = $maxFakeId;
+        $medialibrary->medl_name = $request->medl_name;
+        $medialibrary->medl_description = $request->medl_description;
+        $medialibrary->medl_img_ved = $image;
+        $medialibrary->fakeId = $maxFakeId;
 
-        $mediaLibrary->save();
+        $medialibrary->save();
         return redirect('/media_library');
 
     }

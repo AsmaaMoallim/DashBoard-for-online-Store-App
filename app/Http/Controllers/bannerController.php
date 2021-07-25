@@ -95,13 +95,13 @@ class bannerController extends Controller
     {
         $currentValues = Banner::where("fakeId","=","$id")->first();
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
-        $mediaLibrary = MediaLibrary::all();
+        $medialibrary = MediaLibrary::all();
         $currentMedias = MediaLibrary::all()
             ->where("medl_id","=","$currentValues->medl_id");
 
         return view('new-banner-form')->with('currentValues', $currentValues)
             ->with('id', $id)->with('currentforeignValues',$currentforeignValues)
-            ->with('mediaLibrary',$mediaLibrary)->with('currentMedias',$currentMedias);
+            ->with('medialibrary',$medialibrary)->with('currentMedias',$currentMedias);
 
     }
     public function store_update(Request $request, $id){

@@ -116,6 +116,20 @@ class productController extends Controller
         $product->fakeId = $maxFakeId;
         $product->save();
 
+        //*** color save
+        $color2 = $request->input('ColorBox');
+//        dd($color2);
+        foreach ($color2 as $colors) {
+            $maxFakeIdProdColo = 0;
+            $productProdAvilColor = new ProductProdAvilColor();
+            $productProdAvilColor->prod_id = $product->prod_id;
+            $max = ProductProdAvilColor::orderBy("fakeId", 'desc')->first(); // gets the whole row
+            $maxFakeIdProdColo = $max ? $max->fakeId + 1 : 1;
+            $productProdAvilColor->fakeId = $maxFakeIdProdColo;
+            $productProdAvilColor->prod_avil_color = $colors;
+            $productProdAvilColor->save();
+        }
+
         //*** MED SAVE **
         $medl_id = $request->input('medl_id');
         foreach ($medl_id as $medl_id) {
