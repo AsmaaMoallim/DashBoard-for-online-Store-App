@@ -30,10 +30,14 @@
 
                         <div class="form-group col-sm-10 ">
                             <label>العميل</label>
-                            <br>
+                            <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                                <table class="table-bordered">
                         @foreach($clients as $clients)
                             <?php $clienttt = $clients->cla_id?>
 
+                                        <tbody>
+                                        <tr>
+                                            <td>
                                 <input type="checkbox"  name="cla_id[]" id="cal_id" value="{{$clienttt}}">
                                 {{$clients->cal_frist_name}}{{$clients->cla_last_name}}
                                     <br>
@@ -42,7 +46,11 @@
                             <input name="cla_id[]" type="checkbox"
                                    value="{{$clienttt}}"
                                    onclick="toggle(this);"/> الكل <br />
-                        </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                         <div>
                             <label>نص الإشعار</label>

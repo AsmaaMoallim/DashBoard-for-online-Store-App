@@ -60,19 +60,9 @@ class notificationsController extends Controller
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
             $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
             $notiSent->fakeId = $maxFakeIdProdHas;
-            $notiSent->cla_id = $cla_id[$x];
+            $notiSent->cla_id = $cla_id;
             $notiSent->save();
         }
-
-//        foreach ($cla_id as $cla_id){
-//            $notiSent = new NotifiSendTo();
-//            $notiSent->notifi_id = $notification->notifi_id;
-//            $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
-//            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
-//            $notiSent->fakeId = $maxFakeIdProdHas;
-//            $notiSent->cla_id = $cla_id;
-//            $notiSent->save();
-//        }
 
         return redirect('/notifications');
     }

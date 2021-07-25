@@ -23,6 +23,7 @@ Route::get('media_library/{id}/update/fetch_image', [\App\Http\Controllers\Media
 Route::get('main_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('sub_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('banners/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
+Route::get('/measure/update-measures-form/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
