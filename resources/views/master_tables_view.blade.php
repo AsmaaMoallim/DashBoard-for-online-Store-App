@@ -3,6 +3,8 @@
 @section('content')
 
 
+{{--    <img src="">--}}
+
        <x-table_componentes
            :pagename="$pagename" :displayDetailes="$displayDetailes ?? ''"
            :placeHolder="$placeHolder ?? ''" :key="$key ?? ''"

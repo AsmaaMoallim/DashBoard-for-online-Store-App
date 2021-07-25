@@ -30,6 +30,18 @@ class MeasureController extends Controller
 
         $columns = ['المقاسات', 'fakeId'];
 
+        /////
+
+//        $tables2 = 'measures_images';
+//        $addNew2 = "تعديل الصورة";
+//        $formPage2 = "new-phone-form";
+//
+//        $qry2 = \DB::table('sys_info_phone')
+//            ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')
+//            ->get();
+//
+//        $columns2 = ['الجوال','fakeId'];
+
         return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage);
@@ -99,7 +111,6 @@ class MeasureController extends Controller
                 ->with('mediaLibrary',$mediaLibrary)-with('currentMedias',$currentMedias)
                 ->with('id', $id);
     }
-
 
 
     public function store_update(Request $request, $id){
