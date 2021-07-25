@@ -12,7 +12,7 @@
 
             <form
                 @if(isset($id))
-                action="/position/{{$id}}/update"
+                action="/positions_permissions/{{$id}}/update"
                 @else
                 action="/store-position"
                 @endif

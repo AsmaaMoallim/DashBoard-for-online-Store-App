@@ -11,7 +11,7 @@
 
             <form
                   @if(isset($id))
-                  action="/main_Sections/{{$id}}/update"
+                  action="/main_sections/{{$id}}/update"
                   @else
                   action="/store-main-section"
                   @endif

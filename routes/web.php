@@ -18,6 +18,8 @@ Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
 
 ////////////////////////////////////////////////////  fetch_image
 Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
+Route::get('media_library/{id}/update/fetch_image', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
+
 Route::get('main_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('sub_sections/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
 Route::get('banners/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);
@@ -40,6 +42,7 @@ Route::get('clients/{id}/update/fetch_image', [\App\Http\Controllers\clientContr
 
 Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 Route::get('social_media_link/{id}/update/fetch_image', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
+
 
 //Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 

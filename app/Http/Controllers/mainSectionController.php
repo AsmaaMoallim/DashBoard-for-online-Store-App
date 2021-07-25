@@ -103,7 +103,7 @@ class mainSectionController extends Controller
     public function store_update(Request $request, $id){
         $data = MainSection::where("fakeId","=","$id")->first();
         $data->update($request->all());
-        return redirect('/main_Sections');
+        return redirect('/main_sections');
     }
 
     public function search(Request $request){

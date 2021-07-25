@@ -37,18 +37,18 @@
 
                     <div class="form-group col-sm-10 ">
                         <label>القسم الرئيسي التابع له</label>
-                        <select onchange="GetSelectedItem">
+                        <select name="main_id" onchange="GetSelectedItem">
                             @foreach($mainSections as $mainSection)
                                 @if(isset($id))
 
                                 @if ($mainSection->main_id == $currentValues->main_id)
                                     <option
+
                                         value="{{$mainSection->main_id}}"
                                             selected="selected">{{$CurrentmainSection}}
                                 </option>
                                     @else
                                         <option
-
                                             value="{{$mainSection->main_id}}"> {{$mainSection->main_name}}
                                         </option>
                                     @endif

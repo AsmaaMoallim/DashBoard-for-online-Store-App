@@ -47,15 +47,23 @@
 
 {{--                   need to be changed--}}
 
-                        <div class="form-group col-sm-10">
-
-                            <img src="{{$medl_img_ved}}">
-                        </div>
                             <div class="form-group col-sm-10">
-                                <label>الصورة/رابط الفيديو</label>
-                                <textarea name="medl_img_ved" class="form-control" id="editor1" type="file" name="medl_img_ved"
-                                          style="width:100%"> </textarea>
+                                <label>الصورة الحالية:    </label>
+
+                                <img
+                                    width="100"
+                                    height="100"
+                                    src="update/fetch_image">
                             </div>
+
+                            <x-form.photo-input name="medl_img_ved" label="الصورة"
+                                                value="{{$medl_img_ved ?? ''}}"></x-form.photo-input>
+
+{{--                            <div class="form-group col-sm-10">--}}
+{{--                                <label>الصورة/رابط الفيديو</label>--}}
+{{--                                <textarea name="medl_img_ved" class="form-control" id="editor1" type="file" name="medl_img_ved"--}}
+{{--                                          style="width:100%"> </textarea>--}}
+{{--                            </div>--}}
                     @else()
                         <div class="form-group col-sm-10">
                             <label>الصورة/رابط الفيديو</label>

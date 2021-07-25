@@ -72,17 +72,17 @@ class clientController extends Controller
     {
         $image = Image::make($request->file('cla_img'))->encode('jpeg');
 
-        $client= new client();
-        $client->cla_frist_name = $request->cla_frist_name;
-        $client->cla_last_name = $request->cla_last_name;
-        $client->cla_img = $image;
-        $client->cla_phone_num = $request->cla_phone_num;
-        $client->cla_email = $request->cla_img;
+        $data= new client();
+        $data->cla_frist_name = $request->cla_frist_name;
+        $data->cla_last_name = $request->cla_last_name;
+        $data->cla_img = $image;
+        $data->cla_phone_num = $request->cla_phone_num;
+        $data->cla_email = $request->cla_img;
         $max = Client::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;
-        $client->fakeId =$maxFakeId;
+        $data->fakeId =$maxFakeId;
 
-        $client->save();
+        $data->save();
         return redirect('/clients');
     }
 
@@ -99,7 +99,19 @@ class clientController extends Controller
 
     public function store_update(Request $request, $id){
         $data = Client::where("fakeId","=","$id")->first();
-        $data->update($request->all());
+
+        $image = Image::make($request->file('cla_img'))->encode('jpeg');
+
+        $data->cla_frist_name = $request->cla_frist_name;
+        $data->cla_last_name = $request->cla_last_name;
+        $data->cla_img = $image;
+        $data->cla_phone_num = $request->cla_phone_num;
+        $data->cla_email = $request->cla_img;
+        $max = Client::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
+        $data->fakeId =$maxFakeId;
+
+        $data->update();
         return redirect('/clients');
     }
 

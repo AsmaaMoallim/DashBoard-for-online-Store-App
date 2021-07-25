@@ -50,7 +50,7 @@
                                 </tr>
                                 </thead>
 
-                                @foreach($medialibrary as $media)
+                                @foreach($mediaLibrary as $media)
                                     <?php  $med = $media->medl_id ?>
 
                                     <tbody>

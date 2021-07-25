@@ -1173,46 +1173,51 @@
                                     <div class="row">
                                         <div class="col-12 table-responsive">
                                             <table class="table table-striped">
+
                                                 <thead>
                                                 <tr>
-                                                    <th>تعداد</th>
-                                                    <th>محصول</th>
-                                                    <th>سریال #</th>
-                                                    <th>توضیحات</th>
-                                                    <th>قیمت کل</th>
+                                                    @for( $i = 0 ; $i<=10 ; $i++)
+
+
+                                                        @if(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                            <th>{{$columns[$i]}}</th>
+                                                        @endif
+
+                                                    @endfor
+
+
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>ندای وظیفه</td>
-                                                    <td>455-981-221</td>
-                                                    <td>بازی شوتر شخص اول</td>
-                                                    <td>150000 تومان</td>
+
+                                                    @foreach( $productsInfo as $rows)
+
+                                                        @for( $i = 0 ; $i<=10; $i++)
+                                                            @if(isset($columns[$i]) && $columns[$i] == "الألوان")
+                                                                <?php $val = (string)$columns[$i] ?>
+                                                                <?php $color = (string)$rows->$val ?>
+
+                                                                <td>
+                                                                    {{--                                                        @foreach($columns as $columns)--}}
+                                                                    <div class='box'
+                                                                         style="background-color:{{$color}} !important;">
+
+                                                                    </div>
+                                                                    {{--                                                        @endforeach--}}
+                                                                </td>
+                                                            @elseif(isset($columns[$i]) && $columns[$i]!='fakeId')
+                                                                <?php $val = (string)$columns[$i] ?>
+                                                                <td>{{$rows->$val}}</td>
+                                                            @endif
+
+                                                        @endfor
+
+
                                                 </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>تلویزیون هوشمند سامسونگ</td>
-                                                    <td>247-925-726</td>
-                                                    <td>لوازم خانگی</td>
-                                                    <td>2,000,000 تومان</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>لباسشویی</td>
-                                                    <td>735-845-642</td>
-                                                    <td>
-                                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
-                                                    </td>
-                                                    <td>10,000 تومان</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>نجات سرباز رایان</td>
-                                                    <td>422-568-642</td>
-                                                    <td>لورم ایپسوم متن ساختگی</td>
-                                                    <td>20,000 تومان</td>
-                                                </tr>
+
+                                                @endforeach
+
                                                 </tbody>
                                             </table>
                                         </div>

@@ -94,9 +94,17 @@ class MediaLibraryController extends Controller
 
     public function store_update(Request $request, $id)
     {
+        $image = Image::make($request->file('medl_img_ved'))->encode('jpeg');
+
         $data = MediaLibrary::where("fakeId", "=", "$id")->first();
-        $data->update($request->all());
-        return redirect('/media_Library');
+        $max = MediaLibrary::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max ? $max->fakeId + 1 : 1;
+        $data->medl_name = $request->medl_name;
+        $data->medl_description = $request->medl_description;
+        $data->medl_img_ved = $image;
+        $data->fakeId = $maxFakeId;
+        $data->update();
+        return redirect('/media_library');
     }
 
     public function search(Request $request){

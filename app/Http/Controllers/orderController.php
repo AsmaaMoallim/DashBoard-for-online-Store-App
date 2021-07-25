@@ -214,6 +214,21 @@ class orderController extends Controller
 //            ->get();
 //        dd($rows);
 
+        $rows = \DB::table('orders')
+            ->join('ord_has_item_of', 'orders.ord_id' , 'ord_has_item_of.ord_id')
+            ->join('product', 'ord_has_item_of.prod_id', '=', 'product.prod_id')
+            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
+            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
+            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
+            ->select('product.prod_name AS اسم المنتج', 'color.prod_avil_color AS الألوان','measure.mesu_value AS المقاسات',
+                'ord_has_item_of.prod_ord_amount AS الكمية','product.prod_price AS السعر')
+            ->where("orders.fakeId", "=", "$id")
+            ->groupby('اسم المنتج',  'الألوان' ,'المقاسات', 'الكمية',  'السعر')
+
+            ->get();
+        $columns = ['اسم المنتج', 'الألوان','المقاسات', 'الكمية',  'السعر', 'fakeId'];
+
+//        dd($rows);
 //        $rows = \DB::table('product')
 //            ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
 //            ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
@@ -226,7 +241,8 @@ class orderController extends Controller
 
         return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename,
             'currentValues' => $currentValues, 'currentClient' => $currentClient,
-            'currentPaymentMethod' => $currentPaymentMethod, 'currentOrdStage' => $currentOrdStage])->with('id', $id);
+            'currentPaymentMethod' => $currentPaymentMethod, 'currentOrdStage' => $currentOrdStage])
+            ->with('id', $id)->with('productsInfo', $rows)->with('columns',$columns);
     }
 
 

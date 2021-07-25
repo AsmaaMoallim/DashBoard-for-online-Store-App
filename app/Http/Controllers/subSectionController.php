@@ -78,6 +78,8 @@ class subSectionController extends Controller
 
     function store(Request $request)
     {
+//        dd($request);
+
         $sub_section = new SubSection();
         $sub_section->sub_name = $request->sub_name;
         $sub_section->main_id = $request->main_id;
@@ -109,7 +111,7 @@ class subSectionController extends Controller
     public function store_update(Request $request, $id){
         $data = SubSection::where("fakeId","=","$id")->first();
         $data->update($request->all());
-        return redirect('/sub_Sections');
+        return redirect('/sub_sections');
     }
 
     public function search(Request $request){
