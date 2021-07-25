@@ -23,7 +23,6 @@ class sysContactInfoController extends Controller
         $columns = ['البريد الإلكتروني','fakeId'];
 
 
-
         ///////////////////////
         ///
         $tables2 = 'contact_information';

@@ -3,8 +3,6 @@
 @section('content')
 
 
-{{--    <img src="">--}}
-
        <x-table_componentes
            :pagename="$pagename" :displayDetailes="$displayDetailes ?? ''"
            :placeHolder="$placeHolder ?? ''" :key="$key ?? ''"
@@ -12,6 +10,7 @@
            :addNew="$addNew  ?? ''" :showRecords="$showRecords ?? ''"
            :formPage="$formPage ?? ''" :recordPage="$recordPage ?? ''"
            :noUpdateBtn="$noUpdateBtn ?? ''" :noDeleteBtn="$noDeleteBtn ?? ''"
+           :imgId="$imgId?? ''"
 
 
            :rows2="$rows2 ?? ''" :columns2="$columns2 ?? ''" :tables2="$tables2 ?? ''"

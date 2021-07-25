@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Measure;
 use App\Models\measuresImages;
 use App\Models\MediaLibrary;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
+use Ramsey\Uuid\Type\Integer;
 
 class MeasureController extends Controller
 {
@@ -16,7 +18,35 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   private $id;
+
     static public $storeImage;
+
+    /**
+     * MeasureController constructor.
+     * @param $id
+     */
+    public function __construct( Integer $id)
+    {
+        $this->id = $id;
+    }
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+
     public function index()
     {
         $pagename = "دليل المقاسات";
@@ -30,21 +60,14 @@ class MeasureController extends Controller
 
         $columns = ['المقاسات', 'fakeId'];
 
-        /////
-
-//        $tables2 = 'measures_images';
-//        $addNew2 = "تعديل الصورة";
-//        $formPage2 = "new-phone-form";
-//
-//        $qry2 = \DB::table('sys_info_phone')
-//            ->select('sys_info_phone.sys_phone_num AS الجوال', 'sys_info_phone.state' ,'sys_info_phone.fakeId')
-//            ->get();
-//
-//        $columns2 = ['الجوال','fakeId'];
+        dd($this->id);
 
         return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
         ('showRecords', $showRecords)->with('formPage', $formPage);
+
+//            ->with('tables2', $tables2)->with('rows2', $qry2)->with('columns2', $columns2);
+
     }
 
     public function insertData()
@@ -53,10 +76,10 @@ class MeasureController extends Controller
         return view('update-measures-form')->with( compact('mediaLibrary'));
     }
 
-    public function fetch_image($mesu_id)
+    public function fetch_image($id)
     {
 
-        $image = Measure::findOrFail($mesu_id);
+        $image = Measure::findOrFail($id);
         $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
         $response = Response::make($image_file->encode('jpeg'));
         $response->header('Content-Type', 'image/jpeg');
@@ -97,10 +120,12 @@ class MeasureController extends Controller
         $mesuImage = new MediaLibrary();
         $mesuImage->medl_id = $request->medl_id;
 
+        $this->id = $request->medl_id;
+
         return redirect('/measure');
     }
 
-        public function update(Request $request, Measure $measure,$id)
+    public function update(Request $request, Measure $measure,$id)
     {
         $currentValues = measuresImages::where("fakeId","=","$id")->first();
         $mediaLibrary = MediaLibrary::all();
