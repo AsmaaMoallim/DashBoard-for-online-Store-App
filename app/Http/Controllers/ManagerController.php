@@ -19,6 +19,7 @@ class ManagerController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
+
     public function index()
     {
         $pagename = "الادارة";

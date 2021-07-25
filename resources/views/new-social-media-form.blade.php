@@ -46,6 +46,7 @@
                             <label>الصورة الحالية:    </label>
 
                             <img
+                                onclick="displayImage()"
                                 width="100"
                                 height="100"
                                 src="update/fetch_image">
@@ -69,5 +70,20 @@
         </div>
     </div>
     </div>
+    <script>
 
+        function displayImage(e) {
+            var elem = document.getElementsByClassName('img');
+            e = e || window.event;
+            var t = e.target;
+            var imgArray = $('[id^=img]').map(function (i) {
+                //return this.name;
+                // alert(this.name)
+                if (t.name == this.name) {
+                    window.location.href = t.src;
+                }
+                return this.value; // for real values of input
+            }).get();
+        }
+    </script>
 @endsection
