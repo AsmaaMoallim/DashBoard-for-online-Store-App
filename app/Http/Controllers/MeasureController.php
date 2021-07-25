@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
+use phpDocumentor\Reflection\Types\This;
 use Ramsey\Uuid\Type\Integer;
 
+/**
+ * @property  id
+ */
 class MeasureController extends Controller
 {
     /**
@@ -19,31 +23,31 @@ class MeasureController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   private $id;
+   static $id;
 
     static public $storeImage;
 
-    /**
-     * MeasureController constructor.
-     * @param $id
-     */
-    public function __construct( Integer $id)
-    {
-        $this->id = $id;
-    }
+//    /**
+//     * MeasureController constructor.
+//     * @param  $id
+//     */
+//    public function __construct()
+//    {
+//        $this->id = 0;
+//    }
 
 
     public function getId()
     {
-        return $this->id;
+        return MeasureController::$id;
     }
 
-    /**
-     * @param int $id
-     */
+//    /**
+//     * @param int $id
+//     */
     public function setId(int $id): void
     {
-        $this->id = $id;
+        MeasureController::$id = $id;
     }
 
 
@@ -60,7 +64,6 @@ class MeasureController extends Controller
 
         $columns = ['المقاسات', 'fakeId'];
 
-        dd($this->id);
 
         return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
@@ -119,8 +122,9 @@ class MeasureController extends Controller
 //        MeasureController::$storeImage = $image;
         $mesuImage = new MediaLibrary();
         $mesuImage->medl_id = $request->medl_id;
-
-        $this->id = $request->medl_id;
+        MeasureController::setId($request->medl_id);
+//        $this->id = $request->medl_id;
+        dd(MeasureController::$id);
 
         return redirect('/measure');
     }
