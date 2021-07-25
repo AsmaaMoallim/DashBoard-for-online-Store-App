@@ -16,6 +16,7 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    static public $storeImage;
     public function index()
     {
         $pagename = "دليل المقاسات";
@@ -42,6 +43,7 @@ class MeasureController extends Controller
 
     public function fetch_image($mesu_id)
     {
+
         $image = Measure::findOrFail($mesu_id);
         $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
         $response = Response::make($image_file->encode('jpeg'));
@@ -78,6 +80,8 @@ class MeasureController extends Controller
 
     function store(Request $request)
     {
+//        $image = Image::make($request->file('medl_id'))->encode('jpeg');
+//        MeasureController::$storeImage = $image;
         $mesuImage = new MediaLibrary();
         $mesuImage->medl_id = $request->medl_id;
 

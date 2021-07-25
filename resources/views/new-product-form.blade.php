@@ -125,7 +125,8 @@
                                                     @endforeach
                                                 >
 
-                                                <img src="update/fetch_image/{{$media['medl_id']}}" class="img-thumbnail"
+                                                <img src="update/fetch_image/{{$media['medl_id']}}"
+                                                     class="img-thumbnail"
                                                      width="75"/>
                                             @else
                                                 <input type="checkbox" name="medl_id[]"
@@ -150,11 +151,11 @@
                                       placeholder=" أدخل الكمية المتوفرة حالياً للمنتج الجديد "
                                       value="{{$prod_avil_amount ?? ''}}"></x-form.input>
 
-                        <div class="form-group col-sm-10 ">
+                        <div class="form-group col-sm-10">
                             <label>المقاسات</label>
                             <br>
                             @foreach( $measures as $measure)
-                                <input name="mesu_id[]" type="checkbox"
+                                <input  style="margin-left:7px" name="mesu_id[]" type="checkbox"
                                        value="{{$measure->mesu_id}}"
 
                                        @if(isset($id))

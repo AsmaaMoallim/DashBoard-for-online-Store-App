@@ -65,7 +65,7 @@ class bankAccountController extends Controller
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $sys_bank_account->fakeId = $maxFakeId;
         $sys_bank_account->save();
-        return redirect('/bank_accounts');
+        return redirect('/sys_bank_account');
     }
 
 
@@ -82,7 +82,7 @@ class bankAccountController extends Controller
     public function store_update(Request $request, $id){
         $data = SysBankAccount::where("fakeId","=","$id")->first();
         $data->update($request->all());
-        return redirect('/bank_accounts');
+        return redirect('/sys_bank_account');
     }
 
     public function search(Request $request){

@@ -41,6 +41,7 @@ Route::get('sub_sections/{int}/update/fetch_image/{id}', [\App\Http\Controllers\
 Route::get('clients/fetch_image/{id}', [\App\Http\Controllers\clientController::class, 'fetch_image']);
 Route::get('clients/{id}/update/fetch_image', [\App\Http\Controllers\clientController::class, 'fetch_image']);
 
+//Route::get('social_media_link/new-social-media-form/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 Route::get('social_media_link/fetch_image/{id}', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 Route::get('social_media_link/{id}/update/fetch_image', [\App\Http\Controllers\socialMediaLinksController::class, 'fetch_image']);
 

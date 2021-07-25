@@ -27,6 +27,7 @@ class notificationsController extends Controller
                 \DB::raw("GROUP_CONCAT(CONCAT(cla_frist_name,'',  cla_last_name),'\r\n' SEPARATOR ' //  ') AS 'العملاء' "),
                 'notifications.notifi_title AS عنوان الاشعار','notifications.notifi_content AS نص الاشعار','notifications.fakeId')
             ->groupBy('المدير', 'notifications.notifi_title', 'notifications.notifi_content','notifications.fakeId' )
+            ->orderby('notifications.fakeId')
             ->get();
         $columns = ['المدير','العملاء','عنوان الاشعار','نص الاشعار','fakeId'];
 
@@ -49,7 +50,6 @@ class notificationsController extends Controller
         $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
-        $notification->man_id = Manager::pluck('man_id')->first();
         $notification->save();
 
         $cla_id = $request->input('cla_id');
@@ -60,7 +60,7 @@ class notificationsController extends Controller
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row
             $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
             $notiSent->fakeId = $maxFakeIdProdHas;
-            $notiSent->cla_id = $cla_id;
+            $notiSent->cla_id = $cla_id[$x];
             $notiSent->save();
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Comments;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class commentController extends Controller
 
     public function delete($id)
     {
-        Comments::where("fakeId","=","$id")->delete();
+        Comment::where("fakeId","=","$id")->delete();
         return redirect()->back();
     }
 

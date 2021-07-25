@@ -61,6 +61,6 @@ class Comment extends Model
 
 	public function reports()
 	{
-		return $this->hasMany(Report::class, 'prod_id', 'prod_id');
+		return $this->hasMany(Report::class, 'report_id', 'report_id');
 	}
 }

@@ -16,7 +16,8 @@
                   @else
                   action="/store-social-media-links"
                   @endif
-                  method="Post">
+                  method="Post"
+                  enctype="multipart/form-data">
 
 
                 @if(isset($id))

@@ -60,9 +60,13 @@ class socialMediaLinksController extends Controller
         return $response;
     }
     public function store(Request $request){
+
+        $image = Image::make($request->file('social_img'))->encode('jpeg');
+//        dd($image);
+
         $socialMedial = new SocialMediaLink();
         $socialMedial->social_site_name = $request->social_site_name;
-        $socialMedial->social_img = $request->social_img;
+        $socialMedial->social_img = $image;
         $socialMedial->social_url = $request->social_url;
         $max = SocialMediaLink::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;
@@ -81,8 +85,16 @@ class socialMediaLinksController extends Controller
 
 
     public function store_update(Request $request, $id){
+        $image = Image::make($request->file('social_img'))->encode('jpeg');
+
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
-        $data->update($request->all());
+        $data->social_site_name = $request->social_site_name;
+        $data->social_img = $image;
+        $data->social_url = $request->social_url;
+        $max = SocialMediaLink::orderBy("fakeId", 'desc')->first(); // gets the whole row
+        $maxFakeId = $max? $max->fakeId + 1 : 1;
+        $data->fakeId = $maxFakeId;
+        $data->update();
         return redirect('/social_media_link');
     }
 

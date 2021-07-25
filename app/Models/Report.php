@@ -28,7 +28,8 @@ class Report extends Model
     use HasFactory;
 
     protected $table = 'report';
-	public $timestamps = false;
+    protected $primaryKey = 'report_id';
+    public $timestamps = false;
 
 	protected $casts = [
 		'cla_id' => 'int',
@@ -47,10 +48,14 @@ class Report extends Model
 		return $this->belongsTo(Client::class, 'cla_id');
 	}
 
-	public function comment()
-	{
-		return $this->belongsTo(Comment::class, 'prod_id', 'prod_id')
-					->where('comments.prod_id', '=', 'report.prod_id')
-					->where('comments.com_id', '=', 'report.com_id');
-	}
+//    public function comment()
+//    {
+//        return $this->belongsTo(Comment::class, 'prod_id', 'prod_id')
+//            ->where('comments.prod_id', '=', 'report.prod_id')
+//            ->where('comments.com_id', '=', 'report.com_id');
+//    }
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class, 'com_id', 'com_id');
+    }
 }

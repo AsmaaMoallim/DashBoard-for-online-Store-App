@@ -20,7 +20,7 @@ class reportController extends Controller
             ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم صاحب البلاغ' "),
                 'product.prod_name AS اسم المنتج', 'comments.com_content AS التعليق',
                 'comments.com_rateing AS التقييم', 'ignored as state','report.report_id as fakeId' )
-            ->orderby('state')
+            ->orderby('state', 'DESC')
             ->get();
 
         $col = ['اسم صاحب البلاغ', 'اسم المنتج', 'التعليق', 'التقييم', 'fakeId'];
@@ -43,12 +43,12 @@ class reportController extends Controller
     public function enableordisable($id)
     {
         $data = Report::where("report_id","=","$id")->first();
-        if($data->state==false){
-            $data->state=true;
+        if($data->ignored==false){
+            $data->ignored=true;
             $data->save();
         }
         else{
-            $data->state= false;
+            $data->ignored= false;
             $data->save();
         }
         return redirect()->back();
