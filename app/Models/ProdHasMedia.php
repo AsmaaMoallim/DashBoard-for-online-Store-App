@@ -6,16 +6,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProdHasMedia
- *
+ * 
  * @property int $prod_id
  * @property int $medl_id
  * @property int $fakeId
- *
+ * 
  * @property Product $product
  * @property MediaLibrary $media_library
  *
@@ -23,9 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProdHasMedia extends Model
 {
-    use HasFactory;
-
-    protected $table = 'prod_has_media';
+	protected $table = 'prod_has_media';
 	public $timestamps = false;
 
 	protected $casts = [

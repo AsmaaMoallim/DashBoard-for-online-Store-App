@@ -6,17 +6,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrdHasItemOf
- *
+ * 
  * @property int $prod_id
  * @property int $prod_ord_amount
  * @property int $ord_id
  * @property int $fakeId
- *
+ * 
  * @property Order $order
  * @property Product $product
  *
@@ -24,9 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrdHasItemOf extends Model
 {
-    use HasFactory;
-
-    protected $table = 'ord_has_item_of';
+	protected $table = 'ord_has_item_of';
 	public $incrementing = false;
 	public $timestamps = false;
 

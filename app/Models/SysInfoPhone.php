@@ -6,12 +6,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysInfoPhone
- *
+ * 
  * @property int $sys_phone_id
  * @property string $sys_phone_num
  * @property bool $state
@@ -20,9 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  */
 class SysInfoPhone extends Model
-{    use HasFactory;
-
-    protected $table = 'sys_info_phone';
+{
+	protected $table = 'sys_info_phone';
 	protected $primaryKey = 'sys_phone_id';
 	public $timestamps = false;
 

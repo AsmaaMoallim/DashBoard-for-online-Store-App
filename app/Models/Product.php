@@ -7,12 +7,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Product
- *
+ * 
  * @property int $prod_id
  * @property string $prod_name
  * @property int $sub_id
@@ -21,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $prod_desc_img
  * @property bool $state
  * @property int $fakeId
- *
+ * 
  * @property SubSection $sub_section
  * @property Collection|Comment[] $comments
  * @property Collection|OrdHasItemOf[] $ord_has_item_ofs
@@ -33,9 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    use HasFactory;
-
-    protected $table = 'product';
+	protected $table = 'product';
 	protected $primaryKey = 'prod_id';
 	public $timestamps = false;
 

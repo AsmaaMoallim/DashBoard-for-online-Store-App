@@ -7,18 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MainSection
- *
+ * 
  * @property int $main_id
  * @property string $main_name
  * @property int $medl_id
  * @property bool $state
  * @property int $fakeId
- *
+ * 
  * @property MediaLibrary $media_library
  * @property Collection|SubSection[] $sub_sections
  *
@@ -26,9 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MainSection extends Model
 {
-    use HasFactory;
-
-    protected $table = 'main_sections';
+	protected $table = 'main_sections';
 	protected $primaryKey = 'main_id';
 	public $timestamps = false;
 

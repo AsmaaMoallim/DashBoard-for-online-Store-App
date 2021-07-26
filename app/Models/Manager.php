@@ -6,8 +6,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,7 +18,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $man_last_name
  * @property string $man_phone_num
  * @property string $man_email
+ * @property Carbon|null $email_verified_at
  * @property string $man_password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property int $pos_id
  * @property bool $state
  * @property int $fakeId
@@ -29,13 +33,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Manager extends Model
+class Manager extends Model implements \Illuminate\Contracts\Auth\Authenticatable
 {
-    use HasFactory;
-
-    protected $table = 'manager';
+	protected $table = 'manager';
 	protected $primaryKey = 'man_id';
-	public $timestamps = false;
 
 	protected $casts = [
 		'pos_id' => 'int',
@@ -43,8 +44,13 @@ class Manager extends Model
 		'fakeId' => 'int'
 	];
 
+	protected $dates = [
+		'email_verified_at'
+	];
+
 	protected $hidden = [
-		'man_password'
+		'man_password',
+		'remember_token'
 	];
 
 	protected $fillable = [
@@ -52,7 +58,9 @@ class Manager extends Model
 		'man_last_name',
 		'man_phone_num',
 		'man_email',
+		'email_verified_at',
 		'man_password',
+		'remember_token',
 		'pos_id',
 		'state',
 		'fakeId'
@@ -72,4 +80,35 @@ class Manager extends Model
 	{
 		return $this->hasMany(Notification::class, 'man_id');
 	}
+
+    public function getAuthIdentifierName()
+    {
+        // TODO: Implement getAuthIdentifierName() method.
+    }
+
+    public function getAuthIdentifier()
+    {
+        // TODO: Implement getAuthIdentifier() method.
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->man_password;
+        // TODO: Implement getAuthPassword() method.
+    }
+
+    public function getRememberToken()
+    {
+        // TODO: Implement getRememberToken() method.
+    }
+
+    public function setRememberToken($value)
+    {
+        // TODO: Implement setRememberToken() method.
+    }
+
+    public function getRememberTokenName()
+    {
+        // TODO: Implement getRememberTokenName() method.
+    }
 }

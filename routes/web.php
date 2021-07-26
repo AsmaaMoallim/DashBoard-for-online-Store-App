@@ -14,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [\App\Http\Controllers\ManagerController::class, 'index']);
+Route::get('/', function (){
+    return view('auth.login');
+} );
+
+////////////////////////////////////////////////////  Loging
+Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
+Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+
 
 ////////////////////////////////////////////////////  fetch_image
 Route::get('media_library/fetch_image/{id}', [\App\Http\Controllers\MediaLibraryController::class, 'fetch_image']);

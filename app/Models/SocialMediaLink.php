@@ -6,7 +6,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $social_id
  * @property string $social_site_name
 // * @property boolean|null $social_img
- * @property string $social_img
  * @property string $social_url
  * @property bool $state
  * @property int $fakeId
@@ -24,14 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SocialMediaLink extends Model
 {
-    use HasFactory;
-
-    protected $table = 'social_media_link';
+	protected $table = 'social_media_link';
 	protected $primaryKey = 'social_id';
 	public $timestamps = false;
 
 	protected $casts = [
-//		'social_img' => 'boolean',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];

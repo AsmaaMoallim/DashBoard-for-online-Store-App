@@ -8,9 +8,9 @@ use App\Models\Position;
 use http\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
 use function Sodium\increment;
 use function Symfony\Component\Translation\t;
-
 
 class ManagerController extends Controller
 {
@@ -79,7 +79,11 @@ class ManagerController extends Controller
         $manager->pos_id = $request->pos_id;
         $manager->man_phone_num = $request->man_phone_num;
         $manager->man_email = $request->man_email;
-        $manager->man_password = $request->man_password;
+
+//        $manager->man_password = $request->man_password;
+        $manager->man_password = Hash::make($request->man_password);
+
+
         $max = Manager::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max? $max->fakeId + 1 : 1;
         $manager->fakeId = $maxFakeId;

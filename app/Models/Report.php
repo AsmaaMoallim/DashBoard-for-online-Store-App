@@ -6,18 +6,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Report
- *
+ * 
  * @property int $report_id
- * @property int $cla_id
  * @property int $com_id
+ * @property int $cla_id
  * @property bool $ignored
  * @property int $fakeId
- *
+ * 
  * @property Client $client
  * @property Comment $comment
  *
@@ -25,20 +24,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Report extends Model
 {
-    use HasFactory;
-
-    protected $table = 'report';
-    protected $primaryKey = 'report_id';
-    public $timestamps = false;
+	protected $table = 'report';
+	protected $primaryKey = 'report_id';
+	public $timestamps = false;
 
 	protected $casts = [
-		'cla_id' => 'int',
 		'com_id' => 'int',
+		'cla_id' => 'int',
 		'ignored' => 'bool',
 		'fakeId' => 'int'
 	];
 
 	protected $fillable = [
+		'com_id',
+		'cla_id',
 		'ignored',
 		'fakeId'
 	];
@@ -48,14 +47,8 @@ class Report extends Model
 		return $this->belongsTo(Client::class, 'cla_id');
 	}
 
-//    public function comment()
-//    {
-//        return $this->belongsTo(Comment::class, 'prod_id', 'prod_id')
-//            ->where('comments.prod_id', '=', 'report.prod_id')
-//            ->where('comments.com_id', '=', 'report.com_id');
-//    }
-    public function comment()
-    {
-        return $this->belongsTo(Comment::class, 'com_id', 'com_id');
-    }
+	public function comment()
+	{
+		return $this->belongsTo(Comment::class, 'com_id');
+	}
 }

@@ -124,7 +124,7 @@ class MeasureController extends Controller
         $mesuImage->medl_id = $request->medl_id;
         MeasureController::setId($request->medl_id);
 //        $this->id = $request->medl_id;
-        dd(MeasureController::$id);
+//        dd(MeasureController::$id);
 
         return redirect('/measure');
     }
