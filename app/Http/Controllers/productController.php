@@ -213,8 +213,6 @@ class productController extends Controller
 
     }
 
-    public function delete($id)
-
     public function delete($id, Product $product)
     {
         $this->authorize('view', $product);
