@@ -205,12 +205,14 @@
                                         <p>مكتبة الصور والفيديوهات</p>
                                     </a>
                                 </li>
+                                @can('banner_view')
                                 <li class="nav-item">
                                     <a href="{{ route('banners.index')}}" class="nav-link {{"banners"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>البانارات</p>
                                     </a>
                                 </li>
+                                @endcan
                                 <li class="nav-item">
                                     <a href="{{ route('main_sections.index')}}" class="nav-link {{"main_sections"==request()->path()?"active":""}}">
                                         <i class="fa fa-circle-o nav-icon"></i>

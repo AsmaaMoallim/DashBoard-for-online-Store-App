@@ -7,36 +7,30 @@ use App\Models\Manager;
 use App\Models\MediaLibrary;
 use App\Models\Permission;
 use App\Models\PosInclude;
+use App\Policies\BannerPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 use \Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Ramsey\Uuid\Type\Integer;
 
 class bannerController extends Controller
 {
 
-    public function __construct()
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function __construct(Banner $banner)
     {
-//        $this->middleware(function ($request, $next) {
-//
-//            $this->user = Auth::user();
-//
-//            return $next($request);
-//        });
         $this->middleware('auth');
     }
 
-    public function index(Manager $manager, $guard = null)
+    public function index(Banner $banner, $guard = null)
     {
-//        Session::start();
-//        dd(Session::all());
-//        $user = Auth::guard($guard)->check();
-//        $user = auth()->user();
-//        dd(auth()->user()->pos_id);
-//        dd(PosInclude::all()->where('pos_id', '=', auth()->user()->pos_id)
-//            ->where('per_id', '=', Permission::Deals_with_banners));
+        $this->authorize('view', $banner);
+
         $pagename = "البانارات";
 
         $formPage = "new-banner-form";
@@ -57,8 +51,17 @@ class bannerController extends Controller
         ('formPage', $formPage);
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id, Request $request, Banner $banner)
     {
+        $this->authorize('view', $banner);
+
+//        dd($request->user());
+        $this->authorize('enableordisable', $banner);
+
+//        if (!){
+//            return redirect()->back();
+//            abort(403);
+//        };
         $data = Banner::where("fakeId", "=", "$id")->first();
         if ($data->state == false) {
             $data->state = true;
@@ -70,21 +73,27 @@ class bannerController extends Controller
         return redirect()->back();
     }
 
-    public function delete($id)
+    public function delete($id, Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         $data = Banner::where("fakeId", "=", "$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function insertData()
+    public function insertData(Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         $medialibrary = MediaLibrary::all();
         return view('new-banner-form')->with(compact('medialibrary'));
     }
 
-    public function fetch_image($id, $medl_id = null)
+    public function fetch_image($id, $medl_id = null, Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         if ($medl_id) {
             $image = MediaLibrary::findOrFail($medl_id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
@@ -101,8 +110,10 @@ class bannerController extends Controller
 
     }
 
-    function store(Request $request)
+    function store(Request $request, Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         $banner = new Banner();
         $banner->ban_name = $request->ban_name;
         $banner->medl_id = $request->medl_id;
@@ -116,6 +127,8 @@ class bannerController extends Controller
 
     public function update(Request $request, Banner $banner, $id)
     {
+        $this->authorize('view', $banner);
+
         $currentValues = Banner::where("fakeId", "=", "$id")->first();
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
         $medialibrary = MediaLibrary::all();
@@ -128,15 +141,19 @@ class bannerController extends Controller
 
     }
 
-    public function store_update(Request $request, $id)
+    public function store_update(Request $request, $id, Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         $data = Banner::where("fakeId", "=", "$id")->first();
         $data->update($request->all());
         return redirect('/banners');
     }
 
-    public function search(Request $request)
+    public function search(Request $request , Banner $banner)
     {
+        $this->authorize('view', $banner);
+
         $key = trim($request->get('search'));
 
         $pagename = "البانارات";
