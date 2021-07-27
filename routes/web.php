@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    if (\auth()->check()){
+        return view('adminLayout');
+    }
     return view('auth.login');
 });
 
@@ -27,9 +30,9 @@ Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout
 
 Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(function () {
 
-    Route::get('/adminLayout', function (){
+    Route::get('/adminPanel', function (){
         return view('adminLayout');
-    })->name('adminLayout');
+    })->name('adminPanel');
 
 
 ////////////////////////////////////////////////////  fetch_image

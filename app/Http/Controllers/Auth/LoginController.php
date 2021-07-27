@@ -44,7 +44,7 @@ class LoginController extends Controller
             \auth()->login($manager,true);
 
 //            Auth::login(, true);
-            return redirect()->intended('adminLayout');
+            return redirect()->intended('adminPanel');
         }
 
         return redirect('login')->with('error', 'اووه! البيانات التي ادخلتها غير صحيحة');
