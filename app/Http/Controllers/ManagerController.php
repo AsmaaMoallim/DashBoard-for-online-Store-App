@@ -24,6 +24,7 @@ class ManagerController extends Controller
 
     public function index()
     {
+//        dd(auth()->user());
 
         $pagename = "الادارة";
         $recordPage = "manager_operations_record";

@@ -15,12 +15,29 @@ class BannerPolicy
 {
     use HandlesAuthorization;
 
+
+    public static function retunPer()
+    {
+        if (auth()->check()) {
+            $Per = PosInclude::all()->where('pos_id', '=', auth()->user()->pos_id)
+                ->where('per_id', '=', Permission::Deals_with_banners)->first();
+            if ($Per != null) {
+                $Per = $Per->per_id;
+            } else {
+                $Per = 0;
+            }
+        }
+
+        return $Per;
+    }
+
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\Manager  $manager
+     * @param \App\Models\Manager $manager
      * @return mixed
      */
+
     public function viewAny(Manager $manager)
     {
         //
@@ -29,19 +46,19 @@ class BannerPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Banner  $banner
+     * @param \App\Models\Manager $manager
+     * @param \App\Models\Banner $banner
      * @return mixed
      */
     public function view(Manager $manager, Banner $banner)
     {
-        //
+        return Permission::Deals_with_banners == BannerPolicy::retunPer();
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\Manager  $manager
+     * @param \App\Models\Manager $manager
      * @return mixed
      */
     public function create(Manager $manager)
@@ -52,32 +69,32 @@ class BannerPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Banner  $banner
+     * @param \App\Models\Manager $manager
+     * @param \App\Models\Banner $banner
      * @return mixed
      */
-//    public function update(Manager $manager, Banner $banner)
-//    {
-//        //
-//    }
+    public function update(Manager $manager, Banner $banner)
+    {
+        //
+    }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Banner  $banner
+     * @param \App\Models\Manager $manager
+     * @param \App\Models\Banner $banner
      * @return mixed
      */
-//    public function delete(Manager $manager, Banner $banner)
-//    {
-//        //
-//    }
+    public function delete(Manager $manager, Banner $banner)
+    {
+        //
+    }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Banner  $banner
+     * @param \App\Models\Manager $manager
+     * @param \App\Models\Banner $banner
      * @return mixed
      */
     public function restore(Manager $manager, Banner $banner)
@@ -88,54 +105,13 @@ class BannerPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Banner  $banner
+     * @param \App\Models\Manager $manager
+     * @param \App\Models\Banner $banner
      * @return mixed
      */
     public function forceDelete(Manager $manager, Banner $banner)
     {
         //
     }
-
-//    public function index()
-//    {
-//
-//    }
-
-    public function enableordisable(Manager $manager, Position $position,  Banner $banner , PosInclude $posInclude)
-    {
-//        function (Builder $query) use ($manager)
-//        {
-//            $query = PosInclude::all('per_id')->where('pos_id', Auth()->$manager->pos_id);
-//        };
-//        $posInclude->per_id = Permission::Deals_with_banners;
-//        return Auth()->$manager->pos_id === Permission::Deals_with_banners;
-
-//        return $manager->whereHas(Permission::Deals_with_banners, function (Builder $query) use ($manager)
-//        {
-//            $query = PosInclude::all('per_id')->where('pos_id', Auth()->$manager->pos_id)
-//                ->where('per_id', '=', Permission::Deals_with_banners);
-//        });
-
-        return PosInclude::all()->where('pos_id', '=', auth()->user()->pos_id)
-            ->where('per_id', '=', Permission::Deals_with_banners);
-    }
-
-    public function delete(Manager $manager, Banner $banner)
-    {
-
-    }
-
-    public function insertData(Manager $manager, Banner $banner){
-
-    }
-
-
-
-    public function update(Manager $manager, Banner $banner)
-    {
-
-    }
-
 
 }

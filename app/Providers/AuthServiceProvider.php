@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Banner;
+use App\Models\Manager;
+use App\Models\Permission;
+use App\Policies\BannerPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +29,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('banners_view', function () {
+            return (Permission::Deals_with_banners == BannerPolicy::retunPer());
+        });
+
     }
 }
