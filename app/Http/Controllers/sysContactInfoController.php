@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 
 class sysContactInfoController extends Controller
 {
-    public function index()
+    public function index(SysInfoEmail $sysInfoEmail, SysInfoPhone $sysInfoPhone)
     {
+        $this->authorize('view', $sysInfoEmail);
+        $this->authorize('view', $sysInfoPhone);
+
         $pagename = "بيانات التواصل";
 
         $addNew = "إضافة ايميلات التواصل";
@@ -42,21 +45,27 @@ class sysContactInfoController extends Controller
         ('addNew2',$addNew2)->with('formPage2',$formPage2);
     }
 
-    public function delete($id)
+    public function delete($id,SysInfoEmail $sysInfoEmail)
     {
+        $this->authorize('view', $sysInfoEmail);
+
         $data = SysInfoEmail::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function delete2($id)
+    public function delete2($id,SysInfoPhone $sysInfoPhone)
     {
+        $this->authorize('view', $sysInfoPhone);
+
         $data = SysInfoPhone::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
-    public function enableordisable($id)
+    public function enableordisable($id,SysInfoEmail $sysInfoEmail)
     {
+        $this->authorize('view', $sysInfoEmail);
+
         $data = SysInfoEmail::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -68,8 +77,10 @@ class sysContactInfoController extends Controller
         }
         return redirect()->back();
     }
-    public function enableordisable2($id)
+    public function enableordisable2($id,SysInfoPhone $sysInfoPhone)
     {
+        $this->authorize('view', $sysInfoPhone);
+
         $data = SysInfoPhone::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -82,14 +93,20 @@ class sysContactInfoController extends Controller
         return redirect()->back();
     }
 
-    public function insertData(){
+    public function insertData(SysInfoEmail $sysInfoEmail){
+        $this->authorize('view', $sysInfoEmail);
+
         return view('new-email-form');
     }
-    public function insertData2(){
+    public function insertData2(SysInfoPhone $sysInfoPhone){
+        $this->authorize('view', $sysInfoPhone);
+
         return view('new-phone-form');
     }
-    function store(Request $request)
+    function store(Request $request,SysInfoEmail $sysInfoEmail)
     {
+        $this->authorize('view', $sysInfoEmail);
+
         $email = new SysInfoEmail();
         $email->sys_email = $request->sys_email;
         $max = SysInfoEmail::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -98,8 +115,11 @@ class sysContactInfoController extends Controller
         $email->save();
         return redirect('/contact_information');
     }
-    function store2(Request $request)
+
+    function store2(Request $request,SysInfoPhone $sysInfoPhone)
     {
+        $this->authorize('view', $sysInfoPhone);
+
         $phone = new SysInfoPhone();
         $phone->sys_phone_num = $request->sys_phone_num;
         $max = SysInfoPhone::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -111,6 +131,8 @@ class sysContactInfoController extends Controller
 
     public function update(Request $request, SysInfoEmail $sysInfoEmail,$id)
     {
+        $this->authorize('view', $sysInfoEmail);
+
         $currentValues = SysInfoEmail::where("fakeId","=","$id")->first();
 
         return view('new-email-form')->with('currentValues' , $currentValues)
@@ -118,24 +140,32 @@ class sysContactInfoController extends Controller
     }
     public function update2(Request $request, SysInfoPhone $sysInfoPhone,$id)
     {
+        $this->authorize('view', $sysInfoPhone);
+
         $currentValues = SysInfoPhone::where("fakeId","=","$id")->first();
 
         return view('new-phone-form')->with('currentValues' , $currentValues)
             ->with('id', $id);
     }
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,SysInfoEmail $sysInfoEmail){
+        $this->authorize('view', $sysInfoEmail);
+
         $data = SysInfoEmail::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/contact_information');
     }
-    public function store_update2(Request $request, $id){
+    public function store_update2(Request $request, $id,SysInfoPhone $sysInfoPhone){
+        $this->authorize('view', $sysInfoPhone);
+
         $data = SysInfoPhone::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/contact_information');
     }
 
-    public function search(Request $request){
+    public function search(Request $request, SysInfoEmail $sysInfoEmail){
+        $this->authorize('view', $sysInfoEmail);
+
         $key = trim($request->get('search'));
 
 
@@ -180,7 +210,9 @@ class sysContactInfoController extends Controller
 
     }
 
-    public function search2(Request $request){
+    public function search2(Request $request,SysInfoPhone $sysInfoPhone){
+        $this->authorize('view', $sysInfoPhone);
+
         $key2 = trim($request->get('search2'));
 
         $pagename = "بيانات التواصل";

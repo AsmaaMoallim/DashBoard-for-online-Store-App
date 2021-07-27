@@ -11,8 +11,10 @@ use Intervention\Image\Facades\Image;
 
 class subSectionController extends Controller
 {
-    public function index()
+    public function index(SubSection $subSection)
     {
+        $this->authorize('view', $subSection);
+
         $pagename = "الاقسام الفرعية";
         $formPage = "new-subSection-form";
         $addNew = "إضافة قسم فرعي جديد";
@@ -31,8 +33,10 @@ class subSectionController extends Controller
         ('formPage',$formPage);
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id , SubSection $subSection)
     {
+        $this->authorize('view', $subSection);
+
         $data = SubSection::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -45,20 +49,26 @@ class subSectionController extends Controller
         return redirect()->back();
     }
 
-    public function insertData(){
+    public function insertData(SubSection $subSection){
+        $this->authorize('view', $subSection);
+
         $mainSection = MainSection::all();
         $mediaLibrary = MediaLibrary::all();
         return view('new-subSection-form', ['mainSections' => $mainSection])->with( compact('mediaLibrary'));;
     }
 
-    public function delete($id)
+    public function delete($id, SubSection $subSection)
     {
+        $this->authorize('view', $subSection);
+
         $data = SubSection::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
-    public function fetch_image($id, $medl_id = null)
+    public function fetch_image($id, $medl_id = null,SubSection $subSection)
     {
+        $this->authorize('view', $subSection);
+
         if ($medl_id){
             $image = MediaLibrary::findOrFail($medl_id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
@@ -76,8 +86,10 @@ class subSectionController extends Controller
 
     }
 
-    function store(Request $request)
+    function store(Request $request,SubSection $subSection)
     {
+        $this->authorize('view', $subSection);
+
 //        dd($request);
 
         $sub_section = new SubSection();
@@ -93,6 +105,8 @@ class subSectionController extends Controller
 
     public function update(Request $request, SubSection $subSection, $id)
     {
+        $this->authorize('view', $subSection);
+
         $mainSection = MainSection::all();
         $currentValues = SubSection::where("fakeId","=","$id")->first();;
         $CurrentmainSection = MainSection::find($currentValues->main_id);
@@ -108,13 +122,17 @@ class subSectionController extends Controller
 
     }
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,SubSection $subSection){
+        $this->authorize('view', $subSection);
+
         $data = SubSection::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/sub_sections');
     }
 
-    public function search(Request $request){
+    public function search(Request $request,SubSection $subSection){
+        $this->authorize('view', $subSection);
+
         $key = trim($request->get('search'));
 
         $pagename = "الاقسام الفرعية";

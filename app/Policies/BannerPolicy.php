@@ -16,21 +16,21 @@ class BannerPolicy
 {
     use HandlesAuthorization;
 
-
-    public static function retunPer()
-    {
-        if (auth()->check()) {
-            $Per = PosInclude::all()->where('pos_id', '=', auth()->user()->pos_id)
-                ->where('per_id', '=', Permission::Deals_with_banners)->first();
-            if ($Per != null) {
-                $Per = $Per->per_id;
-            } else {
-                $Per = 0;
-            }
-        }
-
-        return $Per;
-    }
+//
+//    public static function retunPer()
+//    {
+//        if (auth()->check()) {
+//            $Per = PosInclude::all()->where('pos_id', '=', auth()->user()->pos_id)
+//                ->where('per_id', '=', Permission::Deals_with_banners)->first();
+//            if ($Per != null) {
+//                $Per = $Per->per_id;
+//            } else {
+//                $Per = 0;
+//            }
+//        }
+//
+//        return $Per;
+//    }
 
     /**
      * Determine whether the user can view any models.
@@ -53,7 +53,7 @@ class BannerPolicy
      */
     public function view(Manager $manager, Banner $banner)
     {
-        return Permission::Deals_with_banners == BannerPolicy::retunPer();
+        return Permission::Deals_with_banners == ReturnPermissionOfManager::retunPer(Permission::Deals_with_banners);
     }
 
     /**

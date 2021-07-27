@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 
 class positions_permissionsController extends Controller
 {
-    public function index()
+    public function index(Position $position)
     {
+        $this->authorize('view', $position);
+
         $pagename = "الصلاحيات والمنصاب";
         $formPage = "new-position-form";
         $addNew = "إضافة منصب جديد";
@@ -30,14 +32,17 @@ class positions_permissionsController extends Controller
         ('formPage', $formPage);
     }
 
-    public function insertData()
+    public function insertData(Position $position)
     {
+        $this->authorize('view', $position);
+
         $permission = Permission::all();
         return view('new-position-form', ['permissions' => $permission]);
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,Position $position)
     {
+        $this->authorize('view', $position);
 
         $data = Position::where("fakeId","=","$id")->first();
 
@@ -52,15 +57,19 @@ class positions_permissionsController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete($id,Position $position)
     {
+        $this->authorize('view', $position);
+
         $data = Position::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function update(Request $request, Position $manager, $id)
+    public function update(Request $request, Position $position, $id)
     {
+        $this->authorize('view', $position);
+
         $currentValues = Position::where("fakeId","=","$id")->first();
 //        dd($currentValues->pos_id);
         $permissions = Permission::all();
@@ -84,8 +93,10 @@ class positions_permissionsController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Position $position)
     {
+        $this->authorize('view', $position);
+
         $position = new Position();
         $position->pos_name = $request->pos_name;
         $max = Position::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -108,7 +119,10 @@ class positions_permissionsController extends Controller
         return redirect('/positions_permissions');
     }
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,Position $position){
+
+        $this->authorize('view', $position);
+
         $data = Position::where("fakeId","=","$id")->first();
         $per_id = $request->input('per_id');
 
@@ -140,7 +154,9 @@ class positions_permissionsController extends Controller
     }
 
 
-    public function search(Request $request){
+    public function search(Request $request,Position $position){
+        $this->authorize('view', $position);
+
         $key = trim($request->get('search'));
 
 

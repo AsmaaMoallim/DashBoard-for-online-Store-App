@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class commentController extends Controller
 {
-    public function index()
+    public function index(Comment $comment)
     {
+        $this->authorize('view', $comment);
+
         $pagename = "التعليقات";
 
         $recordPage = "comment_reports";
@@ -47,8 +49,10 @@ class commentController extends Controller
         ('showRecords',$showRecords)->with('recordPage',$recordPage);
     }
 
-    public function delete($id)
+    public function delete($id,Comment $comment)
     {
+        $this->authorize('view', $comment);
+
         Comment::where("fakeId","=","$id")->delete();
         return redirect()->back();
     }
@@ -68,7 +72,9 @@ class commentController extends Controller
 //    }
 
 
-    public function search(Request $request){
+    public function search(Request $request,Comment $comment){
+        $this->authorize('view', $comment);
+
         $key = trim($request->get('search'));
 
         $pagename = "التعليقات";

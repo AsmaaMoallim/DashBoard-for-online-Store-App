@@ -11,8 +11,10 @@ use Intervention\Image\Facades\Image;
 
 class mainSectionController extends Controller
 {
-    public function index()
+    public function index(MainSection $mainSection)
     {
+        $this->authorize('view', $mainSection);
+
         $pagename = "الاقسام الرئيسية";
 
         $formPage = "new-maninSection-form";
@@ -29,14 +31,18 @@ class mainSectionController extends Controller
         ('formPage',$formPage);
     }
 
-    public function insertData(){
+    public function insertData(MainSection $mainSection){
+        $this->authorize('view', $mainSection);
+
         $mediaLibrary = MediaLibrary::all();
 
         return view('new-maninSection-form')->with( compact('mediaLibrary'));
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id, MainSection $mainSection)
     {
+        $this->authorize('view', $mainSection);
+
         $data = MainSection::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -50,15 +56,19 @@ class mainSectionController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id, MainSection $mainSection)
     {
+        $this->authorize('view', $mainSection);
+
         $data = MainSection::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function fetch_image($id, $medl_id = null)
+    public function fetch_image($id, $medl_id = null, MainSection $mainSection)
     {
+        $this->authorize('view', $mainSection);
+
         if ($medl_id){
             $image = MediaLibrary::findOrFail($medl_id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
@@ -75,8 +85,10 @@ class mainSectionController extends Controller
         }
 
     }
-    function store(Request $request)
+    function store(Request $request, MainSection $mainSection)
     {
+        $this->authorize('view', $mainSection);
+
         $mainSection = new MainSection();
         $mainSection->main_name = $request->main_name;
         $mainSection->medl_id = $request->medl_id;
@@ -89,6 +101,8 @@ class mainSectionController extends Controller
 
     public function update(Request $request, MainSection $mainSection, $id)
     {
+        $this->authorize('view', $mainSection);
+
         $currentValues = MainSection::where("fakeId","=","$id")->first();
         $currentforeignValues = MediaLibrary::find($currentValues->medl_id);
         $mediaLibrary = MediaLibrary::all();
@@ -100,13 +114,17 @@ class mainSectionController extends Controller
             ->with('mediaLibrary',$mediaLibrary)->with('currentMedias',$currentMedias);
     }
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id, MainSection $mainSection){
+        $this->authorize('view', $mainSection);
+
         $data = MainSection::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/main_sections');
     }
 
-    public function search(Request $request){
+    public function search(Request $request, MainSection $mainSection){
+        $this->authorize('view', $mainSection);
+
         $key = trim($request->get('search'));
 
 

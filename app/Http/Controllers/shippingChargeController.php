@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class shippingChargeController extends Controller
 {
-    public function index()
+    public function index(ShippingCharge $shippingCharge)
     {
+        $this->authorize('view', $shippingCharge);
+
         $pagename = "تكلفة الشحن";
         $formPage = "new-shipping-charge-form";
         $addNew = "اضف تكلفة جديدة";
@@ -25,21 +27,27 @@ class shippingChargeController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id,ShippingCharge $shippingCharge)
     {
+        $this->authorize('view', $shippingCharge);
+
         $data = ShippingCharge::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
 
 
-    public function insertData(){
+    public function insertData(ShippingCharge $shippingCharge){
+        $this->authorize('view', $shippingCharge);
+
         $shippingCharge = ShippingCharge::all();
         return view('new-shipping-charge-form', ['shippingCharge' => $shippingCharge]);
     }
 
-    function store(Request $request)
+    function store(Request $request,ShippingCharge $shippingCharge)
     {
+        $this->authorize('view', $shippingCharge);
+
         $shippingCharge = new ShippingCharge();
         $shippingCharge->ship_price = $request->ship_price;
         $max = ShippingCharge::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -53,6 +61,8 @@ class shippingChargeController extends Controller
 
     public function update(Request $request, ShippingCharge $shippingCharge,$id)
     {
+        $this->authorize('view', $shippingCharge);
+
         $currentValues = ShippingCharge::where("fakeId","=","$id")->first();
 
         return view('new-shipping-charge-form')->with('currentValues' , $currentValues)
@@ -61,14 +71,18 @@ class shippingChargeController extends Controller
 
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,ShippingCharge $shippingCharge){
+        $this->authorize('view', $shippingCharge);
+
         $data = ShippingCharge::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/shipping_charge');
     }
 
-    public function search(Request $request)
+    public function search(Request $request,ShippingCharge $shippingCharge)
     {
+        $this->authorize('view', $shippingCharge);
+
         $key = trim($request->get('search'));
 
 

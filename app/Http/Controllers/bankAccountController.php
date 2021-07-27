@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class bankAccountController extends Controller
 {
-    public function index()
+    public function index(SysBankAccount $sysBankAccount)
     {
+        $this->authorize('view', $sysBankAccount);
+
         $pagename = "الحسابات البنكية";
 
         $formPage = "new-bank-account-form";
@@ -30,8 +32,11 @@ class bankAccountController extends Controller
 
 
 
-    public function enableOrdisable($id)
+    public function enableOrdisable($id, SysBankAccount $sysBankAccount)
     {
+        $this->authorize('view', $sysBankAccount);
+
+
         $data = SysBankAccount::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
@@ -45,19 +50,26 @@ class bankAccountController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id, SysBankAccount $sysBankAccount)
     {
+        $this->authorize('view', $sysBankAccount);
+
         $data = SysBankAccount::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function insertData(){
+    public function insertData(SysBankAccount $sysBankAccount){
+        $this->authorize('view', $sysBankAccount);
+
+
         return view('new-bank-account-form');
     }
 
-    function store(Request $request)
+    function store(Request $request, SysBankAccount $sysBankAccount)
     {
+        $this->authorize('view', $sysBankAccount);
+
         $sys_bank_account = new SysBankAccount();
         $sys_bank_account->sys_bank_name = $request->sys_bank_name;
         $sys_bank_account->sys_bank_account_num = $request->sys_bank_account_num;
@@ -71,6 +83,8 @@ class bankAccountController extends Controller
 
     public function update(Request $request, SysBankAccount $sysBankAccount,$id)
     {
+        $this->authorize('view', $sysBankAccount);
+
         $currentValues = SysBankAccount::where("fakeId","=","$id")->first();
 
         return view('new-bank-account-form')->with('currentValues' , $currentValues)
@@ -79,13 +93,17 @@ class bankAccountController extends Controller
 
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id, SysBankAccount $sysBankAccount){
+        $this->authorize('view', $sysBankAccount);
+
         $data = SysBankAccount::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/sys_bank_account');
     }
 
-    public function search(Request $request){
+    public function search(Request $request, SysBankAccount $sysBankAccount){
+        $this->authorize('view', $sysBankAccount);
+
         $key = trim($request->get('search'));
 
 

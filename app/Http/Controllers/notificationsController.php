@@ -10,8 +10,10 @@ use App\Models\Notification;
 
 class notificationsController extends Controller
 {
-    public function index()
+    public function index(Notification $notification)
     {
+        $this->authorize('view', $notification);
+
         $pagename = "الاشعارات";
         $formPage = "new-notifications-form";
         $addNew = "إرسال إشعار جديد";
@@ -36,13 +38,17 @@ class notificationsController extends Controller
         ('noDeleteBtn', $noDeleteBtn)->with('noUpdateBtn', $noUpdateBtn)->with('formPage',$formPage);
     }
 
-    public function insertData(){
+    public function insertData(Notification $notification){
+        $this->authorize('view', $notification);
+
         $client = Client::all();
         return view('new-notifications-form', ['clients' => $client]);
     }
 
-    function store(Request $request)
+    function store(Request $request,Notification $notification)
     {
+        $this->authorize('view', $notification);
+
         $notification = new Notification();
         $notification->notifi_title = $request->notifi_title;
         $notification->notifi_content = $request->notifi_content;
@@ -67,7 +73,9 @@ class notificationsController extends Controller
         return redirect('/notifications');
     }
 
-    public function search(Request $request){
+    public function search(Request $request,Notification $notification){
+        $this->authorize('view', $notification);
+
         $key = trim($request->get('search'));
 
 

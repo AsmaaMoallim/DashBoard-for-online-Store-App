@@ -9,8 +9,10 @@ use Intervention\Image\Facades\Image;
 
 class socialMediaLinksController extends Controller
 {
-    public function index()
+    public function index(SocialMediaLink $socialMediaLink)
     {
+        $this->authorize('view', $socialMediaLink);
+
         $pagename = "روابط التواصل الاجتماعي";
         $formPage = "new-social-media-form";
         $addNew = "إضافة موقع تواصل إجتماعي جديد";
@@ -26,8 +28,10 @@ class socialMediaLinksController extends Controller
         ('formPage',$formPage);
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,SocialMediaLink $socialMediaLink)
     {
+        $this->authorize('view', $socialMediaLink);
+
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -41,14 +45,18 @@ class socialMediaLinksController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id,SocialMediaLink $socialMediaLink)
     {
+        $this->authorize('view', $socialMediaLink);
+
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function insertData(){
+    public function insertData(SocialMediaLink $socialMediaLink){
+        $this->authorize('view', $socialMediaLink);
+
         return view('new-social-media-form');
     }
 //    public function fetch_image($id, $social_id = null)
@@ -69,15 +77,18 @@ class socialMediaLinksController extends Controller
 //        }
 //
 //    }
-    function fetch_image($social_id)
+    function fetch_image($social_id,SocialMediaLink $socialMediaLink)
     {
+        $this->authorize('view', $socialMediaLink);
+
         $image = SocialMediaLink::findOrFail($social_id);
         $image_file = Image::make($image->social_img);
         $response = Response::make($image_file->encode('jpeg'));
         $response->header('Content-Type', 'image/jpeg');
         return $response;
     }
-    public function store(Request $request){
+    public function store(Request $request,SocialMediaLink $socialMediaLink){
+        $this->authorize('view', $socialMediaLink);
 
         $image = Image::make($request->file('social_img'))->encode('jpeg');
 //        dd($image);
@@ -95,6 +106,8 @@ class socialMediaLinksController extends Controller
 
     public function update(Request $request, SocialMediaLink $socialMediaLink,$id)
     {
+        $this->authorize('view', $socialMediaLink);
+
         $currentValues = SocialMediaLink::where("fakeId","=","$id")->first();
 
         return view('new-social-media-form')->with('currentValues' , $currentValues)
@@ -102,7 +115,9 @@ class socialMediaLinksController extends Controller
     }
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,SocialMediaLink $socialMediaLink){
+        $this->authorize('view', $socialMediaLink);
+
         $image = Image::make($request->file('social_img'))->encode('jpeg');
 
         $data = SocialMediaLink::where("fakeId","=","$id")->first();
@@ -116,7 +131,9 @@ class socialMediaLinksController extends Controller
         return redirect('/social_media_link');
     }
 
-    public function search(Request $request){
+    public function search(Request $request,SocialMediaLink $socialMediaLink){
+        $this->authorize('view', $socialMediaLink);
+
         $key = trim($request->get('search'));
 
 

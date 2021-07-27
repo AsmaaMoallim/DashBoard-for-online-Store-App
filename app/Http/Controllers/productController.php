@@ -26,8 +26,10 @@ class productController extends Controller
 
     public $medl_id = null;
 
-    public function index()
+    public function index(Product $product)
     {
+        $this->authorize('view', $product);
+
         $displayDetailes = 1;
         $pagename = "المنتجات";
         $recordPage = "product_details";
@@ -44,8 +46,10 @@ class productController extends Controller
         ('formPage', $formPage)->with('recordPage', $recordPage);
     }
 
-    public function displayDetailes($id)
+    public function displayDetailes($id, Product $product)
     {
+        $this->authorize('view', $product);
+
         // for details
 
         $pagename = "عرض التفاصيل";
@@ -88,9 +92,9 @@ class productController extends Controller
         $rows = \DB::table('product')
             ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
             ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
-            ->select('product.prod_name', 'media_library.medl_id','product.prod_desc_text')
+            ->select('product.prod_name', 'media_library.medl_id')
             ->where("product.fakeId", "=", "$id")
-            ->groupby('product.prod_name','media_library.medl_id','product.prod_desc_text')
+            ->groupby('product.prod_name','media_library.medl_id')
             ->get();
 //        dd($rows);
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
@@ -102,8 +106,10 @@ class productController extends Controller
             ->with('id', $id);
     }
 
-    function store(Request $request)
+    function store(Request $request,Product $product)
     {
+        $this->authorize('view', $product);
+
         $product = new Product();
         $measure = new Measure();
 
@@ -160,8 +166,10 @@ class productController extends Controller
         return redirect('/products');
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,Product $product)
     {
+        $this->authorize('view', $product);
+
         $data = Product::where("fakeId", "=", "$id")->first();
         if ($data->state == false) {
             $data->state = true;
@@ -174,6 +182,8 @@ class productController extends Controller
     }
 
     public function insertData(Product $product){
+        $this->authorize('view', $product);
+
         $measures = Measure::all();
         $sections = SubSection::all();
         $mediaLibrary = MediaLibrary::all();
@@ -182,8 +192,10 @@ class productController extends Controller
             'sections' => $sections])->with( compact('mediaLibrary'));
     }
 
-    public function fetch_image($id, $medl_id = null)
+    public function fetch_image($id, $medl_id = null, Product $product)
     {
+        $this->authorize('view', $product);
+
         if ($medl_id){
             $image = MediaLibrary::findOrFail($medl_id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
@@ -202,7 +214,11 @@ class productController extends Controller
     }
 
     public function delete($id)
+
+    public function delete($id, Product $product)
     {
+        $this->authorize('view', $product);
+
         $data = Product::where("fakeId", "=", "$id")->first();;
         $data->delete();
         return redirect('/products');
@@ -211,6 +227,8 @@ class productController extends Controller
 ///
     public function update(Request $request, Product $product, $id )
     {
+        $this->authorize('view', $product);
+
         $currentValues = Product::where("fakeId", "=", "$id")->first();
         $measures = Measure::all();
         $currentSections = SubSection::find($currentValues->sub_id);
@@ -243,8 +261,10 @@ class productController extends Controller
     }
 
 
-    public function store_update(Request $request, $id)
+    public function store_update(Request $request, $id, Product $product)
     {
+        $this->authorize('view', $product);
+
         $data = Product::where("fakeId", "=", "$id")->first();
         $color = $request->input('ColorBox');
 
@@ -303,8 +323,10 @@ class productController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(Request $request, Product $product)
     {
+        $this->authorize('view', $product);
+
         $key = trim($request->get('search'));
 
 

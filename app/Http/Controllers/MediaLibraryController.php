@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Banner;
 use App\Models\MediaLibrary;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
 class MediaLibraryController extends Controller
 {
 
-    public function index()
+    public function index(MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
         $pagename = "مكتبة الصور والفيديوهات";
 
         $formPage = "new-mediaLibrary-form";
@@ -30,13 +34,17 @@ class MediaLibraryController extends Controller
         ('formPage', $formPage);
     }
 
-    public function insertData()
+    public function insertData(MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
         return view('new-mediaLibrary-form');
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
         $data = MediaLibrary::where("fakeId", "=", "$id")->first();
         if ($data->state == false) {
             $data->state = true;
@@ -48,8 +56,13 @@ class MediaLibraryController extends Controller
         return redirect()->back();
     }
 
-    function fetch_image($medl_id)
+    function fetch_image($medl_id, MediaLibrary $mediaLibrary, Banner $banner)
     {
+
+//        $this->authorize('view', $mediaLibrary );
+//        $this->authorize('view', $banner );
+
+
         $image = MediaLibrary::findOrFail($medl_id);
         $image_file = Image::make($image->medl_img_ved);
         $response = Response::make($image_file->encode('jpeg'));
@@ -57,8 +70,10 @@ class MediaLibraryController extends Controller
         return $response;
     }
 
-    function store(Request $request)
+    function store(Request $request,MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
         $image = Image::make($request->file('medl_img_ved'))->encode('jpeg');
 
         $medialibrary = new MediaLibrary();
@@ -75,8 +90,11 @@ class MediaLibraryController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id,MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
+
         $data = MediaLibrary::where("fakeId", "=", "$id")->first();;
         $data->delete();
         return redirect()->back();
@@ -85,6 +103,8 @@ class MediaLibraryController extends Controller
 
     public function update(Request $request, MediaLibrary $mediaLibrary, $id)
     {
+        $this->authorize('view', $mediaLibrary);
+
         $currentValues = MediaLibrary::where("fakeId", "=", "$id")->first();
 
         return view('new-mediaLibrary-form')->with('currentValues', $currentValues)
@@ -92,8 +112,10 @@ class MediaLibraryController extends Controller
 
     }
 
-    public function store_update(Request $request, $id)
+    public function store_update(Request $request, $id,MediaLibrary $mediaLibrary)
     {
+        $this->authorize('view', $mediaLibrary);
+
         $image = Image::make($request->file('medl_img_ved'))->encode('jpeg');
 
         $data = MediaLibrary::where("fakeId", "=", "$id")->first();
@@ -107,7 +129,9 @@ class MediaLibraryController extends Controller
         return redirect('/media_library');
     }
 
-    public function search(Request $request){
+    public function search(Request $request,MediaLibrary $mediaLibrary){
+        $this->authorize('view', $mediaLibrary);
+
         $key = trim($request->get('search'));
 
 

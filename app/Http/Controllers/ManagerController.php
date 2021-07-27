@@ -16,24 +16,17 @@ use function Symfony\Component\Translation\t;
 
 class ManagerController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
 
-
-
-    public function index()
+    public function index(Manager $manager)
     {
 //        dd(auth()->user());
+        $this->authorize('view', $manager);
 
-        if (Auth::check() == false)
-        {
-            return redirect('/');
-        }
-        else
         $pagename = "الادارة";
         $recordPage = "manager_operations_record";
         $formPage = "new-manager-form";
@@ -53,15 +46,19 @@ class ManagerController extends Controller
         ('showRecords',$showRecords)->with('formPage',$formPage)->with('recordPage',$recordPage);
     }
 
-    public function delete($id)
+    public function delete($id,Manager $manager)
     {
-       $data = Manager::where("fakeId","=","$id")->first();;
+        $this->authorize('view', $manager);
+
+        $data = Manager::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,Manager $manager)
     {
+        $this->authorize('view', $manager);
+
         $data = Manager::where("fakeId","=","$id")->first();
         if($data->state==false){
             $data->state=true;
@@ -75,20 +72,17 @@ class ManagerController extends Controller
     }
 
 
-    public function insertData(){
+    public function insertData(Manager $manager){
+        $this->authorize('view', $manager);
 
-        if (Auth::check() == false)
-        {
-            return redirect('/');
-        }
-        else
         $positions = Position::all();
         return view('new-manager-form', ['positions' => $positions]);
     }
 
 
-    function store(Request $request)
+    function store(Request $request,Manager $manager)
     {
+        $this->authorize('view', $manager);
 
 
         $manager = new Manager();
@@ -111,6 +105,8 @@ class ManagerController extends Controller
 
     public function update(Request $request, manager $manager,$id)
     {
+        $this->authorize('view', $manager);
+
         $positions = Position::all();
         $currentValues = Manager::where("fakeId","=","$id")->first();
         $CurrentPosition = Position::find($currentValues->pos_id);
@@ -121,14 +117,18 @@ class ManagerController extends Controller
 
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,Manager $manager){
+        $this->authorize('view', $manager);
+
         $data = Manager::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/manager');
     }
 
 
-    public function search(Request $request){
+    public function search(Request $request,Manager $manager){
+        $this->authorize('view', $manager);
+
         $key = trim($request->get('search'));
 
 

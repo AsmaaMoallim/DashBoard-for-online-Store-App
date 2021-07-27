@@ -11,8 +11,10 @@ use PhpParser\Node\Expr\AssignOp\Concat;
 
 class orderController extends Controller
 {
-    public function index()
+    public function index(Order $order)
     {
+        $this->authorize('view', $order);
+
         $pagename = "الطلبات";
         $recordPage = "order_details";
         $tables = 'orders';
@@ -68,8 +70,10 @@ class orderController extends Controller
 //        ('columns', $columns)->with('tables',$tables);
 //    }
 
-    public function enableOrdisable($id)
+    public function enableOrdisable($id,Order $order)
     {
+        $this->authorize('view', $order);
+
         $data = Order::where("fakeId", "=", "$id")->first();;
         if ($data->state == false) {
             $data->state = true;
@@ -82,14 +86,18 @@ class orderController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete($id,Order $order)
     {
+        $this->authorize('view', $order);
+
         $data = Order::where("fakeId", "=", "$id")->first();;
         $data->delete();
         return redirect()->back();
     }
     public function update(Request $request, Order $order,$id)
     {
+        $this->authorize('view', $order);
+
         $currentValues = Order::where("fakeId","=","$id")->first();
         $CurrentStage = Stage::find($currentValues->stage_id);
         $stages = Stage::all();
@@ -98,7 +106,9 @@ class orderController extends Controller
     }
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,Order $order){
+        $this->authorize('view', $order);
+
         $data = Order::where("fakeId","=","$id")->first();
 //        $Stage = Stage::find($request->stage_name);
 //        dd($request->stage_id);
@@ -107,8 +117,10 @@ class orderController extends Controller
         return redirect('/orders');
     }
 
-    public function search(Request $request)
+    public function search(Request $request,Order $order)
     {
+        $this->authorize('view', $order);
+
         $key = trim($request->get('search'));
 
 
@@ -189,8 +201,10 @@ class orderController extends Controller
 
     }
 
-    public function displayDetailes($id)
+    public function displayDetailes($id,Order $order)
     {
+        $this->authorize('view', $order);
+
         // for details
 
         $pagename = "عرض التفاصيل";

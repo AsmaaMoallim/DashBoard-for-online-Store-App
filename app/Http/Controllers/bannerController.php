@@ -8,6 +8,7 @@ use App\Models\MediaLibrary;
 use App\Models\Permission;
 use App\Models\PosInclude;
 use App\Policies\BannerPolicy;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
@@ -56,7 +57,6 @@ class bannerController extends Controller
         $this->authorize('view', $banner);
 
 //        dd($request->user());
-        $this->authorize('enableordisable', $banner);
 
 //        if (!){
 //            return redirect()->back();
@@ -90,7 +90,7 @@ class bannerController extends Controller
         return view('new-banner-form')->with(compact('medialibrary'));
     }
 
-    public function fetch_image($id, $medl_id = null, Banner $banner)
+    public function fetch_image($id, Banner $banner, $medl_id = null)
     {
         $this->authorize('view', $banner);
 
