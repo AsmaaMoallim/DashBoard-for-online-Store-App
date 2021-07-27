@@ -35,80 +35,99 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Manager extends Model implements \Illuminate\Contracts\Auth\Authenticatable
 {
-	protected $table = 'manager';
-	protected $primaryKey = 'man_id';
+    protected $table = 'manager';
+    protected $primaryKey = 'man_id';
 
-	protected $casts = [
-		'pos_id' => 'int',
-		'state' => 'bool',
-		'fakeId' => 'int'
-	];
+    protected $casts = [
+        'pos_id' => 'int',
+        'state' => 'bool',
+        'fakeId' => 'int'
+    ];
 
-	protected $dates = [
-		'email_verified_at'
-	];
+    protected $dates = [
+        'email_verified_at'
+    ];
 
-	protected $hidden = [
-		'man_password',
-		'remember_token'
-	];
+    protected $hidden = [
+        'man_password',
+        'remember_token'
+    ];
 
-	protected $fillable = [
-		'man_frist_name',
-		'man_last_name',
-		'man_phone_num',
-		'man_email',
-		'email_verified_at',
-		'man_password',
-		'remember_token',
-		'pos_id',
-		'state',
-		'fakeId'
-	];
+    protected $fillable = [
+        'man_frist_name',
+        'man_last_name',
+        'man_phone_num',
+        'man_email',
+        'email_verified_at',
+        'man_password',
+        'remember_token',
+        'pos_id',
+        'state',
+        'fakeId'
+    ];
 
-	public function position()
-	{
-		return $this->belongsTo(Position::class, 'pos_id');
-	}
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'pos_id');
+    }
 
-	public function manager_operations_records()
-	{
-		return $this->hasMany(ManagerOperationsRecord::class, 'man_id');
-	}
+    public function manager_operations_records()
+    {
+        return $this->hasMany(ManagerOperationsRecord::class, 'man_id');
+    }
 
-	public function notifications()
-	{
-		return $this->hasMany(Notification::class, 'man_id');
-	}
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'man_id');
+    }
 
     public function getAuthIdentifierName()
     {
+        return 'man_id';
+
+
         // TODO: Implement getAuthIdentifierName() method.
     }
 
     public function getAuthIdentifier()
     {
+        return $this->man_id;
+//        $this->where('id', '5')->first();
+//        dd(auth()->user());
+//        $man_id = $this->man_id;
+
         // TODO: Implement getAuthIdentifier() method.
     }
 
     public function getAuthPassword()
     {
+
         return $this->man_password;
         // TODO: Implement getAuthPassword() method.
     }
 
     public function getRememberToken()
     {
+        return $this->remember_token;
+
         // TODO: Implement getRememberToken() method.
     }
 
     public function setRememberToken($value)
     {
+        $this->remember_token = $value;
+        $this->save();
+
         // TODO: Implement setRememberToken() method.
     }
 
     public function getRememberTokenName()
     {
         // TODO: Implement getRememberTokenName() method.
+    }
+
+    public function get_pos_Id()
+    {
+        return $this->pos_id;
     }
 }

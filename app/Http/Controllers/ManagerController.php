@@ -8,9 +8,11 @@ use App\Models\Position;
 use http\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Sodium\increment;
 use function Symfony\Component\Translation\t;
+
 
 class ManagerController extends Controller
 {
@@ -22,6 +24,7 @@ class ManagerController extends Controller
 
     public function index()
     {
+
         $pagename = "الادارة";
         $recordPage = "manager_operations_record";
         $formPage = "new-manager-form";

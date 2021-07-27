@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -163,27 +164,32 @@ Route::post('/contact_information_phone/{int}/update', [\App\Http\Controllers\sy
 Route::post('/orders/{int}/update', [\App\Http\Controllers\orderController::class, 'store_update'])->name('orders.store_update');
 
 
+Route::group(['middleware' => 'web'], function () {
+
+
 
 ////////////////////////////////////////////////////  tables   + cancel button
-Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
-Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
-Route::get('/positions_permissions', [App\Http\Controllers\positions_permissionsController::class, 'index'])->name('positions_permissions.index');
-Route::get('/media_library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
-Route::get('/banners', [App\Http\Controllers\bannerController::class, 'index'])->name('banners.index');
-Route::get('/main_sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_sections.index');
-Route::get('/sub_sections', [\App\Http\Controllers\subSectionController::class, 'index'])->name('sub_sections.index');
-Route::get('/products', [\App\Http\Controllers\productController::class, 'index'])->name('products.index');
-Route::get('/clients', [\App\Http\Controllers\clientController::class, 'index'])->name('clients.index');
-Route::get('/orders', [\App\Http\Controllers\orderController::class, 'index'])->name('orders.index');
-Route::get('/measure', [App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
-Route::get('/contact_information', [\App\Http\Controllers\sysContactInfoController::class, 'index'])->name('contact_information.index');
-Route::get('/social_media_link', [\App\Http\Controllers\socialMediaLinksController::class, 'index'])->name('social_media_link.index');
-Route::get('/shipping_charge', [\App\Http\Controllers\shippingChargeController::class, 'index'])->name('shipping_charge.index');
-Route::get('/sys_bank_account', [\App\Http\Controllers\bankAccountController::class, 'index'])->name('bank_accounts.index');
-Route::get('/bank_transaction', [\App\Http\Controllers\bankTransactionController::class, 'index'])->name('bank_transaction.index');
-Route::get('/comments', [\App\Http\Controllers\commentController::class, 'index'])->name('comments.index');
-Route::get('/notifications', [\App\Http\Controllers\notificationsController::class, 'index'])->name('notifications.index');
-Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'index'])->name('email_box.index');
+    Route::get('/manager', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager.index');
+    Route::get('/manager_operations_record', [\App\Http\Controllers\ManagerController::class, 'index'])->name('manager_operations_record.index');
+    Route::get('/positions_permissions', [App\Http\Controllers\positions_permissionsController::class, 'index'])->name('positions_permissions.index');
+    Route::get('/media_library', [App\Http\Controllers\MediaLibraryController::class, 'index'])->name('media_Library.index');
+    Route::get('/banners', [App\Http\Controllers\bannerController::class, 'index'])->name('banners.index');
+    Route::get('/main_sections', [\App\Http\Controllers\mainSectionController::class, 'index'])->name('main_sections.index');
+    Route::get('/sub_sections', [\App\Http\Controllers\subSectionController::class, 'index'])->name('sub_sections.index');
+    Route::get('/products', [\App\Http\Controllers\productController::class, 'index'])->name('products.index');
+    Route::get('/clients', [\App\Http\Controllers\clientController::class, 'index'])->name('clients.index');
+    Route::get('/orders', [\App\Http\Controllers\orderController::class, 'index'])->name('orders.index');
+    Route::get('/measure', [App\Http\Controllers\MeasureController::class, 'index'])->name('measure.index');
+    Route::get('/contact_information', [\App\Http\Controllers\sysContactInfoController::class, 'index'])->name('contact_information.index');
+    Route::get('/social_media_link', [\App\Http\Controllers\socialMediaLinksController::class, 'index'])->name('social_media_link.index');
+    Route::get('/shipping_charge', [\App\Http\Controllers\shippingChargeController::class, 'index'])->name('shipping_charge.index');
+    Route::get('/sys_bank_account', [\App\Http\Controllers\bankAccountController::class, 'index'])->name('bank_accounts.index');
+    Route::get('/bank_transaction', [\App\Http\Controllers\bankTransactionController::class, 'index'])->name('bank_transaction.index');
+    Route::get('/comments', [\App\Http\Controllers\commentController::class, 'index'])->name('comments.index');
+    Route::get('/notifications', [\App\Http\Controllers\notificationsController::class, 'index'])->name('notifications.index');
+    Route::get('/email_box', [\App\Http\Controllers\emailBoxController::class, 'index'])->name('email_box.index');
+
+});
 
 
 
