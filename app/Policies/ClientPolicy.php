@@ -7,10 +7,9 @@ use App\Models\Manager;
 use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ClienyPolicy
+class ClientPolicy
 {
     use HandlesAuthorization;
-
 
     /**
      * Determine whether the user can view any models.

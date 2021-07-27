@@ -19,12 +19,17 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 ////////////////////////////////////////////////////  Loging
 Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(function () {
+
+    Route::get('/adminLayout', function (){
+        return view('adminLayout');
+    })->name('adminLayout');
 
 
 ////////////////////////////////////////////////////  fetch_image
