@@ -71,10 +71,13 @@
         <ul class="navbar-nav mr-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-        {{--                <a class="nav-link" data-toggle="dropdown" href="#">--}}
-        {{--                    <i class="fa fa-comments-o"></i>--}}
-        {{--                    <span class="badge badge-danger navbar-badge">3</span>--}}
-        {{--                </a>--}}
+
+                @if(auth()->check())
+                    <a class="nav-link" href="{{ route('logout')}}">
+                        تسجيل الخروج
+                    </a>
+                @endif
+
         {{--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">--}}
         {{--                    <a href="#" class="dropdown-item">--}}
         {{--                        <!-- Message Start -->--}}
@@ -225,143 +228,143 @@
                                         </a>
                                     </li>
                                 @endcan
-                                    @can('main_sections_sub_sections_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('main_sections.index')}}"
-                                       class="nav-link {{"main_sections"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>الاقسام الرئيسية</p>
-                                    </a>
-                                </li>
+                                @can('main_sections_sub_sections_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('main_sections.index')}}"
+                                           class="nav-link {{"main_sections"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>الاقسام الرئيسية</p>
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="{{ route('sub_sections.index')}}"
-                                       class="nav-link {{"sub_sections"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>الاقسام الفرعية</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                    <li class="nav-item">
+                                        <a href="{{ route('sub_sections.index')}}"
+                                           class="nav-link {{"sub_sections"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>الاقسام الفرعية</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('products_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('products.index')}}"
-                                       class="nav-link {{"products"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>المنتجات</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('products_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('products.index')}}"
+                                           class="nav-link {{"products"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>المنتجات</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('clients_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('clients.index')}}"
-                                       class="nav-link {{"clients"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>العملاء</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('clients_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('clients.index')}}"
+                                           class="nav-link {{"clients"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>العملاء</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('orders_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('orders.index')}}"
-                                       class="nav-link {{"orders"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>الطلبات</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('orders_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('orders.index')}}"
+                                           class="nav-link {{"orders"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>الطلبات</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('measure_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('measure.index')}}"
-                                       class="nav-link {{"measure"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>دليل المقاسات</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('measure_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('measure.index')}}"
+                                           class="nav-link {{"measure"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>دليل المقاسات</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('contact_information_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('contact_information.index')}}"
-                                       class="nav-link {{"contact_information"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>بيانات التواصل</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('contact_information_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('contact_information.index')}}"
+                                           class="nav-link {{"contact_information"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>بيانات التواصل</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('social_media_link_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('social_media_link.index')}}"
-                                       class="nav-link {{"social_media_link"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>روابط التواصل الاجتماعي</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('social_media_link_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('social_media_link.index')}}"
+                                           class="nav-link {{"social_media_link"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>روابط التواصل الاجتماعي</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('shipping_charge_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('shipping_charge.index')}}"
-                                       class="nav-link {{"shipping_charge"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>تكلفة الشحن</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('shipping_charge_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('shipping_charge.index')}}"
+                                           class="nav-link {{"shipping_charge"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>تكلفة الشحن</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('bank_accounts_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('bank_accounts.index')}}"
-                                       class="nav-link {{"sys_bank_account"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>الحسابات البنكية</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('bank_accounts_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('bank_accounts.index')}}"
+                                           class="nav-link {{"sys_bank_account"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>الحسابات البنكية</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('bank_transaction_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('bank_transaction.index')}}"
-                                       class="nav-link {{"bank_transaction"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>التحويلات البنكية</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('bank_transaction_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('bank_transaction.index')}}"
+                                           class="nav-link {{"bank_transaction"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>التحويلات البنكية</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('comments_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('comments.index')}}"
-                                       class="nav-link {{"comments"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>التعليقات</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('comments_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('comments.index')}}"
+                                           class="nav-link {{"comments"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>التعليقات</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('notifications_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('notifications.index')}}"
-                                       class="nav-link {{"notifications"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>الاشعارات</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('notifications_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('notifications.index')}}"
+                                           class="nav-link {{"notifications"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>الاشعارات</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                                    @can('email_box_view')
-                                <li class="nav-item">
-                                    <a href="{{ route('email_box.index')}}"
-                                       class="nav-link {{"email_box"==request()->path()?"active":""}}">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>البريد</p>
-                                    </a>
-                                </li>
-                                    @endcan
+                                @can('email_box_view')
+                                    <li class="nav-item">
+                                        <a href="{{ route('email_box.index')}}"
+                                           class="nav-link {{"email_box"==request()->path()?"active":""}}">
+                                            <i class="fa fa-circle-o nav-icon"></i>
+                                            <p>البريد</p>
+                                        </a>
+                                    </li>
+                                @endcan
 
 
                             </ul>
