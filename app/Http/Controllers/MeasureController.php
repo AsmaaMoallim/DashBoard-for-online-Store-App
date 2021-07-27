@@ -23,7 +23,7 @@ class MeasureController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   static $id;
+     static $id;
 
     static public $storeImage;
 
@@ -64,6 +64,7 @@ class MeasureController extends Controller
 
         $columns = ['المقاسات', 'fakeId'];
 
+        dd(MeasureController::$id);
 
         return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
         ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with

@@ -19,8 +19,16 @@ Route::get('/', function (){
     return view('auth.login');
 } );
 
+//
+//Route::group(['middleware'=>"adminsAuth"], function(){
+//
+//    Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+//
+//});
+
+
 ////////////////////////////////////////////////////  Loging
-Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login')->middleware('adminAuth');
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
