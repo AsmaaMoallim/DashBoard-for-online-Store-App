@@ -16,16 +16,24 @@ use function Symfony\Component\Translation\t;
 
 class ManagerController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
 
+
+
     public function index()
     {
 //        dd(auth()->user());
 
+        if (Auth::check() == false)
+        {
+            return redirect('/');
+        }
+        else
         $pagename = "الادارة";
         $recordPage = "manager_operations_record";
         $formPage = "new-manager-form";
@@ -68,6 +76,12 @@ class ManagerController extends Controller
 
 
     public function insertData(){
+
+        if (Auth::check() == false)
+        {
+            return redirect('/');
+        }
+        else
         $positions = Position::all();
         return view('new-manager-form', ['positions' => $positions]);
     }

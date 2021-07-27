@@ -143,6 +143,17 @@
                                             </address>
                                         </div>
 
+                                            <div class="col-sm-4 invoice-col">
+                                                <address>
+                                                    <strong> معلومات المنتج </strong><br>
+                                                    {{$currentValues->prod_desc_text}}
+                                                </address>
+
+                                                @if($currentValues->prod_desc_img != null)
+
+                                                <img src="update/fetch_image/{{$rows->medl_id}}">
+                                                @endif
+                                        </div>
                                     </div>
 
                                     {{--                            <!-- Table row -->--}}

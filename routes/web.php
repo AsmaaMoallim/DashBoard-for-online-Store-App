@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,13 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (){
     return view('auth.login');
 } );
-
-//
-//Route::group(['middleware'=>"adminsAuth"], function(){
-//
-//    Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-//
-//});
 
 
 ////////////////////////////////////////////////////  Loging
@@ -46,6 +40,7 @@ Route::get('/measure/update-measures-form/fetch_image/{id}', [\App\Http\Controll
 Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
 Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
+
 
 Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 Route::get('banners/{int}/update/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
@@ -74,6 +69,7 @@ Route::get('/products/{int}/displayDetailes', [\App\Http\Controllers\productCont
 Route::get('/email_box/{int}/displayDetailes', [App\Http\Controllers\emailBoxController::class, 'displayDetailes'])->name('email_box.displayDetailes');
 Route::get('/orders/{int}/displayDetailes', [App\Http\Controllers\orderController::class, 'displayDetailes'])->name('order.displayDetailes');
 
+//Route::get('/products/{int}/displayDetailes/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
 
 
 ////////////////////////////////////////////////////  enableordisable state

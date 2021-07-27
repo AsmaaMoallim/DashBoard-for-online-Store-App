@@ -98,7 +98,6 @@
                         </div>
 
                         <label class="pb-1">صور المنتج</label>
-
                         <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
                             <table class="table-bordered">
                                 <thead>
@@ -296,11 +295,54 @@
 
                     </script>
 
+                    <x-form.input name="prod_desc_text" class="form-control" label="وصف المنتج" type="text" placeholder="ادخل معلومات المنتج نصاّ"/>
 
-                    <div class="form-group col-sm-10">
-                        <label>معلومات المنتج</label>
-                        <textarea class="form-control" id="editor1" name="prod_desc_img"
-                                  style="width:100%"> </textarea>
+                    <label class="pr-3">بإمكانك إضافة صورة لوصف المنتج</label>
+                    <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                        <table class="table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="70%">الصورة</th>
+                                <th width="30%">اسم الصورة</th>
+                            </tr>
+                            </thead>
+                            @foreach($mediaLibrary as $media)
+                                <?php  $med = $media->medl_id ?>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        @if(isset($id))
+                                            <input type="radio" name="prod_desc_img"
+                                                   value="{{$media['medl_id']}}"
+
+                                                   @foreach($currentMedia as $currentMedias)
+                                                   <?php   $curMedi = $currentMedias->medl_id ?>
+                                                   @if($med == $curMedi)
+                                                   checked="checked"
+                                                @endif
+                                                @endforeach
+                                            >
+
+                                            <img src="update/fetch_image/{{$media['medl_id']}}"
+                                                 class="img-thumbnail"
+                                                 width="75"/>
+                                        @else
+                                            <input type="radio" name="prod_desc_img"
+                                                   value="{{$media['medl_id']}}"
+                                            >
+                                            <img src="fetch_image/{{$med}}" class="img-thumbnail"
+                                                 width="75"/>
+                                        @endif
+
+                                    </td>
+
+                                    <td>  {{$media->medl_name}} </td>
+                                </tr>
+                                </tbody>
+                            @endforeach
+
+                        </table>
                     </div>
 
                     <!-- jQuery -->

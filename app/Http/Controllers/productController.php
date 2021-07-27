@@ -88,16 +88,18 @@ class productController extends Controller
         $rows = \DB::table('product')
             ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
             ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
-            ->select('product.prod_name', 'media_library.medl_id')
+            ->select('product.prod_name', 'media_library.medl_id','product.prod_desc_text')
             ->where("product.fakeId", "=", "$id")
-            ->groupby('product.prod_name','media_library.medl_id')
+            ->groupby('product.prod_name','media_library.medl_id','product.prod_desc_text')
             ->get();
 //        dd($rows);
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
 
-        return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename, 'measures' => $measures, 'currentMeasures' => $currentMeasures,
+        return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename,
+            'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)->with('id', $id);
+            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)
+            ->with('id', $id);
     }
 
     function store(Request $request)
@@ -109,6 +111,7 @@ class productController extends Controller
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
         $product->sub_id = $request->sub_id;
+        $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
         $measure->mesu_value = $request->mesu_value;
         $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -197,7 +200,6 @@ class productController extends Controller
         }
 
     }
-
 
     public function delete($id)
     {

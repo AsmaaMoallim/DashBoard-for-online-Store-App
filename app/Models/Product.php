@@ -11,16 +11,17 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Product
- * 
+ *
  * @property int $prod_id
  * @property string $prod_name
  * @property int $sub_id
  * @property float $prod_price
  * @property int $prod_avil_amount
- * @property boolean $prod_desc_img
+// * @property boolean $prod_desc_img
+ * @property string $prod_desc_text
  * @property bool $state
  * @property int $fakeId
- * 
+ *
  * @property SubSection $sub_section
  * @property Collection|Comment[] $comments
  * @property Collection|OrdHasItemOf[] $ord_has_item_ofs
@@ -41,6 +42,7 @@ class Product extends Model
 		'prod_price' => 'float',
 		'prod_avil_amount' => 'int',
 		'prod_desc_img' => 'boolean',
+        'prod_desc_text' => 'string',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];
@@ -51,6 +53,7 @@ class Product extends Model
 		'prod_price',
 		'prod_avil_amount',
 		'prod_desc_img',
+        'prod_desc_text',
 		'state',
 		'fakeId'
 	];

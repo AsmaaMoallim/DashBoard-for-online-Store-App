@@ -67,9 +67,12 @@
                     @else()
                         <div class="form-group col-sm-10">
                             <label>الصورة/رابط الفيديو</label>
+                            <br>
+                            <input type="radio" name="media_type">
                             <input type="file" name="medl_img_ved">
-{{--                            <textarea  type="file" name="medl_img_ved" class="form-control" id="editor1"--}}
-{{--                                      style="width:100%"> </textarea>--}}
+                            <br>
+                            <input type="radio" name="media_type">
+                            <input type="url" name="medl_img_ved">
                         </div>
 
                     @endif
