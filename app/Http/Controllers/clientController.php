@@ -9,8 +9,10 @@ use Intervention\Image\Facades\Image;
 
 class clientController extends Controller
 {
-    public function index()
+    public function index(Client $client)
     {
+        $this->authorize('view', $client);
+
         $pagename = "العملاء";
         $formPage = "new-client-form";
         $addNew = "إضافة عميل جديد";
@@ -27,8 +29,10 @@ class clientController extends Controller
         ('formPage',$formPage);
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id, Client $client)
     {
+        $this->authorize('view', $client);
+
         $data = Client::where("fakeId","=","$id")->first();;
         if($data->state==false){
             $data->state=true;
@@ -40,27 +44,36 @@ class clientController extends Controller
         }
         return redirect()->back();
     }
-    public function contactinfo(){
+//    public function contactinfo(){
+//
+//        $this->authorize('view', $client);
+//
+//        $tables = 'clients';
+//        $columns= DB::getSchemaBuilder()->getColumnListing('clients');
+//        $rows = DB::table('clients')->get();
+//        return view('master_tables_view')->with('rows',$rows)->with
+//        ('columns', $columns)->with('tables',$tables);
+//    }
 
-        $tables = 'clients';
-        $columns= DB::getSchemaBuilder()->getColumnListing('clients');
-        $rows = DB::table('clients')->get();
-        return view('master_tables_view')->with('rows',$rows)->with
-        ('columns', $columns)->with('tables',$tables);
-    }
+    public function insertData(Client $client){
+        $this->authorize('view', $client);
 
-    public function insertData(){
         return view('new-client-form');
     }
 
-    public function delete($id)
+    public function delete($id,Client $client)
     {
+        $this->authorize('view', $client);
+
+
         $data = Client::where("fakeId","=","$id")->first();;
         $data->delete();
         return redirect()->back();
     }
-    function fetch_image($cla_id)
+    function fetch_image($cla_id,Client $client)
     {
+        $this->authorize('view', $client);
+
         $image = Client::findOrFail($cla_id);
         $image_file = Image::make($image->cla_img);
         $response = Response::make($image_file->encode('jpeg'));
@@ -68,8 +81,10 @@ class clientController extends Controller
         return $response;
     }
 
-    function store(Request $request)
+    function store(Request $request,Client $client)
     {
+        $this->authorize('view', $client);
+
         $image = Image::make($request->file('cla_img'))->encode('jpeg');
 
         $data= new client();
@@ -88,6 +103,8 @@ class clientController extends Controller
 
     public function update(Request $request, Client $client,$id)
     {
+        $this->authorize('view', $client);
+
         $currentValues = Client::where("fakeId","=","$id")->first();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
 
@@ -97,7 +114,9 @@ class clientController extends Controller
 
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id, Client $client){
+        $this->authorize('view', $client);
+
         $data = Client::where("fakeId","=","$id")->first();
 
         $image = Image::make($request->file('cla_img'))->encode('jpeg');
@@ -115,7 +134,9 @@ class clientController extends Controller
         return redirect('/clients');
     }
 
-    public function search(Request $request){
+    public function search(Request $request, Client $client){
+        $this->authorize('view', $client);
+
         $key = trim($request->get('search'));
 
 

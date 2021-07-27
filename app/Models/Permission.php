@@ -42,6 +42,7 @@ class Permission extends Model
     public const Deals_with_comments = 14;
     public const Deals_with_notifications = 15;
     public const Deals_with_email_box = 16;
+    public const Deals_with_orders = 17;
 
 	protected $casts = [
 		'fakeId' => 'int'

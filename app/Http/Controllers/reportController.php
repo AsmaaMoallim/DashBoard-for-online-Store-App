@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
 class reportController extends Controller
 {
-    public function index()
+    public function index(Comment $comment)
     {
+        $this->authorize('view', $comment);
+
         $pagename = "بلاغات التعليقات";
         $tables = 'reports';
         $noUpdateBtn = 1;
@@ -33,15 +36,19 @@ class reportController extends Controller
 //        return view('master_tables_view',['pagename' => $pagename])->with('rows',$rows)->with
 //        ('columns', $columns)->with('tables',$tables);
     }
-    public function delete($id)
+    public function delete($id,Comment $comment)
     {
+        $this->authorize('view', $comment);
+
         $data = Report::where("report_id","=","$id")->first();
         $data->delete();
         return redirect()->back();
     }
 
-    public function enableordisable($id)
+    public function enableordisable($id,Comment $comment)
     {
+        $this->authorize('view', $comment);
+
         $data = Report::where("report_id","=","$id")->first();
         if($data->ignored==false){
             $data->ignored=true;
@@ -55,7 +62,9 @@ class reportController extends Controller
     }
 
 
-    public function search(Request $request){
+    public function search(Request $request,Comment $comment){
+        $this->authorize('view', $comment);
+
         $key = trim($request->get('search'));
 
         $pagename = "بلاغات التعليقات";

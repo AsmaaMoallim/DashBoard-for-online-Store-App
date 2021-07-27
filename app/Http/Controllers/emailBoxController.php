@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class emailBoxController extends Controller
 {
-    public function index()
+    public function index(EmailBox $emailBox)
     {
+        $this->authorize('view', $emailBox);
+
         $pagename = "البريد ";
         $displayDetailes = 1;
 //        $recordPage = "email_display";
@@ -36,8 +38,10 @@ class emailBoxController extends Controller
 
 
 
-    public function displayDetailes($id)
+    public function displayDetailes($id, EmailBox $emailBox)
     {
+        $this->authorize('view', $emailBox);
+
         // for details
 
         $pagename = "عرض التفاصيل";
@@ -97,8 +101,10 @@ class emailBoxController extends Controller
 
 
 
-    public function search(Request $request)
+    public function search(Request $request, EmailBox $emailBox)
     {
+        $this->authorize('view', $emailBox);
+
         $key = trim($request->get('search'));
 
         $pagename = "البريد ";

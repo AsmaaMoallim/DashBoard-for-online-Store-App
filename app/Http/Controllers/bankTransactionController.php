@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class bankTransactionController extends Controller
 {
-    public function index()
+    public function index(BankTransaction $bankTransaction)
     {
+        $this->authorize('view', $bankTransaction);
+
         $pagename = "التحويلات البنكية";
 
         $tables = 'bank_transaction';
@@ -35,7 +37,9 @@ class bankTransactionController extends Controller
         ('noDeleteBtn', $noDeleteBtn)->with('noUpdateBtn',$noUpdateBtn);
     }
 
-    public function search(Request $request){
+    public function search(Request $request, BankTransaction $bankTransaction){
+        $this->authorize('view', $bankTransaction);
+
         $key = trim($request->get('search'));
 
 

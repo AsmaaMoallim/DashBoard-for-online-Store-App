@@ -51,8 +51,10 @@ class MeasureController extends Controller
     }
 
 
-    public function index()
+    public function index(Measure $measure)
     {
+        $this->authorize('view', $measure);
+
         $pagename = "دليل المقاسات";
         $formPage = "update-measures-form";
         $addNew = "تعديل الصورة";
@@ -73,14 +75,17 @@ class MeasureController extends Controller
 
     }
 
-    public function insertData()
+    public function insertData(Measure $measure)
     {
+        $this->authorize('view', $measure);
+
         $mediaLibrary = MediaLibrary::all();
         return view('update-measures-form')->with( compact('mediaLibrary'));
     }
 
-    public function fetch_image($id)
+    public function fetch_image($id,Measure $measure)
     {
+        $this->authorize('view', $measure);
 
         $image = Measure::findOrFail($id);
         $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
@@ -89,8 +94,9 @@ class MeasureController extends Controller
         return $response;
     }
 
-    public function destroy($id)
+    public function destroy($id,Measure $measure)
     {
+        $this->authorize('view', $measure);
 
         $data = Measure::where("fakeId","=","$id")->first();;
         $data->delete();
@@ -98,8 +104,9 @@ class MeasureController extends Controller
         return redirect()->back();
     }
 
-    public function enableOrdisable($id)
+    public function enableOrdisable($id,Measure $measure)
     {
+        $this->authorize('view', $measure);
 
         $data = Measure::where("fakeId","=","$id")->first();;
 
@@ -116,8 +123,10 @@ class MeasureController extends Controller
     }
 
 
-    function store(Request $request)
+    function store(Request $request,Measure $measure)
     {
+        $this->authorize('view', $measure);
+
 //        $image = Image::make($request->file('medl_id'))->encode('jpeg');
 //        MeasureController::$storeImage = $image;
         $mesuImage = new MediaLibrary();
@@ -131,6 +140,8 @@ class MeasureController extends Controller
 
     public function update(Request $request, Measure $measure,$id)
     {
+        $this->authorize('view', $measure);
+
         $currentValues = measuresImages::where("fakeId","=","$id")->first();
         $mediaLibrary = MediaLibrary::all();
         $currentMedias = MediaLibrary::all()
@@ -142,7 +153,9 @@ class MeasureController extends Controller
     }
 
 
-    public function store_update(Request $request, $id){
+    public function store_update(Request $request, $id,Measure $measure){
+        $this->authorize('view', $measure);
+
         $data = Measure::where("fakeId","=","$id")->first();
         $data->update($request->all());
         return redirect('/measure');
@@ -161,7 +174,9 @@ class MeasureController extends Controller
 //   }
 
 
-    public function search(Request $request){
+    public function search(Request $request,Measure $measure){
+        $this->authorize('view', $measure);
+
         $key = trim($request->get('search'));
 
 
