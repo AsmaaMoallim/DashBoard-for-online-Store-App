@@ -6,22 +6,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductProdAvilColor
- * 
+ *
  * @property string $prod_avil_color
  * @property int $prod_id
  * @property int $fakeId
- * 
+ *
  * @property Product $product
  *
  * @package App\Models
  */
 class ProductProdAvilColor extends Model
 {
-	protected $table = 'product_prod_avil_color';
+    use HasFactory;
+
+    protected $table = 'product_prod_avil_color';
 	public $incrementing = false;
 	public $timestamps = false;
 

@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,7 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MediaLibrary extends Model
 {
-	protected $table = 'media_library';
+    use HasFactory;
+
+    protected $table = 'media_library';
 	protected $primaryKey = 'medl_id';
 	public $timestamps = false;
 

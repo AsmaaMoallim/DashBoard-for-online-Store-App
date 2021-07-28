@@ -103,6 +103,7 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('/sub_sections/{int}/delete', [\App\Http\Controllers\subSectionController::class, 'delete'])->name('sub_sections.delete');
     Route::get('/products/{int}/delete', [\App\Http\Controllers\productController::class, 'delete'])->name('products.delete');
     Route::get('/clients/{int}/delete', [\App\Http\Controllers\clientController::class, 'delete'])->name('clients.delete');
+    Route::get('/measure/{int}/delete', [\App\Http\Controllers\MeasureController::class, 'delete'])->name('measure.delete');
     Route::get('/orders/{int}/delete', [\App\Http\Controllers\orderController::class, 'delete'])->name('orders.delete');
     Route::get('/social_media_link/{int}/delete', [\App\Http\Controllers\socialMediaLinksController::class, 'delete'])->name('social_media_link.delete');
     Route::get('/sys_bank_account/{int}/delete', [\App\Http\Controllers\bankAccountController::class, 'delete'])->name('bank_accounts.delete');

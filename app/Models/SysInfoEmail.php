@@ -6,23 +6,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SysInfoEmail
- * 
+ *
  * @property int $sys_email_id
  * @property string $sys_email
  * @property bool $state
  * @property int $fakeId
- * 
+ *
  * @property EmailBox $email_box
  *
  * @package App\Models
  */
 class SysInfoEmail extends Model
 {
-	protected $table = 'sys_info_email';
+    use HasFactory;
+
+    protected $table = 'sys_info_email';
 	protected $primaryKey = 'sys_email_id';
 	public $timestamps = false;
 

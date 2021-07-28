@@ -7,22 +7,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ShippingCharge
- * 
+ *
  * @property int $ship_id
  * @property int $ship_price
  * @property int $fakeId
- * 
+ *
  * @property Collection|Order[] $orders
  *
  * @package App\Models
  */
 class ShippingCharge extends Model
 {
-	protected $table = 'shipping_charge';
+    use HasFactory;
+
+    protected $table = 'shipping_charge';
 	protected $primaryKey = 'ship_id';
 	public $timestamps = false;
 

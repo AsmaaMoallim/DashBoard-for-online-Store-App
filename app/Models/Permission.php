@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,7 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Permission extends Model
 {
-	protected $table = 'permission';
+    use HasFactory;
+
+    protected $table = 'permission';
 	protected $primaryKey = 'per_id';
 	public $timestamps = false;
 

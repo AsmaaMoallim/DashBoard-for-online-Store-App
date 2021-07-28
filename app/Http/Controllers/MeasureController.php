@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ManagerOperationsRecord;
 use App\Models\Measure;
 use App\Models\measuresImages;
 use App\Models\MediaLibrary;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use phpDocumentor\Reflection\Types\This;
 use Ramsey\Uuid\Type\Integer;
+use Yajra\DataTables\Exceptions\Exception;
 
 /**
  * @property  id
@@ -23,7 +29,7 @@ class MeasureController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   static $id;
+    static $id;
 
     static public $storeImage;
 
@@ -80,10 +86,10 @@ class MeasureController extends Controller
         $this->authorize('view', $measure);
 
         $mediaLibrary = MediaLibrary::all();
-        return view('update-measures-form')->with( compact('mediaLibrary'));
+        return view('update-measures-form')->with(compact('mediaLibrary'));
     }
 
-    public function fetch_image($id,Measure $measure)
+    public function fetch_image($id, Measure $measure)
     {
         $this->authorize('view', $measure);
 
@@ -94,36 +100,86 @@ class MeasureController extends Controller
         return $response;
     }
 
-    public function destroy($id,Measure $measure)
+    static function del($id)
     {
-        $this->authorize('view', $measure);
-
-        $data = Measure::where("fakeId","=","$id")->first();;
+        $data = Measure::where("fakeId", "=", "$id")->first();
         $data->delete();
-
-        return redirect()->back();
     }
 
-    public function enableOrdisable($id,Measure $measure)
+    public function delete($id, Measure $measure)
     {
         $this->authorize('view', $measure);
 
-        $data = Measure::where("fakeId","=","$id")->first();;
+
+        ManagerOperationsRecordController::storeLog("حذف",  'App\Http\Controllers\MeasureController::del', $id);
+
+//
+//        try {
+//            DB::beginTransaction();
+//
+//            //some code
+//            $actionRecord = new ManagerOperationsRecord();
+//            $actionRecord->man_id = auth()->id();
+//            $actionRecord->man_oper_date = Carbon::now()->toDateString();
+//            $actionRecord->man_oper_time = Carbon::now()->toTimeString();
+//            $actionRecord->man_operation = " حذف مقاس بالرقم التعريفي: ";
+//            $max = ManagerOperationsRecord::orderBy("fakeId", 'desc')->first(); // gets the whole row
+//            $maxFakeId = $max ? $max->fakeId + 1 : 1;
+//            $actionRecord->fakeId = $maxFakeId;
+//            $actionRecord->save();
+//
+//        } catch (InputValidationFailedException $e) {
+//            DB::rollback();
+//
+//            Log::info('User Validation Failed! ');
+//            throw $e;
+//        } catch
+//        (Exception $e) {
+//            DB::rollback();
+//
+//            Log::error('Server Error at UsersController!');
+//            throw $e;
+//        }
+//
+//
+//        //some other code
+//        if (!Measure::where("fakeId", "=", "$id")->first()) {
+//            DB::commit();
+//        }
+//
+
+//            "klo");
+
+//{
+//Log::error('Server Error at DoctorsController');
+//DB::rollback();
+//App::abort(500, $e->getMessage());
+//}
 
 
-        if ($data->state == false) {
-            $data->state = true;
-            $data->save();
-        } else {
-            $data->state = false;
-            $data->save();
-        }
         return redirect()->back();
-
     }
 
+//    public function enableOrdisable($id,Measure $measure)
+//    {
+//        $this->authorize('view', $measure);
+//
+//        $data = Measure::where("fakeId","=","$id")->first();;
+//
+//
+//        if ($data->state == false) {
+//            $data->state = true;
+//            $data->save();
+//        } else {
+//            $data->state = false;
+//            $data->save();
+//        }
+//        return redirect()->back();
+//
+//    }
 
-    function store(Request $request,Measure $measure)
+
+    function store(Request $request, Measure $measure)
     {
         $this->authorize('view', $measure);
 
@@ -138,25 +194,28 @@ class MeasureController extends Controller
         return redirect('/measure');
     }
 
-    public function update(Request $request, Measure $measure,$id)
+    public
+    function update(Request $request, Measure $measure, $id)
     {
         $this->authorize('view', $measure);
 
-        $currentValues = measuresImages::where("fakeId","=","$id")->first();
+        $currentValues = measuresImages::where("fakeId", "=", "$id")->first();
         $mediaLibrary = MediaLibrary::all();
         $currentMedias = MediaLibrary::all()
-            ->where("medl_id","=","$currentValues->medl_id");
+            ->where("medl_id", "=", "$currentValues->medl_id");
 
-        return view('update-measures-form')->with('currentValues' , $currentValues)
-                ->with('mediaLibrary',$mediaLibrary)-with('currentMedias',$currentMedias)
+        return view('update-measures-form')->with('currentValues', $currentValues)
+                ->with('mediaLibrary', $mediaLibrary) - with('currentMedias', $currentMedias)
                 ->with('id', $id);
     }
 
 
-    public function store_update(Request $request, $id,Measure $measure){
+    public
+    function store_update(Request $request, $id, Measure $measure)
+    {
         $this->authorize('view', $measure);
 
-        $data = Measure::where("fakeId","=","$id")->first();
+        $data = Measure::where("fakeId", "=", "$id")->first();
         $data->update($request->all());
         return redirect('/measure');
     }
@@ -174,7 +233,9 @@ class MeasureController extends Controller
 //   }
 
 
-    public function search(Request $request,Measure $measure){
+    public
+    function search(Request $request, Measure $measure)
+    {
         $this->authorize('view', $measure);
 
         $key = trim($request->get('search'));
@@ -194,28 +255,27 @@ class MeasureController extends Controller
         $col = ['المقاسات', 'fakeId'];
 
 
-        if (isset($_GET['btnSearch']) && $qry->isEmpty()){
+        if (isset($_GET['btnSearch']) && $qry->isEmpty()) {
             $qry = \DB::table('measure')
                 ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
 
             $col = ['المقاسات', 'fakeId'];
 
             $placeHolder = "لا توجد نتائج";
-        } elseif (isset($_GET['btnCancel'])){
+        } elseif (isset($_GET['btnCancel'])) {
             $qry = \DB::table('measure')
                 ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
 
             $col = ['المقاسات', 'fakeId'];
 
             $placeHolder = 'Search';
-        }
-        else{
+        } else {
             $placeHolder = 'Search';
         }
 
-        return view('master_tables_view' ,['pagename' => $pagename, 'placeHolder'=> $placeHolder])->with('rows',$qry)->with
-        ('columns', $col)->with('tables',$tables)->with('addNew',$addNew)->with
-        ('showRecords',$showRecords)->with('formPage',$formPage)->with('key', $key);
+        return view('master_tables_view', ['pagename' => $pagename, 'placeHolder' => $placeHolder])->with('rows', $qry)->with
+        ('columns', $col)->with('tables', $tables)->with('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage)->with('key', $key);
 
     }
 

@@ -7,16 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Position
- * 
+ *
  * @property int $pos_id
  * @property string $pos_name
  * @property int $fakeId
  * @property bool $state
- * 
+ *
  * @property Collection|Manager[] $managers
  * @property Collection|PosInclude[] $pos_includes
  *
@@ -24,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Position extends Model
 {
-	protected $table = 'position';
+    use HasFactory;
+
+    protected $table = 'position';
 	protected $primaryKey = 'pos_id';
 	public $timestamps = false;
 

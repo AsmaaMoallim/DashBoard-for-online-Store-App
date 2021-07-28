@@ -7,17 +7,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Notification
- * 
+ *
  * @property int $notifi_id
  * @property string $notifi_title
  * @property string $notifi_content
  * @property int $man_id
  * @property int $fakeId
- * 
+ *
  * @property Manager $manager
  * @property Collection|NotifiSendTo[] $notifi_send_tos
  *
@@ -25,7 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notification extends Model
 {
-	protected $table = 'notifications';
+    use HasFactory;
+
+    protected $table = 'notifications';
 	protected $primaryKey = 'notifi_id';
 	public $timestamps = false;
 

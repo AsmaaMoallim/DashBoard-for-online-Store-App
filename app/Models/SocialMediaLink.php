@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,7 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SocialMediaLink extends Model
 {
-	protected $table = 'social_media_link';
+    use HasFactory;
+
+    protected $table = 'social_media_link';
 	protected $primaryKey = 'social_id';
 	public $timestamps = false;
 

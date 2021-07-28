@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Permission::factory(16)->create();
 
 //        \App\Models\Manager::factory(10)->create();
-//        \App\Models\Measure::factory(10)->create();
+        \App\Models\Measure::factory(10)->create();
 //        \App\Models\MediaLibrary::factory(10)->create();
 //        \App\Models\MainSection::factory(10)->create();
 //        \App\Models\SubSection::factory(10)->create();

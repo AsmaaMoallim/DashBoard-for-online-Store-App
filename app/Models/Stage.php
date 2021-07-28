@@ -7,22 +7,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Stage
- * 
+ *
  * @property int $stage_id
  * @property string $stage_name
  * @property int $fakeId
- * 
+ *
  * @property Collection|Order[] $orders
  *
  * @package App\Models
  */
 class Stage extends Model
 {
-	protected $table = 'stage';
+    use HasFactory;
+
+    protected $table = 'stage';
 	protected $primaryKey = 'stage_id';
 	public $timestamps = false;
 

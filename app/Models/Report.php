@@ -6,17 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Report
- * 
+ *
  * @property int $report_id
  * @property int $com_id
  * @property int $cla_id
  * @property bool $ignored
  * @property int $fakeId
- * 
+ *
  * @property Client $client
  * @property Comment $comment
  *
@@ -24,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Report extends Model
 {
-	protected $table = 'report';
+    use HasFactory;
+
+    protected $table = 'report';
 	protected $primaryKey = 'report_id';
 	public $timestamps = false;
 

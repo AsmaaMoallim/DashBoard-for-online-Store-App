@@ -7,18 +7,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Comment
- * 
+ *
  * @property int $com_id
  * @property int $cla_id
  * @property int $prod_id
  * @property string $com_content
  * @property int $com_rateing
  * @property int $fakeId
- * 
+ *
  * @property Client $client
  * @property Product $product
  * @property Collection|Report[] $reports
@@ -27,7 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comment extends Model
 {
-	protected $table = 'comments';
+    use HasFactory;
+
+    protected $table = 'comments';
 	protected $primaryKey = 'com_id';
 	public $timestamps = false;
 

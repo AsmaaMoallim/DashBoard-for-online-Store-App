@@ -8,11 +8,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Order
- * 
+ *
  * @property int $ord_id
  * @property int $cla_id
  * @property string $ord_number
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $ship_id
  * @property bool $state
  * @property int $fakeId
- * 
+ *
  * @property ShippingCharge $shipping_charge
  * @property Client $client
  * @property PaymentMethod $payment_method
@@ -34,7 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
-	protected $table = 'orders';
+    use HasFactory;
+
+    protected $table = 'orders';
 	protected $primaryKey = 'ord_id';
 	public $timestamps = false;
 
