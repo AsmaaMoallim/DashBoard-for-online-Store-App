@@ -31,6 +31,7 @@ class BankTransaction extends Model
     use HasFactory;
 	protected $table = 'bank_transaction';
 	public $timestamps = false;
+    protected $primaryKey = 'trans_id';
 
 	protected $casts = [
 		'ord_id' => 'int',

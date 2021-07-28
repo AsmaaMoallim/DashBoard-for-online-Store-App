@@ -62,6 +62,12 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
+        $prod_desc_img = $currentValues->prod_desc_img;
+
+//        dd($img_desc);
+//            MediaLibrary::all()->where("medl_img_ved","=","$currentValues->prod_desc_img");
+
+
 
 //        $rows = \DB::table('product')
 //            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
@@ -99,9 +105,11 @@ class productController extends Controller
 //        dd($rows);
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
 
-        return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename, 'measures' => $measures, 'currentMeasures' => $currentMeasures,
+        return view('displayDetailes', ['tables' => $tables, 'pagename' => $pagename,
+            'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)->with('id', $id);
+            'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)
+            ->with('id', $id)->with('prod_desc_img',$prod_desc_img);
     }
 
     function store(Request $request,Product $product)
@@ -115,6 +123,7 @@ class productController extends Controller
         $product->prod_price = $request->prod_price;
         $product->prod_avil_amount = $request->prod_avil_amount;
         $product->sub_id = $request->sub_id;
+        $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
         $measure->mesu_value = $request->mesu_value;
         $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
@@ -209,7 +218,6 @@ class productController extends Controller
         }
 
     }
-
 
     public function delete($id, Product $product)
     {

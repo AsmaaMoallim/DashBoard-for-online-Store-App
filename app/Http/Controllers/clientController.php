@@ -70,6 +70,7 @@ class clientController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
     function fetch_image($cla_id,Client $client)
     {
         $this->authorize('view', $client);

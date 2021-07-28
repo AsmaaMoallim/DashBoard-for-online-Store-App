@@ -10,6 +10,7 @@ use App\Models\Position;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class BannerPolicy
 {
@@ -63,7 +64,7 @@ class BannerPolicy
      */
     public function create(Manager $manager)
     {
-        //
+
     }
 
     /**
@@ -75,7 +76,7 @@ class BannerPolicy
      */
     public function update(Manager $manager, Banner $banner)
     {
-        //
+
     }
 
     /**

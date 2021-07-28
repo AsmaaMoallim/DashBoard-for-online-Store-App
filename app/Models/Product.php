@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $sub_id
  * @property float $prod_price
  * @property int $prod_avil_amount
- * @property boolean $prod_desc_img
+// * @property boolean $prod_desc_img
+ * @property string $prod_desc_text
  * @property bool $state
  * @property int $fakeId
  *
@@ -43,7 +44,7 @@ class Product extends Model
 		'sub_id' => 'int',
 		'prod_price' => 'float',
 		'prod_avil_amount' => 'int',
-		'prod_desc_img' => 'boolean',
+        'prod_desc_text' => 'string',
 		'state' => 'bool',
 		'fakeId' => 'int'
 	];
@@ -54,6 +55,7 @@ class Product extends Model
 		'prod_price',
 		'prod_avil_amount',
 		'prod_desc_img',
+        'prod_desc_text',
 		'state',
 		'fakeId'
 	];
