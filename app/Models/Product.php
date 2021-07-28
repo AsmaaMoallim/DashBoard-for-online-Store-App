@@ -41,7 +41,6 @@ class Product extends Model
 		'sub_id' => 'int',
 		'prod_price' => 'float',
 		'prod_avil_amount' => 'int',
-		'prod_desc_img' => 'boolean',
         'prod_desc_text' => 'string',
 		'state' => 'bool',
 		'fakeId' => 'int'

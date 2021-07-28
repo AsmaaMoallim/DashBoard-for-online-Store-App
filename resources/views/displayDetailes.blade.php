@@ -151,7 +151,7 @@
 
                                                 @if($currentValues->prod_desc_img != null)
 
-                                                <img src="update/fetch_image/{{$rows->medl_id}}">
+                                                <img src="update/fetch_image/{{$prod_desc_img}}">
                                                 @endif
                                         </div>
                                     </div>

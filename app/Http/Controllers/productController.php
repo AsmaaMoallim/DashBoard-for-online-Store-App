@@ -62,6 +62,12 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
+        $prod_desc_img = $currentValues->prod_desc_img;
+
+//        dd($img_desc);
+//            MediaLibrary::all()->where("medl_img_ved","=","$currentValues->prod_desc_img");
+
+
 
 //        $rows = \DB::table('product')
 //            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
@@ -103,7 +109,7 @@ class productController extends Controller
             'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)
-            ->with('id', $id);
+            ->with('id', $id)->with('prod_desc_img',$prod_desc_img);
     }
 
     function store(Request $request,Product $product)
