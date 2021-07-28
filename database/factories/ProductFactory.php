@@ -30,6 +30,7 @@ class ProductFactory extends Factory
             'prod_price' => $this->faker->randomDigit,
             'prod_avil_amount' => $this->faker->randomDigit,
             'prod_desc_img' => $this->faker->image(),
+            'prod_desc_text' => $this->faker->image(),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];
