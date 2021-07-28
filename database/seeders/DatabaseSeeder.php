@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
 
 //        \App\Models\Manager::factory(10)->create();
 //        \App\Models\Measure::factory(10)->create();
-//        \App\Models\MediaLibrary::factory(10)->create();
+        \App\Models\MediaLibrary::factory(10)->create();
 //        \App\Models\MainSection::factory(10)->create();
 //        \App\Models\SubSection::factory(10)->create();
 //        \App\Models\Product::factory(10)->create();
-//        \App\Models\Client::factory(10)->create();
+        \App\Models\Client::factory(10)->create();
 //        \App\Models\Banner::factory(10)->create();
 //        \App\Models\PaymentMethod::factory(10)->create();
 //        \App\Models\Notification::factory(10)->create();
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\SysBankAccount::factory(10)->create();
 //        \App\Models\SysInfoPhone::factory(10)->create();
 //        \App\Models\EmailBox::factory(4)->create();
-//        \App\Models\BankTransaction::factory(10)->create();
+        \App\Models\BankTransaction::factory(10)->create();
 //        \App\Models\ManagerOperationsRecord::factory(10)->create();
 //        \App\Models\SocialMediaLink::factory(10)->create();
 //        \App\Models\ProductProdAvilColor::factory(10)->create();

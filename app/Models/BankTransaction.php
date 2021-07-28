@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,8 +28,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BankTransaction extends Model
 {
+    use HasFactory;
+
 	protected $table = 'bank_transaction';
 	public $timestamps = false;
+    protected $primaryKey = 'trans_id';
 
 	protected $casts = [
 		'ord_id' => 'int',
