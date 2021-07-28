@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Permission::factory(16)->create();
 
 //        \App\Models\Manager::factory(10)->create();
+//
 //        \App\Models\Measure::factory(10)->create();
 //        \App\Models\MediaLibrary::factory(10)->create();
 //        \App\Models\MainSection::factory(10)->create();
@@ -35,10 +36,10 @@ class DatabaseSeeder extends Seeder
 
 //        \App\Models\ShippingCharge::factory(10)->create();
 //        \App\Models\Order::factory(10)->create();
-
+//
 //        \App\Models\Comment::factory(10)->create();
 //        \App\Models\Report::factory(10)->create();
-
+//
 //        \App\Models\SysInfoEmail::factory(10)->create();
 //        \App\Models\SysBankAccount::factory(10)->create();
 //        \App\Models\SysInfoPhone::factory(10)->create();
@@ -48,7 +49,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\SocialMediaLink::factory(10)->create();
 //        \App\Models\ProductProdAvilColor::factory(10)->create();
 
-//        \App\Models\ProdAvilIn::factory(10)->create();
+        \App\Models\ProdAvilIn::factory(10)->create();
 //        \App\Models\PosInclude::factory(10)->create();
 //        \App\Models\NotifiSendTo::factory(10)->create();
 //        \App\Models\OrdHasItemOf::factory(10)->create();
