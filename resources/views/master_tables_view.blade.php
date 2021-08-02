@@ -18,4 +18,5 @@
            :formPage2="$formPage2 ?? ''" :recordPage2="$recordPage2 ?? ''" :key2="$key2 ?? ''"
        ></x-table_componentes>
 
+
 @endsection

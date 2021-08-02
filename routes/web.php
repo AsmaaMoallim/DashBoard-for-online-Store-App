@@ -28,7 +28,7 @@ Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']
 Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(function () {
+//Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(function () {
 
     Route::get('/adminPanel', function (){
         return view('adminLayout');
@@ -248,7 +248,7 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('comments/comment_reports/display', [App\Http\Controllers\reportController::class, 'index'])->name('comment_reports');
     Route::get('email_box/email_display/display', [App\Http\Controllers\emailBoxController::class, 'display'])->name('email_box.display');
 
-});
+//});
 
 Route::view('/test', 'test');
 

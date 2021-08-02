@@ -29,6 +29,7 @@ class CommentFactory extends Factory
             'cla_id' => $this->faker->randomElement(Client::pluck('cla_id')->toArray()),
             'com_content' => $this->faker->randomLetter,
             'com_rateing' => $this->faker->randomDigit,
+            'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];
     }

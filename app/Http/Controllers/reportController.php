@@ -23,6 +23,7 @@ class reportController extends Controller
             ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم صاحب البلاغ' "),
                 'product.prod_name AS اسم المنتج', 'comments.com_content AS التعليق',
                 'comments.com_rateing AS التقييم', 'ignored as state','report.report_id as fakeId' )
+            ->where('report.ignored', '=', '1')
             ->orderby('state', 'DESC')
             ->get();
 
@@ -78,6 +79,7 @@ class reportController extends Controller
             ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم صاحب البلاغ' "),
                 'product.prod_name AS اسم المنتج', 'comments.com_content AS التعليق',
                 'comments.com_rateing AS التقييم', 'ignored as state','report.report_id as fakeId' )
+            ->where('report.ignored', '=', '1')
             ->Where('cla_frist_name', 'LIKE', "%{$key}%")
             ->orWhere('cla_last_name', 'LIKE', "%{$key}%")
             ->orWhere('product.prod_name', 'LIKE', "%{$key}%")
@@ -96,6 +98,7 @@ class reportController extends Controller
                 ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم صاحب البلاغ' "),
                     'product.prod_name AS اسم المنتج', 'comments.com_content AS التعليق',
                     'comments.com_rateing AS التقييم', 'ignored as state','report.report_id as fakeId' )
+                ->where('report.ignored', '=', '1')
                 ->orderby('state')
                 ->get();
 
@@ -110,6 +113,7 @@ class reportController extends Controller
                 ->select(\DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم صاحب البلاغ' "),
                     'product.prod_name AS اسم المنتج', 'comments.com_content AS التعليق',
                     'comments.com_rateing AS التقييم', 'ignored as state','report.report_id as fakeId' )
+                ->where('report.ignored', '=', '1')
                 ->orderby('state')
                 ->get();
 
