@@ -1,23 +1,5 @@
 @extends('adminLayout')
 
-<style>
-    .row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .box {
-        height: 20px;
-        width: 20px;
-        border: 1px solid black;
-        margin-right: 5px;
-        margin-top: 2%;
-        float: right;
-    }
-
-
-</style>
 @section('content')
 
 

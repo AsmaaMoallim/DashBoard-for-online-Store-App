@@ -192,9 +192,10 @@ class productController extends Controller
 
         $measures = Measure::all();
         $sections = SubSection::all();
+        $mainsections = MainSection::all();
         $mediaLibrary = MediaLibrary::all();
 
-        return view('new-product-form', ['measures' => $measures,
+        return view('new-product-form', ['measures' => $measures, 'mainsections'=>$mainsections,
             'sections' => $sections])->with( compact('mediaLibrary'));
     }
 
