@@ -48,6 +48,12 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
     Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
 
+    Route::get('products/new-product-form/fetch_measures/{id}', [\App\Http\Controllers\productController::class, 'fetch_measures']);
+    Route::get('products/{int}/update/fetch_measures/{id}', [\App\Http\Controllers\productController::class, 'fetch_measures']);
+    Route::get('products/{int}/update/fetch_measures', [\App\Http\Controllers\productController::class, 'fetch_measures']);
+
+
+
     Route::get('banners/new-banner-form/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
     Route::get('banners/{int}/update/fetch_image/{id}', [\App\Http\Controllers\bannerController::class, 'fetch_image']);
 

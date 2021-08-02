@@ -295,6 +295,56 @@
 
                     </script>
 
+
+                    <label class="pr-3">دليل المقاسات</label>
+                    <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                        <table class="table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="70%">صورة الدليل</th>
+                                <th width="30%">اسم الدليل</th>
+                            </tr>
+                            </thead>
+                            @foreach($measures_index as $img)
+                                <?php  $med = $img->mesu_index_id ?>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        @if(isset($id))
+                                            <input type="radio" name="mesu_index_id"
+                                                   value="{{$img['mesu_index_id']}}"
+
+                                                   @foreach($currentMesu as $currentMesus)
+                                                   <?php   $curMedi = $currentMesus->measure_index_id ?>
+                                                   @if($med == $curMedi)
+                                                   checked="checked"
+                                                @endif
+                                                @endforeach
+                                            >
+
+                                            <img src="update/fetch_measures/{{$img['mesu_index_id']}}"
+                                                 class="img-thumbnail"
+                                                 width="75"/>
+                                        @else
+                                            <input type="radio" name="mesu_index_id"
+                                                   value="{{$img['mesu_index_id']}}"
+                                            >
+                                            <img src="fetch_measures/{{$med}}" class="img-thumbnail"
+                                                 width="75"/>
+                                        @endif
+
+                                    </td>
+
+                                    <td>  {{$img->mesu_index_name}} </td>
+                                </tr>
+                                </tbody>
+                            @endforeach
+
+                        </table>
+                    </div>
+
+
                     <x-form.input name="prod_desc_text" class="form-control" label="وصف المنتج" type="text" placeholder="ادخل معلومات المنتج نصاّ"/>
 
                     <label class="pr-3">بإمكانك إضافة صورة لوصف المنتج</label>
@@ -316,8 +366,8 @@
                                             <input type="radio" name="prod_desc_img"
                                                    value="{{$media['medl_id']}}"
 
-                                                   @foreach($currentMedia as $currentMedias)
-                                                   <?php   $curMedi = $currentMedias->medl_id ?>
+                                                   @foreach($currentMesu as $currentMesus)
+                                                   <?php   $curMedi = $currentMesus->medl_id ?>
                                                    @if($med == $curMedi)
                                                    checked="checked"
                                                 @endif

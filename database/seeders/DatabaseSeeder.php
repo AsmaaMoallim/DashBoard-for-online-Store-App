@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Permission::factory(16)->create();
 
 //        \App\Models\Manager::factory(10)->create();
-//
+
 //        \App\Models\Measure::factory(10)->create();
 //        \App\Models\MediaLibrary::factory(10)->create();
 //        \App\Models\MainSection::factory(10)->create();
@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Banner::factory(10)->create();
 //        \App\Models\PaymentMethod::factory(10)->create();
 //        \App\Models\Notification::factory(10)->create();
-
-//        \App\Models\Stage::factory(10)->create();
-
+//
+////        \App\Models\Stage::factory(10)->create();
+//
 //        \App\Models\ShippingCharge::factory(10)->create();
 //        \App\Models\Order::factory(10)->create();
 //
@@ -49,16 +49,15 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\SocialMediaLink::factory(10)->create();
 //        \App\Models\ProductProdAvilColor::factory(10)->create();
 
-        \App\Models\ProdAvilIn::factory(10)->create();
+//        \App\Models\ProdAvilIn::factory(10)->create();
 //        \App\Models\PosInclude::factory(10)->create();
-//        \App\Models\NotifiSendTo::factory(10)->create();
 //        \App\Models\OrdHasItemOf::factory(10)->create();
 //        \App\Models\ProdHasMedia::factory(10)->create();
 //        \App\Models\User::factory(10)->create();
 
     }
     public function emptyData(){
-//        DB::table('ignored_reports')->delete();
+//        DB::table('ig        \App\Models\NotifiSendTo::factory(10)->create();nored_reports')->delete();
 //        DB::table('ord_has_item_of')->delete();
         DB::table('notifi_send_to')->delete();
 //        DB::table('pos_include')->delete();

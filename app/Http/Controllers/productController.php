@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MainSection;
 use App\Models\Measure;
+use App\Models\measuresIndex;
 use App\Models\MediaLibrary;
 use App\Models\ProdAvilIn;
 use App\Models\prodHasMedia;
@@ -68,7 +69,6 @@ class productController extends Controller
 //            MediaLibrary::all()->where("medl_img_ved","=","$currentValues->prod_desc_img");
 
 
-
 //        $rows = \DB::table('product')
 //            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
 //            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
@@ -96,11 +96,11 @@ class productController extends Controller
 //        dd($rows);
 
         $rows = \DB::table('product')
-            ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
+            ->join('prod_has_media', 'prod_has_media.prod_id', 'product.prod_id')
             ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
             ->select('product.prod_name', 'media_library.medl_id')
             ->where("product.fakeId", "=", "$id")
-            ->groupby('product.prod_name','media_library.medl_id')
+            ->groupby('product.prod_name', 'media_library.medl_id')
             ->get();
 //        dd($rows);
         $columns = ['اسم المنتج', 'القسم الفرعي', 'السعر', 'الصورة', 'الكمية المتوفرة حاليًا', 'المقاسات', 'الألوان', 'معلومات الصورة', 'fakeId'];
@@ -109,10 +109,10 @@ class productController extends Controller
             'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)
-            ->with('id', $id)->with('prod_desc_img',$prod_desc_img);
+            ->with('id', $id)->with('prod_desc_img', $prod_desc_img);
     }
 
-    function store(Request $request,Product $product)
+    function store(Request $request, Product $product)
     {
         $this->authorize('view', $product);
 
@@ -125,7 +125,10 @@ class productController extends Controller
         $product->sub_id = $request->sub_id;
         $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
+        $product->measure_index_id = $request->mesu_index_id;
+
         $measure->mesu_value = $request->mesu_value;
+
         $max = Product::orderBy("fakeId", 'desc')->first(); // gets the whole row
         $maxFakeId = $max ? $max->fakeId + 1 : 1;
         $product->fakeId = $maxFakeId;
@@ -151,7 +154,7 @@ class productController extends Controller
             $prodMedia = new prodHasMedia();
             $prodMedia->prod_id = $product->prod_id;
             $max = prodHasMedia::orderBy("fakeId", 'desc')->first(); // gets the whole row
-            $maxFakeIdProdHas = $max? $max->fakeId + 1 : 1;
+            $maxFakeIdProdHas = $max ? $max->fakeId + 1 : 1;
             $prodMedia->fakeId = $maxFakeIdProdHas;
             $prodMedia->medl_id = $medl_id;
             $prodMedia->save();
@@ -159,20 +162,20 @@ class productController extends Controller
 
         //** measure SAVE */
         $mesu_id = $request->input('mesu_id');
-        foreach ($mesu_id as $mesu_id){
-         $prodMesu = new ProdAvilIn();
-         $prodMesu->prod_id = $product->prod_id;
-         $max = ProdAvilIn::orderBy("fakeId", 'desc')->first();
-         $maxFakeIdProdAvil = $max ? $max->fakeId + 1 : 1;
-         $prodMesu->fakeId = $maxFakeIdProdAvil;
-         $prodMesu->mesu_id = $mesu_id;
-         $prodMesu->save();
+        foreach ($mesu_id as $mesu_id) {
+            $prodMesu = new ProdAvilIn();
+            $prodMesu->prod_id = $product->prod_id;
+            $max = ProdAvilIn::orderBy("fakeId", 'desc')->first();
+            $maxFakeIdProdAvil = $max ? $max->fakeId + 1 : 1;
+            $prodMesu->fakeId = $maxFakeIdProdAvil;
+            $prodMesu->mesu_id = $mesu_id;
+            $prodMesu->save();
         }
 
         return redirect('/products');
     }
 
-    public function enableordisable($id,Product $product)
+    public function enableordisable($id, Product $product)
     {
         $this->authorize('view', $product);
 
@@ -187,37 +190,58 @@ class productController extends Controller
         return redirect()->back();
     }
 
-    public function insertData(Product $product){
+    public function insertData(Product $product)
+    {
         $this->authorize('view', $product);
 
         $measures = Measure::all();
         $sections = SubSection::all();
         $mediaLibrary = MediaLibrary::all();
+        $measures_index = measuresIndex::all();
 
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections])->with( compact('mediaLibrary'));
+            'sections' => $sections])->with(compact('mediaLibrary'))->with(compact('measures_index'));
     }
 
     public function fetch_image($id, $medl_id = null, Product $product)
     {
         $this->authorize('view', $product);
 
-        if ($medl_id){
+        if ($medl_id) {
             $image = MediaLibrary::findOrFail($medl_id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
             $response = Response::make($image_file->encode('jpeg'));
             $response->header('Content-Type', 'image/jpeg');
             return $response;
-        }
-        else{
+        } else {
             $image = MediaLibrary::findOrFail($id);
             $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
             $response = Response::make($image_file->encode('jpeg'));
             $response->header('Content-Type', 'image/jpeg');
             return $response;
         }
-
     }
+
+    public
+    function fetch_measures($id, $mesu_index_id = null, Product $product)
+    {
+        if ($mesu_index_id) {
+            $image = measuresIndex::findOrFail($mesu_index_id);
+            $image_file = Image::make($image->mesu_index_img)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        } else {
+            $image = measuresIndex::findOrFail($id);
+            $image_file = Image::make($image->mesu_index_img)->resize(60, 60);
+            $response = Response::make($image_file->encode('jpeg'));
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
+    }
+
+
+
 
     public function delete($id, Product $product)
     {
@@ -240,7 +264,11 @@ class productController extends Controller
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
         $mediaLibrary = MediaLibrary::all();
+        $measures_index = measuresIndex::all();
+//            ->where("mesu_index_id","=","$currentValues->measure_index_id");
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
+        $currentMesu = measuresIndex::all()->where('mesu_index_id','=',"$currentValues->measure_index_id");
+
 //        dd($currentMedia);
 //        dd($currentMedia);
 //        foreach($productProdAvilColor as $productProdAvilColor){
@@ -258,7 +286,7 @@ class productController extends Controller
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary])
-            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('id', $id);
+            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('measures_index',$measures_index)->with('currentMesu',$currentMesu)->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
 

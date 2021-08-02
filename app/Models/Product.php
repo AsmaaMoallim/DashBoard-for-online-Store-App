@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $prod_avil_amount
 // * @property boolean $prod_desc_img
  * @property string $prod_desc_text
+ * @property int measure_index_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -56,6 +57,7 @@ class Product extends Model
 		'prod_avil_amount',
 		'prod_desc_img',
         'prod_desc_text',
+        'measure_index_id',
 		'state',
 		'fakeId'
 	];
@@ -64,6 +66,11 @@ class Product extends Model
 	{
 		return $this->belongsTo(SubSection::class, 'sub_id');
 	}
+
+    public function mesu_index()
+    {
+        return $this->hasOne(measuresIndex::class, 'measure_index_id');
+    }
 
 	public function comments()
 	{
