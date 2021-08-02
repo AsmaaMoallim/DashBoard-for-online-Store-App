@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\ShippingCharge::factory(10)->create();
 //        \App\Models\Order::factory(10)->create();
 //
-//        \App\Models\Comment::factory(10)->create();
+        \App\Models\Comment::factory(10)->create();
 //        \App\Models\Report::factory(10)->create();
 //
 //        \App\Models\SysInfoEmail::factory(10)->create();
@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\PosInclude::factory(10)->create();
 //        \App\Models\OrdHasItemOf::factory(10)->create();
 //        \App\Models\ProdHasMedia::factory(10)->create();
+
 //        \App\Models\User::factory(10)->create();
 
     }

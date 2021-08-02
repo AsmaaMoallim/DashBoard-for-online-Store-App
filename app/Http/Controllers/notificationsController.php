@@ -60,7 +60,7 @@ class notificationsController extends Controller
 
         $cla_id = $request->input('cla_id');
 
-        for ($x = 0; $x < sizeof($cla_id); $x++) {
+        for ($x = 0; $x < sizeof($cla_id)-1; $x++) {
             $notiSent = new NotifiSendTo();
             $notiSent->notifi_id = $notification->notifi_id;
             $max = NotifiSendTo::orderBy("fakeId", 'desc')->first(); // gets the whole row

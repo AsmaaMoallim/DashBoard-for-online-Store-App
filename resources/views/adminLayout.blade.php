@@ -36,6 +36,8 @@
     <!-- template rtl version -->
     <link rel="stylesheet" href="{{ asset('dist/css/custom-style.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -420,6 +422,8 @@
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
 {{--        <script>--}}

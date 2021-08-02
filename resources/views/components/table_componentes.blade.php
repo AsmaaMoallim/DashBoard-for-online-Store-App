@@ -1,32 +1,5 @@
 @extends('adminLayout')
 
-<style>
-    .row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .box {
-        height: 20px;
-        width: 20px;
-        border: 1px solid black;
-        margin-right: 5px;
-        margin-top: 2%;
-        float: right;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .delete {
-        display: none;
-    }
-
-    .box:hover + .delete {
-        display: block;
-    }
-
-</style>
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -470,23 +443,7 @@
 
         </section>
 
-        {{--        <script src="{{ asset('resources/js/app.js/displayImage()') }}"></script>--}}
 
-        <script>
 
-            function displayImage(e) {
-                var elem = document.getElementsByClassName('img');
-                e = e || window.event;
-                var t = e.target;
-                var imgArray = $('[id^=img]').map(function (i) {
-                    //return this.name;
-                    // alert(this.name)
-                    if (t.name == this.name) {
-                        window.location.href = t.src;
-                    }
-                    return this.value; // for real values of input
-                }).get();
-            }
-        </script>
 @endsection
 

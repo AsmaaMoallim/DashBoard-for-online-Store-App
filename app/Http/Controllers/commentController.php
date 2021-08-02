@@ -27,7 +27,7 @@ class commentController extends Controller
             ->select('product.prod_name AS اسم المنتج',
                 \DB::raw("CONCAT(cla_frist_name,'',  cla_last_name) AS 'اسم العميل' "),
                 'comments.com_content AS التعليق','comments.com_rateing AS التقييم',
-                'comments.fakeId')
+                'comments.state','comments.fakeId')
             ->get();
 
 //            ->join('product', 'product.prod_id', ' = ', 'comments.prod_id')
@@ -57,19 +57,21 @@ class commentController extends Controller
         return redirect()->back();
     }
 
-//    public function enableOrdisable($id)
-//    {
-//        $data = Comments::where("fakeId","=","$id")->first();;
-//        if($data->state==false){
-//            $data->state=true;
-//            $data->save();
-//        }
-//        else{
-//            $data->state= false;
-//            $data->save();
-//        }
-//        return redirect()->back();
-//    }
+    public function enableOrdisable($id,Comment $comment)
+    {
+        $this->authorize('view', $comment);
+
+        $data = Comment::where("fakeId","=","$id")->first();;
+        if($data->state==false){
+            $data->state=true;
+            $data->save();
+        }
+        else{
+            $data->state= false;
+            $data->save();
+        }
+        return redirect()->back();
+    }
 
 
     public function search(Request $request,Comment $comment){

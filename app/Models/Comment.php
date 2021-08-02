@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $prod_id
  * @property string $com_content
  * @property int $com_rateing
+ * @property bool $state
  * @property int $fakeId
  *
  * @property Client $client
@@ -38,7 +39,8 @@ class Comment extends Model
 		'cla_id' => 'int',
 		'prod_id' => 'int',
 		'com_rateing' => 'int',
-		'fakeId' => 'int'
+        'state' => 'bool',
+        'fakeId' => 'int'
 	];
 
 	protected $fillable = [
@@ -46,7 +48,8 @@ class Comment extends Model
 		'prod_id',
 		'com_content',
 		'com_rateing',
-		'fakeId'
+        'state',
+        'fakeId'
 	];
 
 	public function client()

@@ -69,6 +69,7 @@ class productController extends Controller
 //            MediaLibrary::all()->where("medl_img_ved","=","$currentValues->prod_desc_img");
 
 
+
 //        $rows = \DB::table('product')
 //            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
 //            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
