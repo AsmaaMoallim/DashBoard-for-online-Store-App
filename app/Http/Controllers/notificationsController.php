@@ -26,7 +26,7 @@ class notificationsController extends Controller
             ->join('notifi_send_to','notifi_send_to.notifi_id','=','notifications.notifi_id')
             ->join('clients','clients.cla_id','=','notifi_send_to.cla_id')
             ->select(\DB::raw("CONCAT(man_frist_name, ' ',  man_last_name) AS 'المدير'"),
-                \DB::raw("GROUP_CONCAT(CONCAT(cla_frist_name,'',  cla_last_name),'\r\n' SEPARATOR ' //  ') AS 'العملاء' "),
+                \DB::raw("GROUP_CONCAT(CONCAT(cla_frist_name,'',  cla_last_name),'' SEPARATOR ' //  ') AS 'العملاء' "),
                 'notifications.notifi_title AS عنوان الاشعار','notifications.notifi_content AS نص الاشعار','notifications.fakeId')
             ->groupBy('المدير', 'notifications.notifi_title', 'notifications.notifi_content','notifications.fakeId' )
             ->orderby('notifications.fakeId')
@@ -52,7 +52,7 @@ class notificationsController extends Controller
         $notification = new Notification();
         $notification->notifi_title = $request->notifi_title;
         $notification->notifi_content = $request->notifi_content;
-        $notification->man_id = Manager::pluck('man_id')->first();
+        $notification->man_id = auth()->user()->man_id;
         $max = Notification::orderBy("fakeId", 'desc')->first();
         $maxFakeId =$max? $max->fakeId + 1 : 1;
         $notification->fakeId = $maxFakeId;
