@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\SysInfoEmail::factory(10)->create();
 //        \App\Models\SysBankAccount::factory(10)->create();
 //        \App\Models\SysInfoPhone::factory(10)->create();
-//        \App\Models\EmailBox::factory(4)->create();
+//        \App\Models\EmailBox::factory(18)->create();
 //        \App\Models\BankTransaction::factory(10)->create();
 //        \App\Models\ManagerOperationsRecord::factory(10)->create();
 //        \App\Models\SocialMediaLink::factory(10)->create();

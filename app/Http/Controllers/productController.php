@@ -96,7 +96,7 @@ class productController extends Controller
         $product->sub_id = $request->sub_id;
         $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
-        $product->measure_index_id = $request->mesu_index_id;
+//        $product->measure_index_id = $request->mesu_index_id;
 
         $measure->mesu_value = $request->mesu_value;
 
@@ -167,15 +167,17 @@ class productController extends Controller
 
         $measures = Measure::all();
         $mediaLibrary = MediaLibrary::all();
-        $measures_index = measuresIndex::all();
+//        $measures_index = measuresIndex::all();
+        $mainsections = MainSection::all();
 
         $Subsections = SubSection::all();
         $MainSection = MainSection::all();
 
 
-        return view('new-product-form', ['measures' => $measures,
+        return view('new-product-form', ['measures' => $measures, 'mainsections'=>$mainsections,
             'Subsections' => $Subsections,'MainSection'=>$MainSection])
-            ->with(compact('mediaLibrary'))->with(compact('measures_index'));
+            ->with(compact('mediaLibrary'));
+//            ->with(compact('measures_index'));
     }
 
     public function subSection(Request $request){
@@ -236,7 +238,11 @@ class productController extends Controller
 
         $currentValues = Product::where("fakeId", "=", "$id")->first();
         $measures = Measure::all();
+
         $currentSections = SubSection::find($currentValues->sub_id);
+        $mainsections = MainSection::all();
+        $currentSubSections = SubSection::all()->where('main_id','=',$currentSections->main_id);
+
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
@@ -244,8 +250,8 @@ class productController extends Controller
         $mediaLibrary = MediaLibrary::all();
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
 
-        $measures_index = measuresIndex::all();
-        $currentMesuIndx = measuresIndex::all()->where('mesu_index_id','=',$currentValues->measure_index_id);
+//        $measures_index = measuresIndex::all();
+//        $currentMesuIndx = measuresIndex::all()->where('mesu_index_id','=',$currentValues->measure_index_id);
 
 //        dd($currentMedia);
 //        dd($currentMedia);
@@ -263,8 +269,10 @@ class productController extends Controller
 
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
-            'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary])
-            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('measures_index',$measures_index)->with('currentMesuIndx',$currentMesuIndx)
+            'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary,
+            'mainsections' =>$mainsections, 'currentSubSections'=>$currentSubSections])
+            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)
+//            ->with('measures_index',$measures_index)->with('currentMesuIndx',$currentMesuIndx)
            ->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
