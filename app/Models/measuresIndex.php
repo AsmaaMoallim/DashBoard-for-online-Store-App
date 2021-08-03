@@ -11,9 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $mesu_index_id
  * @property string mesu_index_name
- * @property string mesu_index_img
+// * @property string mesu_index_img
+ * @property bool $state
+ * @property int $fakeId
  * @package App\Models
+ *
+ *
  */
+
 
 class measuresIndex extends Model
 {
@@ -25,11 +30,17 @@ class measuresIndex extends Model
 
     protected $casts = [
         'mesu_index_name' => 'string',
+        'state' => 'bool',
+        'fakeId' => 'int'
     ];
 
     protected $fillable = [
         'mesu_index_id',
         'mesu_index_name',
-        'mesu_index_img'
+        'mesu_index_img',
+        'state',
+        'fakeId'
     ];
+
+
 }

@@ -7,7 +7,7 @@
         <div class="col-lg-6 pr-xl-5">
             <div class=" card card-dark " style="background-color: silver ">
 
-                <x-form.header-card title="إضافة منتج جديد"/>
+                <x-form.header-card title="إضافة منتج جديد"></x-form.header-card>
 
                 <form
                     @if(isset($id))
@@ -280,7 +280,6 @@
                             > {{$measure->mesu_value}}
                         @endforeach
                     </div>
-            </div>
             <div class="form-group col-sm-10 ">
                 <label>الألوان المتاحة</label>
                 <div>
@@ -313,58 +312,59 @@
                 </div>
             </div>
 
-            {{--                    <label class="pr-3">دليل المقاسات</label>--}}
-            {{--                    <div class="form-group col-sm-10 table-responsive " style="height: 300px;">--}}
-            {{--                        <table class="table-bordered">--}}
-            {{--                            <thead>--}}
-            {{--                            <tr>--}}
-            {{--                                <th width="70%">صورة الدليل</th>--}}
-            {{--                                <th width="30%">اسم الدليل</th>--}}
-            {{--                            </tr>--}}
-            {{--                            </thead>--}}
-            {{--                            @foreach($measures_index as $mesuIdx)--}}
-            {{--                                <?php  $img = $mesuIdx->mesu_index_id ?>--}}
+            <label class="pr-3">دليل المقاسات</label>
+            <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                <table class="table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="70%">صورة الدليل</th>
+                        <th width="30%">اسم الدليل</th>
+                    </tr>
+                    </thead>
+                    @foreach($measures_index as $mesuIdx)
+                        <?php  $img = $mesuIdx->mesu_index_id ?>
 
-            {{--                                <tbody>--}}
-            {{--                                <tr>--}}
-            {{--                                    <td>--}}
-            {{--                                        @if(isset($id))--}}
-            {{--                                            <input type="radio" name="mesu_index_id"--}}
-            {{--                                                   value="{{$mesuIdx['mesu_index_id']}}"--}}
+                        <tbody>
+                        <tr>
+                            <td>
+                                @if(isset($id))
+                                    <input type="radio" name="mesu_index_id"
+                                           value="{{$mesuIdx['mesu_index_id']}}"
 
-            {{--                                                   @foreach($currentMesuIndx as $currentMesus)--}}
-            {{--                                                   <?php   $curMesu = $currentMesus->measure_index_id ?>--}}
+                                           @foreach($currentMesuIndx as $currentMesus)
+                                           <?php   $curMesu = $currentMesus->measure_index_id ?>
 
-            {{--                                                   @if($mesuIdx == $currentMesus) checked="checked"--}}
-            {{--                                                @endif--}}
+                                           @if($mesuIdx == $currentMesus) checked="checked"
+                                        @endif
 
-            {{--                                                @endforeach--}}
-            {{--                                            >--}}
+                                        @endforeach
+                                    >
 
-            {{--                                            <img src="update/fetch_measures/{{$mesuIdx['mesu_index_id']}}"--}}
-            {{--                                                 class="img-thumbnail"--}}
-            {{--                                                 width="75"/>--}}
-            {{--                                        @else--}}
-            {{--                                            <input type="radio" name="mesu_index_id"--}}
-            {{--                                                   value="{{$mesuIdx['mesu_index_id']}}"--}}
-            {{--                                            >--}}
-            {{--                                            <img src="fetch_measures/{{$img}}" class="img-thumbnail"--}}
-            {{--                                                 width="75"/>--}}
-            {{--                                        @endif--}}
+                                    <img src="update/fetch_measures/{{$mesuIdx['mesu_index_id']}}"
+                                         class="img-thumbnail"
+                                         width="75"/>
+                                @else
+                                    <input type="radio" name="mesu_index_id"
+                                           value="{{$mesuIdx['mesu_index_id']}}"
+                                    >
+                                    <img src="fetch_measures/{{$img}}" class="img-thumbnail"
+                                         width="75"/>
+                                @endif
 
-            {{--                                    </td>--}}
+                            </td>
 
-            {{--                                    <td>  {{$mesuIdx->mesu_index_name}} </td>--}}
-            {{--                                </tr>--}}
-            {{--                                </tbody>--}}
-            {{--                            @endforeach--}}
+                            <td>  {{$mesuIdx->mesu_index_name}} </td>
+                        </tr>
+                        </tbody>
+                @endforeach
+        </div>
 
             </table>
         </div>
 
 
         <x-form.input name="prod_desc_text" class="form-control" label="وصف المنتج" type="text"
-                      placeholder="ادخل معلومات المنتج نصاّ"/>
+                      placeholder="ادخل معلومات المنتج نصاّ"></x-form.input>
 
         <label class="pr-3">بإمكانك إضافة صورة لوصف المنتج</label>
         <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
@@ -412,165 +412,97 @@
                 @endforeach
 
             </table>
+
         </div>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <x-form.cancel-button indexPage="products"></x-form.cancel-button>
+        <x-form.save-button></x-form.save-button>
 
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <script src="../../plugins/fastclick/fastclick.js"></script>
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <script src="../../dist/js/demo.js"></script>
-        <script src="../../plugins/ckeditor/ckeditor.js"></script>
-
-        <script
-            src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-        <script>
-            $(function () {
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                ClassicEditor
-                    .create(document.querySelector('#editor1'))
-                    .then(function (editor) {
-                        // The editor instance
-                    })
-                    .catch(function (error) {
-                        console.error(error)
-                    })
-
-                // bootstrap WYSIHTML5 - text editor
-
-                $('.textarea').wysihtml5({
-                    toolbar: {fa: true}
-                })
-            })
-        </script>
-
-        <x-form.cancel-button indexPage="products"/>
-        <x-form.save-button/>
-
+            </form>
+        </div>
     </div>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
 
-    {{--            <h1 style="color: green">--}}
-    {{--                GeeksForGeeks--}}
-    {{--            </h1>--}}
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    {{--            <b>--}}
-    {{--                How to get selected value in dropdown--}}
-    {{--                list using JavaScript?--}}
-    {{--            </b>--}}
+    <script src="../../plugins/fastclick/fastclick.js"></script>
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="../../dist/js/demo.js"></script>
+    <script src="../../plugins/ckeditor/ckeditor.js"></script>
 
-    {{--            <p>--}}
-    {{--                Select one from the given options:--}}
-    {{--                <select id="select1">--}}
-    {{--                    <option value="free">Free</option>--}}
-    {{--                    <option value="basic">Basic</option>--}}
-    {{--                    <option value="premium">Premium</option>--}}
-    {{--                </select>--}}
-    {{--            </p>--}}
+    <script
+        src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script>
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            ClassicEditor
+                .create(document.querySelector('#editor1'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
 
-    {{--            <p>--}}
-    {{--                The value of the option selected is:--}}
-    {{--                <span class="output"></span>--}}
-    {{--            </p>--}}
+            // bootstrap WYSIHTML5 - text editor
 
-    {{--            <button onclick="getOption()">--}}
-    {{--                Check option--}}
-    {{--            </button>--}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        function getOption() {
-            selectElement =
-                document.querySelector('#main_id');
-
-            output = selectElement.value;
-            if (remove = document.getElementById('sub_id')) {
-                var remove = document.getElementById('sub_id');
-                remove.remove();
-            }
-
-            var div = document.getElementById('sub_div');
-            var select = document.createElement('select');
-            select.id = "sub_id";
-            select.name = "sub_id";
-
-            @if(isset($id))
-                @foreach($sections as $section)
-            if (output == {{$section->main_id}}) {
-                var opt = document.createElement('option');
-                opt.value = "{{$section->sub_id}}";
-                opt.innerText = "{{$section->sub_name}}";
-                @if ($section->sub_id == $currentSections->sub_id)
-                    opt.selected = true;
-                @endif
-                div.appendChild(select);
-                select.appendChild(opt);
-            }
-            @endforeach
-                @else
-
-                @foreach($Subsections as $section)
-            if (output == {{$section->main_id}}) {
-                var opt = document.createElement('option');
-                opt.value = "{{$section->sub_id}}";
-                opt.innerText = "{{$section->sub_name}}";
-                div.appendChild(select);
-                select.appendChild(opt);
-            }
-            @endforeach
-            @endif
-
-
-
-        }
-
-
-        {{--$(document).ready(function () {--}}
-        {{--    $("#main_id").change(function () {--}}
-        {{--        var val = $(this).val();--}}
-
-        {{--        // if (val == "item1") {--}}
-        {{--        $("#sub_id").html(--}}
-        {{--        @foreach($sections as $section)--}}
-        {{--        if (val === {{$section->main_id}}) {--}}
-        {{--            alert(val)--}}
-        {{--            @if(isset($id))--}}
-
-        {{--            @if ($section->sub_id == $currentSections->sub_id)--}}
-        {{--            < option--}}
-        {{--            value = "{{$section->sub_id}}"--}}
-        {{--            selected = "selected" >--}}
-        {{--                {{$currentSections->sub_name}} < /option>--}}
-        {{--            @else--}}
-        {{--            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-        {{--            @endif--}}
-
-        {{--            @else--}}
-        {{--            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-
-        {{--            @endif--}}
-        {{--        }--}}
-
-        {{--        @endforeach--}}
-
-        {{--        // } else if (val == "item2") {--}}
-        {{--        //     $("#size").html("<option value='test'>item2: test 1</option><option value='test2'>item2: test 2</option>");--}}
-        {{--        // } else if (val == "item3") {--}}
-        {{--        //     $("#size").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");--}}
-        {{--        // } else if (val == "item0") {--}}
-        {{--        //     $("#size").html("<option value=''>--select one--</option>");--}}
-        {{--        // }--}}
-        {{--    });--}}
-        {{--});--}}
+            $('.textarea').wysihtml5({
+                toolbar: {fa: true}
+            })
+        })
     </script>
 
-
-    </form>
-    </div>
-    </div>
-    </div>
-
 @endsection
+
+
+<script type="text/javascript">
+    function getOption() {
+        selectElement =
+            document.querySelector('#main_id');
+
+        output = selectElement.value;
+        if (remove = document.getElementById('sub_id')) {
+            var remove = document.getElementById('sub_id');
+            remove.remove();
+        }
+
+        var div = document.getElementById('sub_div');
+        var select = document.createElement('select');
+        select.id = "sub_id";
+        select.name = "sub_id";
+
+        @if(isset($id))
+            @foreach($sections as $section)
+        if (output == {{$section->main_id}}) {
+            var opt = document.createElement('option');
+            opt.value = "{{$section->sub_id}}";
+            opt.innerText = "{{$section->sub_name}}";
+            @if ($section->sub_id == $currentSections->sub_id)
+                opt.selected = true;
+            @endif
+            div.appendChild(select);
+            select.appendChild(opt);
+        }
+        @endforeach
+            @else
+
+            @foreach($Subsections as $section)
+        if (output == {{$section->main_id}}) {
+            var opt = document.createElement('option');
+            opt.value = "{{$section->sub_id}}";
+            opt.innerText = "{{$section->sub_name}}";
+            div.appendChild(select);
+            select.appendChild(opt);
+        }
+        @endforeach
+        @endif
+
+
+
+    }
+
+
+</script>
 

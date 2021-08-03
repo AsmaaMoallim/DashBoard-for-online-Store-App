@@ -96,7 +96,7 @@ class productController extends Controller
         $product->sub_id = $request->sub_id;
         $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
-//        $product->measure_index_id = $request->mesu_index_id;
+        $product->measure_index_id = $request->mesu_index_id;
 
         $measure->mesu_value = $request->mesu_value;
 
@@ -167,7 +167,7 @@ class productController extends Controller
 
         $measures = Measure::all();
         $mediaLibrary = MediaLibrary::all();
-//        $measures_index = measuresIndex::all();
+        $measures_index = measuresIndex::all();
         $mainsections = MainSection::all();
 
         $Subsections = SubSection::all();
@@ -176,8 +176,8 @@ class productController extends Controller
 
         return view('new-product-form', ['measures' => $measures, 'mainsections'=>$mainsections,
             'Subsections' => $Subsections,'MainSection'=>$MainSection])
-            ->with(compact('mediaLibrary'));
-//            ->with(compact('measures_index'));
+            ->with(compact('mediaLibrary'))
+            ->with(compact('measures_index'));
     }
 
     public function subSection(Request $request){
@@ -250,15 +250,15 @@ class productController extends Controller
         $mediaLibrary = MediaLibrary::all();
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
 
-//        $measures_index = measuresIndex::all();
-//        $currentMesuIndx = measuresIndex::all()->where('mesu_index_id','=',$currentValues->measure_index_id);
+        $measures_index = measuresIndex::all();
+        $currentMesuIndx = measuresIndex::all()->where('mesu_index_id','=',$currentValues->measure_index_id);
 
-//        dd($currentMedia);
-//        dd($currentMedia);
+////        dd($currentMedia);
+////        dd($currentMedia);
 //        foreach($productProdAvilColor as $productProdAvilColor){
 //            dd($productProdAvilColor->prod_avil_color);
 //        }
-//        dd($productProdAvilColor);
+////        dd($productProdAvilColor);
 //      $mediaImg = MediaLibrary::all();
 
         $columns = ['الصورة/رابط الفيديو'];
@@ -272,7 +272,7 @@ class productController extends Controller
             'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary,
             'mainsections' =>$mainsections, 'currentSubSections'=>$currentSubSections])
             ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)
-//            ->with('measures_index',$measures_index)->with('currentMesuIndx',$currentMesuIndx)
+            ->with('measures_index',$measures_index)->with('currentMesuIndx',$currentMesuIndx)
            ->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
