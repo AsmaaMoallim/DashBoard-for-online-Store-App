@@ -73,7 +73,7 @@
 
                                                 <div class="form-group col-sm-10 ">
                                                     <span>القسم الرئيسي</span>
-                                                    <select name="main_id" id="main_id" class="main_id">
+                                                    <select name="mainSection" id="mainSection" class="mainSection">
                                                         @foreach($MainSection as $mainsection)
                                                         <option value="{{$mainsection->main_id}}"> {{$mainsection->main_name}}</option>
                                                         @endforeach
@@ -84,16 +84,18 @@
                             <span>القسم الفرعي</span>
                             <select class="sub_name">
                                 <option value="0" disabled="true" selected="true">القسم الفرعي</option>
-{{--                                @foreach($Subsections as $subsection)--}}
-{{--                                    <option value="{{$subsection->sub_id}}"> {{$subsection->sub_name}}</option>--}}
-{{--                                @endforeach--}}
+                                @foreach($Subsections as $subsection)
+                                    {{--                                    <option value="{{$subsection->sub_id}}"> {{$subsection->sub_name}}</option>--}}
+                                @endforeach
                             </select>
                         </div>
 
-                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                $(document).on('change','.main_id',function (){
+
+                                $(document).on('change','.mainSection',function (){
 
                                     // console.log("YES Changed")
                                     var main_id = $(this).val();
@@ -103,29 +105,28 @@
                                     var op=" ";
                                     $.ajax({
                                         type:'get',
-                                        url:'{!! URL::to('subSection') !!}',
+                                        url:'{!!URL::to('subSection')!!}',
                                         data:{'id':main_id},
-                                        success:function (data){
+
+                                        success:function(data){
                                             // console.log('success');
                                             // console.log(data);
                                             console.log(data,length);
-
-                                            op+='<option value="0" selected disabled>القسم الفرعي</option>';
-                                            for (var i=0; i <data.length;i++){
-                                                op+='<option value="'+data[i].id+'">'+data[i].value+'</option>';
+                                            op+='<option value="0" selected disabled>chose product</option>';
+                                            for(var i=0;i<data.length;i++){
+                                                op+='<option value="'+data[i].sub_id+'">'+data[i].sub_name+'</option>';
                                             }
 
                                             div.find('.sub_name').html(" ");
                                             div.find('.sub_name').append(op);
                                         },
-                                        error:function (){
+                                        error:function(){ }
 
-                                        }
+
                                     });
                                 })
                             });
                         </script>
-
 
 {{--                        <div class="form-group col-sm-10 ">--}}
 {{--                            <label>القسم الرئيسي</label>--}}
