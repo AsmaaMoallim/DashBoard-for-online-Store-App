@@ -71,38 +71,95 @@
                                       value="{{$prod_price ?? ''}}"></x-form.input>
 
 
+                                                <div class="form-group col-sm-10 ">
+                                                    <span>القسم الرئيسي</span>
+                                                    <select name="main_id" id="main_id" class="main_id">
+                                                        @foreach($MainSection as $mainsection)
+                                                        <option value="{{$mainsection->main_id}}"> {{$mainsection->main_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
                         <div class="form-group col-sm-10 ">
-                            <label>القسم الرئيسي</label>
-                            <select name="main_id" id="main_id"
-                                    onchange="getOption()" onfocus="this.selectedIndex = -1;">
-                                @foreach($mainsections as $mainsection)
-
-                                    {{--                                    @if(isset($id))--}}
-
-                                    {{--                                        @if ($section->sub_id == $currentSections->sub_id)--}}
-                                    <option
-                                        value="{{$mainsection->main_id}}"
-                                    >{{$mainsection->main_name}}
-                                    </option>
-                                    {{--                                        @else--}}
-                                    {{--                                            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-                                    {{--                                        @endif--}}
-
-                                    {{--                                    @else--}}
-                                    {{--                                        <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-
-                                    {{--                                    @endif--}}
-
-                                @endforeach
+                            <span>القسم الفرعي</span>
+                            <select class="sub_name">
+                                <option value="0" disabled="true" selected="true">القسم الفرعي</option>
+{{--                                @foreach($Subsections as $subsection)--}}
+{{--                                    <option value="{{$subsection->sub_id}}"> {{$subsection->sub_name}}</option>--}}
+{{--                                @endforeach--}}
                             </select>
-
                         </div>
 
-                        <div class="form-group col-sm-10 ">
-                            <label>القسم الفرعي</label>
-                            <select name="sub_id" id="sub_id">
-                                <option id="sub_inner" value="sub_inner"></option>
-                                {{--                                @foreach($sections as $section)--}}
+                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                $(document).on('change','.main_id',function (){
+
+                                    // console.log("YES Changed")
+                                    var main_id = $(this).val();
+                                    // console.log(main_id);
+
+                                    var div=$(this).parent();
+                                    var op=" ";
+                                    $.ajax({
+                                        type:'get',
+                                        url:'{!! URL::to('subSection') !!}',
+                                        data:{'id':main_id},
+                                        success:function (data){
+                                            // console.log('success');
+                                            // console.log(data);
+                                            console.log(data,length);
+
+                                            op+='<option value="0" selected disabled>القسم الفرعي</option>';
+                                            for (var i=0; i <data.length;i++){
+                                                op+='<option value="'+data[i].id+'">'+data[i].value+'</option>';
+                                            }
+
+                                            div.find('.sub_name').html(" ");
+                                            div.find('.sub_name').append(op);
+                                        },
+                                        error:function (){
+
+                                        }
+                                    });
+                                })
+                            });
+                        </script>
+
+
+{{--                        <div class="form-group col-sm-10 ">--}}
+{{--                            <label>القسم الرئيسي</label>--}}
+{{--                            <select name="main_id" id="main_id"--}}
+{{--                                    onchange="getOption()" onfocus="this.selectedIndex = -1;">--}}
+{{--                                @foreach($mainsections as $mainsection)--}}
+
+{{--                                                                        @if(isset($id))--}}
+
+{{--                                                                            @if ($section->sub_id == $currentSections->sub_id)--}}
+{{--                                    <option--}}
+{{--                                        value="{{$mainsection->main_id}}"--}}
+{{--                                    >{{$mainsection->main_name}}--}}
+{{--                                    </option>--}}
+{{--                                                                            @else--}}
+{{--                                                                                <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
+{{--                                                                            @endif--}}
+
+{{--                                                                        @else--}}
+{{--                                                                            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
+
+{{--                                                                        @endif--}}
+
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+
+{{--                        </div>--}}
+
+{{--                        <div class="form-group col-sm-10 ">--}}
+{{--                            <label>القسم الفرعي</label>--}}
+{{--                            <select name="sub_id" id="sub_id">--}}
+{{--                                <option id="sub_inner" value="sub_inner"></option>--}}
+
+                                {{--                                @foreach($Subsections as $section)--}}
 
                                 {{--                                    @if(isset($id))--}}
 
@@ -121,9 +178,8 @@
                                 {{--                                    @endif--}}
 
                                 {{--                                @endforeach--}}
-                            </select>
-
-                        </div>
+{{--                            </select>--}}
+{{--                        </div>--}}
 
                         <label class="pb-1">صور المنتج</label>
                         <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
@@ -232,10 +288,56 @@
 
                             </div>
                         </div>
-
-
                     </div>
 
+                    <label class="pr-3">دليل المقاسات</label>
+                    <div class="form-group col-sm-10 table-responsive " style="height: 300px;">
+                        <table class="table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="70%">صورة الدليل</th>
+                                <th width="30%">اسم الدليل</th>
+                            </tr>
+                            </thead>
+                            @foreach($measures_index as $mesuIdx)
+                                <?php  $img = $mesuIdx->mesu_index_id ?>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        @if(isset($id))
+                                            <input type="radio" name="mesu_index_id"
+                                                   value="{{$mesuIdx['mesu_index_id']}}"
+
+                                                   @foreach($currentMesuIndx as $currentMesus)
+                                                   <?php   $curMesu = $currentMesus->measure_index_id ?>
+
+                                                   @if($mesuIdx == $currentMesus) checked="checked"
+                                                @endif
+
+                                                @endforeach
+                                            >
+
+                                            <img src="update/fetch_measures/{{$mesuIdx['mesu_index_id']}}"
+                                                 class="img-thumbnail"
+                                                 width="75"/>
+                                        @else
+                                            <input type="radio" name="mesu_index_id"
+                                                   value="{{$mesuIdx['mesu_index_id']}}"
+                                            >
+                                            <img src="fetch_measures/{{$img}}" class="img-thumbnail"
+                                                 width="75"/>
+                                        @endif
+
+                                    </td>
+
+                                    <td>  {{$mesuIdx->mesu_index_name}} </td>
+                                </tr>
+                                </tbody>
+                            @endforeach
+
+                        </table>
+                    </div>
 
                     <x-form.input name="prod_desc_text" class="form-control" label="وصف المنتج" type="text"
                                   placeholder="ادخل معلومات المنتج نصاّ"/>
@@ -363,13 +465,13 @@
                     var select = document.getElementById('sub_id');
 
                     {{--                    <?php $i = 0?>--}}
-                        {{--                    for (var i = 0; i <= {{sizeof($sections)}}; i++) {--}}
+                        {{--                    for (var i = 0; i <= {{sizeof($Subsections)}}; i++) {--}}
                         {{--                        {{$sections[$i]->main_id}}--}}
                         {{--                        alert(select.id)--}}
 
                         {{--                    }--}}
 
-                        @foreach($sections as $section)
+                        @foreach($Subsections as $section)
                     if (output == {{$section->main_id}}) {
                         var opt = document.createElement('sub_inner');
                         opt.id = {{$section->main_id}};
@@ -396,7 +498,7 @@
 
                 {{--        // if (val == "item1") {--}}
                 {{--        $("#sub_id").html(--}}
-                {{--        @foreach($sections as $section)--}}
+                {{--        @foreach($Subsections as $section)--}}
                 {{--        if (val === {{$section->main_id}}) {--}}
                 {{--            alert(val)--}}
                 {{--            @if(isset($id))--}}
@@ -428,7 +530,6 @@
                 {{--    });--}}
                 {{--});--}}
             </script>
-
 
             </form>
         </div>

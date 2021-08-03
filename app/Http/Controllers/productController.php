@@ -65,36 +65,6 @@ class productController extends Controller
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
         $prod_desc_img = $currentValues->prod_desc_img;
 
-//        dd($img_desc);
-//            MediaLibrary::all()->where("medl_img_ved","=","$currentValues->prod_desc_img");
-
-
-
-//        $rows = \DB::table('product')
-//            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-//            ->join('media_library', 'product.medl_id', '=', 'media_library.medl_id')
-//            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-//            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-//            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
-//            ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
-//                'media_library.medl_img_ved AS الصورة', 'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
-//                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
-//            ->where("product.fakeId", "=", "$id")
-//            ->get();
-//        $rows = \DB::table('product')
-//            ->join('sub_section', 'product.sub_id', '=', 'sub_section.sub_id')
-//            ->join('prod_has_media', 'prod_has_media.prod_id' , 'product.prod_id')
-//            ->join('media_library', 'prod_has_media.medl_id', '=', 'media_library.medl_id')
-//            ->join('prod_avil_in', 'product.prod_id', '=', 'prod_avil_in.prod_id')
-//            ->join('measure', 'prod_avil_in.mesu_id', '=', 'measure.mesu_id')
-//            ->join('product_prod_avil_color AS color', 'product.prod_id', '=', 'color.prod_id')
-//            ->select('product.prod_name AS اسم المنتج', 'sub_section.sub_name AS القسم الفرعي', 'product.prod_price AS السعر',
-//                'media_library.medl_id AS الصورة', 'prod_avil_amount AS الكمية المتوفرة حاليًا', 'measure.mesu_value AS المقاسات',
-//                'color.prod_avil_color AS الألوان', 'product.prod_desc_img AS معلومات الصورة', 'product.state', 'product.fakeId')
-//            ->where("product.fakeId", "=", "$id")
-//            ->groupby('اسم المنتج', 'القسم الفرعي', 'السعر','الكمية المتوفرة حاليًا','المقاسات',)
-//            ->get();
-//        dd($rows);
 
         $rows = \DB::table('product')
             ->join('prod_has_media', 'prod_has_media.prod_id', 'product.prod_id')
@@ -196,12 +166,22 @@ class productController extends Controller
         $this->authorize('view', $product);
 
         $measures = Measure::all();
-        $sections = SubSection::all();
         $mediaLibrary = MediaLibrary::all();
         $measures_index = measuresIndex::all();
 
+        $Subsections = SubSection::all();
+        $MainSection = MainSection::all();
+
+
         return view('new-product-form', ['measures' => $measures,
-            'sections' => $sections])->with(compact('mediaLibrary'))->with(compact('measures_index'));
+            'Subsections' => $Subsections,'MainSection'=>$MainSection])
+            ->with(compact('mediaLibrary'))->with(compact('measures_index'));
+    }
+
+    public function subSection(Request $request){
+        $data = SubSection::select('sub_name','sub_id')
+            ->where('main_id',$request->id)->take(100)->get();
+        return response()->json($data);
     }
 
     public function fetch_image($id, $medl_id = null, Product $product)
@@ -241,9 +221,6 @@ class productController extends Controller
         }
     }
 
-
-
-
     public function delete($id, Product $product)
     {
         $this->authorize('view', $product);
@@ -253,7 +230,6 @@ class productController extends Controller
         return redirect('/products');
     }
 
-///
     public function update(Request $request, Product $product, $id )
     {
         $this->authorize('view', $product);
@@ -264,11 +240,12 @@ class productController extends Controller
         $sections = SubSection::all();
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
+
         $mediaLibrary = MediaLibrary::all();
-        $measures_index = measuresIndex::all();
-//            ->where("mesu_index_id","=","$currentValues->measure_index_id");
         $currentMedia = prodHasMedia::all()->where('prod_id','=',"$currentValues->prod_id");
-        $currentMesu = measuresIndex::all()->where('mesu_index_id','=',"$currentValues->measure_index_id");
+
+        $measures_index = measuresIndex::all();
+        $currentMesuIndx = measuresIndex::all()->where('mesu_index_id','=',$currentValues->measure_index_id);
 
 //        dd($currentMedia);
 //        dd($currentMedia);
@@ -287,7 +264,8 @@ class productController extends Controller
         return view('new-product-form', ['measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor,'mediaLibrary'=>$mediaLibrary])
-            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('measures_index',$measures_index)->with('currentMesu',$currentMesu)->with('id', $id);
+            ->with('currentValues', $currentValues)->with('currentMedia',$currentMedia)->with('measures_index',$measures_index)->with('currentMesuIndx',$currentMesuIndx)
+           ->with('id', $id);
 //        $positions = Position::all();
 //        $CurrentPosition = Position::find($currentValues->pos_id);
 

@@ -220,6 +220,8 @@ Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout
     Route::get('social_media_link/new-social-media-form/insertData', [App\Http\Controllers\socialMediaLinksController::class, 'insertData']);
     Route::get('sub_sections/new-subSection-form/insertData', [App\Http\Controllers\subSectionController::class, 'insertData']);
     Route::get('products/new-product-form/insertData', [App\Http\Controllers\productController::class, 'insertData']);
+    Route::get('/subSection', [App\Http\Controllers\productController::class, 'subSection']);
+
     Route::get('clients/new-client-form/insertData', [App\Http\Controllers\clientController::class, 'insertData']);
     Route::get('measure/update-measures-form/insertData', [App\Http\Controllers\MeasureController::class, 'insertData']);
     Route::get('sys_bank_account/new-bank-account-form/insertData', [App\Http\Controllers\bankAccountController::class, 'insertData']);
