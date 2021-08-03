@@ -96,7 +96,7 @@ class productController extends Controller
         $product->sub_id = $request->sub_id;
         $product->prod_desc_text = $request->prod_desc_text;
         $product->prod_desc_img = $request->prod_desc_img;
-        $product->measure_index_id = $request->mesu_index_id;
+        $product->mesu_index_id = $request->mesu_index_id;
 
         $measure->mesu_value = $request->mesu_value;
 

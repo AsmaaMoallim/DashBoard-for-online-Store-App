@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\OrdHasItemOf::factory(10)->create();
 //        \App\Models\ProdHasMedia::factory(10)->create();
 
-//        \App\Models\User::factory(10)->create();
+        \App\Models\measuresIndex::factory(10)->create();
 
     }
     public function emptyData(){

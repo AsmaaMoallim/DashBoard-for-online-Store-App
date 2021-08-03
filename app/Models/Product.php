@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $prod_avil_amount
 // * @property boolean $prod_desc_img
  * @property string $prod_desc_text
- * @property int measure_index_id
+ * @property int $mesu_index_id
  * @property bool $state
  * @property int $fakeId
  *
@@ -57,7 +57,7 @@ class Product extends Model
 		'prod_avil_amount',
 		'prod_desc_img',
         'prod_desc_text',
-        'measure_index_id',
+        'mesu_index_id',
 		'state',
 		'fakeId'
 	];

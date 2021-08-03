@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\measuresIndex;
 use App\Models\MediaLibrary;
 use App\Models\Product;
 use App\Models\SubSection;
@@ -31,6 +32,7 @@ class ProductFactory extends Factory
             'prod_avil_amount' => $this->faker->randomDigit,
             'prod_desc_img' => $this->faker->image(),
             'prod_desc_text' => $this->faker->image(),
+            'mesu_index_id'=>$this->faker->randomElement(measuresIndex::pluck('mesu_index_id')->toArray()),
             'state' => $this->faker->boolean(50),
             'fakeID'=> ++$fakeID,
         ];
