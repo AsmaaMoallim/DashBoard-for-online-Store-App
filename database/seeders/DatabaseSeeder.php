@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
 
 //        \App\Models\Manager::factory(10)->create();
 
+//        \App\Models\measuresIndex::factory(10)->create();
+
 //        \App\Models\Measure::factory(10)->create();
 //        \App\Models\MediaLibrary::factory(10)->create();
 //        \App\Models\MainSection::factory(10)->create();
@@ -54,7 +56,6 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\OrdHasItemOf::factory(10)->create();
 //        \App\Models\ProdHasMedia::factory(10)->create();
 
-        \App\Models\measuresIndex::factory(10)->create();
 
     }
     public function emptyData(){

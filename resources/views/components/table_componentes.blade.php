@@ -105,11 +105,11 @@
                                     </form>
 {{--                              search --}}
 
-                                    @if("measure"==request()->path())
-                                    <div>
-                                        <img src="measure/fetch_image/{{$imgId}}">
-                                    </div>
-                                    @endif
+{{--                                    @if("measure"==request()->path())--}}
+{{--                                    <div>--}}
+{{--                                        <img src="measure/fetch_image/{{$imgId}}">--}}
+{{--                                    </div>--}}
+{{--                                    @endif--}}
 
                                 </div>
 
@@ -143,9 +143,9 @@
                                                             <img width="60"
                                                                  height="60"
                                                                  class="img"
-                                                                 name="{{$rows->medl_id ?? $rows->cla_id ?? $rows->social_id ?? $rows->trans_id}}"
+                                                                 name="{{$rows->medl_id ?? $rows->cla_id ?? $rows->social_id ?? $rows->trans_id ?? $rows->mesu_index_id}}"
                                                                  id="img"
-                                                                 src="{{$tables}}/fetch_image/{{ $rows->medl_id  ?? $rows->cla_id ?? $rows->social_id ?? $rows->trans_id}}"
+                                                                 src="{{$tables}}/fetch_image/{{ $rows->medl_id  ?? $rows->cla_id ?? $rows->social_id ?? $rows->trans_id ?? $rows->mesu_index_id}}"
                                                                  onclick="displayImage()">
 
                                                             {{--                                                            </a>--}}
@@ -272,7 +272,7 @@
 
             {{--            //////////////////////////////////////////// Contact information second table /////////////////////////////////////////////            @if('contact_information' === $tables)--}}
 
-            @if("contact_information" === $tables2)
+            @if("contact_information" === $tables2 || "measure" === $tables2)
                 <div>
                     <div class="row">
                         <div class="col-12">

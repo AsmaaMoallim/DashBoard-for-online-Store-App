@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ManagerOperationsRecord;
 use App\Models\Measure;
 use App\Models\measuresImages;
+use App\Models\measuresIndex;
 use App\Models\MediaLibrary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -48,9 +49,7 @@ class MeasureController extends Controller
         return MeasureController::$id;
     }
 
-//    /**
-//     * @param int $id
-//     */
+
     public function setId(int $id): void
     {
         MeasureController::$id = $id;
@@ -63,21 +62,28 @@ class MeasureController extends Controller
 
         $pagename = "دليل المقاسات";
         $formPage = "update-measures-form";
-        $addNew = "تعديل الصورة";
+//        $addNew = "تعديل الصورة";
         $showRecords = "0";
-        $tables = 'measure';
+        $tables = $tables2 =  'measure';
 
-        $qry = \DB::table('measure')
+        $qry =\DB::table('measures_index')
+            ->select('mesu_index_id', 'mesu_index_name As اسم دليل المقاسات',
+                'measures_index.state','measures_index.fakeId')->get();
+
+        $columns = ['اسم دليل المقاسات', 'الصورة','fakeId'];
+
+        $qry2= \DB::table('measure')
             ->select('mesu_value AS المقاسات', 'measure.fakeId')->get();
 
-        $columns = ['المقاسات', 'fakeId'];
+        $columns2 = ['المقاسات', 'fakeId'];
 
 
         return view('master_tables_view', ['pagename' => $pagename])->with('rows', $qry)->with
-        ('columns', $columns)->with('tables', $tables)->with('addNew', $addNew)->with
-        ('showRecords', $showRecords)->with('formPage', $formPage);
+        ('columns', $columns)->with('tables', $tables)->with
+//        ('addNew', $addNew)->with
+        ('showRecords', $showRecords)->with('formPage', $formPage)
 
-//            ->with('tables2', $tables2)->with('rows2', $qry2)->with('columns2', $columns2);
+            ->with('tables2', $tables2)->with('rows2', $qry2)->with('columns2', $columns2);
 
     }
 
@@ -93,8 +99,8 @@ class MeasureController extends Controller
     {
         $this->authorize('view', $measure);
 
-        $image = Measure::findOrFail($id);
-        $image_file = Image::make($image->medl_img_ved)->resize(60, 60);
+        $image = measuresIndex::findOrFail($id);
+        $image_file = Image::make($image->mesu_index_img);
         $response = Response::make($image_file->encode('jpeg'));
         $response->header('Content-Type', 'image/jpeg');
         return $response;
@@ -199,13 +205,14 @@ class MeasureController extends Controller
     {
         $this->authorize('view', $measure);
 
-        $currentValues = measuresImages::where("fakeId", "=", "$id")->first();
+//        $currentValues = measuresImages::where("fakeId", "=", "$id")->first();
         $mediaLibrary = MediaLibrary::all();
-        $currentMedias = MediaLibrary::all()
-            ->where("medl_id", "=", "$currentValues->medl_id");
+        $currentMedias = MediaLibrary::all();
+//            ->where("medl_id", "=", "$currentValues->medl_id");
 
-        return view('update-measures-form')->with('currentValues', $currentValues)
-                ->with('mediaLibrary', $mediaLibrary) - with('currentMedias', $currentMedias)
+        return view('update-measures-form')
+//                ->with('currentValues', $currentValues)
+                ->with('mediaLibrary', $mediaLibrary)->with('currentMedias', $currentMedias)
                 ->with('id', $id);
     }
 

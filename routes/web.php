@@ -133,6 +133,7 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('/clients/search', [\App\Http\Controllers\clientController::class, 'search'])->name('clients.search');
     Route::get('/orders/search', [\App\Http\Controllers\orderController::class, 'search'])->name('orders.search');
     Route::get('/measure/search', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search');
+    Route::get('/measure/search2', [App\Http\Controllers\MeasureController::class, 'search'])->name('measure.search2');
     Route::get('/social_media_link/search', [\App\Http\Controllers\socialMediaLinksController::class, 'search'])->name('social_media_link.search');
     Route::get('/shipping_charge/search', [\App\Http\Controllers\shippingChargeController::class, 'search'])->name('shipping_charge.search');
     Route::get('/sys_bank_account/search', [\App\Http\Controllers\bankAccountController::class, 'search'])->name('sys_bank_account.search');
