@@ -64,6 +64,7 @@ class productController extends Controller
         $productProdAvilColor = ProductProdAvilColor::all()->where("prod_id", "=", "$currentValues->prod_id");
         $currentMeasures = ProdAvilIn::all()->where("prod_id", "=", "$currentValues->prod_id");
         $prod_desc_img = $currentValues->prod_desc_img;
+        $prod_mesu_indx = $currentValues->measure_index_id;
 
 
         $rows = \DB::table('product')
@@ -80,7 +81,7 @@ class productController extends Controller
             'measures' => $measures, 'currentMeasures' => $currentMeasures,
             'sections' => $sections, 'columns' => $columns, 'rows' => $rows, 'currentSections' => $currentSections,
             'productProdAvilColor' => $productProdAvilColor])->with('currentValues', $currentValues)
-            ->with('id', $id)->with('prod_desc_img', $prod_desc_img);
+            ->with('id', $id)->with('prod_desc_img', $prod_desc_img)->with('prod_mesu_indx',$prod_mesu_indx);
     }
 
     function store(Request $request, Product $product)
@@ -178,12 +179,6 @@ class productController extends Controller
             'Subsections' => $Subsections,'MainSection'=>$MainSection])
             ->with(compact('mediaLibrary'))
             ->with(compact('measures_index'));
-    }
-
-    public function subSection(Request $request){
-        $data = SubSection::select('sub_name','sub_id')
-            ->where('main_id',$request->id)->take(100)->get();
-        return response()->json($data);
     }
 
     public function fetch_image($id, $medl_id = null, Product $product)
