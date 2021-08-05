@@ -47,6 +47,7 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('products/new-product-form/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
     Route::get('products/{int}/update/fetch_image/{id}', [\App\Http\Controllers\productController::class, 'fetch_image']);
     Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
+    Route::get('products/{int}/update/fetch_image', [\App\Http\Controllers\productController::class, 'fetch_image']);
 
     Route::get('products/new-product-form/fetch_measures/{id}', [\App\Http\Controllers\productController::class, 'fetch_measures']);
     Route::get('products/{int}/update/fetch_measures/{id}', [\App\Http\Controllers\productController::class, 'fetch_measures']);
@@ -221,7 +222,6 @@ Route::middleware([\App\Http\Middleware\CheckLoggedOrNot::class])->group(functio
     Route::get('social_media_link/new-social-media-form/insertData', [App\Http\Controllers\socialMediaLinksController::class, 'insertData']);
     Route::get('sub_sections/new-subSection-form/insertData', [App\Http\Controllers\subSectionController::class, 'insertData']);
     Route::get('products/new-product-form/insertData', [App\Http\Controllers\productController::class, 'insertData']);
-    Route::get('/subSection', [App\Http\Controllers\productController::class, 'subSection']);
 
     Route::get('clients/new-client-form/insertData', [App\Http\Controllers\clientController::class, 'insertData']);
     Route::get('measure/update-measures-form/insertData', [App\Http\Controllers\MeasureController::class, 'insertData']);

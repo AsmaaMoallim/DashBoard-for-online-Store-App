@@ -136,6 +136,17 @@
                                                 <img src="update/fetch_image/{{$prod_desc_img}}">
                                                 @endif
                                         </div>
+
+                                        <div class="col-sm-4 invoice-col">
+                                            <address>
+                                                <strong> دليل القياسات </strong><br>
+                                            @if($currentValues->measure_index_id != null)
+
+                                                <img src="update/fetch_measures/{{$prod_mesu_indx}}">
+                                            @endif
+                                            </address>
+                                        </div>
+
                                     </div>
 
                                     {{--                            <!-- Table row -->--}}

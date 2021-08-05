@@ -107,101 +107,10 @@
                                     @endforeach
                                 @endif
 
-
                             </select>
 
                         </div>
 
-                        {{--                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
-
-                        {{--                        <script type="text/javascript">--}}
-                        {{--                            $(document).ready(function(){--}}
-
-                        {{--                                $(document).on('change','.mainSection',function (){--}}
-
-                        {{--                                    // console.log("YES Changed")--}}
-                        {{--                                    var main_id = $(this).val();--}}
-                        {{--                                    // console.log(main_id);--}}
-
-                        {{--                                    var div=$(this).parent();--}}
-                        {{--                                    var op=" ";--}}
-                        {{--                                    $.ajax({--}}
-                        {{--                                        type:'get',--}}
-                        {{--                                        url:'{!!URL::to('subSection')!!}',--}}
-                        {{--                                        data:{'id':main_id},--}}
-
-                        {{--                                        success:function(data){--}}
-                        {{--                                            // console.log('success');--}}
-                        {{--                                            // console.log(data);--}}
-                        {{--                                            console.log(data,length);--}}
-                        {{--                                            op+='<option value="0" selected disabled>chose product</option>';--}}
-                        {{--                                            for(var i=0;i<data.length;i++){--}}
-                        {{--                                                op+='<option value="'+data[i].sub_id+'">'+data[i].sub_name+'</option>';--}}
-                        {{--                                            }--}}
-
-                        {{--                                            div.find('.sub_name').html(" ");--}}
-                        {{--                                            div.find('.sub_name').append(op);--}}
-                        {{--                                        },--}}
-                        {{--                                        error:function(){ }--}}
-
-
-                        {{--                                    });--}}
-                        {{--                                })--}}
-                        {{--                            });--}}
-                        {{--                        </script>--}}
-
-                        {{--                        <div class="form-group col-sm-10 ">--}}
-                        {{--                            <label>القسم الرئيسي</label>--}}
-                        {{--                            <select name="main_id" id="main_id"--}}
-                        {{--                                    onchange="getOption()" onfocus="this.selectedIndex = -1;">--}}
-                        {{--                                @foreach($mainsections as $mainsection)--}}
-
-                        {{--                                                                        @if(isset($id))--}}
-
-                        {{--                                                                            @if ($section->sub_id == $currentSections->sub_id)--}}
-                        {{--                                    <option--}}
-                        {{--                                        value="{{$mainsection->main_id}}"--}}
-                        {{--                                    >{{$mainsection->main_name}}--}}
-                        {{--                                    </option>--}}
-                        {{--                                                                            @else--}}
-                        {{--                                                                                <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-                        {{--                                                                            @endif--}}
-
-                        {{--                                                                        @else--}}
-                        {{--                                                                            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-
-                        {{--                                                                        @endif--}}
-
-                        {{--                                @endforeach--}}
-                        {{--                            </select>--}}
-
-                        {{--                        </div>--}}
-
-                        {{--                        <div class="form-group col-sm-10 ">--}}
-                        {{--                            <label>القسم الفرعي</label>--}}
-                        {{--                            <select name="sub_id" id="sub_id">--}}
-                        {{--                                <option id="sub_inner" value="sub_inner"></option>--}}
-
-                        {{--                                @foreach($Subsections as $section)--}}
-
-                        {{--                                    @if(isset($id))--}}
-
-                        {{--                                        @if ($section->sub_id == $currentSections->sub_id)--}}
-                        {{--                                            <option--}}
-                        {{--                                                value="{{$section->sub_id}}"--}}
-                        {{--                                                selected="selected">{{$currentSections->sub_name}}--}}
-                        {{--                                            </option>--}}
-                        {{--                                        @else--}}
-                        {{--                                            <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-                        {{--                                        @endif--}}
-
-                        {{--                                    @else--}}
-                        {{--                                        <option value="{{$section->sub_id}}"> {{$section->sub_name}} </option>--}}
-
-                        {{--                                    @endif--}}
-
-                        {{--                                @endforeach--}}
-                        {{--                            </select>--}}
                     </div>
 
                     <label class="pb-1">صور المنتج</label>
