@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMeasureTable extends Migration
+class CreateMeasuresIndexTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMeasureTable extends Migration
      */
     public function up()
     {
-        Schema::create('measure', function (Blueprint $table) {
-            $table->bigIncrements('mesu_id');
-            $table->string('mesu_value')->unique();
+        Schema::create('measures_index', function (Blueprint $table) {
+            $table->bigIncrements('mesu_index_id');
+            $table->string('mesu_index_name')->unique();
+            $table->binary('mesu_index_img');
+            $table->tinyInteger('state')->default(0);
             $table->integer('fakeId');
         });
     }
@@ -27,6 +29,6 @@ class CreateMeasureTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('measure');
+        Schema::dropIfExists('measures_index');
     }
 }
