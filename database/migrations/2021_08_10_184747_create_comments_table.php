@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Yajra\DataTables\Utilities\Config;
 
-class CreateBankTransaction extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +13,8 @@ class CreateBankTransaction extends Migration
      */
     public function up()
     {
-        Schema::create('bank_transaction', function (Blueprint $table) {
-            $table->bigIncrements('trans_id');
-
-            $table->foreignId('ord_id')
-                ->nullable($value = false)
-                ->constrained('orders')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->bigIncrements('com_id');
 
             $table->foreignId('cla_id')
                 ->nullable($value = false)
@@ -30,14 +22,16 @@ class CreateBankTransaction extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('sys_bank_id')
+            $table->foreignId('prod_id')
                 ->nullable($value = false)
-                ->constrained('sys_bank_account')
+                ->constrained('product')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->float('banktran_amount');
-            $table->binary('banktran_img');
+            $table->longText('com_content');
+            $table->integer('com_rateing');
+
+            $table->tinyInteger('state')->default(0);
             $table->integer('fakeId');
 
         });
@@ -50,6 +44,6 @@ class CreateBankTransaction extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_transaction');
+        Schema::dropIfExists('comments');
     }
 }
