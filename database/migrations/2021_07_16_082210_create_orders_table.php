@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('com_id');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->bigIncrements('ord_id');
 
             $table->foreignId('cla_id')
                 ->nullable($value = false)
@@ -22,18 +22,27 @@ class CreateCommentsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('prod_id')
+            $table->string('ord_number');
+
+            $table->date('ord_date');
+
+            $table->integer('payment_method_id');
+
+            $table->foreignId('stage_id')
                 ->nullable($value = false)
-                ->constrained('product')
+                ->constrained('stage')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->longText('com_content');
-            $table->integer('com_rateing');
+            $table->foreignId('ship_id')
+                ->nullable($value = false)
+                ->constrained('shipping_charge')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
-            $table->tinyInteger('state')->default(0);
+            $table->boolean('state')->default(0);
+
             $table->integer('fakeId');
-
         });
     }
 
@@ -44,6 +53,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('orders');
     }
 }

@@ -23,7 +23,7 @@ class CreateClientsTable extends Migration
             $table->binary('cla_img')->nullable();
             $table->string('cla_phone_num')->unique();
             $table->string('cla_email')->unique();
-            $table->tinyInteger('state')->default(0);
+            $table->boolean('state')->default(0);
             $table->integer('fakeId');
         });
     }

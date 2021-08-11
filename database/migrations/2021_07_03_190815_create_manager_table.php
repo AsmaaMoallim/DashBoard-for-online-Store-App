@@ -24,13 +24,13 @@ class CreateManagerTable extends Migration
             $table->string('remember_token')->nullable();
             $table->timestamps();
 
-            $table->foreignId('pos_id')
-                ->nullable($value = false)
-                ->constrained('position')
+            $table->foreignId('pos_id')->unsigned()
+                ->references('pos_id')->on('position')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->tinyInteger('state')->default(0);
+            $table->boolean('state')->default(0);
             $table->integer('fakeId');
 
         });

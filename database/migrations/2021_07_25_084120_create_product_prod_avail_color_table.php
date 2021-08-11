@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMainSectionsTable extends Migration
+class CreateProductProdAvailColorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,17 @@ class CreateMainSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('main_sections', function (Blueprint $table) {
-            $table->bigIncrements('main_id');
+        Schema::create('product_prod_avail_color', function (Blueprint $table) {
+            $table->char('prod_avil_color', 8);
 
-            $table->string('main_name')->unique();
-
-            $table->foreignId('medl_id')
+            $table->foreignId('prod_id')
                 ->nullable($value = false)
-                ->constrained('media_library')
+                ->constrained('product')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->tinyInteger('state')->default(0);
-            $table->integer('fakeId');
 
+            $table->integer('fakeId');
         });
     }
 
@@ -37,6 +34,6 @@ class CreateMainSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_sections');
+        Schema::dropIfExists('product_prod_avail_color');
     }
 }

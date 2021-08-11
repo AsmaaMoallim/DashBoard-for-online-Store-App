@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Yajra\DataTables\Utilities\Config;
 
-class CreateBannerTable extends Migration
+class CreateReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,18 +13,23 @@ class CreateBannerTable extends Migration
      */
     public function up()
     {
-        Schema::create('banner', function (Blueprint $table) {
-            $table->bigIncrements('ban_id');
+        Schema::create('report', function (Blueprint $table) {
+            $table->bigIncrements('report_id');
 
-            $table->string('ban_name')->unique();
-
-            $table->foreignId('medl_id')
+            $table->foreignId('com_id')
                 ->nullable($value = false)
-                ->constrained('banner')
+                ->constrained('comments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->tinyInteger('state')->default(0);
+            $table->foreignId('cla_id')
+                ->nullable($value = false)
+                ->constrained('clients')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->boolean('ignored')->default(0);
+
             $table->integer('fakeId');
         });
     }
@@ -38,6 +41,6 @@ class CreateBannerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banner');
+        Schema::dropIfExists('report');
     }
 }
