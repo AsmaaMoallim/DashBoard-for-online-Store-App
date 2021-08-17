@@ -19573,3 +19573,4 @@ function destroyColor(e) {
         }
     }
 }
+

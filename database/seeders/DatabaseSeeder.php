@@ -153,8 +153,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table('manager')->insert([
             ['man_frist_name' => 'Admin', 'man_last_name' => 'admin' , 'man_phone_num' => '055555555',
-                'man_email' => 'Admin@admin.com', 'man_password' => Hash::make('AdminPass') , 'pos_id' => '1',
-                 'state' => '1' , 'fakeId' => '1'],
+                'man_email' => 'Admin@admin.com', 'man_password' => Hash::make('AdminPass') ,
+                'pos_id' => '1', 'state' => '1' , 'fakeId' => '1'],
         ]);
 
     }
