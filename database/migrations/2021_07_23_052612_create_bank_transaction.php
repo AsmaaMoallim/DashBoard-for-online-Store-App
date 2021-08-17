@@ -19,20 +19,23 @@ class CreateBankTransaction extends Migration
             $table->bigIncrements('trans_id');
 
             $table->foreignId('ord_id')
-                ->nullable($value = false)
-                ->constrained('orders')
+                ->references('ord_id')
+                ->on('orders')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('cla_id')
-                ->nullable($value = false)
-                ->constrained('clients')
+                ->references('cla_id')
+                ->on('clients')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('sys_bank_id')
-                ->nullable($value = false)
-                ->constrained('sys_bank_account')
+                ->references('sys_bank_id')
+                ->on('sys_bank_account')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

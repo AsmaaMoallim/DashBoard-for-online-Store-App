@@ -18,9 +18,10 @@ class CreateNotificationsTable extends Migration
             $table->string('notifi_title');
             $table->longText('notifi_content');
 
-            $table->foreignId('man_id')
-                ->nullable($value = false)
-                ->constrained('manager')
+            $table->foreignId('man_id')->unsigned()
+                ->references('man_id')
+                ->on('manager')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

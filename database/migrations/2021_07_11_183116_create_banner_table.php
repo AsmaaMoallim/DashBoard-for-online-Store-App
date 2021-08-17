@@ -21,8 +21,9 @@ class CreateBannerTable extends Migration
             $table->string('ban_name')->unique();
 
             $table->foreignId('medl_id')
-                ->nullable($value = false)
-                ->constrained('banner')
+                ->references('medl_id')
+                ->on('media_library')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

@@ -15,14 +15,16 @@ class CreateProdAvilInTable extends Migration
     {
         Schema::create('prod_avil_in', function (Blueprint $table) {
             $table->foreignId('prod_id')
-                ->nullable($value = false)
-                ->constrained('product')
+                ->references('prod_id')
+                ->on('product')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('mesu_id')
-                ->nullable($value = false)
-                ->constrained('measure')
+                ->references('mesu_id')
+                ->on('measure')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

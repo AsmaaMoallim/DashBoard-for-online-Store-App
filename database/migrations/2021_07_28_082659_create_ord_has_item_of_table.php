@@ -16,16 +16,18 @@ class CreateOrdHasItemOfTable extends Migration
         Schema::create('ord_has_item_of', function (Blueprint $table) {
 
             $table->foreignId('prod_id')
-                ->nullable($value = false)
-                ->constrained('product')
+                ->references('prod_id')
+                ->on('product')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->integer('prod_ord_amount');
 
             $table->foreignId('ord_id')
-                ->nullable($value = false)
-                ->constrained('orders')
+                ->references('ord_id')
+                ->on('orders')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

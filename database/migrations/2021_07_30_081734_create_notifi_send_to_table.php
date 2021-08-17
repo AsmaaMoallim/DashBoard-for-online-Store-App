@@ -15,14 +15,16 @@ class CreateNotifiSendToTable extends Migration
     {
         Schema::create('notifi_send_to', function (Blueprint $table) {
             $table->foreignId('notifi_id')
-                ->nullable($value = false)
-                ->constrained('notifications')
+                ->references('notifi_id')
+                ->on('notifications')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('cla_id')
-                ->nullable($value = false)
-                ->constrained('clients')
+                ->references('cla_id')
+                ->on('clients')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

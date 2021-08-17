@@ -15,14 +15,16 @@ class CreateProdHasMediaTable extends Migration
     {
         Schema::create('prod_has_media', function (Blueprint $table) {
             $table->foreignId('prod_id')
-                ->nullable($value = false)
-                ->constrained('product')
+                ->references('prod_id')
+                ->on('product')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('medl_id')
-                ->nullable($value = false)
-                ->constrained('media_library')
+                ->references('medl_id')
+                ->on('media_library')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

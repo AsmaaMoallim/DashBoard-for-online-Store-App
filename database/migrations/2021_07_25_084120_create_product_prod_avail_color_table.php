@@ -13,12 +13,14 @@ class CreateProductProdAvailColorTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_prod_avail_color', function (Blueprint $table) {
+        Schema::create('product_prod_avil_color', function (Blueprint $table) {
+
             $table->char('prod_avil_color', 8);
 
             $table->foreignId('prod_id')
-                ->nullable($value = false)
-                ->constrained('product')
+                ->references('prod_id')
+                ->on('product')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

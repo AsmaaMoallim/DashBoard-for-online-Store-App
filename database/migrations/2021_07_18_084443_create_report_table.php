@@ -17,14 +17,16 @@ class CreateReportTable extends Migration
             $table->bigIncrements('report_id');
 
             $table->foreignId('com_id')
-                ->nullable($value = false)
-                ->constrained('comments')
+                ->references('com_id')
+                ->on('comments')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('cla_id')
-                ->nullable($value = false)
-                ->constrained('clients')
+                ->references('cla_id')
+                ->on('clients')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

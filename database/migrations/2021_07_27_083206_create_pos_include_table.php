@@ -16,14 +16,16 @@ class CreatePosIncludeTable extends Migration
         Schema::create('pos_include', function (Blueprint $table) {
 
             $table->foreignId('pos_id')
-                ->nullable($value = false)
-                ->constrained('position')
+                ->references('pos_id')
+                ->on('position')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('per_id')
-                ->nullable($value = false)
-                ->constrained('permission')
+                ->references('per_id')
+                ->on('permission')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

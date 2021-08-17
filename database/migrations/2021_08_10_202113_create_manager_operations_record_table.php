@@ -17,8 +17,9 @@ class CreateManagerOperationsRecordTable extends Migration
             $table->bigIncrements('man_oper_record_id');
 
             $table->foreignId('man_id')
-                ->nullable($value = false)
-                ->constrained('managers')
+                ->references('man_id')
+                ->on('manager')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

@@ -25,7 +25,8 @@ class CreateManagerTable extends Migration
             $table->timestamps();
 
             $table->foreignId('pos_id')->unsigned()
-                ->references('pos_id')->on('position')
+                ->references('pos_id')
+                ->on('position')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

@@ -19,8 +19,9 @@ class CreateProductTable extends Migration
             $table->string('prod_name');
 
             $table->foreignId('sub_id')
-                ->nullable($value = false)
-                ->constrained('sub_section')
+                ->references('sub_id')
+                ->on('sub_section')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -30,9 +31,19 @@ class CreateProductTable extends Migration
 
             $table->binary('prod_desc_img');
 
+            $table->string('prod_desc_text');
+
+            $table->foreignId('mesu_index_id')
+                ->references('mesu_index_id')
+                ->on('measures_index')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->foreignId('medl_id')
-                ->nullable($value = false)
-                ->constrained('media_library')
+                ->references('medl_id')
+                ->on('media_library')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

@@ -26,7 +26,7 @@ class EmailBoxFactory extends Factory
         static $fakeID = 0;
 
         return [
-//            'sys_email_id' => $this->faker->unique(SysInfoEmail::pluck('sys_email_id')->toString()),
+            'sys_email_id' => $this->faker->randomElement(SysInfoEmail::pluck('sys_email_id')),
             'email_cla_name' =>$this->faker->randomElement(\App\Models\Client::pluck('cla_frist_name')->toArray()),
             'email_cla_email' =>$this->faker->randomElement(\App\Models\Client::pluck('cla_email')->toArray()),
             'email_cla_phone' =>$this->faker->randomElement(\App\Models\Client::pluck('cla_phone_num')->toArray()),

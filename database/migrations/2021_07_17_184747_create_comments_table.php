@@ -17,14 +17,16 @@ class CreateCommentsTable extends Migration
             $table->bigIncrements('com_id');
 
             $table->foreignId('cla_id')
-                ->nullable($value = false)
-                ->constrained('clients')
+                ->references('cla_id')
+                ->on('clients')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('prod_id')
-                ->nullable($value = false)
-                ->constrained('product')
+                ->references('prod_id')
+                ->on('product')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

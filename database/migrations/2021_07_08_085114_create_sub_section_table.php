@@ -19,14 +19,16 @@ class CreateSubSectionTable extends Migration
             $table->string('sub_name');
 
             $table->foreignId('main_id')
-                ->nullable($value = false)
-                ->constrained('main_sections')
+                ->references('main_id')
+                ->on('main_sections')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('medl_id')
-                ->nullable($value = false)
-                ->constrained('media_library')
+                ->references('medl_id')
+                ->on('media_library')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

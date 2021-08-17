@@ -17,8 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('ord_id');
 
             $table->foreignId('cla_id')
-                ->nullable($value = false)
-                ->constrained('clients')
+                ->references('cla_id')
+                ->on('clients')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -29,14 +30,16 @@ class CreateOrdersTable extends Migration
             $table->integer('payment_method_id');
 
             $table->foreignId('stage_id')
-                ->nullable($value = false)
-                ->constrained('stage')
+                ->references('stage_id')
+                ->on('stage')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreignId('ship_id')
-                ->nullable($value = false)
-                ->constrained('shipping_charge')
+                ->references('ship_id')
+                ->on('shipping_charge')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

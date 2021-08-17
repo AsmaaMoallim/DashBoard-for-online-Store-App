@@ -19,8 +19,9 @@ class CreateMainSectionsTable extends Migration
             $table->string('main_name')->unique();
 
             $table->foreignId('medl_id')
-                ->nullable($value = false)
-                ->constrained('media_library')
+                ->references('medl_id')
+                ->on('media_library')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

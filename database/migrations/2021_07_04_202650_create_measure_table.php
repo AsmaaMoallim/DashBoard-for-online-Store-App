@@ -15,7 +15,7 @@ class CreateMeasureTable extends Migration
     {
         Schema::create('measure', function (Blueprint $table) {
             $table->bigIncrements('mesu_id');
-            $table->string('mesu_value')->unique();
+            $table->string('mesu_value');
             $table->integer('fakeId');
         });
     }
